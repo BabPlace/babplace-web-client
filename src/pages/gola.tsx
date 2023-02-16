@@ -1,3 +1,3 @@
 export default function Gola() {
-    return <div>hi</div>;
+  return <div>hi</div>;
 }
