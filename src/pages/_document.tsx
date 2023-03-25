@@ -7,6 +7,10 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
+        <script
+          type='text/javascript'
+          src='//dapi.kakao.com/v2/maps/sdk.js?appkey=4d8c337f255e4d10bce42da9f269c2a1&libraries=services,clusterer'
+        ></script>
       </body>
     </Html>
   );

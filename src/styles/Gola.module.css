@@ -1,0 +1,55 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  padding: 10px 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.relative {
+  position: relative;
+}
+.logo {
+  padding: 15px 0;
+  font-size: 20px;
+  text-align: center;
+}
+
+.info {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+
+  font-size: 25px;
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 20px 30px 50px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .relative {
+    position: relative;
+  }
+  .logo {
+    padding: 15px 0;
+    font-size: 20px;
+    text-align: center;
+  }
+  .info {
+    font-size: 25px;
+  }
+}
+
+/* # if width < 480px and height < 700px, .info font-size is 15px */
+@media screen and (max-height: 600px) {
+  .info {
+    font-size: 15px;
+  }
+}

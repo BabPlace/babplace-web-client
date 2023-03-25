@@ -1,0 +1,45 @@
+.container {
+  margin-top: 60px;
+  width: 100%;
+  height: calc(100vh - 60px);
+  overflow: scroll;
+  padding: 15px 25px;
+}
+
+.title {
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.loser {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.loser_title {
+  flex: 1 1 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.loser_bar {
+  height: 25px;
+  flex: 2 2 200px;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.button_box {
+  width: 100%;
+  margin: 20px 0;
+}

@@ -1,0 +1,12 @@
+.result_card__container {
+  width: 100%;
+  height: auto;
+
+  border-radius: 12px;
+  box-shadow: rgb(0 0 0 / 10%) 2px 2px 8px 1px;
+
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+}

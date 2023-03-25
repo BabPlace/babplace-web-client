@@ -1,0 +1,32 @@
+.card {
+  position: absolute;
+  width: 100%;
+  height: 70vh;
+  z-index: 100;
+  background: #fff;
+  border-radius: 12px;
+  transition: background-color 0.5s ease;
+  box-shadow: rgb(0 0 0 / 10%) 2px 2px 8px 1px;
+}
+
+.contents {
+  width: 100%;
+}
+
+@media screen and (max-height: 700px) {
+  .card {
+    height: 70vh;
+  }
+}
+
+@media screen and (max-height: 500px) {
+  .card {
+    height: 60vh;
+  }
+}
+
+@media screen and (max-height: 400px) {
+  .card {
+    height: 50vh;
+  }
+}

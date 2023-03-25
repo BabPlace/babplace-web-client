@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+.flexwrap {
+  display: flex;
+  justify-content: left;
+}
+
+.category {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 768px) {
+  .category {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.category_title {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
