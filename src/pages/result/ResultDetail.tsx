@@ -34,7 +34,7 @@ const ResultDetail = ({ restaurantSatisfaction }: Props) => {
     <div className={styles.container}>
       <div className={styles.flexwrap}>
         {content.map((item) => (
-          <div className={styles.category}>
+          <div key={`satisfaction-${item.satisfaction}`} className={styles.category}>
             <div className={styles.category_title}>
               <div className={styles.flex}>
                 <ColoredCircle color={theme.myPalette.dark[item.satisfaction]} />
@@ -46,8 +46,14 @@ const ResultDetail = ({ restaurantSatisfaction }: Props) => {
                 {restaurantSatisfaction[item.satisfaction]?.length ?? 0}명
               </Typography>
             </div>
-            {restaurantSatisfaction[item.satisfaction]?.map((name) => (
-              <Typography variant='caption' fontFamily={'Noto Sans KR'} fontSize={'10px'} paddingLeft={'15px'}>
+            {restaurantSatisfaction[item.satisfaction]?.map((name, index) => (
+              <Typography
+                key={`satisfaction-user-${name}-${index}`}
+                variant='caption'
+                fontFamily={'Noto Sans KR'}
+                fontSize={'10px'}
+                paddingLeft={'15px'}
+              >
                 {name}
               </Typography>
             ))}

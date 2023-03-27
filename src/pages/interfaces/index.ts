@@ -38,4 +38,7 @@ export type ResultResponse = {
   restaurantSatisfactions: RestaurantSatisfaction[];
 };
 
+export type UserResponse = {
+  userId: string;
+};
 export type Direction = 'up' | 'down' | 'left' | 'right';

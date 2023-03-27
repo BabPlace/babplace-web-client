@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import TypoNotoSans from './TypoNotoSans';
 import { IconButton, Snackbar } from '@mui/material';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
@@ -12,7 +13,7 @@ interface Props {
   showButtons?: boolean;
 }
 
-const Header = ({ showButtons }: Props) => {
+const Header = ({ showButtons = true }: Props) => {
   const theme = useTheme();
   const { Alert, open, handleOpen, handleClose } = useAlert();
 
@@ -33,7 +34,9 @@ const Header = ({ showButtons }: Props) => {
           </IconButton>
         </Link>
       )}
-      <h1>🍚 골라밥 🍚</h1>
+      <TypoNotoSans variant='h6' textAlign='center' width='100%'>
+        🍚 골라밥 🍚
+      </TypoNotoSans>
       {showButtons && (
         <IconButton aria-label='invite' style={{ cursor: 'pointer' }} onClick={copyLink}>
           <PersonAddAltIcon />

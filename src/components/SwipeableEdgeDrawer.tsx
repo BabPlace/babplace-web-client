@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styles from '@/styles/Drawer.module.css';
 import { Button } from '@mui/material';
 
-// create List component
 type Props = {
   children: React.ReactNode;
 };

@@ -3,13 +3,13 @@ import { RatioBarChart, Dataset } from '@teamapdan/weirdchart';
 import axios from 'axios';
 import Layout from '@/components/Layout';
 import Header from '@/components/Header';
-import ResultCard from '@/components/ResultCard';
-import ResultDetail from '@/components/ResultDetail';
+import ResultCard from './ResultCard';
+import ResultDetail from './ResultDetail';
+import TypoNotoSans from '@/components/TypoNotoSans';
 import { url } from '@/utils/url';
 import { useAlert } from '@/hooks';
 import { useTheme } from '@mui/material/styles';
-import { Button, Typography, Snackbar } from '@mui/material';
-import styled from '@emotion/styled';
+import { Button, Snackbar } from '@mui/material';
 import styles from '@/styles/Result.module.css';
 import type { ResultResponse, RestaurantSatisfaction, Satisfaction } from '../interfaces';
 
@@ -47,17 +47,15 @@ function Page({ result, error }: Props) {
     return <div>loading...</div>;
   }
   return (
-    <Layout title='gola-bab result page' description='gola-bab result page for user'>
+    <Layout title='결과 페이지 | 골라밥 🍚' description='생성한 팀 혹은 초대받은 팀의 식당 만족도 조사결과 페이지입니다.'>
       <Header showButtons={true} />
-      <StyledDiv
-        className={styles.container}
-        bgColor={theme.myPalette[theme.palette.mode].background}
-        fgColor={theme.myPalette[theme.palette.mode].foreground}
-      >
-        <h1 className={styles.title}>팀이름 요기</h1>
+      <div className={styles.container}>
+        <TypoNotoSans variant='h6' textAlign='center' marginBottom='20px'>
+          팀이름 요기
+        </TypoNotoSans>
         <div className={styles.flex}>
           {top3(result.restaurantSatisfactions).map((restaurantSatisfaction, index) => (
-            <ResultCard key={restaurantSatisfaction.name} title={restaurantSatisfaction.name} index={index}>
+            <ResultCard key={`top3-${restaurantSatisfaction.name}-${index}`} title={restaurantSatisfaction.name} index={index}>
               <div style={{ height: '20px' }}>
                 <RatioBarChart
                   dataset={makeDataset(restaurantSatisfaction)}
@@ -71,13 +69,13 @@ function Page({ result, error }: Props) {
             </ResultCard>
           ))}
           <ResultCard title='패배자들...'>
-            {others(result.restaurantSatisfactions).map((restaurantSatisfaction) => {
+            {others(result.restaurantSatisfactions).map((restaurantSatisfaction, index) => {
               return (
-                <div key={restaurantSatisfaction.name}>
+                <div key={`others-${restaurantSatisfaction.name}-${index}`}>
                   <div className={styles.loser} style={{ height: '20px' }}>
-                    <Typography className={styles.loser_title} component='div' variant='body2'>
+                    <TypoNotoSans className={styles.loser_title} variant='body2'>
                       {restaurantSatisfaction.name}
-                    </Typography>
+                    </TypoNotoSans>
                     <div className={styles.loser_bar}>
                       <RatioBarChart
                         dataset={makeDataset(restaurantSatisfaction)}
@@ -94,14 +92,14 @@ function Page({ result, error }: Props) {
             })}
           </ResultCard>
           <div className={styles.button_box}>
-            <Button variant='contained' fullWidth style={{ borderRadius: '8px', backgroundColor: '#47B8E0' }} onClick={handleOpen}>
-              <Typography variant='button' textAlign='center' color='white'>
+            <Button variant='contained' fullWidth style={{ borderRadius: '10px', backgroundColor: '#47B8E0' }} onClick={handleOpen}>
+              <TypoNotoSans variant='button' textAlign='center' color='white'>
                 결과 공유하기
-              </Typography>
+              </TypoNotoSans>
             </Button>
-            <Typography variant='button' component='div' textAlign='center' marginTop={'10px'} fontSize='0.7rem'>
+            <TypoNotoSans variant='button' textAlign='center' marginTop={'10px'} fontSize='0.7rem'>
               앱으로 보기
-            </Typography>
+            </TypoNotoSans>
           </div>
         </div>
         <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
@@ -109,7 +107,7 @@ function Page({ result, error }: Props) {
             결과 공유 링크가 복사되었습니다!
           </Alert>
         </Snackbar>
-      </StyledDiv>
+      </div>
     </Layout>
   );
 }
@@ -125,8 +123,3 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 };
 
 export default Page;
-
-const StyledDiv = styled.div<{ bgColor: string; fgColor: string }>`
-  background-color: ${(props) => props.bgColor};
-  color: ${(props) => props.fgColor};
-`;

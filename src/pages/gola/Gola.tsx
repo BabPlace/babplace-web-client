@@ -1,14 +1,10 @@
-import { GetServerSideProps } from 'next';
+import React from 'react';
 import dynamic from 'next/dynamic';
-import axios from 'axios';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { TypoNotoSans, Header, Layout } from '@/components';
 import { useTheme } from '@mui/material/styles';
-import { distance, url } from '@/utils';
-import useResult from '@/hooks/useResult';
-import Layout from '@/components/Layout';
-import Header from '@/components/Header';
-import TypoNotoSans from '@/components/TypoNotoSans';
-import SetUser from './SetUser';
+import { useResult } from '@/hooks';
+import { distance } from '@/utils';
 import type { Restaurant, SatisfactionByRestaurant } from '../interfaces';
 import styled from '@emotion/styled';
 import styles from '@/styles/Gola.module.css';
@@ -23,18 +19,13 @@ const NoSSRCard = dynamic<{
 });
 
 type Props = {
-  userId: number;
+  isValidUser: boolean;
   restaurants: Restaurant[];
 };
 
-function Page({ userId, restaurants }: Props) {
-  const isValidUser = userId >= 0;
+const Gola = ({ isValidUser, restaurants }: Props) => {
   const theme = useTheme();
   const { frontIndex, addResult, afterSwipe } = useResult(restaurants, isValidUser);
-
-  if (!isValidUser) {
-    return <SetUser />;
-  }
   return (
     <Layout title='식당 만족도 조사 | 골라밥 🍚' description='원하는 식당, 원하지 않는 식당을 표현하세요!'>
       <Header showButtons={true} />
@@ -72,28 +63,9 @@ function Page({ userId, restaurants }: Props) {
       </div>
     </Layout>
   );
-}
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const userId = context.query.userId;
-  const response = await axios<Restaurant[]>({ method: 'GET', url: url(`/restaurants?userId=${userId}`) });
-  if (userId && !isNaN(Number(userId))) {
-    return {
-      props: {
-        userId: Number(userId),
-        restaurants: response.data,
-      },
-    };
-  }
-  return {
-    props: {
-      userId: -1,
-      restaurants: response.data,
-    },
-  };
 };
 
-export default Page;
+export default Gola;
 
 const StyledInfo = styled.div<{ bgColor: string }>`
   background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, ${(props) => props.bgColor} 100%);

@@ -1,45 +1,41 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
-import { Restaurant, SatisfactionByRestaurant } from '@/pages/interfaces';
 import TinderCard from 'react-tinder-card';
-import styles from '@/styles/Card.module.css';
 import { directionToSatisfaction } from '@/utils/satisfaction';
-import type { Direction } from '@/pages/interfaces';
+import { useTheme } from '@mui/material/styles';
+import type { Direction, Restaurant, SatisfactionByRestaurant } from '@/pages/interfaces';
+import styled from '@emotion/styled';
+import styles from '@/styles/Card.module.css';
 
 type Props = {
   restaurant: Restaurant;
-  changeInfo: Dispatch<SetStateAction<Restaurant>>;
-  change: Dispatch<SetStateAction<boolean>>;
   addResult: (newResult: SatisfactionByRestaurant) => void;
+  afterSwipe: () => void;
   children?: React.ReactNode;
 };
 
-const Card = ({ restaurant, changeInfo, change, addResult, children }: Props) => {
-  const [lastDirection, setLastDirection] = useState<Direction>();
-  const swiped = (direction: Direction, nameToDelete: any) => {
-    change(false);
-    changeInfo(restaurant);
-    setLastDirection(direction);
+const Card = ({ restaurant, addResult, afterSwipe, children }: Props) => {
+  const theme = useTheme();
+
+  const onSwipe = (direction: Direction) => {
+    console.log('You swiped: ' + direction);
     addResult({ restaurantId: restaurant.id, satisfaction: directionToSatisfaction(direction) });
-    change(true);
   };
 
-  const outOfFrame = (name: string) => {
-    console.log(name + ' left the screen!');
+  const onCardLeftScreen = () => {
+    afterSwipe();
   };
 
   return (
-    <TinderCard
-      className='swipe'
-      key={restaurant.name}
-      onSwipe={(dir) => swiped(dir, restaurant.name)}
-      onCardLeftScreen={() => outOfFrame(restaurant.name)}
-    >
-      <div className={styles.card + ' card'}>
-        <div className={styles.contents}>{restaurant.name}</div>
+    <TinderCard className='swipe' onSwipe={(dir) => onSwipe(dir)} onCardLeftScreen={onCardLeftScreen}>
+      <StyledCard className={styles.card + ' card'} bgColor={theme.myPalette[theme.palette.mode].foreground}>
         {children}
-      </div>
+      </StyledCard>
     </TinderCard>
   );
 };
 
 export default Card;
+
+const StyledCard = styled.div<{ bgColor: string }>`
+  box-shadow: 1px 1px 16px 2px ${(props) => props.bgColor + '10'};
+`;

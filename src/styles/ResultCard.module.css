@@ -10,3 +10,7 @@
   display: flex;
   flex-direction: column;
 }
+
+.toleft {
+  transform: translateX(-10px);
+}

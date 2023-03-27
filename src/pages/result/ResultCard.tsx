@@ -4,11 +4,11 @@ import { useTheme } from '@mui/material/styles';
 import styled from '@emotion/styled';
 import { Typography } from '@mui/material';
 
-interface Props {
+type Props = {
   children?: React.ReactNode;
   title?: string;
   index?: number;
-}
+};
 
 const ResultCard = ({ children, title, index }: Props) => {
   const theme = useTheme();
@@ -21,10 +21,17 @@ const ResultCard = ({ children, title, index }: Props) => {
     }
     return '🥉 ';
   }
+  function transfromTitle(index?: number) {
+    if (index === undefined) return '';
+    if (index === 0 || index === 1 || index === 2) {
+      return 'toleft';
+    }
+    return '';
+  }
   return (
     <ColoredBox className={styles.result_card__container} bgColor={theme.myPalette[theme.palette.mode].boxBackground}>
       {title && (
-        <Typography textAlign='center' variant='h6' fontSize='1rem' marginBottom='10px'>
+        <Typography textAlign='center' fontSize='1rem' marginBottom='10px' className={styles[transfromTitle(index)]}>
           {getMedal(index) + title}
         </Typography>
       )}

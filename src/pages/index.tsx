@@ -1,7 +1,7 @@
-import Head from 'next/head';
+import { useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import Layout from '@/components/Layout';
-import { useState } from 'react';
+import Header from '@/components/Header';
 import SwipeableEdgeDrawer from '@/components/SwipeableEdgeDrawer';
 
 export default function Home() {
@@ -9,7 +9,8 @@ export default function Home() {
   const [lng, setLng] = useState(0);
 
   return (
-    <Layout title='Home' description='main'>
+    <Layout title='골라밥 🍚' description='친구들과 함께 오늘 메뉴를 골라골라 🍚'>
+      <Header showButtons={false} />
       <Map
         center={{ lat: 33.5563, lng: 126.79581 }}
         style={{ width: '100%', height: '100vh' }}

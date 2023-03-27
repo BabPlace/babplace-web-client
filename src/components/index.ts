@@ -1,7 +1,6 @@
-import Card from './Card';
-import SwipeableEdgeDrawer from './SwipeableEdgeDrawer';
-import Header from './Header';
-import Layout from './Layout';
-import ResultCard from './ResultCard';
-
-export { Card, SwipeableEdgeDrawer, Header, Layout, ResultCard };
+export { default as Layout } from './Layout';
+export { default as Header } from './Header';
+export { default as Card } from './Card';
+export { default as Input } from './Input';
+export { default as SwipeableEdgeDrawer } from './SwipeableEdgeDrawer';
+export { default as TypoNotoSans } from './TypoNotoSans';
