@@ -6,10 +6,10 @@ import { Typography } from '@mui/material';
 import type { RestaurantSatisfaction, Satisfaction } from '@/pages/interfaces';
 
 type Props = {
-  restaurantSatisfaction: RestaurantSatisfaction;
+  satisfaction: RestaurantSatisfaction;
 };
 
-const ResultDetail = ({ restaurantSatisfaction }: Props) => {
+const ResultDetail = ({ satisfaction }: Props) => {
   const content: { name: string; satisfaction: Satisfaction }[] = [
     // {
     //   name: '짱 좋아요',
@@ -43,10 +43,10 @@ const ResultDetail = ({ restaurantSatisfaction }: Props) => {
                 </Typography>
               </div>
               <Typography variant='body2' fontFamily={'Noto Sans KR'}>
-                {restaurantSatisfaction[item.satisfaction]?.length ?? 0}명
+                {satisfaction[item.satisfaction]?.length ?? 0}명
               </Typography>
             </div>
-            {restaurantSatisfaction[item.satisfaction]?.map((name, index) => (
+            {satisfaction[item.satisfaction]?.map((name, index) => (
               <Typography
                 key={`satisfaction-user-${name}-${index}`}
                 variant='caption'

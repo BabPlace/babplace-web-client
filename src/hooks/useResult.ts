@@ -4,7 +4,7 @@ import { url } from '@/utils';
 import type { Restaurant, ResultRequest, SatisfactionByRestaurant } from '@/pages/interfaces';
 import axios from 'axios';
 
-const useResult = (restaurants: Restaurant[], isValidUser: boolean) => {
+export default function useResult(restaurants: Restaurant[], isValidUser: boolean) {
   const router = useRouter();
   const [frontIndex, setFrontIndex] = useState(restaurants.length - 1);
   const [result, setResult] = useState<ResultRequest>({ userId: -1, restaurantSatisfactions: [] });
@@ -33,6 +33,4 @@ const useResult = (restaurants: Restaurant[], isValidUser: boolean) => {
   }, [result]);
 
   return { frontIndex, result, afterSwipe, addResult };
-};
-
-export default useResult;
+}

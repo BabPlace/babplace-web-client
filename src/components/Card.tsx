@@ -1,10 +1,14 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
-import TinderCard from 'react-tinder-card';
-import { directionToSatisfaction } from '@/utils/satisfaction';
+import React from 'react';
+import dynamic from 'next/dynamic';
+import { directionToSatisfaction } from '@/utils';
 import { useTheme } from '@mui/material/styles';
 import type { Direction, Restaurant, SatisfactionByRestaurant } from '@/pages/interfaces';
 import styled from '@emotion/styled';
 import styles from '@/styles/Card.module.css';
+
+const NoSSRTinderCard = dynamic(() => import('react-tinder-card'), {
+  ssr: false,
+});
 
 type Props = {
   restaurant: Restaurant;
@@ -17,7 +21,6 @@ const Card = ({ restaurant, addResult, afterSwipe, children }: Props) => {
   const theme = useTheme();
 
   const onSwipe = (direction: Direction) => {
-    console.log('You swiped: ' + direction);
     addResult({ restaurantId: restaurant.id, satisfaction: directionToSatisfaction(direction) });
   };
 
@@ -26,11 +29,11 @@ const Card = ({ restaurant, addResult, afterSwipe, children }: Props) => {
   };
 
   return (
-    <TinderCard className='swipe' onSwipe={(dir) => onSwipe(dir)} onCardLeftScreen={onCardLeftScreen}>
+    <NoSSRTinderCard className='swipe' onSwipe={(dir) => onSwipe(dir)} onCardLeftScreen={onCardLeftScreen}>
       <StyledCard className={styles.card + ' card'} bgColor={theme.myPalette[theme.palette.mode].foreground}>
         {children}
       </StyledCard>
-    </TinderCard>
+    </NoSSRTinderCard>
   );
 };
 

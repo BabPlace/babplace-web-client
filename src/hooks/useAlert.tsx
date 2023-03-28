@@ -5,7 +5,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props,
   return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
 });
 
-const useAlert = () => {
+export default function useAlert() {
   const [open, setOpen] = useState(false);
   const handleClose = () => {
     setOpen(false);
@@ -15,6 +15,4 @@ const useAlert = () => {
   };
 
   return { Alert, handleClose, handleOpen, open };
-};
-
-export default useAlert;
+}

@@ -1,10 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
 import TypoNotoSans from './TypoNotoSans';
-import { IconButton, Snackbar } from '@mui/material';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
+import { Snackbar } from '@mui/material';
+
 import { useTheme } from '@mui/material/styles';
+import PointerIconButton from './PointerIconButton';
 import { useAlert } from '@/hooks';
 import styled from '@emotion/styled';
 import styles from '@/styles/Header.module.css';
@@ -29,19 +29,13 @@ const Header = ({ showButtons = true }: Props) => {
     >
       {showButtons && (
         <Link href='/'>
-          <IconButton aria-label='home' style={{ cursor: 'pointer' }}>
-            <HomeOutlinedIcon />
-          </IconButton>
+          <PointerIconButton icon='home' aria-label='home' />
         </Link>
       )}
       <TypoNotoSans variant='h6' textAlign='center' width='100%'>
         🍚 골라밥 🍚
       </TypoNotoSans>
-      {showButtons && (
-        <IconButton aria-label='invite' style={{ cursor: 'pointer' }} onClick={copyLink}>
-          <PersonAddAltIcon />
-        </IconButton>
-      )}
+      {showButtons && <PointerIconButton icon='invite' aria-label='invite' onClick={copyLink} />}
       <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
         <Alert onClose={handleClose} severity='success' sx={{ width: '100%' }}>
           초대 링크가 복사되었습니다!

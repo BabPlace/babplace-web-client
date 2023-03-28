@@ -23,4 +23,6 @@ export default Input;
 const StyledInput = styled.input<{ borderColor: string }>`
   padding: 5px 10px;
   border-bottom: 1px solid ${(props) => props.borderColor};
+  background: none;
+  border: none;
 `;

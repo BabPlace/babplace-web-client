@@ -28,6 +28,13 @@
   --callout-border-rgb: 172, 175, 176;
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
+
+  --header-default-height: 60px;
+
+  --drawer-default-height: 300px;
+  --drawer-maximun-height: 90%;
+  --drawer-inner-padding-tb: 30px;
+  --drawer-inner-padding-lr: 40px;
 }
 
 @media (prefers-color-scheme: dark) {

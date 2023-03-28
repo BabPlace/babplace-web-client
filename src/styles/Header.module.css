@@ -3,7 +3,7 @@
   top: 0px;
   left: 0;
   width: 100%;
-  height: 60px;
+  height: var(--header-default-height);
   display: flex;
   justify-content: space-between;
   align-items: center;

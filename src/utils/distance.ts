@@ -1,4 +1,4 @@
-export function distance(meter: number) {
+export default function distance(meter: number) {
   if (meter < 1000) {
     return `${meter}m`;
   }

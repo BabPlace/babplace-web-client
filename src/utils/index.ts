@@ -1,5 +1,5 @@
-import { url } from './url';
-import { directionToSatisfaction } from './satisfaction';
-import { distance } from './distance';
-
-export { url, directionToSatisfaction, distance };
+export { default as url } from './url';
+export { default as directionToSatisfaction } from './satisfaction';
+export { default as distance } from './distance';
+export { default as sliceByOffset } from './slice';
+export { default as makeDataset } from './dataset';

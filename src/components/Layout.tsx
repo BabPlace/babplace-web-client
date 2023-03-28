@@ -11,7 +11,7 @@ type Props = {
   style?: React.CSSProperties;
 };
 
-const Layout = ({ children, title = '골라밥 🍚', description = 'This is default description' }: Props) => {
+const Layout = ({ children, style, title = '골라밥 🍚', description = 'This is default description' }: Props) => {
   const theme = useTheme();
   return (
     <div className={styles.main}>
@@ -21,11 +21,14 @@ const Layout = ({ children, title = '골라밥 🍚', description = 'This is def
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <div className={styles.max_width}>
-        <StyledDiv bgColor={theme.myPalette[theme.palette.mode].background} fgColor={theme.myPalette[theme.palette.mode].foreground}>
-          {children}
-        </StyledDiv>
-      </div>
+
+      <StyledDiv
+        style={style}
+        bgColor={theme.myPalette[theme.palette.mode].background}
+        fgColor={theme.myPalette[theme.palette.mode].foreground}
+      >
+        {children}
+      </StyledDiv>
     </div>
   );
 };
@@ -33,9 +36,10 @@ const Layout = ({ children, title = '골라밥 🍚', description = 'This is def
 export default Layout;
 
 const StyledDiv = styled.div<{ bgColor: string; fgColor: string }>`
+  position: relative;
   background-color: ${(props) => props.bgColor};
   color: ${(props) => props.fgColor};
   width: 100%;
-  margin-top: 60px;
-  height: calc(100vh - 60px);
+  margin-top: var(--header-default-height);
+  height: calc(100vh - var(--header-default-height));
 `;

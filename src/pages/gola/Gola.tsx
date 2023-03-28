@@ -1,22 +1,13 @@
 import React from 'react';
-import dynamic from 'next/dynamic';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { TypoNotoSans, Header, Layout } from '@/components';
 import { useTheme } from '@mui/material/styles';
+import { Card } from '@/components';
 import { useResult } from '@/hooks';
 import { distance } from '@/utils';
-import type { Restaurant, SatisfactionByRestaurant } from '../interfaces';
+import type { Restaurant } from '../interfaces';
 import styled from '@emotion/styled';
 import styles from '@/styles/Gola.module.css';
-
-const NoSSRCard = dynamic<{
-  restaurant: Restaurant;
-  addResult: (newResult: SatisfactionByRestaurant) => void;
-  afterSwipe: () => void;
-  children?: React.ReactNode;
-}>(() => import('../../components/Card'), {
-  ssr: false,
-});
 
 type Props = {
   isValidUser: boolean;
@@ -34,7 +25,7 @@ const Gola = ({ isValidUser, restaurants }: Props) => {
           {restaurants.map(
             (restaurant, index) =>
               (index === frontIndex || index + 1 === frontIndex) && (
-                <NoSSRCard key={restaurant.id} restaurant={restaurant} addResult={addResult} afterSwipe={afterSwipe}>
+                <Card key={restaurant.id} restaurant={restaurant} addResult={addResult} afterSwipe={afterSwipe}>
                   <Map
                     center={{ lat: restaurant.latitude, lng: restaurant.longitude }}
                     style={{ width: '100%', height: '100%', borderRadius: '12px' }}
@@ -56,10 +47,11 @@ const Gola = ({ isValidUser, restaurants }: Props) => {
                       <TypoNotoSans>{distance(restaurant.distance)}</TypoNotoSans>
                     </div>
                   </StyledInfo>
-                </NoSSRCard>
+                </Card>
               )
           )}
         </div>
+        <div className={styles.card_action_buttons}></div>
       </div>
     </Layout>
   );

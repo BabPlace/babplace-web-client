@@ -1,4 +1,4 @@
-export function directionToSatisfaction(direction: string) {
+export default function directionToSatisfaction(direction: string) {
   switch (direction) {
     // case 'up':
     //   return 1;
