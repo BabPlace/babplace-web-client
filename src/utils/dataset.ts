@@ -1,5 +1,5 @@
 import { Dataset } from '@teamapdan/weirdchart';
-import { Satisfaction, RestaurantSatisfaction } from '@/pages/interfaces';
+import { Satisfaction, RestaurantSatisfaction } from '@/interfaces';
 import { Theme } from '@mui/material';
 
 export default function makeDataset(restaurantSatisfaction: RestaurantSatisfaction, theme: Theme): Dataset[] {

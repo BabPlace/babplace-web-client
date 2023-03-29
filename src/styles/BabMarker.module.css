@@ -1,0 +1,31 @@
+.container {
+  position: f;
+}
+.container::after {
+  position: absolute;
+  content: '🍚';
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+  background: rgb(var(--gola-verygood-rgb));
+  padding: 0.5rem;
+  border-radius: 50%;
+  line-height: 1;
+  bottom: calc((100vh - var(--drawer-default-height) + var(--border-radius) + 7px) / 2 + 16px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+}
+
+.container::before {
+  position: absolute;
+  content: '';
+  border-top: 32px solid rgb(var(--gola-verygood-rgb));
+  border-left: 16px solid transparent;
+  border-right: 16px solid transparent;
+  bottom: calc((100vh - var(--drawer-default-height) + var(--border-radius) + 7px) / 2);
+
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+}

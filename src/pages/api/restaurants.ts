@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { Restaurant } from '../interfaces';
+import type { Restaurant } from '../../interfaces';
 
 const dummyRestaurants: Restaurant[] = [
   {

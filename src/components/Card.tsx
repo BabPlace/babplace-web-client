@@ -2,7 +2,7 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import { directionToSatisfaction } from '@/utils';
 import { useTheme } from '@mui/material/styles';
-import type { Direction, Restaurant, SatisfactionByRestaurant } from '@/pages/interfaces';
+import type { Direction, Restaurant, SatisfactionByRestaurant } from '@/interfaces';
 import styled from '@emotion/styled';
 import styles from '@/styles/Card.module.css';
 
@@ -11,17 +11,17 @@ const NoSSRTinderCard = dynamic(() => import('react-tinder-card'), {
 });
 
 type Props = {
-  restaurant: Restaurant;
+  id: number;
   addResult: (newResult: SatisfactionByRestaurant) => void;
   afterSwipe: () => void;
   children?: React.ReactNode;
 };
 
-const Card = ({ restaurant, addResult, afterSwipe, children }: Props) => {
+const Card = ({ id, addResult, afterSwipe, children }: Props) => {
   const theme = useTheme();
 
   const onSwipe = (direction: Direction) => {
-    addResult({ restaurantId: restaurant.id, satisfaction: directionToSatisfaction(direction) });
+    addResult({ restaurantId: id, satisfaction: directionToSatisfaction(direction) });
   };
 
   const onCardLeftScreen = () => {

@@ -6,3 +6,4 @@ export { default as SwipeableEdgeDrawer } from './SwipeableEdgeDrawer';
 export { default as PointerIconButton } from './PointerIconButton';
 export { default as TypoNotoSans } from './TypoNotoSans';
 export { default as BabMarker } from './BabMarker';
+export { default as ButtonGroup } from './ButtonGroup';

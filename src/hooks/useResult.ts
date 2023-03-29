@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { url } from '@/utils';
-import type { Restaurant, ResultRequest, SatisfactionByRestaurant } from '@/pages/interfaces';
+import type { Restaurant, ResultRequest, SatisfactionByRestaurant } from '@/interfaces';
 import axios from 'axios';
 
 export default function useResult(restaurants: Restaurant[], isValidUser: boolean) {
   const router = useRouter();
-  const [frontIndex, setFrontIndex] = useState(restaurants.length - 1);
+  const [frontIndex, setFrontIndex] = useState(restaurants ? restaurants.length - 1 : 0);
   const [result, setResult] = useState<ResultRequest>({ userId: -1, restaurantSatisfactions: [] });
 
   const afterSwipe = () => {
@@ -20,7 +20,7 @@ export default function useResult(restaurants: Restaurant[], isValidUser: boolea
   };
 
   useEffect(() => {
-    if (!isValidUser) return;
+    if (!isValidUser || !restaurants) return;
     if (restaurants.length !== 0 && restaurants.length === result.restaurantSatisfactions.length) {
       const teamId = router.query.teamId;
       axios.post(url(`/result/${teamId}`), result).then((response) => {
@@ -30,7 +30,7 @@ export default function useResult(restaurants: Restaurant[], isValidUser: boolea
         }
       });
     }
-  }, [result]);
+  }, [result, restaurants]);
 
   return { frontIndex, result, afterSwipe, addResult };
 }

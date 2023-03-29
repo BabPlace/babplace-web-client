@@ -1,9 +1,8 @@
 import React from 'react';
-import { useTheme } from '@mui/material/styles';
 import { styled } from '@mui/material';
 import styles from '@/styles/ResultDetail.module.css';
 import { Typography } from '@mui/material';
-import type { RestaurantSatisfaction, Satisfaction } from '@/pages/interfaces';
+import type { RestaurantSatisfaction, Satisfaction } from '@/interfaces';
 
 type Props = {
   satisfaction: RestaurantSatisfaction;
@@ -29,7 +28,7 @@ const ResultDetail = ({ satisfaction }: Props) => {
     // },
   ];
 
-  const theme = useTheme();
+  if (!satisfaction) return <div>loading...</div>;
   return (
     <div className={styles.container}>
       <div className={styles.flexwrap}>
@@ -37,7 +36,7 @@ const ResultDetail = ({ satisfaction }: Props) => {
           <div key={`satisfaction-${item.satisfaction}`} className={styles.category}>
             <div className={styles.category_title}>
               <div className={styles.flex}>
-                <ColoredCircle color={theme.myPalette.dark[item.satisfaction]} />
+                <ColoredCircle satisfaction={item.satisfaction} />
                 <Typography variant='body2' fontFamily={'Noto Sans KR'}>
                   {item.name}
                 </Typography>
@@ -66,9 +65,9 @@ const ResultDetail = ({ satisfaction }: Props) => {
 
 export default ResultDetail;
 
-const ColoredCircle = styled('div')<{ color: string }>`
+const ColoredCircle = styled('div')<{ satisfaction: Satisfaction }>`
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background-color: ${({ color }) => color};
+  background-color: rgb(var(${(props) => `--gola-${props.satisfaction}-rgb`}));
 `;

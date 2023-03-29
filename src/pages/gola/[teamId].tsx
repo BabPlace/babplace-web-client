@@ -3,7 +3,7 @@ import axios from 'axios';
 import { url } from '@/utils';
 import Gola from './Gola';
 import SetUser from './SetUser';
-import type { Restaurant } from '../interfaces';
+import type { Restaurant } from '../../interfaces';
 
 type Props = {
   userId: number;

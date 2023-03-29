@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { UserResponse } from '../interfaces';
+import type { UserResponse } from '../../interfaces';
 
 const dummyUserResponse: UserResponse = {
   userId: '1',

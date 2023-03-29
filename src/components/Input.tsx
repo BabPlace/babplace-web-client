@@ -21,7 +21,7 @@ const Input = ({ onReturn, ...props }: Props) => {
 export default Input;
 
 const StyledInput = styled.input<{ borderColor: string }>`
-  padding: 5px 10px;
+  width: 100%;
   border-bottom: 1px solid ${(props) => props.borderColor};
   background: none;
   border: none;

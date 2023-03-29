@@ -1,21 +1,29 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
+import useKeyboardVisible from './useKeyboardVisible';
 
 export default function useDrawer() {
   const drawerRef = useRef<HTMLDivElement>(null);
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
+  const { isKeyboardVisible } = useKeyboardVisible();
 
   const handleDrawer = (bool: boolean) => {
     setOpen(bool);
   };
 
-  const onFocus = () => {
-    handleDrawer(false);
-  };
+  const onFocus = useCallback(() => {
+    if (isKeyboardVisible) handleDrawer(true);
+  }, [isKeyboardVisible]);
+
+  useEffect(() => {
+    if (drawerRef.current && !open) {
+      (document.activeElement as HTMLElement).blur();
+    }
+  }, [open]);
 
   useEffect(() => {
     function handleClickOutside({ target }: MouseEvent) {
       if (drawerRef.current && !drawerRef.current.contains(target as Node)) {
-        handleDrawer(true);
+        handleDrawer(false);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -26,24 +34,24 @@ export default function useDrawer() {
 
   useEffect(() => {
     let touchDownPosition = 0;
-    function swipeInMobile({ touches }: TouchEvent) {
-      touchDownPosition = touches[0].clientX;
+    function handleTouchStart({ touches }: TouchEvent) {
+      touchDownPosition = touches[0].pageY;
     }
-    function swipeOutMobile({ touches }: TouchEvent) {
-      console.log(touches);
-      if (touchDownPosition - touches[0].clientX > 100) {
-        handleDrawer(false);
-      }
-      if (touchDownPosition - touches[0].clientX < -100) {
+    function handleTouchMove({ touches }: TouchEvent) {
+      if (touches.length === 0) return;
+      if (touchDownPosition - touches[0].pageY > 50) {
         handleDrawer(true);
+      }
+      if (touchDownPosition - touches[0].pageY < -50) {
+        handleDrawer(false);
       }
     }
     if (drawerRef.current) {
-      drawerRef.current.addEventListener('touchstart', swipeInMobile);
-      drawerRef.current.addEventListener('touchend', swipeOutMobile);
+      drawerRef.current.addEventListener('touchstart', handleTouchStart);
+      drawerRef.current.addEventListener('touchmove', handleTouchMove);
       return () => {
-        drawerRef.current?.removeEventListener('touchstart', swipeInMobile);
-        drawerRef.current?.removeEventListener('touchend', swipeOutMobile);
+        drawerRef.current?.removeEventListener('touchstart', handleTouchStart);
+        drawerRef.current?.removeEventListener('touchmove', handleTouchMove);
       };
     }
   }, [drawerRef]);

@@ -8,7 +8,7 @@ import { url, sliceByOffset, makeDataset } from '@/utils';
 import { useAlert } from '@/hooks';
 import { useTheme } from '@mui/material/styles';
 import { Button, Snackbar } from '@mui/material';
-import type { ResultResponse } from '../interfaces';
+import type { ResultResponse } from '../../interfaces';
 import styles from '@/styles/Result.module.css';
 
 type Props = {
