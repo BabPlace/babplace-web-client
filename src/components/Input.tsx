@@ -25,4 +25,5 @@ const StyledInput = styled.input<{ borderColor: string }>`
   border-bottom: 1px solid ${(props) => props.borderColor};
   background: none;
   border: none;
+  font-size: 0.9rem;
 `;

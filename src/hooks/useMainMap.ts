@@ -36,11 +36,7 @@ export default function useMainMap() {
       }
     };
     geocoder.coord2RegionCode(longitude, latitude, callback);
-  }, [loading]);
-
-  useEffect(() => {
-    console.log(addressName);
-  }, [addressName]);
+  }, [loading, latitude, longitude]);
 
   return { latitude, longitude, addressName, onCenterChanged };
 }

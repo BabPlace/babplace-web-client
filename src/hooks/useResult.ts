@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { url } from '@/utils';
+import { createResult } from '@/controller';
 import type { Restaurant, ResultRequest, SatisfactionByRestaurant } from '@/interfaces';
-import axios from 'axios';
 
 export default function useResult(restaurants: Restaurant[], isValidUser: boolean) {
   const router = useRouter();
@@ -22,12 +21,9 @@ export default function useResult(restaurants: Restaurant[], isValidUser: boolea
   useEffect(() => {
     if (!isValidUser || !restaurants) return;
     if (restaurants.length !== 0 && restaurants.length === result.restaurantSatisfactions.length) {
-      const teamId = router.query.teamId;
-      axios.post(url(`/result/${teamId}`), result).then((response) => {
-        if (response.status === 200) router.push(`/result/${teamId}`);
-        else {
-          // TODO: 에러 처리
-        }
+      const teamId = router.query.teamId as string;
+      createResult({ teamId, ...result }).then(() => {
+        router.push(`/result/${teamId}`);
       });
     }
   }, [result, restaurants]);

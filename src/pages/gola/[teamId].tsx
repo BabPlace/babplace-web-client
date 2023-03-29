@@ -1,8 +1,7 @@
 import { GetServerSideProps } from 'next';
-import axios from 'axios';
-import { url } from '@/utils';
 import Gola from './Gola';
 import SetUser from './SetUser';
+import { getRestaurant } from '@/controller';
 import type { Restaurant } from '../../interfaces';
 
 type Props = {
@@ -20,19 +19,15 @@ function Page({ userId, restaurants }: Props) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const userId = context.query.userId;
+  const userId = context.query.userId as string;
   if (userId && !isNaN(Number(userId))) {
-    try {
-      const response = await axios<Restaurant[]>({ method: 'GET', url: url(`/restaurants?userId=${userId}`) });
-      return {
-        props: {
-          userId: Number(userId),
-          restaurants: response.data,
-        },
-      };
-    } catch (error) {
-      console.log(error);
-    }
+    const response = await getRestaurant({ userId });
+    return {
+      props: {
+        userId: Number(userId),
+        restaurants: response,
+      },
+    };
   }
   return {
     props: {

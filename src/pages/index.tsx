@@ -3,7 +3,7 @@ import { useMainMap } from '@/hooks';
 import { Layout, SwipeableEdgeDrawer, BabMarker } from '@/components';
 
 export default function Home() {
-  const { latitude, longitude, onCenterChanged } = useMainMap();
+  const { latitude, longitude, addressName, onCenterChanged } = useMainMap();
   return (
     <Layout
       title='골라밥 🍚'
@@ -23,7 +23,7 @@ export default function Home() {
         {/* <MapMarker position={{ lat: latitude, lng: longitude }} /> */}
       </Map>
       <BabMarker />
-      <SwipeableEdgeDrawer />
+      <SwipeableEdgeDrawer addressName={addressName} lat={latitude} lng={longitude} />
     </Layout>
   );
 }

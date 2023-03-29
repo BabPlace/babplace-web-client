@@ -8,7 +8,7 @@ type Props = {
 
 const TypoNotoSans = ({ children, className, text, ...props }: Props) => {
   return (
-    <Typography component='div' fontFamily='Noto Sans KR' {...props} className={className}>
+    <Typography component='div' fontFamily='Noto Sans KR' {...props} className={className} noWrap={true}>
       {text}
       {children}
     </Typography>

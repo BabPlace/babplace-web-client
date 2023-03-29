@@ -1,14 +1,14 @@
 import { GetServerSideProps } from 'next';
 import { RatioBarChart } from '@teamapdan/weirdchart';
-import axios from 'axios';
 import { TypoNotoSans, Layout, Header } from '@/components';
 import ResultCard from './ResultCard';
 import ResultDetail from './ResultDetail';
-import { url, sliceByOffset, makeDataset } from '@/utils';
+import { sliceByOffset, makeDataset } from '@/utils';
 import { useAlert } from '@/hooks';
 import { useTheme } from '@mui/material/styles';
+import { getResult } from '@/controller';
 import { Button, Snackbar } from '@mui/material';
-import type { ResultResponse } from '../../interfaces';
+import { ResultResponse } from '@/interfaces';
 import styles from '@/styles/Result.module.css';
 
 type Props = {
@@ -83,21 +83,14 @@ function Page({ result, error }: Props) {
   );
 }
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-  const { teamId } = context.query;
-  try {
-    const response = await axios<ResultResponse>({ method: 'GET', url: url(`/result?teamId=${teamId}`) });
-    const result = response.data;
-    return { props: { result } };
-  } catch (error) {
-    return {
-      props: {
-        result: {
-          restaurantSatisfactions: [],
-        },
-        error: 'error',
-      },
-    };
-  }
+  const teamId = context.query.teamId as string;
+
+  const response = await getResult(teamId);
+  return {
+    props: {
+      result: response,
+    },
+  };
 };
 
 export default Page;

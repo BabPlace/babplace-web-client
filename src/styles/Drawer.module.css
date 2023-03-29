@@ -1,6 +1,6 @@
 .container {
   position: fixed;
-  padding: var(--drawer-inner-padding-tb) var(--drawer-inner-padding-lr);
+  padding: var(--drawer-inner-padding-t) var(--drawer-inner-padding-lr) var(--drawer-inner-padding-b);
   bottom: 0;
   left: 0;
   width: 100%;
@@ -8,8 +8,19 @@
   transition: height 0.5s ease;
   border-radius: var(--border-radius) var(--border-radius) 0 0;
   background-color: rgb(var(--primary-background-rgb));
-  color: rgb(var(--pribary-foreground-rgba));
+  color: rgba(var(--pribary-foreground-rgba));
   box-shadow: 0 0 10px 0 rgba(var(--primary-foreground-rgba), 0.2);
+}
+
+.puller {
+  position: absolute;
+  top: calc(var(--border-radius) * 0.75);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 4px;
+  border-radius: 5px;
+  background-color: rgba(var(--primary-foreground-rgba), 0.1);
 }
 
 .content {
@@ -30,7 +41,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 3rem;
+  gap: 2rem;
   height: var(--drawer-list-height);
   border-bottom: 1px solid #eee;
 }
@@ -50,16 +61,18 @@
 .list_item__button_guide {
   width: 100%;
   position: absolute;
-  text-align: center;
-  bottom: -1.2rem;
+  bottom: -1.5rem;
   color: rgba(var(--caption-foreground-rgba));
 }
 
 @media screen and (max-width: 360px) {
-  .drawer_list_item {
+  .list_item {
     gap: 1rem;
   }
-  .content {
-    flex: 1 1 0;
+  .list_item__title {
+    flex: 2 2 0;
+  }
+  .list_item__content {
+    flex: 3 3 0;
   }
 }

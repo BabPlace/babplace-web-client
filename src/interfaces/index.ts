@@ -1,3 +1,5 @@
+export type Satisfaction = 'good' | 'bad' | 'verygood' | 'verybad';
+export type Direction = 'up' | 'down' | 'left' | 'right';
 export type Restaurant = {
   id: number;
   name: string;
@@ -10,16 +12,9 @@ export type Restaurant = {
   teamcenterLoong: number;
 };
 
-export type Satisfaction = 'good' | 'bad' | 'verygood' | 'verybad';
-
 export type SatisfactionByRestaurant = {
   restaurantId: number;
   satisfaction: Satisfaction;
-};
-
-export type ResultRequest = {
-  userId: number;
-  restaurantSatisfactions: SatisfactionByRestaurant[];
 };
 
 export type RestaurantSatisfaction = {
@@ -33,12 +28,45 @@ export type CategorySatisfaction = {
   percent: number;
 };
 
+// Result
+export type ResultParams = {
+  teamId: string;
+};
+export type ResultRequest = {
+  userId: number;
+  restaurantSatisfactions: SatisfactionByRestaurant[];
+};
 export type ResultResponse = {
   // categorySatisfactions: CategorySatisfaction[];
   restaurantSatisfactions: RestaurantSatisfaction[];
 };
 
+// User
+export type UserParams = {
+  teamId: string;
+};
+export type UserRequest = {
+  nickName: string;
+};
 export type UserResponse = {
   userId: string;
 };
-export type Direction = 'up' | 'down' | 'left' | 'right';
+
+// Team
+export type TeamRequest = {
+  name: string;
+  radius: number;
+  lat: number;
+  lng: number;
+  limitUser?: number;
+  limitRestaurant?: number;
+};
+export type TeamResponse = {
+  teamId: string;
+};
+
+// Restaurant
+export type RestaurantParams = {
+  userId: string;
+};
+export type RestaurantResponse = Restaurant[];

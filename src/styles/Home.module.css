@@ -1,14 +1,14 @@
 .main {
   position: relative;
   width: 100%;
-  max-width: 700px;
-  margin: auto;
+  background-color: rgb(var(--primary-background-rgb));
+  color: rgba(var(--primary-foreground-rgba));
 }
 
 .body {
   width: 100%;
-  background-color: rgb(var(--primary-background-rgb));
-  color: rgba(var(--primary-foreground-rgba));
+  margin: auto;
+  max-width: 700px;
   margin-top: var(--header-default-height);
   height: calc(100vh - var(--header-default-height));
 }

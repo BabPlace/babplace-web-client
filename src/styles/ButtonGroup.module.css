@@ -5,11 +5,23 @@
   border: none;
   background: none;
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
+  justify-content: space-evenly;
+  /* justify-content: space-between; */
 }
 
 .item {
+  background: rgb(var(--secondary-background-rgb));
+  border-radius: var(--border-radius-2);
   width: calc(var(--drawer-list-height) * 0.75);
   height: calc(var(--drawer-list-height) * 0.75);
   position: relative;
+  padding: 0.25rem;
+  cursor: pointer;
+  border: none;
+  transition: background 0.3s ease-in-out;
+}
+
+.selected {
+  background: rgba(var(--highlight-background-rgba));
 }
