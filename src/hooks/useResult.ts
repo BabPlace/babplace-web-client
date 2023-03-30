@@ -5,14 +5,7 @@ import type { Restaurant, ResultRequest, SatisfactionByRestaurant } from '@/inte
 
 export default function useResult(restaurants: Restaurant[], isValidUser: boolean) {
   const router = useRouter();
-  const [frontIndex, setFrontIndex] = useState(restaurants ? restaurants.length - 1 : 0);
   const [result, setResult] = useState<ResultRequest>({ userId: -1, restaurantSatisfactions: [] });
-
-  const afterSwipe = () => {
-    if (frontIndex > 0) {
-      setFrontIndex(frontIndex - 1);
-    }
-  };
 
   const addResult = (newResult: SatisfactionByRestaurant) => {
     setResult({ ...result, restaurantSatisfactions: [...result.restaurantSatisfactions, newResult] });
@@ -28,5 +21,5 @@ export default function useResult(restaurants: Restaurant[], isValidUser: boolea
     }
   }, [result, restaurants]);
 
-  return { frontIndex, result, afterSwipe, addResult };
+  return { result, addResult };
 }

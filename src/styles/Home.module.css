@@ -1,5 +1,4 @@
 .main {
-  position: relative;
   width: 100%;
   background-color: rgb(var(--primary-background-rgb));
   color: rgba(var(--primary-foreground-rgba));

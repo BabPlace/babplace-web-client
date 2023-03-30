@@ -1,44 +1,33 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import dynamic from 'next/dynamic';
 import { directionToSatisfaction } from '@/utils';
-import { useTheme } from '@mui/material/styles';
-import type { Direction, Restaurant, SatisfactionByRestaurant } from '@/interfaces';
-import styled from '@emotion/styled';
+import type { Direction, API, SatisfactionByRestaurant } from '@/interfaces';
 import styles from '@/styles/Card.module.css';
 
 const NoSSRTinderCard = dynamic(() => import('react-tinder-card'), {
   ssr: false,
 });
 
+const ForwardRefNoSSRTinderCard = forwardRef<API, any>((props, ref) => <NoSSRTinderCard ref={ref} {...props} />);
+
 type Props = {
-  id: number;
+  restaurantId: number;
   addResult: (newResult: SatisfactionByRestaurant) => void;
   afterSwipe: () => void;
   children?: React.ReactNode;
-};
+  innerRef?: React.Ref<API>;
+} & React.HTMLAttributes<HTMLDivElement>;
 
-const Card = ({ id, addResult, afterSwipe, children }: Props) => {
-  const theme = useTheme();
-
+const Card = ({ restaurantId, addResult, afterSwipe, children, innerRef, ...props }: Props) => {
   const onSwipe = (direction: Direction) => {
-    addResult({ restaurantId: id, satisfaction: directionToSatisfaction(direction) });
-  };
-
-  const onCardLeftScreen = () => {
-    afterSwipe();
+    addResult({ restaurantId: restaurantId, satisfaction: directionToSatisfaction(direction) });
   };
 
   return (
-    <NoSSRTinderCard className='swipe' onSwipe={(dir) => onSwipe(dir)} onCardLeftScreen={onCardLeftScreen}>
-      <StyledCard className={styles.card + ' card'} bgColor={theme.myPalette[theme.palette.mode].foreground}>
-        {children}
-      </StyledCard>
-    </NoSSRTinderCard>
+    <ForwardRefNoSSRTinderCard ref={innerRef} className='swipe' onSwipe={onSwipe} onCardLeftScreen={afterSwipe} {...props}>
+      <div className={styles.card + ' card'}>{children}</div>
+    </ForwardRefNoSSRTinderCard>
   );
 };
 
 export default Card;
-
-const StyledCard = styled.div<{ bgColor: string }>`
-  box-shadow: 1px 1px 16px 2px ${(props) => props.bgColor + '10'};
-`;

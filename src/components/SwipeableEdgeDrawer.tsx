@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import { useInput, useDrawer, useSelectedButton } from '@/hooks';
 import { GButton } from '@/layouts';
 import TypoNotoSans from './TypoNotoSans';
@@ -16,6 +17,7 @@ type Props = {
 };
 
 const SwipeableEdgeDrawer = ({ addressName, lat, lng }: Props) => {
+  const router = useRouter();
   const { value: name, handleChange } = useInput('');
   const { drawerRef, open, onFocus } = useDrawer();
   const { selectedButton, radius, guideMessage, onClickButton } = useSelectedButton();
@@ -28,8 +30,10 @@ const SwipeableEdgeDrawer = ({ addressName, lat, lng }: Props) => {
   };
 
   const onClick = () => {
-    createTeam({ name, lat, lng, radius }).then((response) => {
-      console.log(response);
+    createTeam({ name, lat, lng, radius }).then(({ teamId }) => {
+      router.push({
+        pathname: `gola/${teamId}`,
+      });
     });
   };
 

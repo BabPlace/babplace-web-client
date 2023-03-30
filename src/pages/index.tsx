@@ -1,4 +1,4 @@
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { Map } from 'react-kakao-maps-sdk';
 import { useMainMap } from '@/hooks';
 import { Layout, SwipeableEdgeDrawer, BabMarker } from '@/components';
 
@@ -11,19 +11,14 @@ export default function Home() {
       style={{ maxWidth: '100%' }}
       bodyStyle={{ marginTop: '0px' }}
     >
-      {/* <div>🍚 골라밥 </div> */}
-      <Map
-        center={{ lat: latitude, lng: longitude }}
-        style={{
-          width: '100%',
-          height: 'calc(100vh - var(--drawer-default-height) + var(--border-radius) + 7px)',
-        }}
-        onCenterChanged={onCenterChanged}
-      >
-        {/* <MapMarker position={{ lat: latitude, lng: longitude }} /> */}
-      </Map>
+      <Map center={{ lat: latitude, lng: longitude }} style={mapStyle} onCenterChanged={onCenterChanged} />
       <BabMarker />
       <SwipeableEdgeDrawer addressName={addressName} lat={latitude} lng={longitude} />
     </Layout>
   );
 }
+
+const mapStyle = {
+  width: '100%',
+  height: 'calc(100vh - var(--drawer-default-height) + var(--border-radius) + 7px)',
+};

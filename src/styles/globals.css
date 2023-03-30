@@ -14,6 +14,8 @@
 
   --caption-foreground-rgba: 0, 0, 0, 0.4;
 
+  --card-default-height: 70vh;
+
   --gola-good-rgb: 140, 215, 144;
   --gola-bad-rgb: 255, 95, 46;
   --gola-verygood-rgb: 71, 184, 224;
@@ -86,5 +88,23 @@ a {
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
+  }
+}
+
+@media screen and (max-height: 700px) {
+  :root {
+    --card-default-height: 70vh;
+  }
+}
+
+@media screen and (max-height: 500px) {
+  :root {
+    --card-default-height: 60vh;
+  }
+}
+
+@media screen and (max-height: 400px) {
+  :root {
+    --card-default-height: 50vh;
   }
 }
