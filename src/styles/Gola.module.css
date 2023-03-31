@@ -31,6 +31,7 @@
 .bad,
 .good,
 .verygood {
+  max-width: 100px;
   border-radius: 50%;
   box-shadow: var(--box-shadow-1);
   width: var(--gola-button-default-width);
