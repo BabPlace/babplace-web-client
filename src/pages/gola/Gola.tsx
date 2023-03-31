@@ -43,7 +43,7 @@ const Gola = ({ isValidUser, restaurants }: Props) => {
                   }}
                 >
                   <div className={styles.card + ' card'}>
-                    <Map center={{ lat, lng }} style={mapStyle}>
+                    <Map center={{ lat, lng }} style={mapStyle} level={5}>
                       <MapMarker position={{ lat, lng }} />
                     </Map>
                     <div className={styles.info}>
