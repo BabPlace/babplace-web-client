@@ -25,7 +25,6 @@ const SwipeableEdgeDrawer = ({ addressName, lat, lng }: Props) => {
   const liTitleOptions = {
     className: styles.list_item__title,
     textAlign: 'right' as const,
-    fontSize: '0.9rem',
     fontWeight: 500,
   };
 
