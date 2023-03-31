@@ -6,7 +6,7 @@ import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded';
 
-export type Icon = 'home' | 'invite' | 'good' | 'bad' | 'undo';
+export type Icon = 'home' | 'invite' | 'GOOD' | 'BAD' | 'undo';
 type Props = {
   icon: Icon;
 } & React.ComponentProps<typeof IconButton>;
@@ -18,9 +18,9 @@ const PointerIconButton = ({ icon, ...props }: Props) => {
         return <HomeOutlinedIcon />;
       case 'invite':
         return <PersonAddAltIcon />;
-      case 'good':
+      case 'GOOD':
         return <FavoriteBorderRoundedIcon />;
-      case 'bad':
+      case 'BAD':
         return <CloseRoundedIcon />;
       case 'undo':
         return <ReplayRoundedIcon />;

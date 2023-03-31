@@ -7,7 +7,7 @@
 .body {
   width: 100%;
   margin: auto;
-  max-width: 700px;
+  max-width: var(--max-width);
   margin-top: var(--header-default-height);
   height: calc(100vh - var(--header-default-height));
 }

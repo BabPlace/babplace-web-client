@@ -1,8 +1,6 @@
 import React from 'react';
+import { TypoNotoSans } from '@/components';
 import styles from '@/styles/ResultCard.module.css';
-import { useTheme } from '@mui/material/styles';
-import styled from '@emotion/styled';
-import { Typography } from '@mui/material';
 
 type Props = {
   children?: React.ReactNode;
@@ -11,7 +9,6 @@ type Props = {
 };
 
 const ResultCard = ({ children, title, index }: Props) => {
-  const theme = useTheme();
   function getMedal(index?: number) {
     if (index === undefined) return '';
     if (index === 0) {
@@ -21,28 +18,19 @@ const ResultCard = ({ children, title, index }: Props) => {
     }
     return '🥉 ';
   }
-  function transfromTitle(index?: number) {
-    if (index === undefined) return '';
-    if (index === 0 || index === 1 || index === 2) {
-      return 'toleft';
-    }
-    return '';
-  }
   return (
-    <ColoredBox className={styles.result_card__container} bgColor={theme.myPalette[theme.palette.mode].boxBackground}>
-      {title && (
-        <Typography textAlign='center' fontSize='1rem' marginBottom='10px' className={styles[transfromTitle(index)]}>
-          {getMedal(index) + title}
-        </Typography>
-      )}
+    <div className={styles.result_card__container}>
+      {title && <TypoNotoSans text={getMedal(index) + title} {...titleStyle} />}
       {children}
-    </ColoredBox>
+    </div>
   );
 };
 
 export default ResultCard;
 
-const ColoredBox = styled.div<{ bgColor?: string; fgColor?: string }>`
-  background-color: ${(props) => props.bgColor};
-  color: ${(props) => props.fgColor};
-`;
+const titleStyle = {
+  fontSize: '1rem',
+  lineHeight: '1.1',
+  textAlign: 'center' as const,
+  marginBottom: '16px',
+};

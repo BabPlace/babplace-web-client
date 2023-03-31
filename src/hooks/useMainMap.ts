@@ -12,7 +12,8 @@ export default function useMainMap() {
   const [addressName, setAdressName] = useState('');
 
   const { loading } = useInjectKakaoMapApi({
-    appkey: process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY ?? '',
+    appkey: process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY!,
+    libraries: ['services', 'clusterer'],
   });
 
   const setLocation = ({ latitude, longitude }: { latitude?: number; longitude?: number }) => {
@@ -38,5 +39,5 @@ export default function useMainMap() {
     geocoder.coord2RegionCode(longitude, latitude, callback);
   }, [loading, latitude, longitude]);
 
-  return { latitude, longitude, addressName, onCenterChanged };
+  return { loading, latitude, longitude, addressName, onCenterChanged };
 }

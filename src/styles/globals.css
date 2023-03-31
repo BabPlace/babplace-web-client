@@ -1,10 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 /*  1rem = 16px */
 :root {
-  --max-width: 1100px;
+  --max-width: 700px;
+
+  --header-default-height: 60px;
+
   --border-radius: 12px;
   --border-radius-2: 8px;
 
+  /* chosen by color scheme */
   --primary-background-rgb: 255, 255, 255;
   --primary-foreground-rgba: 0, 0, 0;
   --highlight-background-rgba: 71, 184, 224, 0.6;
@@ -14,24 +18,43 @@
 
   --caption-foreground-rgba: 0, 0, 0, 0.4;
 
-  --card-default-height: 70vh;
+  --box-shadow-1: 1px 1px 8px 2px rgba(var(--primary-foreground-rgba), 0.08);
+  --box-shadow-card: 2px 2px 8px 1px rgba(var(--primary-foreground-rgba), 0.1);
+
+  --card-default-height: 75vh;
 
   --gola-good-rgb: 140, 215, 144;
   --gola-bad-rgb: 255, 95, 46;
   --gola-verygood-rgb: 71, 184, 224;
   --gola-verybad-rgb: 189, 21, 80;
+  --gola-undo-rgb: 255, 201, 82;
+  /***/
 
-  --header-default-height: 60px;
+  --result-card-loser-default-height: 16px;
+
+  --gola-padding-t: 20px;
+  --gola-padding-b: 20px;
+  --gola-padding-l: 30px;
+  --gola-padding-r: 30px;
+
+  --gola-padding-lr: calc(var(--gola-padding-l) + var(--gola-padding-r));
+  --gola-padding-tb: calc(var(--gola-padding-t) + var(--gola-padding-b));
+
+  --gola-button-count: 4; /* 골라페이지 버튼 개수에 의존 */
+
+  --gola-button-default-width: calc((100vw - var(--gola-padding-lr)) / (var(--gola-button-count) * 2 - 2));
+  --gola-button-default-height: var(--gola-button-default-width);
 
   --drawer-max-width: 25rem;
 
-  --drawer-list-item-count: 4;
+  --drawer-list-item-count: 4; /* drawer list item의 개수에 의존 */
+
   --drawer-list-height: 3rem;
   --drawer-button-height: 2.5rem;
   --drwaer-list-button-gap: 1.875rem;
 
   --drawer-maximun-height: 90%;
-  /* 3.75 */
+
   --drawer-inner-padding-t: 1.25rem;
   --drawer-inner-padding-b: 2.5rem;
   --drawer-inner-padding-tb: calc(var(--drawer-inner-padding-t) + var(--drawer-inner-padding-b));
@@ -54,10 +77,11 @@
 
     --caption-foreground-rgba: 255, 255, 255, 0.6;
 
-    --gola-good-rgb: 140, 215, 144;
-    --gola-bad-rgb: 255, 95, 46;
-    --gola-verygood-rgb: 71, 184, 224;
-    --gola-verybad-rgb: 189, 21, 80;
+    --gola-GOOD-rgb: 140, 215, 144;
+    --gola-BAD-rgb: 255, 95, 46;
+    --gola-VERYGOOD-rgb: 71, 184, 224;
+    --gola-VERYBAD-rgb: 189, 21, 80;
+    --gola-undo-rgb: 255, 201, 82;
   }
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled } from '@mui/material';
 import styles from '@/styles/ResultDetail.module.css';
-import { Typography } from '@mui/material';
+import { TypoNotoSans } from '@/components';
 import type { RestaurantSatisfaction, Satisfaction } from '@/interfaces';
 
 type Props = {
@@ -9,11 +9,11 @@ type Props = {
 };
 
 const ResultDetail = ({ satisfaction }: Props) => {
-  const content: { name: string; satisfaction: Satisfaction }[] = [
-    // {
-    //   name: '짱 좋아요',
-    //   satisfaction: 'verygood',
-    // },
+  const content: { name: string; satisfaction: Lowercase<Satisfaction> }[] = [
+    {
+      name: '짱 좋아요',
+      satisfaction: 'verygood',
+    },
     {
       name: '좋아요',
       satisfaction: 'good',
@@ -22,10 +22,10 @@ const ResultDetail = ({ satisfaction }: Props) => {
       name: '싫어요',
       satisfaction: 'bad',
     },
-    // {
-    //   name: '짱 싫어요',
-    //   satisfaction: 'verybad',
-    // },
+    {
+      name: '짱 싫어요',
+      satisfaction: 'verybad',
+    },
   ];
 
   if (!satisfaction) return <div>loading...</div>;
@@ -35,26 +35,14 @@ const ResultDetail = ({ satisfaction }: Props) => {
         {content.map((item) => (
           <div key={`satisfaction-${item.satisfaction}`} className={styles.category}>
             <div className={styles.category_title}>
-              <div className={styles.flex}>
+              <div className={styles.category_title__name}>
                 <ColoredCircle satisfaction={item.satisfaction} />
-                <Typography variant='body2' fontFamily={'Noto Sans KR'}>
-                  {item.name}
-                </Typography>
+                <TypoNotoSans text={item.name} variant='body2' />
               </div>
-              <Typography variant='body2' fontFamily={'Noto Sans KR'}>
-                {satisfaction[item.satisfaction]?.length ?? 0}명
-              </Typography>
+              <TypoNotoSans text={(satisfaction[item.satisfaction]?.length ?? 0) + '명'} variant='body2' />
             </div>
             {satisfaction[item.satisfaction]?.map((name, index) => (
-              <Typography
-                key={`satisfaction-user-${name}-${index}`}
-                variant='caption'
-                fontFamily={'Noto Sans KR'}
-                fontSize={'10px'}
-                paddingLeft={'15px'}
-              >
-                {name}
-              </Typography>
+              <TypoNotoSans text={name} key={`satisfaction-user-${name}-${index}`} {...userNicknameStyle} />
             ))}
           </div>
         ))}
@@ -65,9 +53,16 @@ const ResultDetail = ({ satisfaction }: Props) => {
 
 export default ResultDetail;
 
-const ColoredCircle = styled('div')<{ satisfaction: Satisfaction }>`
+const ColoredCircle = styled('div')<{ satisfaction: Lowercase<Satisfaction> }>`
   width: 9px;
   height: 9px;
   border-radius: 50%;
   background-color: rgb(var(${(props) => `--gola-${props.satisfaction}-rgb`}));
 `;
+
+const userNicknameStyle = {
+  variant: 'caption' as const,
+  color: 'rgba(var(--secondary-foreground-rgba))',
+  lineHeight: '1.2',
+  paddingLeft: '15px',
+};

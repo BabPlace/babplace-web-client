@@ -1,5 +1,5 @@
 .container {
-  padding: 30px 70px;
+  padding: var(--gola-padding-t) var(--gola-padding-r) var(--gola-padding-b) var(--gola-padding-l);
   height: calc(100vh - var(--header-default-height));
   display: flex;
   flex-direction: column;
@@ -11,12 +11,74 @@
   height: var(--card-default-height);
 }
 
+.info {
+  position: absolute;
+  width: 100%;
+  padding: 20px;
+  bottom: 0px;
+  z-index: 30000;
+}
+
 .card_action_buttons {
+  margin: auto;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   gap: 10px;
-  margin-top: 10px;
 }
+
+.undo,
+.BAD,
+.GOOD,
+.VERYGOOD {
+  border-radius: 50%;
+  box-shadow: var(--box-shadow-1);
+  width: var(--gola-button-default-width);
+  height: var(--gola-button-default-height);
+  background-color: rgb(var(--secondary-background-rgb)) !important;
+}
+
+.undo {
+  color: rgb(var(--gola-undo-rgb)) !important;
+}
+
+.BAD {
+  color: rgb(var(--gola-BAD-rgb)) !important;
+}
+
+.GOOD {
+  color: rgb(var(--gola-GOOD-rgb)) !important;
+}
+
+.VERYGOOD {
+  color: rgb(var(--gola-VERYGOOD-rgb)) !important;
+}
+
+.card {
+  position: absolute;
+  width: 100%;
+  height: var(--card-default-height);
+  border-radius: var(--border-radius);
+  box-shadow: 1px 1px 16px 2px rgba(var(--primary-foreground-rgba), 0.06);
+  border: 0px;
+  z-index: 10000;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgb(var(--primary-background-rgb)) 100%);
+  border-radius: var(--border-radius);
+  z-index: 20000;
+}
+
+.contents {
+  width: 100%;
+}
+
+/* SetUser.tsx */
 .setuser {
   position: fixed;
   left: 0;
@@ -30,64 +92,9 @@
 .setuser_input {
   text-align: center;
   font-size: 1rem;
+  padding-bottom: 10px;
 }
 
 .setuser_input:focus-visible {
   outline: none;
-}
-.logo {
-  padding: 15px 0;
-  font-size: 20px;
-  text-align: center;
-}
-
-.info {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0px;
-  left: 0px;
-
-  font-size: 25px;
-  border-radius: 12px;
-  z-index: 20000;
-
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgb(var(--primary-background-rgb)) 100%);
-}
-
-.info > div {
-  position: absolute;
-  padding: 20px;
-  bottom: 0px;
-  left: 0px;
-}
-
-@media screen and (max-width: 480px) {
-  .container {
-    padding: 20px 30px 50px 30px;
-  }
-  .info {
-    font-size: 25px;
-  }
-}
-
-/* # if width < 480px and height < 700px, .info font-size is 15px */
-@media screen and (max-height: 600px) {
-  .info {
-    font-size: 15px;
-  }
-}
-
-.card {
-  position: absolute;
-  width: 100%;
-  height: var(--card-default-height);
-  z-index: 100;
-  border-radius: 12px;
-  box-shadow: 1px 1px 16px 2px rgba(var(--primary-foreground-rgba), 0.06);
-  border: 0px;
-}
-
-.contents {
-  width: 100%;
 }

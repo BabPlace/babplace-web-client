@@ -1,12 +1,12 @@
 .container {
-  display: flex;
-  flex-direction: column;
   margin: 0;
   padding: 0;
 }
+
 .flexwrap {
   display: flex;
-  justify-content: left;
+  flex-wrap: wrap;
+  row-gap: 15px;
 }
 
 .category {
@@ -23,15 +23,18 @@
   }
 }
 
-.flex {
+.category_title {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+  margin-bottom: 5px;
+}
+
+.category_title__name {
   display: flex;
   align-items: center;
   gap: 5px;
-}
-.category_title {
-  width: 60%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 5px;
+  width: 5rem;
 }

@@ -3,21 +3,28 @@
   padding: 15px 25px;
 }
 
+.losers {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .loser {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 16px;
+  height: var(--result-card-loser-default-height);
 }
 
-.loser_title {
+.loser__title {
   flex: 1 1 100px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.loser_bar {
-  height: 25px;
+.loser__bar {
+  height: var(--result-card-loser-default-height);
   flex: 2 2 200px;
 }
 

@@ -2,7 +2,7 @@ import { GAxiosInstance } from './instance';
 import { ResultRequest, ResultResponse, ResultParams } from '@/interfaces';
 
 export const createResult = async ({ teamId, userId, restaurantSatisfactions }: ResultParams & ResultRequest) => {
-  const response = await GAxiosInstance.post<ResultResponse>(`/result/${teamId}`, {
+  const response = await GAxiosInstance.post<ResultResponse>(`/result/?teamId=${teamId}`, {
     userId,
     restaurantSatisfactions,
   });

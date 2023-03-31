@@ -2,13 +2,13 @@ export default function directionToSatisfaction(direction: string) {
   switch (direction) {
     // case 'up':
     //   return 1;
-    // case 'down':
-    //   return -1;
+    case 'down':
+      return 'VERYGOOD';
     case 'left':
-      return 'bad';
+      return 'BAD';
     case 'right':
-      return 'good';
+      return 'GOOD';
     default:
-      return 'good';
+      return 'GOOD';
   }
 }

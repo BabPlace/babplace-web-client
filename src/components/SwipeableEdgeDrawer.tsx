@@ -50,6 +50,7 @@ const SwipeableEdgeDrawer = ({ addressName, lat, lng }: Props) => {
               placeholder='팀명을 입력하세요'
               value={name}
               onChange={handleChange}
+              border={false}
             />
           </li>
           <li className={styles.list_item}>

@@ -1,5 +1,12 @@
 .container {
-  position: f;
+  width: 10px;
+  height: 10px;
+  /* background: #000; */
+  border-radius: 50%;
+  left: 50%;
+  transform: translate(-50%, -10px);
+  bottom: calc((100vh - var(--drawer-default-height) + var(--border-radius) + 7px) / 2);
+  z-index: 100;
 }
 .container::after {
   position: absolute;
@@ -7,25 +14,20 @@
   width: 16px;
   height: 16px;
   font-size: 16px;
-  background: rgb(var(--gola-verygood-rgb));
+  background: rgb(var(--gola-VERYGOOD-rgb));
   padding: 0.5rem;
   border-radius: 50%;
   line-height: 1;
-  bottom: calc((100vh - var(--drawer-default-height) + var(--border-radius) + 7px) / 2 + 16px);
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 100;
+  bottom: 16px;
+  transform: translate(-10px, 0px);
 }
 
 .container::before {
   position: absolute;
   content: '';
-  border-top: 32px solid rgb(var(--gola-verygood-rgb));
+  border-top: 32px solid rgb(var(--gola-VERYGOOD-rgb));
   border-left: 16px solid transparent;
   border-right: 16px solid transparent;
-  bottom: calc((100vh - var(--drawer-default-height) + var(--border-radius) + 7px) / 2);
-
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 100;
+  bottom: 0px;
+  transform: translate(-10px, 0px);
 }

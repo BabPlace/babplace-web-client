@@ -4,7 +4,7 @@ import { Theme } from '@mui/material';
 
 export default function makeDataset(restaurantSatisfaction: RestaurantSatisfaction, theme: Theme): Dataset[] {
   const dataset: Dataset[] = [];
-  const satisfactions: Satisfaction[] = ['good', 'bad', 'verygood', 'verybad'];
+  const satisfactions: Lowercase<Satisfaction>[] = ['good', 'bad', 'verygood', 'verybad'];
   satisfactions.forEach((satisfaction) => {
     if (restaurantSatisfaction[satisfaction] !== undefined) {
       dataset.push({
@@ -14,5 +14,6 @@ export default function makeDataset(restaurantSatisfaction: RestaurantSatisfacti
       });
     }
   });
+
   return dataset;
 }

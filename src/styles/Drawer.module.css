@@ -1,15 +1,15 @@
 .container {
   position: fixed;
   padding: var(--drawer-inner-padding-t) var(--drawer-inner-padding-lr) var(--drawer-inner-padding-b);
-  bottom: 0;
-  left: 0;
   width: 100%;
-  z-index: 100;
-  transition: height 0.5s ease;
+  max-width: var(--max-width);
+  bottom: 0;
   border-radius: var(--border-radius) var(--border-radius) 0 0;
   background-color: rgb(var(--primary-background-rgb));
   color: rgba(var(--pribary-foreground-rgba));
   box-shadow: 0 0 10px 0 rgba(var(--primary-foreground-rgba), 0.2);
+  transition: height 0.5s ease;
+  z-index: 100;
 }
 
 .puller {
