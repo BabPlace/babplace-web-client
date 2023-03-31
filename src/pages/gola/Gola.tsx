@@ -60,13 +60,13 @@ const Gola = ({ isValidUser, restaurants }: Props) => {
           <IconButton onClick={goBack} className={styles.undo}>
             <ReplayRoundedIcon />
           </IconButton>
-          <IconButton onClick={swipeLeft} className={styles.BAD}>
+          <IconButton onClick={swipeLeft} className={styles.bad}>
             <CloseRoundedIcon />
           </IconButton>
-          <IconButton onClick={swipeUp} className={styles.VERYGOOD}>
+          <IconButton onClick={swipeUp} className={styles.verygood}>
             <StarBorderRoundedIcon />
           </IconButton>
-          <IconButton onClick={swipeRight} className={styles.GOOD}>
+          <IconButton onClick={swipeRight} className={styles.good}>
             <CheckRoundedIcon />
           </IconButton>
         </div>
