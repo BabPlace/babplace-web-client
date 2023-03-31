@@ -25,7 +25,7 @@
 
 .container::before {
   position: absolute;
-  content: ' ';
+  content: '';
   border-top: 32px solid rgb(var(--gola-verygood-rgb));
   border-left: 16px solid transparent;
   border-right: 16px solid transparent;
