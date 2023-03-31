@@ -29,6 +29,7 @@ const SetUser = () => {
         <TypoNotoSans text='사용자 닉네임을 입력해주세요.' textAlign='center' variant='h6' />
         <Input
           className={styles.setuser_input}
+          style={{ width: '50%' }}
           name='txtDescEd'
           type='text'
           placeholder='3-10자의 닉네임 입력'
