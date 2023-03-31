@@ -32,27 +32,28 @@ const Gola = ({ isValidUser, restaurants }: Props) => {
             ({ id, latitude: lat, longitude: lng, name, address, distance }, index) =>
               !loading &&
               canRender(index) && (
-                <ForwardRefNoSSRTinderCard
-                  key={`gola-card-${id}`}
-                  ref={cardRefs[index]}
-                  className='swipe'
-                  onCardLeftScreen={afterSwipe}
-                  preventSwipe={['down']}
-                  onSwipe={(direction: Direction) => {
-                    addResult({ restaurantId: id, satisfaction: directionToSatisfaction(direction) });
-                  }}
-                >
-                  <div className={styles.card + ' card'}>
-                    <Map center={{ lat, lng }} style={mapStyle} level={5}>
-                      <MapMarker position={{ lat, lng }} />
-                    </Map>
-                    <div className={styles.info}>
-                      <TypoNotoSans text={name} variant='h6' />
-                      <TypoNotoSans text={address} />
-                      <TypoNotoSans text={distanceFormat(distance)} variant='caption' />
+                <div key={`gola-card-${id}`} style={{ borderRadius: 'var(--border-radius)' }}>
+                  <ForwardRefNoSSRTinderCard
+                    ref={cardRefs[index]}
+                    className='swipe'
+                    onCardLeftScreen={afterSwipe()}
+                    preventSwipe={['down']}
+                    onSwipe={(direction: Direction) => {
+                      addResult({ restaurantId: id, satisfaction: directionToSatisfaction(direction) });
+                    }}
+                  >
+                    <div className={styles.card + ' card'}>
+                      <div className={styles.info}>
+                        <TypoNotoSans text={name} variant='h6' />
+                        <TypoNotoSans text={address} />
+                        <TypoNotoSans text={distanceFormat(distance)} variant='caption' />
+                      </div>
+                      <Map center={{ lat, lng }} style={mapStyle} level={5}>
+                        <MapMarker position={{ lat, lng }} />
+                      </Map>
                     </div>
-                  </div>
-                </ForwardRefNoSSRTinderCard>
+                  </ForwardRefNoSSRTinderCard>
+                </div>
               )
           )}
         </div>
@@ -82,4 +83,4 @@ const NoSSRTinderCard = dynamic(() => import('../../components/TinderCardWrapper
 });
 const ForwardRefNoSSRTinderCard = React.forwardRef<API, any>((props, ref) => <NoSSRTinderCard innerRef={ref} {...props} />);
 
-const mapStyle = { width: '100%', height: '100%', borderRadius: 'var(--border-radius)' };
+const mapStyle = { width: '99.5%', height: '99.5%', borderRadius: '12px' };

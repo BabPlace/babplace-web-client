@@ -21,7 +21,7 @@
   --box-shadow-1: 1px 1px 8px 2px rgba(var(--primary-foreground-rgba), 0.08);
   --box-shadow-card: 2px 2px 8px 1px rgba(var(--primary-foreground-rgba), 0.1);
 
-  --card-default-height: 75vh;
+  --card-default-height: 60vh;
 
   --gola-good-rgb: 140, 215, 144;
   --gola-bad-rgb: 255, 95, 46;
@@ -92,6 +92,12 @@
   margin: 0;
   font-family: 'Noto Sans KR', sans-serif;
   transition: background, color, border-color 0.2s ease-in-out;
+}
+
+html {
+  position: fixed;
+  width: 100%;
+  height: 100%;
 }
 
 html,

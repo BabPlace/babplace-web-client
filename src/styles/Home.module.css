@@ -1,5 +1,5 @@
 .main {
-  height: 100svh;
+  height: 100vh;
   overflow: hidden;
   width: 100%;
   background-color: rgb(var(--primary-background-rgb));
@@ -8,9 +8,9 @@
 
 .body {
   width: 100%;
-  margin: auto;
   max-width: var(--max-width);
-  margin-top: var(--header-default-height);
+  padding-top: var(--header-default-height);
+  height: 100%;
   height: calc(100% - var(--header-default-height));
   overflow-y: scroll;
 }
