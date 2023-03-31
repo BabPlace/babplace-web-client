@@ -21,7 +21,7 @@
   --box-shadow-1: 1px 1px 8px 2px rgba(var(--primary-foreground-rgba), 0.08);
   --box-shadow-card: 2px 2px 8px 1px rgba(var(--primary-foreground-rgba), 0.1);
 
-  --card-default-height: 60vh;
+  --card-default-height: calc((100vh - var(--header-default-height)) * 0.7);
 
   --gola-good-rgb: 140, 215, 144;
   --gola-bad-rgb: 255, 95, 46;

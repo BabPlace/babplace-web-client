@@ -34,10 +34,10 @@ export default function useDrawer() {
     }
     function handleTouchMove({ touches }: TouchEvent) {
       if (touches.length === 0) return;
-      if (touchDownPosition - touches[0].pageY > 50) {
+      if (touchDownPosition - touches[0].pageY > 40) {
         handleDrawer(true);
       }
-      if (touchDownPosition - touches[0].pageY < -50) {
+      if (touchDownPosition - touches[0].pageY < -40) {
         handleDrawer(false);
       }
     }
