@@ -77,7 +77,7 @@ function Page({ result: satisfactions, error }: Props) {
             <Button
               variant='contained'
               fullWidth
-              style={{ borderRadius: 'var(--border-radius)', backgroundColor: 'rgb(var(--gola-VERYGOOD-rgb))' }}
+              style={{ borderRadius: 'var(--border-radius)', backgroundColor: 'rgb(var(--gola-verygood-rgb))' }}
               onClick={handleShareResultButtonClick}
             >
               <TypoNotoSans text='결과 공유하기' variant='button' textAlign='center' color='white' />

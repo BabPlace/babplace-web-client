@@ -1,4 +1,6 @@
 .main {
+  height: 100svh;
+  overflow: hidden;
   width: 100%;
   background-color: rgb(var(--primary-background-rgb));
   color: rgba(var(--primary-foreground-rgba));
@@ -9,5 +11,6 @@
   margin: auto;
   max-width: var(--max-width);
   margin-top: var(--header-default-height);
-  height: calc(100vh - var(--header-default-height));
+  height: calc(100% - var(--header-default-height));
+  overflow-y: scroll;
 }

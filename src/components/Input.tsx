@@ -16,8 +16,9 @@ const Input = ({ onReturn, border = true, ...props }: Props) => {
 export default Input;
 
 const StyledInput = styled.input<{ border: boolean }>`
+  width: 100%;
   border: none;
   border-bottom: ${(props) => (props.border ? '1px solid rgb(var(--primary-foreground-rgba))' : 'none')};
   background: none;
-  font-size: 0.9rem;
+  font-size: 1rem;
 `;

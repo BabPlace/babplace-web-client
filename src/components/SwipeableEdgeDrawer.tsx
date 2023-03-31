@@ -19,7 +19,7 @@ type Props = {
 const SwipeableEdgeDrawer = ({ addressName, lat, lng }: Props) => {
   const router = useRouter();
   const { value: name, handleChange } = useInput('');
-  const { drawerRef, open, onFocus } = useDrawer();
+  const { drawerRef, open } = useDrawer();
   const { selectedButton, radius, guideMessage, onClickButton } = useSelectedButton();
 
   const liTitleOptions = {
@@ -46,7 +46,6 @@ const SwipeableEdgeDrawer = ({ addressName, lat, lng }: Props) => {
             <TypoNotoSans text='팀명' {...liTitleOptions} />
             <Input
               className={styles.list_item__content}
-              onFocus={onFocus}
               placeholder='팀명을 입력하세요'
               value={name}
               onChange={handleChange}

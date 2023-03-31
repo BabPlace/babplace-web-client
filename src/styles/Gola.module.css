@@ -28,9 +28,9 @@
 }
 
 .undo,
-.BAD,
-.GOOD,
-.VERYGOOD {
+.bad,
+.good,
+.verygood {
   border-radius: 50%;
   box-shadow: var(--box-shadow-1);
   width: var(--gola-button-default-width);
@@ -42,16 +42,16 @@
   color: rgb(var(--gola-undo-rgb)) !important;
 }
 
-.BAD {
-  color: rgb(var(--gola-BAD-rgb)) !important;
+.bad {
+  color: rgb(var(--gola-bad-rgb)) !important;
 }
 
-.GOOD {
-  color: rgb(var(--gola-GOOD-rgb)) !important;
+.good {
+  color: rgb(var(--gola-good-rgb)) !important;
 }
 
-.VERYGOOD {
-  color: rgb(var(--gola-VERYGOOD-rgb)) !important;
+.verygood {
+  color: rgb(var(--gola-verygood-rgb)) !important;
 }
 
 .card {

@@ -4,15 +4,10 @@ import useKeyboardVisible from './useKeyboardVisible';
 export default function useDrawer() {
   const drawerRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
-  const { isKeyboardVisible } = useKeyboardVisible();
 
   const handleDrawer = (bool: boolean) => {
     setOpen(bool);
   };
-
-  const onFocus = useCallback(() => {
-    if (isKeyboardVisible) handleDrawer(true);
-  }, [isKeyboardVisible]);
 
   useEffect(() => {
     if (drawerRef.current && !open) {
@@ -56,5 +51,5 @@ export default function useDrawer() {
     }
   }, [drawerRef]);
 
-  return { drawerRef, open, onFocus, handleDrawer };
+  return { drawerRef, open, handleDrawer };
 }

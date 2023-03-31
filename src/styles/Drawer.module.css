@@ -9,7 +9,7 @@
   color: rgba(var(--pribary-foreground-rgba));
   box-shadow: 0 0 10px 0 rgba(var(--primary-foreground-rgba), 0.2);
   transition: height 0.5s ease;
-  z-index: 100;
+  z-index: 2000;
 }
 
 .puller {

@@ -77,10 +77,10 @@
 
     --caption-foreground-rgba: 255, 255, 255, 0.6;
 
-    --gola-GOOD-rgb: 140, 215, 144;
-    --gola-BAD-rgb: 255, 95, 46;
-    --gola-VERYGOOD-rgb: 71, 184, 224;
-    --gola-VERYBAD-rgb: 189, 21, 80;
+    --gola-good-rgb: 140, 215, 144;
+    --gola-bad-rgb: 255, 95, 46;
+    --gola-verygood-rgb: 71, 184, 224;
+    --gola-verybad-rgb: 189, 21, 80;
     --gola-undo-rgb: 255, 201, 82;
   }
 }

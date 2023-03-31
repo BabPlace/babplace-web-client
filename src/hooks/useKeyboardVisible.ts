@@ -4,11 +4,16 @@ export default function useKeyboardVisible() {
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 
   useEffect(() => {
-    function handleKeyboardDidShow(event: UIEvent) {
-      console.log(event);
+    const bottomBar = document.getElementById('bottombar');
+    function handleKeyboardDidShow() {
+      if (bottomBar) {
+        bottomBar.style.transform = 'translateY(0)';
+      }
       setKeyboardVisible(true);
     }
-    document.addEventListener('resize', handleKeyboardDidShow);
+
+    window.visualViewport?.addEventListener('scroll', handleKeyboardDidShow);
+    window.visualViewport?.addEventListener('resize', handleKeyboardDidShow);
 
     return () => {
       document.removeEventListener('resize', handleKeyboardDidShow);

@@ -17,6 +17,7 @@ export default function Home() {
 }
 
 const mapStyle = {
+  overflow: 'hidden',
   width: '100%',
   height: 'calc(100vh - var(--drawer-default-height) + var(--border-radius) + 7px)',
 };
