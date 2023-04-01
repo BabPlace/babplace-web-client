@@ -29,11 +29,15 @@ const SwipeableEdgeDrawer = ({ addressName, lat, lng }: Props) => {
   };
 
   const onClick = () => {
-    createTeam({ name, lat, lng, radius }).then(({ teamId }) => {
-      router.push({
-        pathname: `gola/${teamId}`,
+    createTeam({ name, lat, lng, radius })
+      .then(({ teamId }) => {
+        router.push({
+          pathname: `gola/${teamId}`,
+        });
+      })
+      .catch(() => {
+        router.push({ pathname: '/404' });
       });
-    });
   };
 
   return (

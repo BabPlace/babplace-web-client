@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
-import useKeyboardVisible from './useKeyboardVisible';
+import { useEffect, useRef, useState } from 'react';
 
 export default function useDrawer() {
   const drawerRef = useRef<HTMLDivElement>(null);
@@ -8,12 +7,6 @@ export default function useDrawer() {
   const handleDrawer = (bool: boolean) => {
     setOpen(bool);
   };
-
-  useEffect(() => {
-    if (drawerRef.current && !open) {
-      (document.activeElement as HTMLElement).blur();
-    }
-  }, [open]);
 
   useEffect(() => {
     function handleClickOutside({ target }: MouseEvent) {
@@ -29,15 +22,17 @@ export default function useDrawer() {
 
   useEffect(() => {
     let touchDownPosition = 0;
-    function handleTouchStart({ touches }: TouchEvent) {
-      touchDownPosition = touches[0].pageY;
+    function handleTouchStart(event: TouchEvent) {
+      event.stopPropagation();
+      touchDownPosition = event.touches[0].pageY;
     }
-    function handleTouchMove({ touches }: TouchEvent) {
-      if (touches.length === 0) return;
-      if (touchDownPosition - touches[0].pageY > 40) {
+    function handleTouchMove(event: TouchEvent) {
+      event.stopPropagation();
+      if (event.touches.length === 0) return;
+      if (touchDownPosition - event.touches[0].pageY > 40) {
         handleDrawer(true);
       }
-      if (touchDownPosition - touches[0].pageY < -40) {
+      if (touchDownPosition - event.touches[0].pageY < -40) {
         handleDrawer(false);
       }
     }

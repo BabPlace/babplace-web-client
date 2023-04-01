@@ -5,7 +5,7 @@ import { useInput } from '@/hooks';
 import { createUser } from '@/controller';
 import styles from '@/styles/Gola.module.css';
 
-const title = '유저 닉네임 설정하기 | 골라밥 🍚';
+const title = '팀에 참가하기 | 골라밥 🍚';
 const description = '생성한 팀 혹은 초대받은 팀에 보여질 사용자의 닉네임 설정 페이지입니다.';
 
 const SetUser = () => {
@@ -14,12 +14,18 @@ const SetUser = () => {
 
   function onReturn() {
     const teamId = router.query.teamId as string;
-    createUser({ teamId, nickName }).then(({ userId }) => {
-      router.push({
-        pathname: router.asPath,
-        query: { userId },
+    createUser({ teamId, nickName })
+      .then(({ userId }) => {
+        router.push({ pathname: router.asPath, query: { userId } });
+      })
+      .catch(() => {
+        router.push({ pathname: '/404' });
       });
-    });
+  }
+
+  function handleToResultButtonClick() {
+    const teamId = router.query.teamId as string;
+    router.push(`/result/${teamId}`);
   }
 
   return (
@@ -38,6 +44,9 @@ const SetUser = () => {
           onReturn={onReturn}
           enterKeyHint='done'
         />
+        <button onClick={handleToResultButtonClick}>
+          <TypoNotoSans text='결과 보러 가기' variant='button' textAlign='center' />
+        </button>
       </div>
     </Layout>
   );

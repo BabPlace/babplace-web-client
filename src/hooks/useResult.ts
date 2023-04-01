@@ -9,8 +9,16 @@ export default function useResult(restaurants: Restaurant[], isValidUser: boolea
   const [result, setResult] = useState<ResultRequest>({ userId: parseInt(userId), restaurantSatisfactions: [] });
 
   const addResult = (newResult: SatisfactionByRestaurant) => {
-    if (result.restaurantSatisfactions.some((r) => r.restaurantId === newResult.restaurantId)) return;
-    setResult({ ...result, restaurantSatisfactions: [...result.restaurantSatisfactions, newResult] });
+    const newRestaurantSatisfactions = result.restaurantSatisfactions.map((restaurantSatisfaction) => {
+      if (restaurantSatisfaction.restaurantId === newResult.restaurantId) {
+        return newResult;
+      }
+      return restaurantSatisfaction;
+    });
+    if (newRestaurantSatisfactions.length === result.restaurantSatisfactions.length) {
+      newRestaurantSatisfactions.push(newResult);
+    }
+    setResult({ ...result, restaurantSatisfactions: newRestaurantSatisfactions });
   };
 
   useEffect(() => {

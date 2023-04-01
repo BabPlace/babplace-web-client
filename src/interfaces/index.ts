@@ -6,7 +6,9 @@ type ExtractGenericFromRefObject<TRefObject> = TRefObject extends RefObject<infe
 export type TinderCardProps = Parameters<typeof TinderCard>[0];
 export type API = ExtractGenericFromRefObject<TinderCardProps['ref']>;
 
-export type Satisfaction = 'GOOD' | 'BAD' | 'VERYGOOD' | 'VERYBAD';
+export type SatisfactionResponse = 'good' | 'bad' | 'veryGood' | 'veryBad';
+export type Satisfaction = Uppercase<SatisfactionResponse>;
+
 export type Direction = 'up' | 'down' | 'left' | 'right';
 export type Restaurant = {
   id: number;
@@ -28,7 +30,7 @@ export type SatisfactionByRestaurant = {
 export type RestaurantSatisfaction = {
   restaurantName: string;
 } & {
-  [key in Lowercase<Satisfaction>]?: string[];
+  [key in SatisfactionResponse]?: string[];
 };
 
 export type CategorySatisfaction = {
@@ -72,6 +74,17 @@ export type TeamRequest = {
 };
 export type TeamResponse = {
   teamId: string;
+};
+export type TeamInfoParams = {
+  teamId: string;
+};
+export type TeamInfoResponse = {
+  name: string;
+  radius: number;
+  limitUser: number;
+  limitRestaurant: number;
+  latitude: number;
+  longitude: number;
 };
 
 // Restaurant

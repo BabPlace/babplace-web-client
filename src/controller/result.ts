@@ -9,7 +9,7 @@ export const createResult = async ({ teamId, userId, restaurantSatisfactions }: 
   return response.data;
 };
 
-export const getResult = async (teamId: string) => {
+export const getResult = async ({ teamId }: ResultParams) => {
   const response = await GAxiosInstance.get<ResultResponse>(`/result?teamId=${teamId}`);
   return response.data;
 };

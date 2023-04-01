@@ -21,19 +21,22 @@ function Page({ userId, restaurants }: Props) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const userId = context.query.userId as string;
   if (userId && !isNaN(Number(userId))) {
-    const response = await getRestaurant({ userId });
-    return {
-      props: {
-        userId: Number(userId),
-        restaurants: response,
-      },
-    };
+    try {
+      const restaurants = await getRestaurant({ userId });
+      return {
+        props: { userId: Number(userId), restaurants },
+      };
+    } catch (error) {
+      return {
+        redirect: {
+          destination: '/404',
+          permanent: false,
+        },
+      };
+    }
   }
   return {
-    props: {
-      userId: -1,
-      restaurants: [],
-    },
+    props: { userId: -1, restaurants: [] },
   };
 };
 

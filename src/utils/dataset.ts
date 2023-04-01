@@ -1,19 +1,18 @@
 import { Dataset } from '@teamapdan/weirdchart';
-import { Satisfaction, RestaurantSatisfaction } from '@/interfaces';
-import { Theme } from '@mui/material';
+import { RestaurantSatisfaction, SatisfactionResponse } from '@/interfaces';
+import { myPalette } from '@/theme';
 
-export default function makeDataset(restaurantSatisfaction: RestaurantSatisfaction, theme: Theme): Dataset[] {
+export default function makeDataset(restaurantSatisfaction: RestaurantSatisfaction): Dataset[] {
   const dataset: Dataset[] = [];
-  const satisfactions: Lowercase<Satisfaction>[] = ['good', 'bad', 'verygood', 'verybad'];
+  const satisfactions: SatisfactionResponse[] = ['good', 'bad', 'veryGood', 'veryBad'];
   satisfactions.forEach((satisfaction) => {
     if (restaurantSatisfaction[satisfaction] !== undefined) {
       dataset.push({
         label: satisfaction,
         value: restaurantSatisfaction[satisfaction]?.length ?? 0,
-        color: theme.myPalette.light[satisfaction],
+        color: myPalette.light[satisfaction],
       });
     }
   });
-
   return dataset;
 }
