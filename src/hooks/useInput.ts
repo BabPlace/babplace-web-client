@@ -1,24 +1,52 @@
-import { useState } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 
-export default function useInput(initialValue = '', maxLength: number = 15) {
-  const [isOverLimit, setIsOverLimit] = useState(false);
-  const [value, setValue] = useState(initialValue);
+type InputValue = string | number;
+
+export default function useInput<T extends InputValue>(initialValue: T, max: number = 15) {
+  const [isError, setIsError] = useState({ state: false, message: '' });
+  const [value, setValue] = useState<T>(initialValue);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value.length > maxLength) {
-      setIsOverLimit(true);
-      return;
+    if (typeof initialValue === 'number') {
+      const num = Number(event.target.value);
+      if (num < 0 || num > max) {
+        setIsError({ state: true, message: `숫자는 0부터 ${max}까지 입력 가능합니다.` });
+      }
+    } else if (typeof initialValue === 'string' && event.target.value.length > max) {
+      setIsError({ state: true, message: '닉네임이 너무 길어요!' });
+    } else {
+      setIsError((prev) => ({ state: false, message: prev.message }));
     }
-    setValue(event.target.value);
+    setValue(event.target.value as T);
   };
 
-  const resetOverLimit = () => {
-    setIsOverLimit(false);
+  const valitate = useMemo(() => {
+    if (typeof value === 'number') {
+      const num = Number(value);
+      if (num <= 0 || num > max) {
+        setIsError({ state: true, message: `1부터 ${max}까지 입력 가능합니다.` });
+        return false;
+      }
+    } else if (typeof value === 'string') {
+      if (value.length > max) {
+        setIsError({ state: true, message: `${max}자 이하로 입력해주세요.` });
+        return false;
+      }
+    }
+    return true;
+  }, [value, max]);
+
+  const resetIsError = () => {
+    setIsError({ state: false, message: '' });
   };
 
   const reset = () => {
-    setValue('');
+    setValue(initialValue);
   };
 
-  return { value, isOverLimit, handleChange, reset, resetOverLimit };
+  useEffect(() => {
+    console.log(isError);
+  }, []);
+
+  return { value, isError, handleChange, reset, resetIsError, valitate };
 }

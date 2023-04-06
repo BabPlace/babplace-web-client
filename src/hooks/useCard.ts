@@ -1,9 +1,9 @@
 import { useState, useMemo, createRef, RefObject, useEffect, useCallback } from 'react';
 import type { API, Direction, Restaurant } from '@/interfaces';
 
-export default function useCard(restaurants: Restaurant[]) {
-  const restaurantLength = restaurants ? restaurants.length : 0;
-  const [frontIndex, setFrontIndex] = useState(restaurants ? restaurantLength - 1 : 0);
+export default function useCard(restaurants: Restaurant[] = []) {
+  const restaurantLength = restaurants.length;
+  const [frontIndex, setFrontIndex] = useState(restaurantLength - 1);
   const canGoBack = frontIndex < restaurantLength - 1;
   const canSwipe = frontIndex >= 0;
   const canRender = useCallback(
@@ -35,6 +35,7 @@ export default function useCard(restaurants: Restaurant[]) {
   const swipeUp = () => swipe('down');
   const swipeLeft = () => swipe('left');
   const swipeRight = () => swipe('right');
+  const swipeDown = () => swipe('up');
 
   const goBack = async () => {
     if (!canGoBack) return;
@@ -43,5 +44,11 @@ export default function useCard(restaurants: Restaurant[]) {
     await cardRefs[frontIndex].current?.restoreCard();
   };
 
-  return { cardRefs, frontIndex, canRender, afterSwipe, swipe, goBack, swipeUp, swipeLeft, swipeRight };
+  useEffect(() => {
+    if (restaurantLength === 0) {
+      throw new Error('No restaurants found');
+    }
+  }, [restaurantLength]);
+
+  return { cardRefs, frontIndex, canRender, afterSwipe, swipe, goBack, swipeUp, swipeLeft, swipeRight, swipeDown };
 }

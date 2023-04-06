@@ -1,7 +1,7 @@
 import { GAxiosInstance } from './instance';
 import { TeamInfoParams, TeamInfoResponse, TeamRequest, TeamResponse } from '@/interfaces';
 
-export const createTeam = async ({ name, lat, lng, radius, limitUser = 20, limitRestaurant = 15 }: TeamRequest) => {
+export const createTeam = async ({ name, lat, lng, radius, limitUser = 20, limitRestaurant = 10 }: TeamRequest) => {
   const response = await GAxiosInstance.post<TeamResponse>('/team', {
     name,
     limitUser,

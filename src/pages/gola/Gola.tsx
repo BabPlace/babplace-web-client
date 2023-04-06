@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { Map, MapMarker, useInjectKakaoMapApi } from 'react-kakao-maps-sdk';
 import { IconButton } from '@mui/material';
@@ -18,11 +18,10 @@ type Props = {
 };
 
 const Gola = ({ isValidUser, restaurants }: Props) => {
-  const { cardRefs, frontIndex, canRender, afterSwipe, swipeUp, swipeLeft, swipeRight, goBack } = useCard(restaurants);
   const { loading } = useInjectKakaoMapApi({ appkey: process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY!, libraries: ['services', 'clusterer'] });
+  const { cardRefs, frontIndex, canRender, afterSwipe, swipeUp, swipeLeft, swipeRight, goBack } = useCard(restaurants);
   const { addResult } = useResult(restaurants, isValidUser, frontIndex);
 
-  if (!restaurants) return <div>loading...</div>;
   return (
     <Layout title={title} description={description}>
       <Header showButtons />

@@ -1,6 +1,9 @@
 import { RefObject } from 'react';
 import type TinderCard from 'react-tinder-card';
 
+export { Errors } from './error';
+export type { ErorrData } from './error';
+
 type ExtractGenericFromRefObject<TRefObject> = TRefObject extends RefObject<infer U> ? U : never;
 
 export type TinderCardProps = Parameters<typeof TinderCard>[0];
@@ -20,6 +23,7 @@ export type Restaurant = {
   distance: number;
   teamcenterLat: number;
   teamcenterLoong: number;
+  restaurantPlaceUrl: string;
 };
 
 export type SatisfactionByRestaurant = {

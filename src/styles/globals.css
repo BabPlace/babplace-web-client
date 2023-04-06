@@ -4,6 +4,7 @@
   --max-width: 700px;
 
   --header-default-height: 60px;
+  --button-default-height: 40px;
 
   --border-radius: 12px;
   --border-radius-2: 8px;
@@ -11,15 +12,19 @@
   /* chosen by color scheme */
   --primary-background-rgb: 255, 255, 255;
   --primary-foreground-rgba: 0, 0, 0;
+
   --highlight-background-rgba: 71, 184, 224, 0.6;
+  --highlight-foreground-rgba: 71, 184, 224, 0.9;
 
   --secondary-background-rgb: 245, 245, 245;
   --secondary-foreground-rgba: 0, 0, 0, 0.6;
 
   --caption-foreground-rgba: 0, 0, 0, 0.4;
+  --error-foreground-rgba: 255, 95, 46, 0.8;
 
   --box-shadow-1: 1px 1px 8px 2px rgba(var(--primary-foreground-rgba), 0.08);
   --box-shadow-card: 2px 2px 8px 1px rgba(var(--primary-foreground-rgba), 0.1);
+  --box-shadow-button: 2px 2px 4px 1px rgba(var(--primary-background-rgb), 0.3);
 
   --card-default-height: calc((100vh - var(--header-default-height)) * 0.7);
 

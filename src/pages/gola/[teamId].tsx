@@ -3,6 +3,7 @@ import Gola from './Gola';
 import SetUser from './SetUser';
 import { getRestaurant } from '@/controller';
 import type { Restaurant } from '../../interfaces';
+import ErrorBoundary from '@/components/ErrorBoundary';
 
 type Props = {
   userId: number;
@@ -12,10 +13,7 @@ type Props = {
 function Page({ userId, restaurants }: Props) {
   const isValidUser = userId >= 0;
 
-  if (!isValidUser) {
-    return <SetUser />;
-  }
-  return <Gola restaurants={restaurants} isValidUser={isValidUser} />;
+  return <ErrorBoundary>{isValidUser ? <Gola restaurants={restaurants} isValidUser={isValidUser} /> : <SetUser />}</ErrorBoundary>;
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -28,10 +26,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       };
     } catch (error) {
       return {
-        redirect: {
-          destination: '/404',
-          permanent: false,
-        },
+        props: { userId: userId, restaurants: [] },
       };
     }
   }

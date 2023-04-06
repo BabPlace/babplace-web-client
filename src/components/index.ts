@@ -6,3 +6,6 @@ export { default as PointerIconButton } from './PointerIconButton';
 export { default as TypoNotoSans } from './TypoNotoSans';
 export { default as BabMarker } from './BabMarker';
 export { default as ButtonGroup } from './ButtonGroup';
+export { default as SwipeableButton } from './SwipeableButton';
+export { default as LoadableMap } from './LoadableMap';
+export { default as Guide } from './Guide';

@@ -7,7 +7,7 @@ import ButtonGroup from './ButtonGroup';
 import Input from './Input';
 import { createTeam } from '@/controller';
 import { BusIcon, BikeIcon, FootPrintIcon } from '@/icons';
-import styles from '@/styles/Drawer.module.css';
+import styles from '@/styles/SwipeableEdgeDrawer.module.css';
 import styled from '@emotion/styled';
 
 type Props = {
@@ -18,15 +18,10 @@ type Props = {
 
 const SwipeableEdgeDrawer = ({ addressName, lat, lng }: Props) => {
   const router = useRouter();
-  const { value: name, handleChange } = useInput('');
+  const { value: name, handleChange: handleNameChange } = useInput('');
+  const { value: count, handleChange: handleCountChange } = useInput(10);
   const { drawerRef, open } = useDrawer();
   const { selectedButton, radius, guideMessage, onClickButton } = useSelectedButton();
-
-  const liTitleOptions = {
-    className: styles.list_item__title,
-    textAlign: 'right' as const,
-    fontWeight: 500,
-  };
 
   const onClick = () => {
     createTeam({ name, lat, lng, radius })
@@ -51,17 +46,17 @@ const SwipeableEdgeDrawer = ({ addressName, lat, lng }: Props) => {
               className={styles.list_item__content}
               placeholder='팀명을 입력하세요'
               value={name}
-              onChange={handleChange}
+              onChange={handleNameChange}
               border={false}
             />
           </li>
           <li className={styles.list_item}>
             <TypoNotoSans text='기준 위치' {...liTitleOptions} />
-            <TypoNotoSans text={addressName} className={styles.list_item__content} fontSize='0.9rem' />
+            <TypoNotoSans text={addressName} className={styles.list_item__content} fontSize='0.8rem' textAlign='center' />
           </li>
           <li className={styles.list_item}>
             <TypoNotoSans text='음식점 개수' {...liTitleOptions} />
-            <TypoNotoSans text='15' className={styles.list_item__content} fontSize='0.9rem' textAlign='center' />
+            <Input className={styles.list_item__content} type='number' value={count} onChange={handleCountChange} border={false} />
           </li>
           <li className={styles.list_item}>
             <TypoNotoSans text='제한 반경' {...liTitleOptions} />
@@ -90,3 +85,9 @@ export default SwipeableEdgeDrawer;
 const StyledDrawer = styled.div<{ isOpen: boolean }>`
   height: ${(props) => (props.isOpen ? 'var(--drawer-maximun-height)' : 'var(--drawer-default-height)')};
 `;
+
+const liTitleOptions = {
+  className: styles.list_item__title,
+  textAlign: 'right' as const,
+  fontWeight: 500,
+};

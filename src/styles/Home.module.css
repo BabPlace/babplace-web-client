@@ -9,7 +9,9 @@
 .body {
   width: 100%;
   max-width: var(--max-width);
+  margin: auto;
   margin-top: var(--header-default-height);
+
   height: 100%;
   height: calc(100% - var(--header-default-height));
   overflow-y: scroll;

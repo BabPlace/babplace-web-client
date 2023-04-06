@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 export const GAxiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -9,7 +9,10 @@ GAxiosInstance.interceptors.response.use(
     return response;
   },
   (error) => {
-    // TODO: error handling
+    const axiosError = error as AxiosError;
+    if (axiosError.response) {
+      return Promise.reject(axiosError);
+    }
     return Promise.reject(error);
   }
 );

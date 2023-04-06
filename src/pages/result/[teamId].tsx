@@ -33,12 +33,12 @@ function Page({ result: satisfactions, teamInfo }: Props) {
           {top3.map((satisfaction, index) => (
             <ResultCard key={`top3-${satisfaction.restaurantName}-${index}`} title={satisfaction.restaurantName} index={index}>
               <div style={{ height: '20px' }}>
-                <RatioBarChart dataset={makeDataset(satisfaction)} option={{ startAnimation: 'fromEqual', barHeight: 25 }} />
+                <RatioBarChart dataset={makeDataset(satisfaction)} option={{ startAnimation: 'fromEqual', barHeight: 20 }} />
               </div>
               <ResultDetail satisfaction={satisfaction} />
             </ResultCard>
           ))}
-          <ResultCard title='패배자들...'>
+          <ResultCard title='🥲 패배자들'>
             <div className={styles.losers}>
               {others.map((satisfaction, index) => {
                 return (
@@ -64,7 +64,7 @@ function Page({ result: satisfactions, teamInfo }: Props) {
               variant='contained'
               fullWidth
               color='primary'
-              sx={{ borderRadius: 'var(--border-radius)' }}
+              sx={{ borderRadius: 'var(--border-radius)', height: '40px' }}
               onClick={() => share(handleOpen)}
             >
               <TypoNotoSans text='결과 공유하기' variant='button' textAlign='center' color='white' />
@@ -87,20 +87,20 @@ function Page({ result: satisfactions, teamInfo }: Props) {
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
   const teamId = context.query.teamId as string;
 
-  try {
-    const result = await getResult({ teamId });
-    const teamInfo = await getTeamInfo({ teamId });
-    return {
-      props: { result, teamInfo },
-    };
-  } catch (error) {
-    return {
-      redirect: {
-        destination: '/404',
-        permanent: false,
-      },
-    };
-  }
+  // try {
+  const result = await getResult({ teamId });
+  const teamInfo = await getTeamInfo({ teamId });
+  return {
+    props: { result, teamInfo },
+  };
+  // } catch (error) {
+  //   return {
+  //     redirect: {
+  //       destination: '/404',
+  //       permanent: false,
+  //     },
+  //   };
+  // }
 };
 
 export default Page;

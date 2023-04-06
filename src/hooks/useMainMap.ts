@@ -39,5 +39,14 @@ export default function useMainMap() {
     geocoder.coord2RegionCode(longitude, latitude, callback);
   }, [loading, latitude, longitude]);
 
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setLocation({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+      });
+    });
+  }, []);
+
   return { loading, latitude, longitude, addressName, onCenterChanged };
 }

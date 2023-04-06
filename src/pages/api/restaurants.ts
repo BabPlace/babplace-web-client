@@ -13,6 +13,7 @@ const dummyRestaurants: Restaurant[] = [
     distance: 1500,
     teamcenterLat: 1,
     teamcenterLoong: 1,
+    restaurantPlaceUrl: 'https://www.google.com',
   },
   {
     id: 2,
@@ -24,6 +25,7 @@ const dummyRestaurants: Restaurant[] = [
     distance: 1,
     teamcenterLat: 1,
     teamcenterLoong: 1,
+    restaurantPlaceUrl: 'https://www.google.com',
   },
   {
     id: 3,
@@ -35,6 +37,7 @@ const dummyRestaurants: Restaurant[] = [
     distance: 1,
     teamcenterLat: 1,
     teamcenterLoong: 1,
+    restaurantPlaceUrl: 'https://www.google.com',
   },
   {
     id: 4,
@@ -46,6 +49,7 @@ const dummyRestaurants: Restaurant[] = [
     distance: 1500,
     teamcenterLat: 1,
     teamcenterLoong: 1,
+    restaurantPlaceUrl: 'https://www.google.com',
   },
 ];
 

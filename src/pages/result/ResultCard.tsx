@@ -31,5 +31,6 @@ export default ResultCard;
 const titleStyle = {
   fontSize: '1rem',
   textAlign: 'center' as const,
+  fontWeight: 'bold' as const,
   marginBottom: '16px',
 };
