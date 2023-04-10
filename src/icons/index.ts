@@ -1,7 +1,12 @@
-export { default as ReplayRoundedIcon } from '@mui/icons-material/ReplayRounded';
-export { default as CloseRoundedIcon } from '@mui/icons-material/CloseRounded';
-export { default as CheckRoundedIcon } from '@mui/icons-material/CheckRounded';
-export { default as StarBorderRoundedIcon } from '@mui/icons-material/StarBorderRounded';
+export { default as ReplayIcon } from '@mui/icons-material/ReplayRounded';
+export { default as CloseIcon } from '@mui/icons-material/CloseRounded';
+export { default as CancelRoundedIcon } from '@mui/icons-material/CancelRounded';
+export { default as CheckIcon } from '@mui/icons-material/CheckRounded';
+export { default as StarIcon } from '@mui/icons-material/StarBorderRounded';
+export { default as SatisfiedAltIcon } from '@mui/icons-material/SentimentSatisfiedAlt';
+export { default as VerySatisfiedIcon } from '@mui/icons-material/SentimentVerySatisfied';
+export { default as VeryDissatisfiedIcon } from '@mui/icons-material/SentimentVeryDissatisfied';
+export { default as InfoIcon } from '@mui/icons-material/InfoRounded';
 export { default as FootPrintIcon } from './FootPrintIcon';
 export { default as BikeIcon } from './BikeIcon';
 export { default as BusIcon } from './BusIcon';

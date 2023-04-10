@@ -1,11 +1,7 @@
-import React from 'react';
+import React, { ComponentProps } from 'react';
 import Flex from './Flex';
 
-type Props = {
-  children: React.ReactNode;
-  width?: string;
-  gap?: string;
-} & React.HTMLAttributes<HTMLDivElement>;
+type Props = ComponentProps<typeof Flex>;
 
 const FlexRow = ({ children, width = '', gap = '', ...props }: Props) => {
   return (

@@ -6,7 +6,6 @@
   left: 50%;
   transform: translate(-50%, -10px);
   bottom: calc((100vh - var(--drawer-default-height) + var(--border-radius) + 7px) / 2);
-  z-index: 1000;
 }
 .container::after {
   position: absolute;
@@ -20,7 +19,7 @@
   line-height: 1;
   bottom: 16px;
   transform: translate(-10px, 0px);
-  z-index: 1000;
+  z-index: 1;
 }
 
 .container::before {
@@ -31,5 +30,5 @@
   border-right: 16px solid transparent;
   bottom: 0px;
   transform: translate(-10px, 0px);
-  z-index: 1000;
+  z-index: 1;
 }

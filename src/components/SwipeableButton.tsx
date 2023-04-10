@@ -1,22 +1,16 @@
 import React from 'react';
+import cn from 'classnames';
+import { useSwipeableButton } from '@/hooks';
 import styles from '@/styles/SwipeableButton.module.css';
-import TypoNotoSans from './TypoNotoSans';
-import { FlexRow } from '@/layouts';
 
-type Props = {
-  buttons: {
-    label: string;
-    onClick: () => void;
-  }[];
-};
-
-const SwipeableButton = ({ buttons }: Props) => {
+const SwipeableButton = () => {
+  const { buttons, isShow } = useSwipeableButton();
   return (
-    <div className={styles.container}>
-      {buttons.map(({ label, onClick }, index) => {
+    <div className={cn(styles.container, styles['but' + isShow])}>
+      {buttons.map(({ children, onClick, className }, index) => {
         return (
-          <button className={styles.button} key={`swipablebutton-${label}-${index}`} onClick={onClick}>
-            <TypoNotoSans text={label} variant='caption' fontSize={label.length === 1 ? '0.85rem' : '0.75rem'} textAlign='center' />
+          <button className={cn(styles.button, styles[`${className}`])} key={`swipablebutton-${index}`} onClick={onClick}>
+            {children}
           </button>
         );
       })}
@@ -24,4 +18,4 @@ const SwipeableButton = ({ buttons }: Props) => {
   );
 };
 
-export default SwipeableButton;
+export default React.memo(SwipeableButton);

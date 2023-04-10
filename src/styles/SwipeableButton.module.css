@@ -1,12 +1,18 @@
 .container {
-  position: fixed;
+  position: absolute;
   width: 100%;
 
-  z-index: 1000;
-  bottom: var(--drawer-default-height);
+  bottom: calc(var(--drawer-default-height) - var(--header-default-height));
   padding: 5px 10px;
   overflow: auto;
   white-space: nowrap;
+}
+
+.butfalse {
+  animation: slideRight var(--animation-half-speed) none ease-in;
+}
+.buttrue {
+  animation: slideLeft var(--animation-half-speed) forwards ease-out;
 }
 
 .button {
@@ -21,4 +27,91 @@
   white-space: nowrap;
   text-align: center;
   margin-right: 5px;
+
+  transition: all var(--animation-half-speed);
+}
+
+.false {
+  animation: scaleDown var(--animation-half-speed) none;
+}
+
+.true {
+  position: fixed;
+  z-index: 4000;
+  animation: scaleUp var(--animation-half-speed) forwards;
+  color: transparent;
+}
+
+@keyframes scaleUp {
+  0% {
+    color: transparent;
+    width: var(--swipeable-button-default-height);
+    height: var(--swipeable-button-default-height);
+    border-radius: 100px;
+    bottom: calc(var(--drawer-default-height) + var(--swipeable-button-default-height) / 2 - 10px);
+    left: 10px;
+  }
+  100% {
+    margin: auto;
+    padding: 30px;
+
+    max-width: var(--guide-max-width);
+    max-height: var(--guide-max-height);
+    width: calc(100% - var(--guide-default-margin) * 2);
+    height: calc(100% - var(--guide-default-margin) * 2);
+
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, +50%);
+
+    box-shadow: var(--box-shadow-button);
+    border-radius: var(--border-radius);
+  }
+}
+
+@keyframes scaleDown {
+  0% {
+    position: fixed;
+    margin: auto;
+    padding: 30px;
+
+    max-width: var(--guide-max-width);
+    max-height: var(--guide-max-height);
+    width: calc(100% - var(--guide-default-margin) * 2);
+    height: calc(100% - var(--guide-default-margin) * 2);
+
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, +50%);
+
+    box-shadow: var(--box-shadow-button);
+    border-radius: var(--border-radius);
+    z-index: 3000;
+  }
+  100% {
+    position: fixed;
+    width: var(--swipeable-button-default-height);
+    height: var(--swipeable-button-default-height);
+    border-radius: 100px;
+    bottom: calc(var(--drawer-default-height) + var(--swipeable-button-default-height) / 2 - 10px);
+    left: 10px;
+  }
+}
+
+@keyframes slideLeft {
+  0% {
+    padding-left: calc(10px + var(--swipeable-button-default-height));
+  }
+  100% {
+    padding-left: 10px;
+  }
+}
+
+@keyframes slideRight {
+  0% {
+    padding-left: 10px;
+  }
+  100% {
+    padding-left: calc(10px + var(--swipeable-button-default-height));
+  }
 }

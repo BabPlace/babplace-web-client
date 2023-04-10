@@ -1,9 +1,9 @@
 import React from 'react';
+import { Button } from '@mui/material';
+import { ProgressButton, FlexColumn } from '@/layouts';
 import { Input, TypoNotoSans, Header, Layout } from '@/components';
 import { useInput, useCreateUser } from '@/hooks';
 import styles from '@/styles/Gola.module.css';
-import { Button } from '@mui/material';
-import { ProgressButton, FlexColumn } from '@/layouts';
 
 const maxLength = 10;
 const title = '팀에 참가하기 | 골라밥 🍚';

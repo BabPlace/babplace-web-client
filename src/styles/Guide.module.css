@@ -1,0 +1,18 @@
+.container {
+  position: fixed;
+  max-width: var(--guide-max-width);
+  max-height: var(--guide-max-height);
+
+  margin: auto;
+  padding: 30px;
+  border-radius: var(--border-radius);
+  /* box-shadow: var(--box-shadow-button); */
+
+  width: calc(100% - var(--guide-default-margin) * 2);
+  height: calc(100% - var(--guide-default-margin) * 2);
+  /* background-color: #00000020; */
+
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, +50%);
+}

@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { createUser } from '@/controller';
+import { createTeam } from '@/controller';
 import { Errors, ErorrData } from '@/interfaces';
 import { AxiosError } from 'axios';
 
-export default function useCopy(nickName: string) {
+export default function useCreateTeam(name: string, limitRestaurant: number, lat: number, lng: number, radius: number) {
   const [isLoaded, setIsLoaded] = useState(true);
   const [errors, setErrors] = useState<Errors>();
   const router = useRouter();
 
-  async function onReturn() {
+  async function onClick() {
     setIsLoaded(false);
-    const teamId = router.query.teamId as string;
     try {
-      const { userId } = await createUser({ teamId, nickName });
-      router.push({ pathname: teamId, query: { userId } });
+      const { teamId } = await createTeam({ name, lat, lng, radius, limitRestaurant });
+      router.push({
+        pathname: `gola/${teamId}`,
+      });
     } catch (error) {
       const axiosError = error as AxiosError<ErorrData>;
       if (axiosError.response) {
@@ -25,21 +26,13 @@ export default function useCopy(nickName: string) {
         } = axiosError;
         setErrors({ name, message, status, data });
       }
-      // TODO: 최상위 컴포넌트에서 에러 처리 추가
     }
-    setIsLoaded(true);
-  }
-
-  function toResultPage() {
-    const teamId = router.query.teamId as string;
-    router.push(`/result/${teamId}`);
+    // setIsLoaded(true);
   }
 
   useEffect(() => {
-    if (errors) {
-      throw errors;
-    }
+    if (errors) throw errors;
   }, [errors]);
 
-  return { isLoaded, errors, onReturn, toResultPage };
+  return { isLoaded, errors, onClick };
 }

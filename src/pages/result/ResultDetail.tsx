@@ -1,18 +1,18 @@
 import React from 'react';
+import { TypoNotoSans } from '@/components';
+import type { RestaurantSatisfaction, SatisfactionResponse } from '@/interfaces';
 import { styled } from '@mui/material';
 import styles from '@/styles/ResultDetail.module.css';
-import { TypoNotoSans } from '@/components';
-import type { RestaurantSatisfaction, Satisfaction } from '@/interfaces';
 
 type Props = {
   satisfaction: RestaurantSatisfaction;
 };
 
 const ResultDetail = ({ satisfaction }: Props) => {
-  const content: { name: string; satisfaction: Lowercase<Satisfaction> }[] = [
+  const content: { name: string; satisfaction: SatisfactionResponse }[] = [
     {
       name: '짱 좋아요',
-      satisfaction: 'verygood',
+      satisfaction: 'veryGood',
     },
     {
       name: '좋아요',
@@ -24,7 +24,7 @@ const ResultDetail = ({ satisfaction }: Props) => {
     },
     {
       name: '짱 싫어요',
-      satisfaction: 'verybad',
+      satisfaction: 'veryBad',
     },
   ];
 
@@ -53,11 +53,11 @@ const ResultDetail = ({ satisfaction }: Props) => {
 
 export default ResultDetail;
 
-const ColoredCircle = styled('div')<{ satisfaction: Lowercase<Satisfaction> }>`
+const ColoredCircle = styled('div')<{ satisfaction: SatisfactionResponse }>`
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background-color: rgb(var(${(props) => `--gola-${props.satisfaction}-rgb`}));
+  background-color: rgb(var(${(props) => `--gola-${props.satisfaction.toLowerCase()}-rgb`}));
 `;
 
 const userNicknameStyle = {

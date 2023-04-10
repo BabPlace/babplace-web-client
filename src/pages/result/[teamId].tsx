@@ -69,7 +69,7 @@ function Page({ result: satisfactions, teamInfo }: Props) {
             >
               <TypoNotoSans text='결과 공유하기' variant='button' textAlign='center' color='white' />
             </Button>
-            <Button variant='text' onClick={() => invite}>
+            <Button variant='text' onClick={() => invite()}>
               <TypoNotoSans text='친구 초대하기' {...inviteButtonTypoStyle} />
             </Button>
           </div>

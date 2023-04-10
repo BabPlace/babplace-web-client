@@ -3,19 +3,20 @@ import styled from '@emotion/styled';
 import TypoNotoSans from './TypoNotoSans';
 
 type Props = {
+  className?: string;
   border?: boolean;
   error?: boolean;
   errorText?: string;
   onReturn?: () => void;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
-const Input = ({ border = true, error = false, errorText = '', onReturn, ...props }: Props) => {
+const Input = ({ className, border = true, error = false, errorText = '', onReturn, ...props }: Props) => {
   function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === 'Enter' && onReturn) onReturn();
   }
 
   return (
-    <Container border={border} error={error}>
+    <Container border={border} error={error} className={className}>
       <input onKeyDown={onKeyDown} {...props} />
       <TypoNotoSans className={'error-text ' + (error ? 'show' : 'hide')} textAlign='center' fontSize='0.8rem'>
         {errorText}
@@ -27,7 +28,9 @@ const Input = ({ border = true, error = false, errorText = '', onReturn, ...prop
 export default Input;
 
 const Container = styled.div<{ border: boolean; error: boolean }>`
+  width: 100%;
   input {
+    width: 100%;
     border: none;
     border-bottom: ${(props) =>
       props.border
@@ -36,6 +39,7 @@ const Container = styled.div<{ border: boolean; error: boolean }>`
           : '1px solid rgb(var(--primary-foreground-rgba))'
         : 'none'};
 
+    color: rgba(var(--primary-foreground-rgba));
     text-align: center;
     background: none;
     font-size: 1rem;

@@ -9,6 +9,9 @@
   --border-radius: 12px;
   --border-radius-2: 8px;
 
+  --animation-default-speed: 1s;
+  --animation-half-speed: 0.5s;
+
   /* chosen by color scheme */
   --primary-background-rgb: 255, 255, 255;
   --primary-foreground-rgba: 0, 0, 0;
@@ -28,11 +31,13 @@
 
   --card-default-height: calc((100vh - var(--header-default-height)) * 0.7);
 
-  --gola-good-rgb: 140, 215, 144;
-  --gola-bad-rgb: 255, 95, 46;
-  --gola-verygood-rgb: 71, 184, 224;
   --gola-verybad-rgb: 189, 21, 80;
+  --gola-bad-rgb: 255, 95, 46;
+  --gola-good-rgb: 140, 215, 144;
+  --gola-verygood-rgb: 71, 184, 224;
   --gola-undo-rgb: 255, 201, 82;
+
+  --disabled-background-rgb: 245, 245, 245;
   /***/
 
   --result-card-loser-default-height: 16px;
@@ -45,9 +50,9 @@
   --gola-padding-lr: calc(var(--gola-padding-l) + var(--gola-padding-r));
   --gola-padding-tb: calc(var(--gola-padding-t) + var(--gola-padding-b));
 
-  --gola-button-count: 4; /* 골라페이지 버튼 개수에 의존 */
+  --gola-button-count: 5; /* 골라페이지 버튼 개수에 의존 */
 
-  --gola-button-default-width: calc((100vw - var(--gola-padding-lr)) / (var(--gola-button-count) * 2 - 2));
+  --gola-button-default-width: calc((100vw - var(--gola-padding-lr)) / (var(--gola-button-count) * 2 - 3));
   --gola-button-default-height: var(--gola-button-default-width);
 
   --drawer-max-width: 25rem;
@@ -69,6 +74,16 @@
     var(--drawer-list-item-count) * var(--drawer-list-height) + var(--drawer-button-height) + var(--drwaer-list-button-gap)
   );
   --drawer-default-height: calc(var(--drawer-content-height) + var(--drawer-inner-padding-tb));
+
+  --swipeable-button-default-height: 32px;
+
+  --guide-max-width: 400px;
+  --guide-max-height: 600px;
+  --guide-default-margin: 20px;
+  --guide-default-padding: 30px;
+
+  --guide-show-z-index: 5000;
+  --guide-hide-z-index: -1;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -87,7 +102,56 @@
     --gola-verygood-rgb: 71, 184, 224;
     --gola-verybad-rgb: 189, 21, 80;
     --gola-undo-rgb: 255, 201, 82;
+
+    --disabled-background-rgb: 45, 45, 45;
   }
+}
+
+[data-theme='dark'] {
+  --primary-background-rgb: 16, 16, 16;
+  --primary-foreground-rgba: 245, 245, 245;
+  --highlight-background-rgba: 71, 184, 224, 0.8;
+
+  --secondary-background-rgb: 34, 34, 34;
+  --secondary-foreground-rgba: 255, 255, 255, 0.7;
+
+  --caption-foreground-rgba: 255, 255, 255, 0.6;
+
+  --gola-good-rgb: 140, 215, 144;
+  --gola-bad-rgb: 255, 95, 46;
+  --gola-verygood-rgb: 71, 184, 224;
+  --gola-verybad-rgb: 189, 21, 80;
+  --gola-undo-rgb: 255, 201, 82;
+
+  --disabled-background-rgb: 45, 45, 45;
+}
+
+[data-theme='light'] {
+  --primary-background-rgb: 255, 255, 255;
+  --primary-foreground-rgba: 0, 0, 0;
+
+  --highlight-background-rgba: 71, 184, 224, 0.6;
+  --highlight-foreground-rgba: 71, 184, 224, 0.9;
+
+  --secondary-background-rgb: 245, 245, 245;
+  --secondary-foreground-rgba: 0, 0, 0, 0.6;
+
+  --caption-foreground-rgba: 0, 0, 0, 0.4;
+  --error-foreground-rgba: 255, 95, 46, 0.8;
+
+  --box-shadow-1: 1px 1px 8px 2px rgba(var(--primary-foreground-rgba), 0.08);
+  --box-shadow-card: 2px 2px 8px 1px rgba(var(--primary-foreground-rgba), 0.1);
+  --box-shadow-button: 2px 2px 4px 1px rgba(var(--primary-background-rgb), 0.3);
+
+  --card-default-height: calc((100vh - var(--header-default-height)) * 0.7);
+
+  --gola-verybad-rgb: 189, 21, 80;
+  --gola-bad-rgb: 255, 95, 46;
+  --gola-good-rgb: 140, 215, 144;
+  --gola-verygood-rgb: 71, 184, 224;
+  --gola-undo-rgb: 255, 201, 82;
+
+  --disabled-background-rgb: 245, 245, 245;
 }
 
 * {
@@ -96,9 +160,12 @@
   padding: 0;
   margin: 0;
   font-family: 'Noto Sans KR', sans-serif;
-  transition: background, color, border-color 0.2s ease-in-out;
+  transition: background, color, border-color 0.5s ease-in-out;
 }
 
+*::-webkit-scrollbar {
+  display: none;
+}
 html {
   position: fixed;
   width: 100%;

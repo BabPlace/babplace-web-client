@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import dynamic from 'next/dynamic';
 import { Map, MapMarker, useInjectKakaoMapApi } from 'react-kakao-maps-sdk';
 import { IconButton } from '@mui/material';
-import { TypoNotoSans, Header, Layout } from '@/components';
+import { TypoNotoSans, Header, Layout, Guide } from '@/components';
 import { useResult, useCard } from '@/hooks';
 import { distanceFormat, directionToSatisfaction } from '@/utils';
-import { ReplayRoundedIcon, CloseRoundedIcon, CheckRoundedIcon, StarBorderRoundedIcon } from '@/icons';
+import { InfoIcon, ReplayIcon, ErrorIcon, SatisfiedAltIcon, VerySatisfiedIcon, VeryDissatisfiedIcon } from '@/icons';
 import type { Restaurant, API, Direction } from '@/interfaces';
 import styles from '@/styles/Gola.module.css';
+import { FlexRow } from '@/layouts';
 
 const title = '식당 만족도 조사 | 골라밥 🍚';
 const description = '원하는 식당, 원하지 않는 식당을 표현하세요!';
@@ -19,37 +20,49 @@ type Props = {
 
 const Gola = ({ isValidUser, restaurants }: Props) => {
   const { loading } = useInjectKakaoMapApi({ appkey: process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY!, libraries: ['services', 'clusterer'] });
-  const { cardRefs, frontIndex, canRender, afterSwipe, swipeUp, swipeLeft, swipeRight, goBack } = useCard(restaurants);
+  const { cardRefs, frontIndex, canRender, afterSwipe, swipeUp, swipeLeft, swipeRight, swipeDown, goBack } = useCard(restaurants);
   const { addResult } = useResult(restaurants, isValidUser, frontIndex);
 
   return (
     <Layout title={title} description={description}>
       <Header showButtons />
+      <Guide page='gola' />
       <div className={styles.container}>
         <div className={styles.relative}>
           {restaurants.map(
-            ({ id, latitude: lat, longitude: lng, name, address, distance }, index) =>
+            ({ id, latitude: lat, longitude: lng, name, address, distance, restaurantPlaceUrl }, index) =>
               !loading &&
               canRender(index) && (
                 <div key={`gola-card-${id}`} style={{ borderRadius: 'var(--border-radius)' }}>
                   <ForwardRefNoSSRTinderCard
                     ref={cardRefs[index]}
                     className='swipe'
-                    onCardLeftScreen={afterSwipe}
-                    preventSwipe={['down']}
                     onSwipe={(direction: Direction) => {
                       addResult({ restaurantId: id, satisfaction: directionToSatisfaction(direction) });
+                      afterSwipe();
                     }}
                   >
                     <div className={styles.card + ' card'}>
-                      <div className={styles.info}>
-                        <TypoNotoSans text={name} variant='h6' />
-                        <TypoNotoSans text={address} />
-                        <TypoNotoSans text={distanceFormat(distance)} variant='caption' />
-                      </div>
                       <Map center={{ lat, lng }} style={mapStyle} level={5}>
                         <MapMarker position={{ lat, lng }} />
                       </Map>
+                      <div className={styles.info}>
+                        <FlexRow alignItems='center' justifyContent='space-between'>
+                          <TypoNotoSans text={name} variant='h6' />
+                          <IconButton
+                            onTouchStartCapture={(event) => {
+                              event.stopPropagation();
+                            }}
+                            onClick={() => {
+                              window.open(restaurantPlaceUrl, '_blank');
+                            }}
+                          >
+                            <InfoIcon />
+                          </IconButton>
+                        </FlexRow>
+                        <TypoNotoSans text={address} />
+                        <TypoNotoSans text={distanceFormat(distance)} variant='caption' />
+                      </div>
                     </div>
                   </ForwardRefNoSSRTinderCard>
                 </div>
@@ -58,16 +71,19 @@ const Gola = ({ isValidUser, restaurants }: Props) => {
         </div>
         <div className={styles.card_action_buttons}>
           <IconButton onClick={goBack} className={styles.undo}>
-            <ReplayRoundedIcon />
+            <ReplayIcon />
+          </IconButton>
+          <IconButton onClick={swipeDown} className={styles.verybad}>
+            <ErrorIcon />
           </IconButton>
           <IconButton onClick={swipeLeft} className={styles.bad}>
-            <CloseRoundedIcon />
+            <VeryDissatisfiedIcon />
           </IconButton>
-          <IconButton onClick={swipeUp} className={styles.verygood}>
-            <StarBorderRoundedIcon />
+          <IconButton onClick={swipeUp} className={styles.good}>
+            <SatisfiedAltIcon />
           </IconButton>
-          <IconButton onClick={swipeRight} className={styles.good}>
-            <CheckRoundedIcon />
+          <IconButton onClick={swipeRight} className={styles.verygood}>
+            <VerySatisfiedIcon />
           </IconButton>
         </div>
       </div>

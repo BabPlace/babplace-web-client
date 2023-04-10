@@ -44,9 +44,5 @@ export default function useInput<T extends InputValue>(initialValue: T, max: num
     setValue(initialValue);
   };
 
-  useEffect(() => {
-    console.log(isError);
-  }, []);
-
   return { value, isError, handleChange, reset, resetIsError, valitate };
 }

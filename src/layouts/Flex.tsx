@@ -5,23 +5,24 @@ type Props = {
   children: React.ReactNode;
   direction?: 'row' | 'column';
   width?: string;
+  height?: string;
   gap?: string;
+  alignItems?: string;
+  justifyContent?: string;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-const FlexColumn = ({ children, direction = 'row', width = '', gap = '', ...props }: Props) => {
-  return (
-    <StyledFlexColumn direction={direction} width={width} gap={gap} {...props}>
-      {children}
-    </StyledFlexColumn>
-  );
+const FlexColumn = ({ children, ...props }: Props) => {
+  return <StyledFlexColumn {...props}>{children}</StyledFlexColumn>;
 };
 
 export default FlexColumn;
 
-const StyledFlexColumn = styled.div<{ width: string; gap: string; direction: string }>`
+const StyledFlexColumn = styled.div<Omit<Props, 'children'>>`
   display: flex;
   flex-direction: ${({ direction }) => direction};
   width: ${({ width }) => width};
+  height: ${({ height }) => height};
   gap: ${({ gap }) => gap};
-  align-items: center;
+  align-items: ${({ alignItems }) => alignItems};
+  justify-content: ${({ justifyContent }) => justifyContent};
 `;

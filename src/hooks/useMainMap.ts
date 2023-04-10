@@ -7,9 +7,10 @@ const defaultLocation = {
 };
 
 export default function useMainMap() {
+  const [isLoading, setIsLoading] = useState(false);
   const [latitude, setLatitude] = useState(defaultLocation.latitude);
   const [longitude, setLongitude] = useState(defaultLocation.longitude);
-  const [addressName, setAdressName] = useState('');
+  const [addressName, setAdressName] = useState('-');
 
   const { loading } = useInjectKakaoMapApi({
     appkey: process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY!,
@@ -29,7 +30,7 @@ export default function useMainMap() {
   };
 
   useEffect(() => {
-    if (loading) return;
+    if (loading || !isLoading) return;
     const geocoder = new kakao.maps.services.Geocoder();
     const callback = (result: kakao.maps.services.RegionCode[], status: kakao.maps.services.Status) => {
       if (status === kakao.maps.services.Status.OK) {
@@ -40,13 +41,19 @@ export default function useMainMap() {
   }, [loading, latitude, longitude]);
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      setLocation({
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-      });
-    });
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setLocation({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+        setIsLoading(true);
+      },
+      (error) => {
+        setIsLoading(true);
+      }
+    );
   }, []);
 
-  return { loading, latitude, longitude, addressName, onCenterChanged };
+  return { loading: loading ? loading : !isLoading, latitude, longitude, addressName, onCenterChanged };
 }
