@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 
 type InputValue = string | number;
 
@@ -32,7 +32,9 @@ export default function useInput<T extends InputValue>(initialValue: T, max: num
         setIsError({ state: true, message: `${max}자 이하로 입력해주세요.` });
         return false;
       }
+      if (value.length === 0) return false;
     }
+
     return true;
   }, [value, max]);
 

@@ -15,8 +15,8 @@ type Props = {
 };
 
 const SwipeableEdgeDrawer = ({ addressName, lat, lng }: Props) => {
-  const { value: name, handleChange: handleNameChange } = useInput('');
-  const { value: count, handleChange: handleCountChange } = useInput(10);
+  const { value: name, isError: isNameError, handleChange: handleNameChange } = useInput('');
+  const { value: count, isError: isCountError, handleChange: handleCountChange } = useInput(10);
   const { drawerRef, open } = useDrawer();
   const { selectedButton, radius, guideMessage, onClickButton } = useSelectedButton();
   const { isLoaded, onClick } = useCreateTeam(name, count, lat, lng, radius);
@@ -32,6 +32,9 @@ const SwipeableEdgeDrawer = ({ addressName, lat, lng }: Props) => {
               value={name}
               className={styles.list_item__content}
               placeholder='팀명을 입력하세요'
+              error={isNameError.state}
+              errorText={isNameError.message}
+              errorSize='small'
               border={false}
               onChange={handleNameChange}
             />
@@ -42,7 +45,16 @@ const SwipeableEdgeDrawer = ({ addressName, lat, lng }: Props) => {
           </li>
           <li className={styles.list_item}>
             <TypoNotoSans text='음식점 개수' {...liTitleOptions} />
-            <Input value={count} className={styles.list_item__content} type='number' border={false} onChange={handleCountChange} />
+            <Input
+              value={count}
+              className={styles.list_item__content}
+              type='number'
+              error={isCountError.state}
+              errorText={isCountError.message}
+              errorSize='small'
+              border={false}
+              onChange={handleCountChange}
+            />
           </li>
           <li className={styles.list_item}>
             <TypoNotoSans text='제한 반경' {...liTitleOptions} />
