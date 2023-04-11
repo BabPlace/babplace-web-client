@@ -71,7 +71,7 @@ const Gola = ({ isValidUser, restaurants = [] }: Props) => {
             <ReplayIcon />
           </IconButton>
           <IconButton onClick={swipeDown} className={styles.verybad}>
-            <ErrorIcon />
+            <ErrorIcon width='1.5rem' height='1.5rem' />
           </IconButton>
           <IconButton onClick={swipeLeft} className={styles.bad}>
             <VeryDissatisfiedIcon />
