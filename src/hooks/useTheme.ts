@@ -3,6 +3,7 @@ import { createTheme, useMediaQuery } from '@mui/material';
 
 export default function useTheme() {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const [isInit, setIsInit] = useState(false);
   const [mode, setMode] = useState<'light' | 'dark'>(prefersDarkMode ? 'dark' : 'light');
   const colorMode = useMemo(
     () => ({
@@ -47,7 +48,11 @@ export default function useTheme() {
   );
 
   useEffect(() => {
-    if (mode === 'light') {
+    if (!isInit) {
+      setIsInit(true);
+      return;
+    }
+    if (mode === 'dark') {
       document.documentElement.setAttribute('data-theme', 'dark');
     } else {
       document.documentElement.setAttribute('data-theme', 'light');
