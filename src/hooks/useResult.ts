@@ -6,6 +6,7 @@ import type { Restaurant, ResultRequest, SatisfactionByRestaurant } from '@/inte
 export default function useResult(restaurants: Restaurant[], isValidUser: boolean, frontIndex: number) {
   const router = useRouter();
   const userId = router.query.userId as string;
+  const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<ResultRequest>({ userId: parseInt(userId), restaurantSatisfactions: [] });
 
   const addResult = (newResult: SatisfactionByRestaurant) => {
@@ -24,6 +25,7 @@ export default function useResult(restaurants: Restaurant[], isValidUser: boolea
   useEffect(() => {
     if (!isValidUser || !restaurants) return;
     if (frontIndex === -1) {
+      setIsLoading(true);
       const teamId = router.query.teamId as string;
       createResult({ teamId, ...result }).then(() => {
         router.push(`/result/${teamId}`);
@@ -31,5 +33,5 @@ export default function useResult(restaurants: Restaurant[], isValidUser: boolea
     }
   }, [frontIndex, restaurants]);
 
-  return { result, addResult };
+  return { result, isLoading, addResult };
 }
