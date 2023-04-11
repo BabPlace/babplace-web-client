@@ -45,5 +45,6 @@ export default SetUser;
 
 const sendButtonSx = {
   width: '200px',
+  height: 'var(--button-default-height)',
   marginTop: '150px',
 };

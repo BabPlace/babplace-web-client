@@ -12,7 +12,6 @@ export default function App({ Component, pageProps }: AppProps) {
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
-        console.log('in toggle');
         setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
       },
     }),
@@ -43,7 +42,6 @@ export default function App({ Component, pageProps }: AppProps) {
   );
 
   useEffect(() => {
-    console.log(mode);
     if (mode === 'light') {
       document.documentElement.setAttribute('data-theme', 'dark');
     } else {

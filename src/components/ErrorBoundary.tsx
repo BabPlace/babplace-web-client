@@ -33,13 +33,15 @@ class ErrorBoundary extends Component<Props, State> {
 
   public render() {
     if (this.state.hasError && this.state.error) {
+      const message = this.state.error.message ?? 'undefined error';
+      const status = this.state.error.status ?? 'none';
       return (
         <Layout onClick={this.reset}>
           <Header />
           <div className={styles.container}>
             <ErrorIcon width='150px' fill='rgba(var(--primary-foreground-rgba))' />
-            <TypoNotoSans variant='h6'>{this.state.error.data.message}</TypoNotoSans>
-            <TypoNotoSans variant='caption'>{'Error Code : ' + this.state.error.status}</TypoNotoSans>
+            <TypoNotoSans variant='h6'>{message}</TypoNotoSans>
+            <TypoNotoSans variant='caption'>{'Error Code : ' + status}</TypoNotoSans>
             <TypoNotoSans className={styles.caption} variant='caption' color='rgba(var(--highlight-foreground-rgba))'>
               아무 곳이나 눌러서 다시 시도하기
             </TypoNotoSans>
