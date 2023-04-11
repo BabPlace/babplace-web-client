@@ -221,6 +221,7 @@ a {
 @media screen and (min-width: 700px) {
   :root {
     --left-start-position: calc((100vw - 700px) / 2 + 12px);
+    --gola-button-default-width: calc((700px - var(--gola-padding-lr)) / (var(--gola-button-count) * 2 - 3));
   }
 }
 
