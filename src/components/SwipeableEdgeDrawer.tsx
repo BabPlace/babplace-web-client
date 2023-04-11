@@ -70,7 +70,12 @@ const SwipeableEdgeDrawer = ({ addressName, lat, lng }: Props) => {
             </div>
           </li>
         </ul>
-        <ProgressButton isLoaded={isLoaded} onClick={onClick} disabled={name === ''} {...doneButtonStyle}>
+        <ProgressButton
+          isLoaded={isLoaded}
+          onClick={onClick}
+          disabled={name === '' || isCountError.state || isNameError.state}
+          {...doneButtonStyle}
+        >
           <TypoNotoSans text='완료' variant='button' textAlign='center' />
         </ProgressButton>
       </div>

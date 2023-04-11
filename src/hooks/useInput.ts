@@ -11,6 +11,8 @@ export default function useInput<T extends InputValue>(initialValue: T, max: num
       const num = Number(event.target.value);
       if (num < 0 || num > max) {
         setIsError({ state: true, message: `숫자는 0부터 ${max}까지 입력 가능합니다.` });
+      } else {
+        setIsError((prev) => ({ state: false, message: prev.message }));
       }
     } else if (typeof initialValue === 'string' && event.target.value.length > max) {
       setIsError({ state: true, message: '닉네임이 너무 길어요!' });
