@@ -37,9 +37,9 @@ const Gola = ({ isValidUser, restaurants }: Props) => {
                   <ForwardRefNoSSRTinderCard
                     ref={cardRefs[index]}
                     className='swipe'
+                    onCardLeftScreen={afterSwipe}
                     onSwipe={(direction: Direction) => {
                       addResult({ restaurantId: id, satisfaction: directionToSatisfaction(direction) });
-                      afterSwipe();
                     }}
                   >
                     <div className={styles.card + ' card'}>
