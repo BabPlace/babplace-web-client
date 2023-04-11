@@ -33,6 +33,8 @@
 
 .button:first-child {
   padding: 0px;
+  max-width: var(--guide-max-width);
+  max-height: var(--guide-max-height);
 }
 
 .false {
@@ -58,8 +60,6 @@
     bottom: calc(var(--drawer-default-height) + var(--swipeable-button-default-height) / 2 - 10px);
   }
   100% {
-    max-width: var(--guide-max-width);
-    max-height: var(--guide-max-height);
     width: calc(100% - var(--guide-default-margin) * 2);
     height: calc(100% - var(--guide-default-margin) * 2);
 
@@ -74,8 +74,6 @@
 @keyframes scaleDown {
   0% {
     position: fixed;
-    max-width: var(--guide-max-width);
-    max-height: var(--guide-max-height);
     width: calc(100% - var(--guide-default-margin) * 2);
     height: calc(100% - var(--guide-default-margin) * 2);
 
