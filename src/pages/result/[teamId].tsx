@@ -10,9 +10,6 @@ import { getResult, getTeamInfo } from '@/controller';
 import type { ResultResponse, TeamInfoResponse } from '@/interfaces';
 import styles from '@/styles/Result.module.css';
 
-const title = '결과 페이지 | 골라밥 🍚';
-const description = '생성한 팀 혹은 초대받은 팀의 식당 만족도 조사결과 페이지입니다.';
-
 type Props = {
   result: ResultResponse;
   teamInfo: TeamInfoResponse;
@@ -105,6 +102,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
 export default Page;
 
+const title = '결과 페이지 | 골라밥 🍚';
+const description = '생성한 팀 혹은 초대받은 팀의 식당 만족도 조사결과 페이지입니다.';
 const inviteButtonTypoStyle = {
   variant: 'button' as const,
   textAlign: 'center' as const,

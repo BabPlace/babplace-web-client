@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Button, ButtonTypeMap, CircularProgress } from '@mui/material';
 
 type Props = {

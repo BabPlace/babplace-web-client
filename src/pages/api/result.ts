@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { Restaurant, ResultResponse } from '../../interfaces';
+import type { ResultResponse } from '../../interfaces';
 
 const dummyResultResponse: ResultResponse = [
   {

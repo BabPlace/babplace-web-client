@@ -5,10 +5,6 @@ import { Input, TypoNotoSans, Header, Layout } from '@/components';
 import { useInput, useCreateUser } from '@/hooks';
 import styles from '@/styles/Gola.module.css';
 
-const maxLength = 10;
-const title = '팀에 참가하기 | 골라밥 🍚';
-const description = '생성한 팀 혹은 초대받은 팀에 보여질 사용자의 닉네임 설정 페이지입니다.';
-
 const SetUser = () => {
   const { value: nickName, isError, handleChange, valitate } = useInput('', maxLength);
   const { isLoaded, onReturn, toResultPage } = useCreateUser(nickName);
@@ -43,6 +39,9 @@ const SetUser = () => {
 
 export default SetUser;
 
+const maxLength = 10;
+const title = '팀에 참가하기 | 골라밥 🍚';
+const description = '생성한 팀 혹은 초대받은 팀에 보여질 사용자의 닉네임 설정 페이지입니다.';
 const sendButtonSx = {
   width: '200px',
   height: 'var(--button-default-height)',
