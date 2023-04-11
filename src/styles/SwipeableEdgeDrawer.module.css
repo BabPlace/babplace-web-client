@@ -8,7 +8,7 @@
   background-color: rgb(var(--primary-background-rgb));
   color: rgba(var(--pribary-foreground-rgba));
   box-shadow: 0 0 10px 0 rgba(var(--primary-foreground-rgba), 0.2);
-  transition: background, color, border-color, height 0.5s ease;
+  transition: all 0.5s ease-in-out;
 }
 
 .puller {
