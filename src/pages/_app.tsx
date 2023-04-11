@@ -4,7 +4,10 @@ import { createTheme, ThemeProvider, useMediaQuery } from '@mui/material';
 import type { AppProps } from 'next/app';
 import '@/styles/globals.css';
 
-export const ColorModeContext = createContext({ toggleColorMode: () => {} });
+export const ColorModeContext = createContext<{ toggleColorMode: () => void; mode: 'light' | 'dark' }>({
+  toggleColorMode: () => {},
+  mode: 'light',
+});
 
 export default function App({ Component, pageProps }: AppProps) {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -14,8 +17,9 @@ export default function App({ Component, pageProps }: AppProps) {
       toggleColorMode: () => {
         setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
       },
+      mode,
     }),
-    []
+    [mode]
   );
 
   const theme = useMemo(
@@ -32,6 +36,15 @@ export default function App({ Component, pageProps }: AppProps) {
               root: {
                 '&.Mui-disabled': {
                   background: 'rgb(var(--disabled-background-rgb))',
+                },
+              },
+            },
+          },
+          MuiIconButton: {
+            styleOverrides: {
+              root: {
+                '&': {
+                  color: 'rgba(var(--primary-foreground-rgba))',
                 },
               },
             },
