@@ -31,6 +31,10 @@
   transition: all var(--animation-half-speed);
 }
 
+.button:first-child {
+  padding: 0px;
+}
+
 .false {
   animation: scaleDown var(--animation-half-speed) none;
 }
