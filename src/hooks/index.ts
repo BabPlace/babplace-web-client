@@ -11,3 +11,4 @@ export { default as useCreateUser } from './useCreateUser';
 export { default as useCreateTeam } from './useCreateTeam';
 export { default as useSwipeableButton } from './useSwipeableButton';
 export { default as useGuide } from './useGuide';
+export { default as useTheme } from './useTheme';

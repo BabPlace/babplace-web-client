@@ -1,6 +1,7 @@
 import Head from 'next/head';
-import { useMemo, useState, createContext, useEffect } from 'react';
-import { createTheme, ThemeProvider, useMediaQuery } from '@mui/material';
+import { createContext } from 'react';
+import { ThemeProvider } from '@mui/material';
+import { useTheme } from '@/hooks';
 import type { AppProps } from 'next/app';
 import '@/styles/globals.css';
 
@@ -10,58 +11,7 @@ export const ColorModeContext = createContext<{ toggleColorMode: () => void; mod
 });
 
 export default function App({ Component, pageProps }: AppProps) {
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const [mode, setMode] = useState<'light' | 'dark'>(prefersDarkMode ? 'dark' : 'light');
-  const colorMode = useMemo(
-    () => ({
-      toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
-      },
-      mode,
-    }),
-    [mode]
-  );
-
-  const theme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          primary: {
-            main: '#47B8E0',
-          },
-        },
-        components: {
-          MuiButton: {
-            styleOverrides: {
-              root: {
-                '&.Mui-disabled': {
-                  background: 'rgb(var(--disabled-background-rgb))',
-                },
-              },
-            },
-          },
-          MuiIconButton: {
-            styleOverrides: {
-              root: {
-                '&': {
-                  color: 'rgba(var(--primary-foreground-rgba))',
-                },
-              },
-            },
-          },
-        },
-      }),
-    [mode]
-  );
-
-  useEffect(() => {
-    if (mode === 'light') {
-      document.documentElement.setAttribute('data-theme', 'dark');
-    } else {
-      document.documentElement.setAttribute('data-theme', 'light');
-    }
-  }, [mode]);
-
+  const { colorMode, theme } = useTheme();
   return (
     <>
       <Head>
