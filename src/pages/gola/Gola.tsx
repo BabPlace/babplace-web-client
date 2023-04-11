@@ -15,7 +15,7 @@ type Props = {
   restaurants: Restaurant[];
 };
 
-const Gola = ({ isValidUser, restaurants }: Props) => {
+const Gola = ({ isValidUser, restaurants = [] }: Props) => {
   const { loading } = useInjectKakaoMapApi({ appkey: process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY!, libraries: ['services', 'clusterer'] });
   const { cardRefs, frontIndex, canRender, afterSwipe, swipeUp, swipeLeft, swipeRight, swipeDown, goBack } = useCard(restaurants);
   const { addResult } = useResult(restaurants, isValidUser, frontIndex);
