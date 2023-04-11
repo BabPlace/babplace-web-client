@@ -42,51 +42,45 @@
 .true {
   position: fixed;
   z-index: 4000;
-  animation: scaleUp var(--animation-half-speed) forwards;
+
+  animation: scaleUp var(--animation-half-speed) forwards ease-in-out;
   color: transparent;
 }
 
 @keyframes scaleUp {
   0% {
     color: transparent;
+
     width: var(--swipeable-button-default-height);
     height: var(--swipeable-button-default-height);
     border-radius: 100px;
+    left: var(--left-start-position);
     bottom: calc(var(--drawer-default-height) + var(--swipeable-button-default-height) / 2 - 10px);
-    left: 10px;
   }
   100% {
-    margin: auto;
-    padding: 30px;
-
     max-width: var(--guide-max-width);
     max-height: var(--guide-max-height);
     width: calc(100% - var(--guide-default-margin) * 2);
     height: calc(100% - var(--guide-default-margin) * 2);
 
-    bottom: 50%;
-    left: 50%;
-    transform: translate(-50%, +50%);
-
     box-shadow: var(--box-shadow-button);
     border-radius: var(--border-radius);
+
+    left: var(--left-start-position-after);
+    bottom: var(--bottom-start-position-after);
   }
 }
 
 @keyframes scaleDown {
   0% {
     position: fixed;
-    margin: auto;
-    padding: 30px;
-
     max-width: var(--guide-max-width);
     max-height: var(--guide-max-height);
     width: calc(100% - var(--guide-default-margin) * 2);
     height: calc(100% - var(--guide-default-margin) * 2);
 
-    bottom: 50%;
-    left: 50%;
-    transform: translate(-50%, +50%);
+    left: var(--left-start-position-after);
+    bottom: var(--bottom-start-position-after);
 
     box-shadow: var(--box-shadow-button);
     border-radius: var(--border-radius);
@@ -98,7 +92,7 @@
     height: var(--swipeable-button-default-height);
     border-radius: 100px;
     bottom: calc(var(--drawer-default-height) + var(--swipeable-button-default-height) / 2 - 10px);
-    left: 10px;
+    left: var(--left-start-position);
   }
 }
 

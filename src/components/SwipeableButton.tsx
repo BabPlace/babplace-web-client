@@ -9,7 +9,7 @@ const SwipeableButton = () => {
     <div className={cn(styles.container, styles['but' + isShow])}>
       {buttons.map(({ children, onClick, className }, index) => {
         return (
-          <button className={cn(styles.button, styles[`${className}`])} key={`swipablebutton-${index}`} onClick={onClick}>
+          <button className={cn(styles.button, className ? styles[`${className}`] : '')} key={`swipablebutton-${index}`} onClick={onClick}>
             {children}
           </button>
         );

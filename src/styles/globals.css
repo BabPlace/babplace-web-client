@@ -82,8 +82,15 @@
   --guide-default-margin: 20px;
   --guide-default-padding: 30px;
 
+  --guide-default-width: calc(100vw - var(--guide-default-margin) * 2);
+  --guide-default-height: calc(100vw - var(--guide-default-margin) * 2);
+
   --guide-show-z-index: 5000;
   --guide-hide-z-index: -1;
+
+  --left-start-position: calc(50vw - 50% + 12px);
+  --left-start-position-after: var(--guide-default-margin);
+  --bottom-start-position-after: var(--guide-default-margin);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -208,5 +215,23 @@ a {
 @media screen and (max-height: 400px) {
   :root {
     --card-default-height: 50vh;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  :root {
+    --left-start-position: calc((100vw - 700px) / 2 + 12px);
+  }
+}
+
+@media screen and (min-width: 440px) {
+  :root {
+    --left-start-position-after: calc((100vw - var(--guide-max-width)) / 2);
+  }
+}
+
+@media screen and (min-height: 640px) {
+  :root {
+    --bottom-start-position-after: calc((100vh - var(--guide-max-height)) / 2);
   }
 }
