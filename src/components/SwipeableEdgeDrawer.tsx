@@ -16,7 +16,7 @@ type Props = {
 
 const SwipeableEdgeDrawer = ({ addressName, lat, lng }: Props) => {
   const { value: name, isError: isNameError, handleChange: handleNameChange } = useInput('');
-  const { value: count, isError: isCountError, handleChange: handleCountChange } = useInput(10);
+  const { value: count, isError: isCountError, handleChange: handleCountChange } = useInput(7);
   const { drawerRef, open } = useDrawer();
   const { selectedButton, radius, guideMessage, onClickButton } = useSelectedButton();
   const { isLoaded, onClick } = useCreateTeam(name, count, lat, lng, radius);
