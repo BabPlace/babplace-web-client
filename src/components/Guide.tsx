@@ -52,18 +52,21 @@ const GuideHeader = () => {
 };
 
 const GuideBody = () => {
+  const bodyTypoStyle = { variant: 'body1' as const, textAlign: 'center' as const, noWrap: false };
   return (
     <Swiper navigation={true} pagination={{ clickable: true }} spaceBetween={50} className={styles.mySwiper}>
       <SwiperSlide>
         <SwiperSlideItem>
-          <TypoNotoSans text='1. 원하는 지역 선택하기' variant='body1' textAlign='center' />
-          <TypoNotoSans text='2. 팀 이름 만들기' variant='body1' textAlign='center' />
-          <TypoNotoSans text='3. 추천받을 식당 개수 정하기' variant='body1' textAlign='center' />
-          <TypoNotoSans text='4. 원하는 거리 고르기' variant='body1' textAlign='center' />
+          <TypoNotoSans text='1. 원하는 지역 선택하기' {...bodyTypoStyle} />
+          <TypoNotoSans text='2. 팀 이름 만들기' {...bodyTypoStyle} />
+          <TypoNotoSans text='3. 추천받을 식당 개수 정하기' {...bodyTypoStyle} />
+          <TypoNotoSans text='4. 원하는 거리 고르기' {...bodyTypoStyle} />
         </SwiperSlideItem>
       </SwiperSlide>
       <SwiperSlide>
-        <SwiperSlideItem>hi</SwiperSlideItem>
+        <SwiperSlideItem>
+          <TypoNotoSans text='아래로 스와이프 하거나 버튼을 눌러ㅁㄴㅇㄹㅁㄴㄹㅇㅁㄴㄹㅇ' {...bodyTypoStyle} />
+        </SwiperSlideItem>
       </SwiperSlide>
     </Swiper>
   );
