@@ -23,7 +23,7 @@ const ResultDetail = ({ satisfaction }: Props) => {
       satisfaction: 'bad',
     },
     {
-      name: '짱 싫어요',
+      name: '못먹어요',
       satisfaction: 'veryBad',
     },
   ];

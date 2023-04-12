@@ -4,7 +4,7 @@
   max-height: var(--guide-max-height);
 
   margin: auto;
-  padding: 30px;
+  padding: 30px 5px 5px 5px;
   border-radius: var(--border-radius);
   /* box-shadow: var(--box-shadow-button); */
 
@@ -15,4 +15,14 @@
   bottom: 50%;
   left: 50%;
   transform: translate(-50%, +50%);
+}
+
+.mySwiper {
+  height: 100%;
+  width: 100%;
+  padding: 0 25px 25px 25px;
+}
+
+.donot_button {
+  /* bottom: 10px; */
 }

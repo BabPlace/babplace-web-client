@@ -1,17 +1,20 @@
 import { useMainMap } from '@/hooks';
-import { Layout, LoadableMap, BabMarker, SwipeableEdgeDrawer, SwipeableButton, Guide } from '@/components';
+
+import { Layout, LoadableMap, BabMarker, SwipeableEdgeDrawer, SwipeableButton, Guide, ErrorBoundary } from '@/components';
 
 export default function Home() {
   const { loading, latitude: lat, longitude: lng, addressName, onCenterChanged } = useMainMap();
 
   return (
-    <Layout title={title} description={description} bodyStyle={{ marginTop: '0px' }}>
-      <Guide />
-      <LoadableMap isLoading={loading} center={{ lat, lng }} style={mapStyle} onCenterChanged={onCenterChanged} />
-      {!loading && <BabMarker />}
-      {!loading && <SwipeableButton />}
-      <SwipeableEdgeDrawer addressName={addressName} lat={lat} lng={lng} />
-    </Layout>
+    <ErrorBoundary>
+      <Layout title={title} description={description} bodyStyle={{ marginTop: '0px' }}>
+        <Guide />
+        <LoadableMap isLoading={loading} center={{ lat, lng }} style={mapStyle} onCenterChanged={onCenterChanged} />
+        {!loading && <BabMarker />}
+        {!loading && <SwipeableButton />}
+        <SwipeableEdgeDrawer addressName={addressName} lat={lat} lng={lng} />
+      </Layout>
+    </ErrorBoundary>
   );
 }
 

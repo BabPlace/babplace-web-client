@@ -18,7 +18,7 @@ type Props = {
 const Gola = ({ isValidUser, restaurants = [] }: Props) => {
   const { loading } = useInjectKakaoMapApi({ appkey: process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY!, libraries: ['services', 'clusterer'] });
   const { cardRefs, frontIndex, canRender, afterSwipe, swipeUp, swipeLeft, swipeRight, swipeDown, goBack } = useCard(restaurants);
-  const { addResult } = useResult(restaurants, isValidUser, frontIndex);
+  const { addResult, isLoading } = useResult(restaurants, isValidUser, frontIndex);
 
   return (
     <Layout title={title} description={description}>
@@ -97,4 +97,4 @@ const ForwardRefNoSSRTinderCard = React.forwardRef<API, any>((props, ref) => <No
 
 const title = '식당 만족도 조사 | 골라밥 🍚';
 const description = '원하는 식당, 원하지 않는 식당을 표현하세요!';
-const mapStyle = { width: '99.5%', height: '99.5%', borderRadius: '12px' };
+const mapStyle = { width: '99.5%', height: '99.5%', borderRadius: 'var(--border-radius)' };

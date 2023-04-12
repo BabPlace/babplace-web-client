@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { RatioBarChart } from '@teamapdan/weirdchart';
 import { Button, Snackbar } from '@mui/material';
-import { TypoNotoSans, Layout, Header } from '@/components';
+import { TypoNotoSans, Layout, Header, ErrorBoundary } from '@/components';
 import ResultCard from './ResultCard';
 import ResultDetail from './ResultDetail';
 import { sliceByOffset, makeDataset } from '@/utils';
@@ -21,63 +21,65 @@ function Page({ result: satisfactions, teamInfo }: Props) {
   const [top3, others] = sliceByOffset(satisfactions, 3);
 
   return (
-    <Layout title={title} description={description}>
-      <Header showButtons={true} />
-      <div className={styles.container}>
-        <TypoNotoSans text='오늘의 식당은?' variant='caption' textAlign='center' />
-        <TypoNotoSans text={teamInfo.name} variant='h6' textAlign='center' marginBottom='20px' />
-        <div className={styles.flex}>
-          {top3.map((satisfaction, index) => (
-            <ResultCard key={`top3-${satisfaction.restaurantName}-${index}`} title={satisfaction.restaurantName} index={index}>
-              <div style={{ height: '20px' }}>
-                <RatioBarChart dataset={makeDataset(satisfaction)} option={{ startAnimation: 'fromEqual', barHeight: 20 }} />
-              </div>
-              <ResultDetail satisfaction={satisfaction} />
-            </ResultCard>
-          ))}
-          <ResultCard title='🥲 패배자들'>
-            <div className={styles.losers}>
-              {others.map((satisfaction, index) => {
-                return (
-                  <div key={`others-${satisfaction.restaurantName}-${index}`} className={styles.loser}>
-                    <TypoNotoSans text={satisfaction.restaurantName} variant='caption' className={styles.loser__title} />
-                    <div className={styles.loser__bar}>
-                      <RatioBarChart
-                        dataset={makeDataset(satisfaction)}
-                        option={{
-                          startAnimation: 'fromEqual',
-                          barHeight: 25,
-                          offsetY: 5,
-                        }}
-                      />
+    <ErrorBoundary>
+      <Layout title={title} description={description}>
+        <Header showButtons={true} />
+        <div className={styles.container}>
+          <TypoNotoSans text='오늘의 식당은?' variant='caption' textAlign='center' />
+          <TypoNotoSans text={teamInfo.name} variant='h6' textAlign='center' marginBottom='20px' />
+          <div className={styles.flex}>
+            {top3.map((satisfaction, index) => (
+              <ResultCard key={`top3-${satisfaction.restaurantName}-${index}`} title={satisfaction.restaurantName} index={index}>
+                <div style={{ height: '20px' }}>
+                  <RatioBarChart dataset={makeDataset(satisfaction)} option={{ startAnimation: 'fromEqual', barHeight: 20 }} />
+                </div>
+                <ResultDetail satisfaction={satisfaction} />
+              </ResultCard>
+            ))}
+            <ResultCard title='🥲 패배자들'>
+              <div className={styles.losers}>
+                {others.map((satisfaction, index) => {
+                  return (
+                    <div key={`others-${satisfaction.restaurantName}-${index}`} className={styles.loser}>
+                      <TypoNotoSans text={satisfaction.restaurantName} variant='caption' className={styles.loser__title} />
+                      <div className={styles.loser__bar}>
+                        <RatioBarChart
+                          dataset={makeDataset(satisfaction)}
+                          option={{
+                            startAnimation: 'fromEqual',
+                            barHeight: 25,
+                            offsetY: 5,
+                          }}
+                        />
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
+            </ResultCard>
+            <div className={styles.button_box}>
+              <Button
+                variant='contained'
+                fullWidth
+                color='primary'
+                sx={{ borderRadius: 'var(--border-radius)', height: '40px' }}
+                onClick={() => share(handleOpen)}
+              >
+                <TypoNotoSans text='결과 공유하기' variant='button' textAlign='center' color='white' />
+              </Button>
+              <Button variant='text' onClick={() => invite()}>
+                <TypoNotoSans text='친구 초대하기' {...inviteButtonTypoStyle} />
+              </Button>
             </div>
-          </ResultCard>
-          <div className={styles.button_box}>
-            <Button
-              variant='contained'
-              fullWidth
-              color='primary'
-              sx={{ borderRadius: 'var(--border-radius)', height: '40px' }}
-              onClick={() => share(handleOpen)}
-            >
-              <TypoNotoSans text='결과 공유하기' variant='button' textAlign='center' color='white' />
-            </Button>
-            <Button variant='text' onClick={() => invite()}>
-              <TypoNotoSans text='친구 초대하기' {...inviteButtonTypoStyle} />
-            </Button>
           </div>
+          <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity='info' sx={{ width: '100%' }}>
+              결과 공유 링크가 복사되었습니다!
+            </Alert>
+          </Snackbar>
         </div>
-        <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity='info' sx={{ width: '100%' }}>
-            결과 공유 링크가 복사되었습니다!
-          </Alert>
-        </Snackbar>
-      </div>
-    </Layout>
+      </Layout>
+    </ErrorBoundary>
   );
 }
 

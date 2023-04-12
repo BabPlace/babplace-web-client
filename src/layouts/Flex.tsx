@@ -19,6 +19,7 @@ export default FlexColumn;
 
 const StyledFlexColumn = styled.div<Omit<Props, 'children'>>`
   display: flex;
+
   flex-direction: ${({ direction }) => direction};
   width: ${({ width }) => width};
   height: ${({ height }) => height};

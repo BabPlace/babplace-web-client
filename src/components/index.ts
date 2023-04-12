@@ -9,3 +9,4 @@ export { default as ButtonGroup } from './ButtonGroup';
 export { default as SwipeableButton } from './SwipeableButton';
 export { default as LoadableMap } from './LoadableMap';
 export { default as Guide } from './Guide';
+export { default as ErrorBoundary } from './ErrorBoundary';

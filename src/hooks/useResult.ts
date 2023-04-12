@@ -10,16 +10,21 @@ export default function useResult(restaurants: Restaurant[], isValidUser: boolea
   const [result, setResult] = useState<ResultRequest>({ userId: parseInt(userId), restaurantSatisfactions: [] });
 
   const addResult = (newResult: SatisfactionByRestaurant) => {
-    const newRestaurantSatisfactions = result.restaurantSatisfactions.map((restaurantSatisfaction) => {
-      if (restaurantSatisfaction.restaurantId === newResult.restaurantId) {
-        return newResult;
-      }
-      return restaurantSatisfaction;
-    });
-    if (newRestaurantSatisfactions.length === result.restaurantSatisfactions.length) {
-      newRestaurantSatisfactions.push(newResult);
+    const { restaurantSatisfactions } = result;
+    const index = restaurantSatisfactions.findIndex((r) => r.restaurantId === newResult.restaurantId);
+    if (index === -1) {
+      setResult((prevResult) => ({
+        ...prevResult,
+        restaurantSatisfactions: [...restaurantSatisfactions, newResult],
+      }));
+    } else {
+      const updatedRestaurantSatisfactions = [...restaurantSatisfactions];
+      updatedRestaurantSatisfactions[index] = newResult;
+      setResult((prevResult) => ({
+        ...prevResult,
+        restaurantSatisfactions: updatedRestaurantSatisfactions,
+      }));
     }
-    setResult({ ...result, restaurantSatisfactions: newRestaurantSatisfactions });
   };
 
   useEffect(() => {
@@ -32,6 +37,10 @@ export default function useResult(restaurants: Restaurant[], isValidUser: boolea
       });
     }
   }, [frontIndex, restaurants]);
+
+  useEffect(() => {
+    console.log(result);
+  }, [result]);
 
   return { result, isLoading, addResult };
 }
