@@ -1,10 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 /*  1rem = 16px */
 :root {
-  --swiper-navigation-size: 20px;
   --max-width: 700px;
-  --swiper-navigation-color: #47b8e0;
-  --swiper-pagination-color: var(--swiper-navigation-color);
 
   --header-default-height: 60px;
   --button-default-height: 40px;
@@ -238,4 +235,11 @@ a {
   :root {
     --bottom-start-position-after: calc((100vh - var(--guide-max-height)) / 2);
   }
+}
+
+/* force styling for external libraries */
+:root {
+  --swiper-navigation-color: #47b8e0 !important;
+  --swiper-pagination-color: var(--swiper-navigation-color) !important;
+  --swiper-navigation-size: 20px !important;
 }
