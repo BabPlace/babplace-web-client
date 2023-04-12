@@ -239,7 +239,7 @@ a {
 
 /* force styling for external libraries */
 :root {
-  --swiper-navigation-color: #47b8e0 !important;
+  --swiper-navigation-color: var(--primary-foreground-rgba) !important;
   --swiper-pagination-color: var(--swiper-navigation-color) !important;
   --swiper-navigation-size: 20px !important;
 }

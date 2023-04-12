@@ -3,7 +3,17 @@ import cn from 'classnames';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import { Button, Backdrop } from '@mui/material';
-import { FlexColumn, TypoNotoSans } from '@/layouts';
+import { FlexColumn, FlexRow, TypoNotoSans } from '@/layouts';
+import {
+  VeryDissatisfiedIcon,
+  SatisfiedAltIcon,
+  VerySatisfiedIcon,
+  SickIcon,
+  PlaceIcon,
+  RenameIcon,
+  RestaurantIcon,
+  RouteIcon,
+} from '@/icons';
 import { useGuide } from '@/hooks';
 
 import styled from '@emotion/styled';
@@ -51,20 +61,55 @@ const GuideHeader = () => {
 };
 
 const GuideBody = () => {
-  const bodyTypoStyle = { variant: 'body1' as const, textAlign: 'center' as const, noWrap: false };
+  const bodyTypoStyle = { variant: 'body1' as const, noWrap: false };
   return (
     <Swiper navigation={true} pagination={{ clickable: true }} spaceBetween={50} className={styles.mySwiper}>
       <SwiperSlide>
         <SwiperSlideItem>
-          <TypoNotoSans text='1. 원하는 지역 선택하기' {...bodyTypoStyle} />
-          <TypoNotoSans text='2. 팀 이름 만들기' {...bodyTypoStyle} />
-          <TypoNotoSans text='3. 추천받을 식당 개수 정하기' {...bodyTypoStyle} />
-          <TypoNotoSans text='4. 원하는 거리 고르기' {...bodyTypoStyle} />
+          <FlexRow alignItems='center' justifyContent='flex-start' gap='10px'>
+            <PlaceIcon fontSize='large' sx={{ color: 'rgb(var(--gola-verygood-rgb))' }} />
+            <TypoNotoSans text='원하는 지역 선택하기' fontWeight={600} {...bodyTypoStyle} />
+          </FlexRow>
+          <FlexRow alignItems='center' justifyContent='flex-start' gap='10px'>
+            <RenameIcon fontSize='large' sx={{ color: 'rgb(var(--gola-good-rgb))' }} />
+            <TypoNotoSans text='팀 이름 만들기' fontWeight={600} {...bodyTypoStyle} />
+          </FlexRow>
+          <FlexRow alignItems='center' justifyContent='flex-start' gap='10px'>
+            <RestaurantIcon fontSize='large' sx={{ color: 'rgb(var(--gola-bad-rgb))' }} />
+            <TypoNotoSans text='추천받을 식당 개수 정하기' fontWeight={600} {...bodyTypoStyle} />
+          </FlexRow>
+          <FlexRow alignItems='center' justifyContent='flex-start' gap='10px'>
+            <RouteIcon fontSize='large' sx={{ color: 'rgb(var(--gola-verybad-rgb))' }} />
+            <TypoNotoSans text='4. 원하는 거리 고르기' fontWeight={600} {...bodyTypoStyle} />
+          </FlexRow>
         </SwiperSlideItem>
       </SwiperSlide>
       <SwiperSlide>
         <SwiperSlideItem>
-          <TypoNotoSans text='아래로 스와이프 하거나 버튼을 눌러ㅁㄴㅇㄹㅁㄴㄹㅇㅁㄴㄹㅇ' {...bodyTypoStyle} />
+          <FlexRow alignItems='center' justifyContent='flex-start' width='100%' gap='10px'>
+            <VerySatisfiedIcon fontSize='large' sx={{ color: 'rgb(var(--gola-verygood-rgb))' }} />
+            <TypoNotoSans {...bodyTypoStyle}>
+              <b>위로 스와이프</b>해서 <b>짱 좋아요</b>
+            </TypoNotoSans>
+          </FlexRow>
+          <FlexRow alignItems='center' justifyContent='flex-start' width='100%' gap='10px'>
+            <SatisfiedAltIcon fontSize='large' sx={{ color: 'rgb(var(--gola-good-rgb))' }} />
+            <TypoNotoSans {...bodyTypoStyle}>
+              <b>오른쪽으로 스와이프</b>해서 <b>좋아요</b>
+            </TypoNotoSans>
+          </FlexRow>
+          <FlexRow alignItems='center' justifyContent='flex-start' width='100%' gap='10px'>
+            <VeryDissatisfiedIcon fontSize='large' sx={{ color: 'rgb(var(--gola-bad-rgb))' }} />
+            <TypoNotoSans {...bodyTypoStyle}>
+              <b>왼쪽으로 스와이프</b>해서 <b>싫어요</b>
+            </TypoNotoSans>
+          </FlexRow>
+          <FlexRow alignItems='center' justifyContent='flex-start' width='100%' gap='10px'>
+            <SickIcon fontSize='large' sx={{ color: 'rgb(var(--gola-verybad-rgb))' }} />
+            <TypoNotoSans {...bodyTypoStyle}>
+              아래로 스와이프해서 <b>알러지, 비건</b>등의 이유로 제외하고 싶은 식당을 표현하세요
+            </TypoNotoSans>
+          </FlexRow>
         </SwiperSlideItem>
       </SwiperSlide>
     </Swiper>
@@ -88,7 +133,7 @@ const Container = styled.div<{ isShow: boolean }>`
 `;
 
 const SwiperSlideItem = styled.div`
-  padding: 40px;
+  padding: 30px 50px;
   height: 100%;
   display: flex;
   flex-direction: column;
