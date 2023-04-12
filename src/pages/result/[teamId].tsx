@@ -26,8 +26,8 @@ function Page({ result: satisfactions, teamInfo }: Props) {
       <Layout title={title} description={description}>
         <Header showButtons={true} />
         <div className={styles.container}>
-          <TypoNotoSans text='오늘의 식당은?' variant='caption' textAlign='center' />
-          <TypoNotoSans text={teamInfo.name} variant='h6' textAlign='center' marginBottom='20px' />
+          <TypoNotoSans text={teamInfo.name} variant='h6' textAlign='center' />
+          <TypoNotoSans text='오늘의 식당은?' variant='caption' textAlign='center' marginBottom='20px' />
           <div className={styles.flex}>
             {top3.map((satisfaction, index) => (
               <ResultCard key={`top3-${satisfaction.restaurantName}-${index}`} title={satisfaction.restaurantName} index={index}>

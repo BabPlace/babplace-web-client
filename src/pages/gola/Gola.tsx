@@ -77,10 +77,10 @@ const Gola = ({ isValidUser, restaurants = [] }: Props) => {
           <IconButton onClick={swipeLeft} className={styles.bad}>
             <VeryDissatisfiedIcon />
           </IconButton>
-          <IconButton onClick={swipeUp} className={styles.good}>
+          <IconButton onClick={swipeRight} className={styles.good}>
             <SatisfiedAltIcon />
           </IconButton>
-          <IconButton onClick={swipeRight} className={styles.verygood}>
+          <IconButton onClick={swipeUp} className={styles.verygood}>
             <VerySatisfiedIcon />
           </IconButton>
         </div>
