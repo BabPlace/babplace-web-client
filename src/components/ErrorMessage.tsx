@@ -1,6 +1,6 @@
 import React from 'react';
 import { ErrorIcon } from '@/icons';
-import TypoNotoSans from './TypoNotoSans';
+import { TypoNotoSans } from '@/layouts';
 
 type Props = {
   message: string;

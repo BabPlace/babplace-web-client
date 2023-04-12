@@ -1,7 +1,6 @@
 import React from 'react';
 import { useInput, useDrawer, useSelectedButton, useCreateTeam } from '@/hooks';
-import { ProgressButton } from '@/layouts';
-import TypoNotoSans from './TypoNotoSans';
+import { ProgressButton, TypoNotoSans } from '@/layouts';
 import ButtonGroup from './ButtonGroup';
 import Input from './Input';
 import { BusIcon, BikeIcon, FootPrintIcon } from '@/icons';

@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
-import { TypoNotoSans } from '@/components';
+import { TypoNotoSans } from '@/layouts';
 import { ColorModeContext } from '@/pages/_app';
 
 export default function useSwipeableButton() {

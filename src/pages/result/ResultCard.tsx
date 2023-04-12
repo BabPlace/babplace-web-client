@@ -1,5 +1,5 @@
 import React from 'react';
-import { TypoNotoSans } from '@/components';
+import { TypoNotoSans } from '@/layouts';
 import styles from '@/styles/ResultCard.module.css';
 
 type Props = {

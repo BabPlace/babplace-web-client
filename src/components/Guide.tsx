@@ -3,9 +3,8 @@ import cn from 'classnames';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import { Button, Backdrop } from '@mui/material';
+import { FlexColumn, TypoNotoSans } from '@/layouts';
 import { useGuide } from '@/hooks';
-import TypoNotoSans from './TypoNotoSans';
-import { FlexColumn } from '@/layouts';
 
 import styled from '@emotion/styled';
 import styles from '@/styles/Guide.module.css';

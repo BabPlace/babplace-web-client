@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import TypoNotoSans from './TypoNotoSans';
+import { TypoNotoSans } from '@/layouts';
 
 type Props = {
   className?: string;

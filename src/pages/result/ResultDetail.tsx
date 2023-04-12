@@ -1,5 +1,5 @@
 import React from 'react';
-import { TypoNotoSans } from '@/components';
+import { TypoNotoSans } from '@/layouts';
 import type { RestaurantSatisfaction, SatisfactionResponse } from '@/interfaces';
 import { styled } from '@mui/material';
 import styles from '@/styles/ResultDetail.module.css';

@@ -2,9 +2,9 @@ import React, { Component, ReactNode } from 'react';
 import Header from './Header';
 import Layout from './Layout';
 import { ErrorIcon } from '@/icons';
+import { TypoNotoSans } from '@/layouts';
 import type { Errors } from '@/interfaces';
 import styles from '@/styles/ErrorBoundary.module.css';
-import TypoNotoSans from './TypoNotoSans';
 
 interface Props {
   children?: ReactNode;

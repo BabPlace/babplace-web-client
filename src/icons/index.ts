@@ -12,3 +12,9 @@ export { default as BikeIcon } from './BikeIcon';
 export { default as BusIcon } from './BusIcon';
 export { default as SvgIcon } from './SvgIcon';
 export { default as ErrorIcon } from './ErrorIcon';
+export { default as HomeIcon } from '@mui/icons-material/HomeOutlined';
+export { default as InviteIcon } from '@mui/icons-material/PersonAddAlt';
+
+// import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
+// import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+// import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded';

@@ -2,13 +2,13 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import { Map, MapMarker, useInjectKakaoMapApi } from 'react-kakao-maps-sdk';
 import { IconButton } from '@mui/material';
-import { TypoNotoSans, Header, Layout, Guide } from '@/components';
+import { Header, Layout, Guide } from '@/components';
+import { FlexRow, TypoNotoSans } from '@/layouts';
 import { useResult, useCard } from '@/hooks';
 import { distanceFormat, directionToSatisfaction } from '@/utils';
 import { InfoIcon, ReplayIcon, ErrorIcon, SatisfiedAltIcon, VerySatisfiedIcon, VeryDissatisfiedIcon } from '@/icons';
 import type { Restaurant, API, Direction } from '@/interfaces';
 import styles from '@/styles/Gola.module.css';
-import { FlexRow } from '@/layouts';
 
 type Props = {
   isValidUser: boolean;
