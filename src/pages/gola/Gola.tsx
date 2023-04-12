@@ -5,7 +5,7 @@ import { IconButton } from '@mui/material';
 import { Header, Layout, Guide } from '@/components';
 import { FlexRow, TypoNotoSans } from '@/layouts';
 import { useResult, useCard } from '@/hooks';
-import { distanceFormat, directionToSatisfaction } from '@/utils';
+import { categoryFormat, distanceFormat, directionToSatisfaction } from '@/utils';
 import { InfoIcon, ReplayIcon, ErrorIcon, SatisfiedAltIcon, VerySatisfiedIcon, VeryDissatisfiedIcon } from '@/icons';
 import type { Restaurant, API, Direction } from '@/interfaces';
 import styles from '@/styles/Gola.module.css';
@@ -27,7 +27,7 @@ const Gola = ({ isValidUser, restaurants = [] }: Props) => {
       <div className={styles.container}>
         <div className={styles.relative}>
           {restaurants.map(
-            ({ id, latitude: lat, longitude: lng, name, address, distance, restaurantPlaceUrl }, index) =>
+            ({ id, latitude: lat, longitude: lng, name, category, address, distance, restaurantPlaceUrl }, index) =>
               !loading &&
               canRender(index) && (
                 <div key={`gola-card-${id}`} style={{ borderRadius: 'var(--border-radius)' }}>
@@ -53,11 +53,12 @@ const Gola = ({ isValidUser, restaurants = [] }: Props) => {
                             onClick={() => {
                               window.open(restaurantPlaceUrl, '_blank');
                             }}
+                            sx={{ padding: '0px' }}
                           >
                             <InfoIcon />
                           </IconButton>
                         </FlexRow>
-                        <TypoNotoSans text={address} />
+                        <TypoNotoSans text={categoryFormat(category)} />
                         <TypoNotoSans text={distanceFormat(distance)} variant='caption' />
                       </div>
                     </div>
