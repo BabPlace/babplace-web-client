@@ -4,7 +4,7 @@ import { myPalette } from '@/theme';
 
 export default function makeDataset(restaurantSatisfaction: RestaurantSatisfaction): Dataset[] {
   const dataset: Dataset[] = [];
-  const satisfactions: SatisfactionResponse[] = ['good', 'bad', 'veryGood', 'veryBad'];
+  const satisfactions: SatisfactionResponse[] = ['veryGood', 'good', 'bad', 'veryBad'];
   satisfactions.forEach((satisfaction) => {
     if (restaurantSatisfaction[satisfaction] !== undefined) {
       dataset.push({
