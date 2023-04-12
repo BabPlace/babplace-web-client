@@ -6,7 +6,7 @@ import { Header, Layout, Guide } from '@/components';
 import { FlexRow, TypoNotoSans } from '@/layouts';
 import { useResult, useCard } from '@/hooks';
 import { categoryFormat, distanceFormat, directionToSatisfaction } from '@/utils';
-import { InfoIcon, ReplayIcon, ErrorIcon, SatisfiedAltIcon, VerySatisfiedIcon, VeryDissatisfiedIcon } from '@/icons';
+import { InfoIcon, ReplayIcon, ErrorIcon, SatisfiedAltIcon, VerySatisfiedIcon, VeryDissatisfiedIcon, SickIcon } from '@/icons';
 import type { Restaurant, API, Direction } from '@/interfaces';
 import styles from '@/styles/Gola.module.css';
 
@@ -72,7 +72,7 @@ const Gola = ({ isValidUser, restaurants = [] }: Props) => {
             <ReplayIcon />
           </IconButton>
           <IconButton onClick={swipeDown} className={styles.verybad}>
-            <ErrorIcon width='1.5rem' height='1.5rem' />
+            <SickIcon />
           </IconButton>
           <IconButton onClick={swipeLeft} className={styles.bad}>
             <VeryDissatisfiedIcon />

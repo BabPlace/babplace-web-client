@@ -8,17 +8,20 @@ import styles from '@/styles/SwipeableEdgeDrawer.module.css';
 import styled from '@emotion/styled';
 
 type Props = {
+  isLoading: boolean;
   addressName: string;
-  lat: number;
-  lng: number;
+  location: {
+    lat: number;
+    lng: number;
+  };
 };
 
-const SwipeableEdgeDrawer = ({ addressName, lat, lng }: Props) => {
+const SwipeableEdgeDrawer = ({ isLoading, addressName, location }: Props) => {
   const { value: name, isError: isNameError, handleChange: handleNameChange } = useInput('');
   const { value: count, isError: isCountError, handleChange: handleCountChange } = useInput(7);
   const { drawerRef, open } = useDrawer();
   const { selectedButton, radius, guideMessage, onClickButton } = useSelectedButton();
-  const { isLoaded, onClick } = useCreateTeam(name, count, lat, lng, radius);
+  const { isLoaded, onClick } = useCreateTeam(name, count, location.lat, location.lng, radius);
 
   return (
     <StyledDrawer className={styles.container} ref={drawerRef} isOpen={open}>
@@ -72,7 +75,7 @@ const SwipeableEdgeDrawer = ({ addressName, lat, lng }: Props) => {
         <ProgressButton
           isLoaded={isLoaded}
           onClick={onClick}
-          disabled={name === '' || isCountError.state || isNameError.state}
+          disabled={isLoading || name === '' || isCountError.state || isNameError.state}
           {...doneButtonStyle}
         >
           <TypoNotoSans text='완료' variant='button' textAlign='center' />
@@ -86,8 +89,6 @@ export default SwipeableEdgeDrawer;
 
 const StyledDrawer = styled.div<{ isOpen: boolean }>`
   height: ${(props) => (props.isOpen ? 'var(--drawer-maximun-height)' : 'var(--drawer-default-height)')};
-  /* z-index: ${(props) => (props.isOpen ? 4000 : 3000)}; */
-  /* z-index: 1; */
 `;
 
 const liTitleOptions = {

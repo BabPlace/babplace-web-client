@@ -55,5 +55,5 @@ export default function useMainMap() {
     );
   }, []);
 
-  return { loading: loading ? loading : !isLoading, latitude, longitude, addressName, onCenterChanged };
+  return { loading: loading ? loading : !isLoading, location: { lat: latitude, lng: longitude }, addressName, onCenterChanged };
 }
