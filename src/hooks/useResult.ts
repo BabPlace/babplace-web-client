@@ -38,9 +38,5 @@ export default function useResult(restaurants: Restaurant[], isValidUser: boolea
     }
   }, [frontIndex, restaurants]);
 
-  useEffect(() => {
-    console.log(result);
-  }, [result]);
-
   return { result, isLoading, addResult };
 }
