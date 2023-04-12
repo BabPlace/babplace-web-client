@@ -1,11 +1,11 @@
 import React from 'react';
-import { useGuide } from '@/hooks';
-import TypoNotoSans from './TypoNotoSans';
 import cn from 'classnames';
-import { Button, IconButton, Backdrop } from '@mui/material';
-import { FlexColumn } from '@/layouts';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
+import { Button, Backdrop } from '@mui/material';
+import { useGuide } from '@/hooks';
+import TypoNotoSans from './TypoNotoSans';
+import { FlexColumn } from '@/layouts';
 
 import styled from '@emotion/styled';
 import styles from '@/styles/Guide.module.css';
@@ -18,10 +18,11 @@ type Props = {
 };
 
 const Guide = ({ page = 'main' }: Props) => {
-  SwiperCore.use([Navigation, Pagination]);
   const { isShow, hide, doNotShowAgain } = useGuide(page);
+  SwiperCore.use([Navigation, Pagination]);
   return (
-    <Backdrop open={isShow} sx={{ zIndex: 'var(--guide-show-z-index)' }}>
+    <>
+      <Backdrop open={isShow} onClick={hide} sx={{ zIndex: 'var(--guide-show-z-index)' }} />
       <Container isShow={isShow} className={cn(styles.container)}>
         <FlexColumn justifyContent='space-between' alignItems='center' height='100%'>
           <GuideHeader />
@@ -29,7 +30,7 @@ const Guide = ({ page = 'main' }: Props) => {
           <GuideFooter doNotShowAgain={doNotShowAgain} />
         </FlexColumn>
       </Container>
-    </Backdrop>
+    </>
   );
 };
 
@@ -86,9 +87,9 @@ const Container = styled.div<{ isShow: boolean }>`
 
 const SwiperSlideItem = styled.div`
   padding: 40px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  height: 100%;
 `;

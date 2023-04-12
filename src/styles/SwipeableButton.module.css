@@ -46,13 +46,14 @@
   z-index: 4000;
 
   animation: scaleUp var(--animation-half-speed) forwards ease-in-out;
+}
+
+.true > div {
   color: transparent;
 }
 
 @keyframes scaleUp {
   0% {
-    color: transparent;
-
     width: var(--swipeable-button-default-height);
     height: var(--swipeable-button-default-height);
     border-radius: 100px;
