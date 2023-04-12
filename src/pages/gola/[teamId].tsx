@@ -1,9 +1,7 @@
 import { GetServerSideProps } from 'next';
-import Gola from './Gola';
-import SetUser from './SetUser';
 import { getRestaurant } from '@/controller';
-import type { Restaurant } from '../../interfaces';
-import ErrorBoundary from '@/components/ErrorBoundary';
+import { ErrorBoundary, Gola, SetUser } from '@/components';
+import type { Restaurant } from '@/interfaces';
 
 type Props = {
   userId: number;

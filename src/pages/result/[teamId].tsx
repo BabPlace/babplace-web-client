@@ -1,13 +1,11 @@
 import { GetServerSideProps } from 'next';
 import { RatioBarChart } from '@teamapdan/weirdchart';
 import { Button, Snackbar } from '@mui/material';
-import { Layout, Header, ErrorBoundary } from '@/components';
+import { Layout, Header, ErrorBoundary, ResultCard, ResultDetail } from '@/components';
 import { sliceByOffset, makeDataset } from '@/utils';
 import { TypoNotoSans } from '@/layouts';
 import { useAlert, useCopy } from '@/hooks';
 import { getResult, getTeamInfo } from '@/controller';
-import ResultCard from './ResultCard';
-import ResultDetail from './ResultDetail';
 import type { ResultResponse, TeamInfoResponse } from '@/interfaces';
 import styles from '@/styles/Result.module.css';
 

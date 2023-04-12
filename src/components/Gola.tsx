@@ -91,7 +91,7 @@ const Gola = ({ isValidUser, restaurants = [] }: Props) => {
 
 export default Gola;
 
-const NoSSRTinderCard = dynamic(() => import('../../components/TinderCardWrapper'), {
+const NoSSRTinderCard = dynamic(() => import('./TinderCardWrapper'), {
   ssr: false,
 });
 const ForwardRefNoSSRTinderCard = React.forwardRef<API, any>((props, ref) => <NoSSRTinderCard innerRef={ref} {...props} />);

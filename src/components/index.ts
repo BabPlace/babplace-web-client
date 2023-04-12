@@ -8,3 +8,7 @@ export { default as SwipeableButton } from './SwipeableButton';
 export { default as LoadableMap } from './LoadableMap';
 export { default as Guide } from './Guide';
 export { default as ErrorBoundary } from './ErrorBoundary';
+export { default as Gola } from './Gola';
+export { default as SetUser } from './SetUser';
+export { default as ResultCard } from './ResultCard';
+export { default as ResultDetail } from './ResultDetail';
