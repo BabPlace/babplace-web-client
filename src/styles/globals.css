@@ -233,7 +233,7 @@ a {
 
 @media screen and (min-height: 640px) {
   :root {
-    --bottom-start-position-after: calc((100vh - var(--guide-max-height)) / 2);
+    --bottom-start-position-after: calc((100svh - var(--guide-max-height)) / 2);
   }
 }
 
