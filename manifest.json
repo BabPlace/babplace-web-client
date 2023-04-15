@@ -3,8 +3,8 @@
   "short_name": "골라밥",
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#fff",
-  "theme_color": "#47B8E0",
+  "background_color": "#ffffff",
+  "theme_color": "#47b8e0",
   "icons": [
     {
       "src": "/144.png",
