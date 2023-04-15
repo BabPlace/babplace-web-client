@@ -1,17 +1,17 @@
-import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { TypoNotoSans } from '@/layouts';
 import { ColorModeContext } from '@/pages/_app';
+import useQuery from './useQuery';
 
 export default function useSwipeableButton() {
-  const router = useRouter();
   const colorMode = useContext(ColorModeContext);
-  const isShow = router.query.isShow as string;
+  const { isShow, isCustom, setQuery } = useQuery();
+
   const buttons = [
     {
       children: <TypoNotoSans text='❓' variant='caption' fontSize='0.85rem' textAlign='center' />,
       onClick: showGuide,
-      className: isShow,
+      className: isShow.toString(),
     },
     {
       children: (
@@ -25,6 +25,10 @@ export default function useSwipeableButton() {
       onClick: colorMode.toggleColorMode,
     },
     {
+      children: <TypoNotoSans text='🧩 직접 추가하기' variant='caption' fontSize='0.75rem' textAlign='center' />,
+      onClick: setMode,
+    },
+    {
       children: <TypoNotoSans text='✨ 코드 기여하기' variant='caption' fontSize='0.75rem' textAlign='center' />,
       onClick: showGithub,
     },
@@ -34,8 +38,16 @@ export default function useSwipeableButton() {
     },
   ];
 
+  function setMode() {
+    if (isCustom) {
+      setQuery('mode');
+    } else {
+      setQuery('mode', 'custom');
+    }
+  }
+
   function showGuide() {
-    router.push({ pathname: router.asPath.split('?')[0], query: { ...router.query, isShow: 'true' } });
+    setQuery('isShow', 'true');
   }
 
   function openApp() {
@@ -46,5 +58,5 @@ export default function useSwipeableButton() {
     window.open('https://github.com/Gola-bab/web');
   }
 
-  return { buttons, isShow };
+  return { buttons, isShow, isCustom };
 }

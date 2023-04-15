@@ -1,17 +1,16 @@
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import useQuery from './useQuery';
 
 export default function useGuide(page: string) {
-  const router = useRouter();
-  const isShow = router.query.isShow as string;
+  const { isShow, setQuery } = useQuery();
   const [isLoaded, setIsLoaded] = useState(false);
 
   function show() {
-    router.push({ pathname: router.asPath.split('?')[0], query: { ...router.query, isShow: 'true' } });
+    setQuery('isShow', 'true');
   }
 
   function hide() {
-    router.push({ pathname: router.asPath.split('?')[0], query: { ...router.query, isShow: 'false' } });
+    setQuery('isShow', 'false');
   }
 
   function doNotShowAgain() {
@@ -31,5 +30,5 @@ export default function useGuide(page: string) {
     setIsLoaded(true);
   }, []);
 
-  return { isShow: isLoaded ? isShow === 'true' : isLoaded, show, hide, doNotShowAgain };
+  return { isShow: isLoaded ? isShow : isLoaded, show, hide, doNotShowAgain };
 }

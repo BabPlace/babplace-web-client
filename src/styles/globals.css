@@ -62,7 +62,7 @@
 
   --drawer-list-height: 3rem;
   --drawer-button-height: 2.5rem;
-  --drwaer-list-button-gap: 1.875rem;
+  --drawer-list-button-gap: 1.875rem;
 
   --drawer-maximun-height: 90%;
 
@@ -72,7 +72,7 @@
   --drawer-inner-padding-lr: 2.5rem;
 
   --drawer-content-height: calc(
-    var(--drawer-list-item-count) * var(--drawer-list-height) + var(--drawer-button-height) + var(--drwaer-list-button-gap)
+    var(--drawer-list-item-count) * var(--drawer-list-height) + var(--drawer-button-height) + var(--drawer-list-button-gap)
   );
   --drawer-default-height: calc(var(--drawer-content-height) + var(--drawer-inner-padding-tb));
 

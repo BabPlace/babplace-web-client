@@ -1,6 +1,6 @@
 import React from 'react';
-import { useInput, useDrawer, useSelectedButton, useCreateTeam } from '@/hooks';
-import { ProgressButton, TypoNotoSans } from '@/layouts';
+import { useInput, useDrawer, useSelectedButton, useCreateTeam, useQuery } from '@/hooks';
+import { FlexColumn, FlexRow, ProgressButton, TypoNotoSans } from '@/layouts';
 import ButtonGroup from './ButtonGroup';
 import Input from './Input';
 import { BusIcon, BikeIcon, FootPrintIcon } from '@/icons';
@@ -20,15 +20,16 @@ const SwipeableEdgeDrawer = ({ isLoading, addressName, location }: Props) => {
   const { value: name, isError: isNameError, handleChange: handleNameChange } = useInput('');
   const { value: count, isError: isCountError, handleChange: handleCountChange } = useInput(7);
   const { drawerRef, open } = useDrawer();
+  const { isCustom } = useQuery();
   const { selectedButton, radius, guideMessage, onClickButton } = useSelectedButton();
   const { isLoaded, onClick } = useCreateTeam(name, count, location.lat, location.lng, radius);
 
   return (
-    <StyledDrawer className={styles.container} ref={drawerRef} isOpen={open}>
+    <StyledDrawer className={styles.container} ref={drawerRef} isOpen={open} isCustom={isCustom}>
       <div className={styles.puller} />
-      <div className={styles.content}>
-        <ul className={styles.list}>
-          <li className={styles.list_item}>
+      <FlexColumn className={styles.content} justifyContent='space-between'>
+        <StyledUl>
+          <DefaultListItem className={styles.list_item} isCustom={isCustom} type='default'>
             <TypoNotoSans text='팀 이름' {...liTitleOptions} />
             <Input
               value={name}
@@ -40,12 +41,12 @@ const SwipeableEdgeDrawer = ({ isLoading, addressName, location }: Props) => {
               border={false}
               onChange={handleNameChange}
             />
-          </li>
-          <li className={styles.list_item}>
+          </DefaultListItem>
+          <DefaultListItem className={styles.list_item} isCustom={isCustom} type='custom'>
             <TypoNotoSans text='기준 위치' {...liTitleOptions} />
             <TypoNotoSans text={addressName} className={styles.list_item__content} fontSize='0.8rem' textAlign='center' />
-          </li>
-          <li className={styles.list_item}>
+          </DefaultListItem>
+          <DefaultListItem className={styles.list_item} isCustom={isCustom} type='custom'>
             <TypoNotoSans text='음식점 개수' {...liTitleOptions} />
             <Input
               value={count}
@@ -57,8 +58,8 @@ const SwipeableEdgeDrawer = ({ isLoading, addressName, location }: Props) => {
               border={false}
               onChange={handleCountChange}
             />
-          </li>
-          <li className={styles.list_item}>
+          </DefaultListItem>
+          <DefaultListItem className={styles.list_item} isCustom={isCustom} type='custom' noBorder={true}>
             <TypoNotoSans text='제한 반경' {...liTitleOptions} />
             <div className={styles.list_item__content}>
               <ButtonGroup selectedButton={selectedButton} onClickButton={onClickButton}>
@@ -70,8 +71,15 @@ const SwipeableEdgeDrawer = ({ isLoading, addressName, location }: Props) => {
                 {guideMessage}
               </TypoNotoSans>
             </div>
-          </li>
-        </ul>
+          </DefaultListItem>
+          <EmptyListItem className={styles.list_item} isCustom={isCustom} />
+          <CustomListItem className={styles.list_item} isCustom={isCustom} type='custom'>
+            <FlexRow className={styles.custon__buttons} alignItems='center' gap='10px'>
+              <button className={styles.custon__buttons_add}>+</button>
+              <div>res</div>
+            </FlexRow>
+          </CustomListItem>
+        </StyledUl>
         <ProgressButton
           isLoaded={isLoaded}
           onClick={onClick}
@@ -80,15 +88,34 @@ const SwipeableEdgeDrawer = ({ isLoading, addressName, location }: Props) => {
         >
           <TypoNotoSans text='완료' variant='button' textAlign='center' />
         </ProgressButton>
-      </div>
+      </FlexColumn>
     </StyledDrawer>
   );
 };
 
 export default SwipeableEdgeDrawer;
 
-const StyledDrawer = styled.div<{ isOpen: boolean }>`
-  height: ${(props) => (props.isOpen ? 'var(--drawer-maximun-height)' : 'var(--drawer-default-height)')};
+const StyledDrawer = styled.div<{ isOpen: boolean; isCustom: boolean }>`
+  /* height: ${({ isOpen, isCustom }) => (isCustom ? '' : isOpen ? 'var(--drawer-maximun-height)' : 'var(--drawer-default-height)')}; */
+`;
+
+const StyledUl = styled.ul`
+  list-style: none;
+`;
+
+const DefaultListItem = styled.li<{ isCustom: boolean; type: string; noBorder?: boolean }>`
+  opacity: ${({ isCustom, type }) => (isCustom && type === 'custom' ? 0 : 1)};
+  height: ${({ isCustom, type }) => (isCustom && type === 'custom' ? 0 : `var(--drawer-list-height)`)};
+  border-bottom: ${({ isCustom, type, noBorder }) => ((isCustom && type === 'custom') || noBorder ? 0 : '1px solid #eee')};
+`;
+const CustomListItem = styled.li<{ isCustom: boolean; type: string }>`
+  opacity: ${({ isCustom, type }) => (isCustom && type === 'custom' ? 1 : 0)};
+  height: ${({ isCustom, type }) => (isCustom && type === 'custom' ? `calc(var(--drawer-list-height) * 2)` : 0)};
+  border-bottom: 0;
+`;
+const EmptyListItem = styled.li<{ isCustom: boolean }>`
+  height: ${({ isCustom }) => (isCustom ? 0 : `var(--drawer-list-button-gap)`)};
+  border-bottom: 0;
 `;
 
 const liTitleOptions = {

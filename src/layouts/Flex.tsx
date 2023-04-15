@@ -6,7 +6,7 @@ type Props = {
   direction?: 'row' | 'column';
   width?: string;
   height?: string;
-  gap?: string;
+  gap?: string | number;
   alignItems?: string;
   justifyContent?: string;
 } & React.HTMLAttributes<HTMLDivElement>;
