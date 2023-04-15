@@ -1,0 +1,20 @@
+{
+  "name": "골라밥",
+  "short_name": "골라밥",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fff",
+  "theme_color": "#47B8E0",
+  "icons": [
+    {
+      "src": "/144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
