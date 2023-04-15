@@ -62,7 +62,7 @@
   }
   100% {
     width: calc(100vw - var(--guide-default-margin) * 2);
-    height: calc(100svh - var(--guide-default-margin) * 2);
+    height: calc(var(--max-height) - var(--guide-default-margin) * 2);
 
     box-shadow: var(--box-shadow-button);
     border-radius: var(--border-radius);
@@ -76,7 +76,7 @@
   0% {
     position: fixed;
     width: calc(100vw - var(--guide-default-margin) * 2);
-    height: calc(100svh - var(--guide-default-margin) * 2);
+    height: calc(var(--max-height) - var(--guide-default-margin) * 2);
 
     left: var(--left-start-position-after);
     bottom: var(--bottom-start-position-after);

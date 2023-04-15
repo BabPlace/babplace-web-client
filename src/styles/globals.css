@@ -2,6 +2,7 @@
 /*  1rem = 16px */
 :root {
   --max-width: 700px;
+  --max-height: 100svh;
 
   --header-default-height: 60px;
   --button-default-height: 40px;
@@ -233,7 +234,7 @@ a {
 
 @media screen and (min-height: 640px) {
   :root {
-    --bottom-start-position-after: calc((100svh - var(--guide-max-height)) / 2);
+    --bottom-start-position-after: calc((var(--max-height) - var(--guide-max-height)) / 2);
   }
 }
 

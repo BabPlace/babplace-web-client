@@ -1,5 +1,5 @@
 .main {
-  height: 100svh;
+  height: var(--max-height);
   overflow: hidden;
   width: 100%;
   background-color: rgb(var(--primary-background-rgb));
