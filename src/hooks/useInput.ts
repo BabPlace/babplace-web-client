@@ -1,8 +1,9 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef } from 'react';
 
 type InputValue = string | number;
 
 export default function useInput<T extends InputValue>(initialValue: T, max: number = 15) {
+  const inputRef = useRef(null);
   const [isError, setIsError] = useState({ state: false, message: '' });
   const [value, setValue] = useState<T>(initialValue);
 
@@ -48,5 +49,5 @@ export default function useInput<T extends InputValue>(initialValue: T, max: num
     setValue(initialValue);
   };
 
-  return { value, isError, handleChange, reset, resetIsError, valitate };
+  return { value, isError, inputRef, handleChange, reset, resetIsError, valitate };
 }

@@ -20,7 +20,7 @@
   --highlight-background-rgba: 71, 184, 224, 0.6;
   --highlight-foreground-rgba: 71, 184, 224, 0.9;
 
-  --secondary-background-rgb: 245, 245, 245;
+  --secondary-background-rgb: 235, 235, 235;
   --secondary-foreground-rgba: 0, 0, 0, 0.6;
 
   --caption-foreground-rgba: 0, 0, 0, 0.4;
@@ -28,7 +28,7 @@
 
   --box-shadow-1: 1px 1px 8px 2px rgba(var(--primary-foreground-rgba), 0.08);
   --box-shadow-card: 2px 2px 8px 1px rgba(var(--primary-foreground-rgba), 0.1);
-  --box-shadow-button: 2px 2px 4px 1px rgba(var(--primary-background-rgb), 0.3);
+  --box-shadow-button: 1px 1px 8px 0px rgba(var(--primary-foreground-rgba), 0.05);
 
   --card-default-height: calc((100vh - var(--header-default-height)) * 0.7);
 
@@ -92,6 +92,11 @@
   --left-start-position: calc(50vw - 50% + 12px);
   --left-start-position-after: var(--guide-default-margin);
   --bottom-start-position-after: var(--guide-default-margin);
+
+  --search-box-height: 45px;
+  --search-box-width: 90vw;
+  --search-box-margin-tb: 20px;
+  --search-box-margin-lr: calc((100vw - var(--search-box-width)) / 2);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -221,8 +226,8 @@ a {
 
 @media screen and (min-width: 700px) {
   :root {
-    --left-start-position: calc((100vw - 700px) / 2 + 12px);
-    --gola-button-default-width: calc((700px - var(--gola-padding-lr)) / (var(--gola-button-count) * 2 - 3));
+    --left-start-position: calc((100vw - var(--max-width)) / 2 + 12px);
+    --gola-button-default-width: calc((var(--max-width) - var(--gola-padding-lr)) / (var(--gola-button-count) * 2 - 3));
   }
 }
 

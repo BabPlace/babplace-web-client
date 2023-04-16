@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
 import { TypoNotoSans } from '@/layouts';
 
@@ -8,17 +8,34 @@ type Props = {
   error?: boolean;
   errorText?: string;
   errorSize?: 'small' | 'large';
+  textAlign?: string;
   onReturn?: () => void;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
-const Input = ({ className, border = true, error = false, errorText = '', errorSize = 'large', onReturn, ...props }: Props) => {
+const Input = ({
+  className,
+  border = true,
+  error = false,
+  errorText = '',
+  errorSize = 'large',
+  textAlign = 'center',
+  onReturn,
+  ...props
+}: Props) => {
+  const inputRef = useRef<HTMLInputElement>(null);
   function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === 'Enter' && onReturn) onReturn();
   }
 
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
+
   return (
-    <Container border={border} error={error} errorSize={errorSize} className={className}>
-      <input onKeyDown={onKeyDown} {...props} />
+    <Container border={border} error={error} errorSize={errorSize} className={className} textAlign={textAlign}>
+      <input ref={inputRef} onKeyDown={onKeyDown} {...props} className='input' />
       <TypoNotoSans
         className={'error-text ' + (error ? 'show' : 'hide')}
         textAlign='center'
@@ -33,10 +50,11 @@ const Input = ({ className, border = true, error = false, errorText = '', errorS
 
 export default Input;
 
-const Container = styled.div<{ border: boolean; error: boolean; errorSize: 'small' | 'large' }>`
+const Container = styled.div<{ border: boolean; error: boolean; errorSize: 'small' | 'large'; textAlign: string }>`
   width: 100%;
-  input {
+  .input {
     width: 100%;
+    height: 100%;
     border: none;
     border-bottom: ${(props) =>
       props.border
@@ -46,9 +64,13 @@ const Container = styled.div<{ border: boolean; error: boolean; errorSize: 'smal
         : 'none'};
 
     color: rgba(var(--primary-foreground-rgba));
-    text-align: center;
+    text-align: ${({ textAlign }) => textAlign};
     background: none;
     font-size: 1rem;
+  }
+
+  .input:focus-visible {
+    outline: none;
   }
 
   .error-text {

@@ -12,3 +12,4 @@ export { default as Gola } from './Gola';
 export { default as SetUser } from './SetUser';
 export { default as ResultCard } from './ResultCard';
 export { default as ResultDetail } from './ResultDetail';
+export { default as SearchBox } from './SearchBox';
