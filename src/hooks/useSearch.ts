@@ -2,23 +2,28 @@ import { useState, useEffect } from 'react';
 
 export default function useSearch(value: string, lat: number, lng: number) {
   const [searchResult, setSearchResult] = useState<kakao.maps.services.PlacesSearchResult>([]);
+  const [ps, setPs] = useState<kakao.maps.services.Places>();
 
   useEffect(() => {
-    if (value.length === 0) {
+    setPs(new kakao.maps.services.Places());
+  }, []);
+
+  useEffect(() => {
+    if (!ps) return;
+    if (value.length <= 1) {
       setSearchResult([]);
       return;
     }
-    const ps = new kakao.maps.services.Places();
-    const location = new kakao.maps.LatLng(lat, lng);
     ps.keywordSearch(
       value,
       (data, status, _pagination) => {
         if (status === kakao.maps.services.Status.OK) {
+          console.log(data);
           setSearchResult(data);
         }
       },
       {
-        location,
+        location: new kakao.maps.LatLng(lat, lng),
       }
     );
   }, [value]);

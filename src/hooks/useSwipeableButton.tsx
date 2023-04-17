@@ -25,7 +25,9 @@ export default function useSwipeableButton() {
       onClick: colorMode.toggleColorMode,
     },
     {
-      children: <TypoNotoSans text='🧩 직접 추가하기' variant='caption' fontSize='0.75rem' textAlign='center' />,
+      children: (
+        <TypoNotoSans text={isDefault ? '🧩 직접 추가하기' : '💣 랜덤 선택하기'} variant='caption' fontSize='0.75rem' textAlign='center' />
+      ),
       onClick: setMode,
     },
     {
@@ -39,7 +41,7 @@ export default function useSwipeableButton() {
   ];
 
   function setMode() {
-    if (isCustom) {
+    if (!isDefault) {
       setQuery('mode');
     } else {
       setQuery('mode', 'custom');
