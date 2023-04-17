@@ -13,6 +13,7 @@ export default function Document() {
         <link rel='apple-touch-icon' href='/icons/icon-192x192.png'></link>
         <meta name='msapplication-TileColor' content='#47b8e0'></meta>
         {/* splash screen */}
+        <meta name='apple-mobile-web-app-capable' content='yes'></meta>
         <link
           rel='apple-touch-startup-image'
           media='screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)'
