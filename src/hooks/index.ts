@@ -14,3 +14,4 @@ export { default as useGuide } from './useGuide';
 export { default as useTheme } from './useTheme';
 export { default as useQuery } from './useQuery';
 export { default as useSearch } from './useSearch';
+export { default as useCustom } from './useCustom';

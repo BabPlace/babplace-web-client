@@ -13,3 +13,5 @@ export { default as SetUser } from './SetUser';
 export { default as ResultCard } from './ResultCard';
 export { default as ResultDetail } from './ResultDetail';
 export { default as Search } from './Search';
+export { default as CategoryIcon } from './CategoryIcon';
+export { default as Selects } from './Selects';

@@ -72,13 +72,13 @@ const SwipeableEdgeDrawer = ({ isLoading, addressName, location }: Props) => {
               </TypoNotoSans>
             </div>
           </DefaultListItem>
-          <EmptyListItem className={styles.list_item} isCustom={!isDefault} />
-          <CustomListItem className={styles.list_item} isCustom={!isDefault} type='custom'>
+          <EmptyListItem className={styles.list_item} isCustom={false} />
+          {/* <CustomListItem className={styles.list_item} isCustom={!isDefault} type='custom'>
             <FlexRow className={styles.custon__buttons} alignItems='center' gap='10px'>
               <button className={styles.custon__buttons_add}>+</button>
               <div>res</div>
             </FlexRow>
-          </CustomListItem>
+          </CustomListItem> */}
         </StyledUl>
         <ProgressButton
           isLoaded={isLoaded}
@@ -108,11 +108,11 @@ const DefaultListItem = styled.li<{ isCustom: boolean; type: string; noBorder?: 
   height: ${({ isCustom, type }) => (isCustom && type === 'custom' ? 0 : `var(--drawer-list-height)`)};
   border-bottom: ${({ isCustom, type, noBorder }) => ((isCustom && type === 'custom') || noBorder ? 0 : '1px solid #eee')};
 `;
-const CustomListItem = styled.li<{ isCustom: boolean; type: string }>`
-  opacity: ${({ isCustom, type }) => (isCustom && type === 'custom' ? 1 : 0)};
-  height: ${({ isCustom, type }) => (isCustom && type === 'custom' ? `calc(var(--drawer-list-height) * 2)` : 0)};
-  border-bottom: 0;
-`;
+// const CustomListItem = styled.li<{ isCustom: boolean; type: string }>`
+//   opacity: ${({ isCustom, type }) => (isCustom && type === 'custom' ? 1 : 0)};
+//   height: ${({ isCustom, type }) => (isCustom && type === 'custom' ? `calc(var(--drawer-list-height) * 2)` : 0)};
+//   border-bottom: 0;
+// `;
 const EmptyListItem = styled.li<{ isCustom: boolean }>`
   height: ${({ isCustom }) => (isCustom ? 0 : `var(--drawer-list-button-gap)`)};
   border-bottom: 0;

@@ -6,13 +6,19 @@ export default function useQuery() {
 
   const isDefault = useMemo(() => {
     const mode = router.query.mode as string;
-    if (mode === 'custom' || mode === 'search') return false;
+    if (mode === 'custom' || mode === 'search' || mode === 'selects') return false;
     return true;
+  }, [router.query]);
+
+  const isSelects = useMemo(() => {
+    const mode = router.query.mode as string;
+    if (mode === 'selects') return true;
+    return false;
   }, [router.query]);
 
   const isCustom = useMemo(() => {
     const mode = router.query.mode as string;
-    if (mode === 'custom') return true;
+    if (mode === 'custom' || mode === 'selects') return true;
     return false;
   }, [router.query]);
 
@@ -40,5 +46,5 @@ export default function useQuery() {
     });
   }
 
-  return { isDefault, isCustom, isShow, isSearch, setQuery };
+  return { isDefault, isCustom, isShow, isSearch, isSelects, setQuery };
 }

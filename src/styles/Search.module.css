@@ -1,9 +1,8 @@
+/* Search Result */
 .search_result {
   position: fixed;
   width: 100vw;
-  height: calc(
-    var(--max-height) - var(--drawer-default-height) + var(--drawer-list-height) + var(--drawer-list-button-gap) + var(--border-radius)
-  );
+  height: calc(var(--max-height) - var(--drawer-default-height) + var(--drawer-list-height) * 3 + var(--border-radius));
   max-width: var(--max-width);
   top: 0;
   z-index: 0;
@@ -27,14 +26,26 @@
 }
 
 .search_result__li {
-  padding: 5px 0;
+  padding: 10px 0;
 }
+.search_result__li::after {
+  content: '';
+  width: calc(100% - 39px + 6px);
+  right: -6px;
+  bottom: -1px;
+  height: 1px;
+  position: absolute;
+
+  background-color: rgb(var(--tertiary-background-rgb));
+}
+
 .search_result__li_btn {
   margin-left: auto;
   width: 24px;
   height: 100%;
 }
 
+/* Search Box */
 .search_box {
   position: fixed;
   top: 0;
@@ -56,5 +67,23 @@
 }
 
 .search_box__input {
+  height: 100%;
+}
+
+/* Select Box */
+.select_box {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  right: 0;
+  bottom: calc(var(--drawer-default-height) - var(--drawer-list-height) * 3 + var(--swipeable-button-default-height));
+  margin-right: var(--select-box-margin-r);
+  margin-bottom: var(--select-box-margin-b);
+  border-radius: 100px;
+  background-color: rgb(var(--gola-bad-rgb));
+}
+
+.select_box > button {
+  width: 100%;
   height: 100%;
 }

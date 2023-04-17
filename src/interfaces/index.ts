@@ -12,6 +12,8 @@ export type API = ExtractGenericFromRefObject<TinderCardProps['ref']>;
 export type SatisfactionResponse = 'good' | 'bad' | 'veryGood' | 'veryBad';
 export type Satisfaction = Uppercase<SatisfactionResponse>;
 
+export type SelectPlace = kakao.maps.services.PlacesSearchResultItem;
+
 export type Direction = 'up' | 'down' | 'left' | 'right';
 export type Restaurant = {
   id: number;

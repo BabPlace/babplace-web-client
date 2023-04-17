@@ -1,14 +1,16 @@
-import { useMainMap, useQuery } from '@/hooks';
-import { Layout, LoadableMap, BabMarker, SwipeableEdgeDrawer, SwipeableButton, Guide, ErrorBoundary, Search } from '@/components';
+import { useMainMap, useQuery, useCustom } from '@/hooks';
+import { Layout, LoadableMap, BabMarker, SwipeableEdgeDrawer, SwipeableButton, Guide, ErrorBoundary, Search, Selects } from '@/components';
 
 export default function Home() {
   const { loading, location, addressName, onCenterChanged } = useMainMap();
+  const { selects, addSelects } = useCustom();
   const { isDefault } = useQuery();
 
   return (
     <ErrorBoundary>
       <Layout title={title} description={description} bodyStyle={{ marginTop: '0px' }}>
         <Guide />
+        <Selects selects={selects} />
         <LoadableMap
           isLoading={loading}
           center={location}
@@ -16,7 +18,7 @@ export default function Home() {
           onCenterChanged={onCenterChanged}
         />
         {!loading && isDefault && <BabMarker />}
-        {!loading && <Search location={location} />}
+        {!loading && <Search location={location} addSelects={addSelects} />}
         <SwipeableButton />
         <SwipeableEdgeDrawer isLoading={loading} addressName={addressName} location={location} />
       </Layout>

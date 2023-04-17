@@ -1,23 +1,27 @@
 import React, { useCallback, useMemo } from 'react';
 import Input from './Input';
+import CategoryIcon from './CategoryIcon';
 import { useInput, useSearch, useQuery } from '@/hooks';
 import { IconButton } from '@mui/material';
-import { AddLocationIcon, MapIcon, SearchIcon, RestaurantIcon } from '@/icons';
+import { AddLocationIcon, MapIcon, SearchIcon, RestaurantIcon, MenuIcon } from '@/icons';
 import { FlexColumn, FlexRow, TypoNotoSans, Visible } from '@/layouts';
-import styles from '@/styles/Search.module.css';
 import { distanceFormat } from '@/utils';
+import type { SelectPlace } from '@/interfaces';
+import styles from '@/styles/Search.module.css';
 
 type SearchBoxProps = { value: string; handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void };
 type SearchResultProps = { value: string; searchResult: kakao.maps.services.PlacesSearchResult; reset: () => void };
 type Props = {
   location: { lat: number; lng: number };
+  addSelects: (newSelect: SelectPlace) => void;
 };
 
-const Search = ({ location }: Props) => {
+const Search = ({ location, addSelects }: Props) => {
   const { value, reset, handleChange } = useInput('');
   const { searchResult } = useSearch(value, location.lat, location.lng);
   return (
     <>
+      <SelectBox />
       <SearchBox value={value} handleChange={handleChange} />
       <SearchResult value={value} searchResult={searchResult} reset={reset} />
     </>
@@ -25,6 +29,21 @@ const Search = ({ location }: Props) => {
 };
 
 export default Search;
+
+const SelectBox = () => {
+  const { isDefault, setQuery } = useQuery();
+  return (
+    <Visible visible={!isDefault} className={styles.select_box}>
+      <IconButton
+        onClick={() => {
+          setQuery('mode', 'selects');
+        }}
+      >
+        <MenuIcon />
+      </IconButton>
+    </Visible>
+  );
+};
 
 const SearchBox = ({ value, handleChange }: SearchBoxProps) => {
   const { isDefault, isCustom, setQuery } = useQuery();
@@ -69,8 +88,7 @@ const SearchResult = ({ value, searchResult, reset }: SearchResultProps) => {
     return source.split(new RegExp(`(${delim})`, 'gi'));
   };
   const isRestaurant = (category: string) => {
-    console.log(category);
-    return category === '음식점';
+    return category === '음식점' || category === '카페';
   };
 
   if (isDefault) reset();
@@ -83,7 +101,7 @@ const SearchResult = ({ value, searchResult, reset }: SearchResultProps) => {
             <li key={item.id} className={styles.search_result__li}>
               <FlexRow alignItems='center' gap='15px'>
                 <FlexColumn alignItems='center'>
-                  <RestaurantIcon />
+                  <CategoryIcon category={item.category_group_name} />
                   <TypoNotoSans
                     text={distanceFormat(parseInt(item.distance))}
                     variant='caption'
@@ -104,7 +122,7 @@ const SearchResult = ({ value, searchResult, reset }: SearchResultProps) => {
                   <TypoNotoSans text={item.road_address_name} variant='caption' color='rgba(var(--secondary-foreground-rgba))' />
                 </FlexColumn>
                 <Visible visible={isRestaurant(item.category_group_name)} className={styles.search_result__li_btn}>
-                  <IconButton>
+                  <IconButton onClick={() => {}}>
                     <AddLocationIcon color='primary' />
                   </IconButton>
                 </Visible>
