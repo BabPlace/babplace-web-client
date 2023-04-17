@@ -4,9 +4,21 @@ import { useMemo } from 'react';
 export default function useQuery() {
   const router = useRouter();
 
+  const isDefault = useMemo(() => {
+    const mode = router.query.mode as string;
+    if (mode === 'custom' || mode === 'search') return false;
+    return true;
+  }, [router.query]);
+
   const isCustom = useMemo(() => {
     const mode = router.query.mode as string;
-    if (mode === 'custom' || mode === 'customSearch') return true;
+    if (mode === 'custom') return true;
+    return false;
+  }, [router.query]);
+
+  const isSearch = useMemo(() => {
+    const mode = router.query.mode as string;
+    if (mode === 'search') return true;
     return false;
   }, [router.query]);
 
@@ -28,5 +40,5 @@ export default function useQuery() {
     });
   }
 
-  return { isCustom, isShow, setQuery };
+  return { isDefault, isCustom, isShow, isSearch, setQuery };
 }

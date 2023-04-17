@@ -23,7 +23,7 @@
   right: 0;
   margin: var(--search-box-margin-tb) auto;
   width: var(--search-box-width);
-  max-width: var(--max-width);
+  max-width: calc(var(--max-width) - var(--search-box-margin-lr));
   height: var(--search-box-height);
 
   display: flex;
@@ -33,6 +33,7 @@
   border: 1px solid rgb(var(--tertiary-background-rgb));
   border-radius: var(--border-radius);
   z-index: 1;
+  background: rgb(var(--secondary-background-rgb));
 }
 
 .search_box__input {

@@ -5,9 +5,9 @@ import styles from '@/styles/SwipeableButton.module.css';
 import styled from '@emotion/styled';
 
 const SwipeableButton = () => {
-  const { buttons, isShow, isCustom } = useSwipeableButton();
+  const { buttons, isShow, isDefault } = useSwipeableButton();
   return (
-    <StyledButton className={cn(styles.container, styles['but' + isShow])} isCustom={isCustom}>
+    <StyledButton className={cn(styles.container, styles['but' + isShow])} isCustom={!isDefault}>
       {buttons.map(({ children, onClick, className }, index) => {
         return (
           <button className={cn(styles.button, className ? styles[`${className}`] : '')} key={`swipablebutton-${index}`} onClick={onClick}>

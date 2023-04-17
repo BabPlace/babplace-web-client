@@ -3,7 +3,7 @@ import { Layout, LoadableMap, BabMarker, SwipeableEdgeDrawer, SwipeableButton, G
 
 export default function Home() {
   const { loading, location, addressName, onCenterChanged } = useMainMap();
-  const { isCustom } = useQuery();
+  const { isDefault } = useQuery();
 
   return (
     <ErrorBoundary>
@@ -12,11 +12,11 @@ export default function Home() {
         <LoadableMap
           isLoading={loading}
           center={location}
-          style={{ ...mapStyle, height: isCustom ? '100svh' : mapDefaultHeight }}
+          style={{ ...mapStyle, height: !isDefault ? '100svh' : mapDefaultHeight }}
           onCenterChanged={onCenterChanged}
         />
-        {!loading && !isCustom && <BabMarker />}
-        {!loading && isCustom && <Search location={location} />}
+        {!loading && isDefault && <BabMarker />}
+        {!loading && <Search location={location} />}
         <SwipeableButton />
         <SwipeableEdgeDrawer isLoading={loading} addressName={addressName} location={location} />
       </Layout>

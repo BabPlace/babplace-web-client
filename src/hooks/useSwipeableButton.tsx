@@ -5,7 +5,7 @@ import useQuery from './useQuery';
 
 export default function useSwipeableButton() {
   const colorMode = useContext(ColorModeContext);
-  const { isShow, isCustom, setQuery } = useQuery();
+  const { isShow, isDefault, isCustom, setQuery } = useQuery();
 
   const buttons = [
     {
@@ -58,5 +58,5 @@ export default function useSwipeableButton() {
     window.open('https://github.com/Gola-bab/web');
   }
 
-  return { buttons, isShow, isCustom };
+  return { buttons, isShow, isCustom, isDefault };
 }
