@@ -23,6 +23,8 @@
   --secondary-background-rgb: 235, 235, 235;
   --secondary-foreground-rgba: 0, 0, 0, 0.6;
 
+  --tertiary-background-rgb: 200, 200, 200;
+
   --caption-foreground-rgba: 0, 0, 0, 0.4;
   --error-foreground-rgba: 255, 95, 46, 0.8;
 
@@ -108,6 +110,8 @@
     --secondary-background-rgb: 34, 34, 34;
     --secondary-foreground-rgba: 255, 255, 255, 0.7;
 
+    --tertiary-background-rgb: 60, 60, 60;
+
     --caption-foreground-rgba: 255, 255, 255, 0.6;
 
     --gola-good-rgb: 140, 215, 144;
@@ -125,8 +129,10 @@
   --primary-foreground-rgba: 245, 245, 245;
   --highlight-background-rgba: 71, 184, 224, 0.8;
 
-  --secondary-background-rgb: 34, 34, 34;
+  --secondary-background-rgb: 20, 20, 20;
   --secondary-foreground-rgba: 255, 255, 255, 0.7;
+
+  --tertiary-background-rgb: 50, 50, 50;
 
   --caption-foreground-rgba: 255, 255, 255, 0.6;
 
@@ -148,6 +154,8 @@
 
   --secondary-background-rgb: 245, 245, 245;
   --secondary-foreground-rgba: 0, 0, 0, 0.6;
+
+  --tertiary-background-rgb: 200, 200, 200;
 
   --caption-foreground-rgba: 0, 0, 0, 0.4;
   --error-foreground-rgba: 255, 95, 46, 0.8;
@@ -174,11 +182,14 @@
   margin: 0;
   font-family: 'Noto Sans KR', sans-serif;
   transition: background, color, border-color 0.5s ease-in-out;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 *::-webkit-scrollbar {
   display: none;
 }
+
 html {
   position: fixed;
   width: 100%;
