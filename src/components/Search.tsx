@@ -11,8 +11,8 @@ type Props = {
   location: { lat: number; lng: number };
 };
 
-const SearchBox = ({ location }: Props) => {
-  const { value, handleChange, inputRef } = useInput('');
+const Search = ({ location }: Props) => {
+  const { value, handleChange } = useInput('');
   const [searchResult, setSearchResult] = useState<kakao.maps.services.PlacesSearchResult>([]);
 
   useEffect(() => {
@@ -61,4 +61,4 @@ const SearchBox = ({ location }: Props) => {
   );
 };
 
-export default SearchBox;
+export default Search;

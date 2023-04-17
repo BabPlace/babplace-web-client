@@ -1,5 +1,5 @@
 import { useMainMap, useQuery } from '@/hooks';
-import { Layout, LoadableMap, BabMarker, SwipeableEdgeDrawer, SwipeableButton, Guide, ErrorBoundary, SearchBox } from '@/components';
+import { Layout, LoadableMap, BabMarker, SwipeableEdgeDrawer, SwipeableButton, Guide, ErrorBoundary, Search } from '@/components';
 
 export default function Home() {
   const { loading, location, addressName, onCenterChanged } = useMainMap();
@@ -16,7 +16,7 @@ export default function Home() {
           onCenterChanged={onCenterChanged}
         />
         {!loading && !isCustom && <BabMarker />}
-        {!loading && isCustom && <SearchBox location={location} />}
+        {!loading && isCustom && <Search location={location} />}
         <SwipeableButton />
         <SwipeableEdgeDrawer isLoading={loading} addressName={addressName} location={location} />
       </Layout>
