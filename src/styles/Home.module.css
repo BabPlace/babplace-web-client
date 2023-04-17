@@ -14,5 +14,4 @@
 
   height: 100%;
   height: calc(100% - var(--header-default-height));
-  overflow-y: scroll;
 }
