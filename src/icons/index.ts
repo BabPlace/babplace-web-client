@@ -14,7 +14,7 @@ export { default as PlaceIcon } from '@mui/icons-material/PlaceOutlined';
 export { default as RenameIcon } from '@mui/icons-material/DriveFileRenameOutlineOutlined';
 export { default as RestaurantIcon } from '@mui/icons-material/RestaurantRounded';
 export { default as RouteIcon } from '@mui/icons-material/RouteRounded';
-
+export { default as MapIcon } from '@mui/icons-material/MapOutlined';
 export { default as FootPrintIcon } from './FootPrintIcon';
 export { default as BikeIcon } from './BikeIcon';
 export { default as BusIcon } from './BusIcon';
