@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from 'react';
 import Input from './Input';
 import { useInput, useSearch, useQuery } from '@/hooks';
 import { IconButton } from '@mui/material';
-import { HomeIcon, MapIcon, SearchIcon } from '@/icons';
+import { AddLocationIcon, MapIcon, SearchIcon, RestaurantIcon } from '@/icons';
 import { FlexColumn, FlexRow, TypoNotoSans, Visible } from '@/layouts';
 import styles from '@/styles/Search.module.css';
 import { distanceFormat } from '@/utils';
@@ -68,6 +68,10 @@ const SearchResult = ({ value, searchResult, reset }: SearchResultProps) => {
     }
     return source.split(new RegExp(`(${delim})`, 'gi'));
   };
+  const isRestaurant = (category: string) => {
+    console.log(category);
+    return category === '음식점';
+  };
 
   if (isDefault) reset();
 
@@ -79,7 +83,7 @@ const SearchResult = ({ value, searchResult, reset }: SearchResultProps) => {
             <li key={item.id} className={styles.search_result__li}>
               <FlexRow alignItems='center' gap='15px'>
                 <FlexColumn alignItems='center'>
-                  <HomeIcon />
+                  <RestaurantIcon />
                   <TypoNotoSans
                     text={distanceFormat(parseInt(item.distance))}
                     variant='caption'
@@ -99,6 +103,11 @@ const SearchResult = ({ value, searchResult, reset }: SearchResultProps) => {
                   </div>
                   <TypoNotoSans text={item.road_address_name} variant='caption' color='rgba(var(--secondary-foreground-rgba))' />
                 </FlexColumn>
+                <Visible visible={isRestaurant(item.category_group_name)} className={styles.search_result__li_btn}>
+                  <IconButton>
+                    <AddLocationIcon color='primary' />
+                  </IconButton>
+                </Visible>
               </FlexRow>
             </li>
           ))}

@@ -29,6 +29,11 @@
 .search_result__li {
   padding: 5px 0;
 }
+.search_result__li_btn {
+  margin-left: auto;
+  width: 24px;
+  height: 100%;
+}
 
 .search_box {
   position: fixed;
