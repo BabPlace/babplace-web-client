@@ -6,7 +6,7 @@
   left: 50%;
   transform: translate(-50%, -10px);
   bottom: calc((100vh - var(--drawer-default-height) + var(--border-radius) + 7px) / 2);
-  animation: fade-in 0.5s cubic-bezier(0.99, -0.01, 1, -0.01);
+  animation: fade-in 0.5s cubic-bezier(0.95, -0.01, 0.77, 0.08);
 }
 .container::after {
   position: absolute;
