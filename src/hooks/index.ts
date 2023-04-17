@@ -13,3 +13,4 @@ export { default as useSwipeableButton } from './useSwipeableButton';
 export { default as useGuide } from './useGuide';
 export { default as useTheme } from './useTheme';
 export { default as useQuery } from './useQuery';
+export { default as useSearch } from './useSearch';
