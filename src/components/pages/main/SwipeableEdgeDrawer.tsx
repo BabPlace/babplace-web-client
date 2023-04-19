@@ -1,8 +1,6 @@
 import React from 'react';
 import { useInput, useDrawer, useSelectedButton, useCreateTeam, useQuery } from '@/hooks';
-import { FlexColumn, FlexRow, ProgressButton, TypoNotoSans } from '@/layouts';
-import ButtonGroup from './ButtonGroup';
-import Input from './Input';
+import { Input, FlexColumn, ProgressButton, ButtonGroup, TypoNotoSans } from '@/layouts';
 import { BusIcon, BikeIcon, FootPrintIcon } from '@/icons';
 import styles from '@/styles/SwipeableEdgeDrawer.module.css';
 import styled from '@emotion/styled';

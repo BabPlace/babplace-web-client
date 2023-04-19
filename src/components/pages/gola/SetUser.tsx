@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@mui/material';
 import { ProgressButton, FlexColumn, TypoNotoSans } from '@/layouts';
-import { Input, Header, Layout } from '@/components';
+import { Input, Header, BaseUI } from '@/components';
 import { useInput, useCreateUser } from '@/hooks';
 import styles from '@/styles/Gola.module.css';
 
@@ -9,7 +9,7 @@ const SetUser = () => {
   const { value: nickName, isError, handleChange, valitate } = useInput('', maxLength);
   const { isLoaded, onReturn, toResultPage } = useCreateUser(nickName);
   return (
-    <Layout title={title} description={description}>
+    <BaseUI title={title} description={description}>
       <Header />
       <div className={styles.setuser}>
         <TypoNotoSans text='사용할 닉네임을 입력해주세요' textAlign='center' variant='h6' />
@@ -33,7 +33,7 @@ const SetUser = () => {
           </Button>
         </FlexColumn>
       </div>
-    </Layout>
+    </BaseUI>
   );
 };
 

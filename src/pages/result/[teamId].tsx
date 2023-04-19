@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { RatioBarChart } from '@teamapdan/weirdchart';
 import { Button, Snackbar } from '@mui/material';
-import { Layout, Header, ErrorBoundary, ResultCard, ResultDetail } from '@/components';
+import { BaseUI, Header, ErrorBoundary, ResultCard, ResultDetail } from '@/components';
 import { sliceByOffset, makeDataset } from '@/utils';
 import { TypoNotoSans } from '@/layouts';
 import { useAlert, useCopy } from '@/hooks';
@@ -21,7 +21,7 @@ function Page({ result: satisfactions, teamInfo }: Props) {
 
   return (
     <ErrorBoundary>
-      <Layout title={title} description={description}>
+      <BaseUI title={title} description={description}>
         <Header showButtons={true} />
         <div className={styles.container}>
           <TypoNotoSans text={teamInfo.name} variant='h6' textAlign='center' />
@@ -77,7 +77,7 @@ function Page({ result: satisfactions, teamInfo }: Props) {
             </Alert>
           </Snackbar>
         </div>
-      </Layout>
+      </BaseUI>
     </ErrorBoundary>
   );
 }

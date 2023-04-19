@@ -2,8 +2,8 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import { Map, MapMarker, useInjectKakaoMapApi } from 'react-kakao-maps-sdk';
 import { IconButton } from '@mui/material';
-import { Header, Layout, Guide } from '@/components';
-import { FlexRow, TypoNotoSans } from '@/layouts';
+import { Header, Guide } from '@/components';
+import { BaseUI, FlexRow, TypoNotoSans } from '@/layouts';
 import { useResult, useCard } from '@/hooks';
 import { categoryFormat, distanceFormat, directionToSatisfaction } from '@/utils';
 import { InfoIcon, ReplayIcon, ErrorIcon, SatisfiedAltIcon, VerySatisfiedIcon, VeryDissatisfiedIcon, SickIcon } from '@/icons';
@@ -21,7 +21,7 @@ const Gola = ({ isValidUser, restaurants = [] }: Props) => {
   const { addResult, isLoading } = useResult(restaurants, isValidUser, frontIndex);
 
   return (
-    <Layout title={title} description={description}>
+    <BaseUI title={title} description={description}>
       <Header showButtons />
       <Guide page='gola' />
       <div className={styles.container}>
@@ -85,7 +85,7 @@ const Gola = ({ isValidUser, restaurants = [] }: Props) => {
           </IconButton>
         </div>
       </div>
-    </Layout>
+    </BaseUI>
   );
 };
 

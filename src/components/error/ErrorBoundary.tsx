@@ -1,6 +1,6 @@
 import React, { Component, ReactNode } from 'react';
-import Header from './Header';
-import Layout from './Layout';
+import Header from '../header/Header';
+import BaseUI from '../../layouts/container/BaseUI';
 import { ErrorIcon } from '@/icons';
 import { TypoNotoSans } from '@/layouts';
 import type { Errors } from '@/interfaces';
@@ -36,7 +36,7 @@ class ErrorBoundary extends Component<Props, State> {
       const message = this.state.error.message ?? 'undefined error';
       const status = this.state.error.status ?? 'none';
       return (
-        <Layout onClick={this.reset}>
+        <BaseUI onClick={this.reset}>
           <Header />
           <div className={styles.container}>
             <ErrorIcon width='150px' fill='rgba(var(--primary-foreground-rgba))' />
@@ -46,7 +46,7 @@ class ErrorBoundary extends Component<Props, State> {
               아무 곳이나 눌러서 다시 시도하기
             </TypoNotoSans>
           </div>
-        </Layout>
+        </BaseUI>
       );
     }
     return this.props.children;

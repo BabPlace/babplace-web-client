@@ -43,6 +43,8 @@ export { default as BusIcon } from './BusIcon';
 export { default as SvgIcon } from './SvgIcon';
 export { default as ErrorIcon } from './ErrorIcon';
 
+export { default as CategoryIcon } from './CategoryIcon';
+
 // import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 // import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 // import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded';
