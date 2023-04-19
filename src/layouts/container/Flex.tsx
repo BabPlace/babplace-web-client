@@ -11,13 +11,13 @@ type Props = {
   justifyContent?: string;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-const FlexColumn = ({ children, ...props }: Props) => {
-  return <StyledFlexColumn {...props}>{children}</StyledFlexColumn>;
+const Flex = ({ children, ...props }: Props) => {
+  return <StyledFlex {...props}>{children}</StyledFlex>;
 };
 
-export default FlexColumn;
+export default Flex;
 
-const StyledFlexColumn = styled.div<Omit<Props, 'children'>>`
+const StyledFlex = styled.div<Omit<Props, 'children'>>`
   display: flex;
 
   flex-direction: ${({ direction }) => direction};

@@ -1,12 +1,17 @@
+import React from 'react';
 import { useQuery } from '@/hooks';
 import { Visible, TypoNotoSans, FlexRow, FlexColumn } from '@/layouts';
 import { CategoryIcon } from '@/icons';
 import { distanceFormat } from '@/utils';
 import styles from '@/styles/Search.module.css';
 
-type SearchResultProps = { value: string; searchResult: kakao.maps.services.PlacesSearchResult; reset: () => void };
+type Props = {
+  value: string;
+  searchResult: kakao.maps.services.PlacesSearchResult;
+  reset: () => void;
+};
 
-const SearchResult = ({ value, searchResult, reset }: SearchResultProps) => {
+const SearchResultBox = ({ value, searchResult, reset }: Props) => {
   const { isSearch, isDefault } = useQuery();
 
   const isValidDelim = (delim: string) => {
@@ -59,4 +64,4 @@ const SearchResult = ({ value, searchResult, reset }: SearchResultProps) => {
   );
 };
 
-export default SearchResult;
+export default SearchResultBox;

@@ -1,16 +1,19 @@
+import React from 'react';
 import { useCallback, useMemo } from 'react';
 import { useQuery } from '@/hooks';
-import { Visible } from '@/layouts';
-import Input from '../../../../layouts/forms/Input';
+import { Visible, Input } from '@/layouts';
 import { SearchIcon, MapIcon } from '@/icons';
 import { IconButton } from '@mui/material';
 import styles from '@/styles/Search.module.css';
 
-type SearchBoxProps = { value: string; handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void };
+type Props = {
+  value: string;
 
-const SearchBox = ({ value, handleChange }: SearchBoxProps) => {
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+const SearchBox = ({ value, handleChange }: Props) => {
   const { isDefault, isCustom, setQuery } = useQuery();
-
   const handleIconClicked = useCallback(() => {
     setQuery('mode', isCustom ? 'search' : 'custom');
   }, [isCustom]);

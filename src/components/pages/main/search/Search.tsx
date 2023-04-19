@@ -1,8 +1,7 @@
 import React from 'react';
 import { useInput, useSearch } from '@/hooks';
 import SearchBox from './SearchBox';
-import SearchResult from './SearchResult';
-import type { SelectPlace } from '@/interfaces';
+import SearchResultBox from './SearchResultBox';
 
 type Props = {
   location: { lat: number; lng: number };
@@ -14,7 +13,7 @@ const Search = ({ location }: Props) => {
   return (
     <>
       <SearchBox value={value} handleChange={handleChange} />
-      <SearchResult value={value} searchResult={searchResult} reset={reset} />
+      {/* <SearchResultBox value={value} searchResult={searchResult} reset={reset} /> */}
     </>
   );
 };

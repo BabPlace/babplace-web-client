@@ -1,9 +1,9 @@
 import { GetServerSideProps } from 'next';
 import { RatioBarChart } from '@teamapdan/weirdchart';
 import { Button, Snackbar } from '@mui/material';
-import { BaseUI, Header, ErrorBoundary, ResultCard, ResultDetail } from '@/components';
+import { Header, ErrorBoundary, ResultCard, ResultDetail } from '@/components';
 import { sliceByOffset, makeDataset } from '@/utils';
-import { TypoNotoSans } from '@/layouts';
+import { BaseUI, TypoNotoSans } from '@/layouts';
 import { useAlert, useCopy } from '@/hooks';
 import { getResult, getTeamInfo } from '@/controller';
 import type { ResultResponse, TeamInfoResponse } from '@/interfaces';

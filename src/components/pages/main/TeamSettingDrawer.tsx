@@ -1,7 +1,8 @@
 import React from 'react';
-import { useInput, useDrawer, useSelectedButton, useCreateTeam, useQuery } from '@/hooks';
-import { Input, FlexColumn, ProgressButton, ButtonGroup, TypoNotoSans } from '@/layouts';
+import { useInput, useSelectedButton, useCreateTeam, useQuery } from '@/hooks';
+import { Input, FlexColumn, ProgressButton, ButtonGroup, TypoNotoSans, SwipeableEdgeDrawer } from '@/layouts';
 import { BusIcon, BikeIcon, FootPrintIcon } from '@/icons';
+
 import styles from '@/styles/SwipeableEdgeDrawer.module.css';
 import styled from '@emotion/styled';
 
@@ -14,17 +15,15 @@ type Props = {
   };
 };
 
-const SwipeableEdgeDrawer = ({ isLoading, addressName, location }: Props) => {
+const TeamSettingDrawer = ({ isLoading, addressName, location }: Props) => {
   const { value: name, isError: isNameError, handleChange: handleNameChange } = useInput('');
   const { value: count, isError: isCountError, handleChange: handleCountChange } = useInput(7);
-  const { drawerRef, open } = useDrawer();
   const { isDefault } = useQuery();
   const { selectedButton, radius, guideMessage, onClickButton } = useSelectedButton();
   const { isLoaded, onClick } = useCreateTeam(name, count, location.lat, location.lng, radius);
 
   return (
-    <StyledDrawer className={styles.container} ref={drawerRef} isOpen={open}>
-      <div className={styles.puller} />
+    <SwipeableEdgeDrawer>
       <FlexColumn className={styles.content} justifyContent='space-between'>
         <StyledUl>
           <DefaultListItem className={styles.list_item} isCustom={!isDefault} type='default'>
@@ -71,12 +70,6 @@ const SwipeableEdgeDrawer = ({ isLoading, addressName, location }: Props) => {
             </div>
           </DefaultListItem>
           <EmptyListItem className={styles.list_item} isCustom={false} />
-          {/* <CustomListItem className={styles.list_item} isCustom={!isDefault} type='custom'>
-            <FlexRow className={styles.custon__buttons} alignItems='center' gap='10px'>
-              <button className={styles.custon__buttons_add}>+</button>
-              <div>res</div>
-            </FlexRow>
-          </CustomListItem> */}
         </StyledUl>
         <ProgressButton
           isLoaded={isLoaded}
@@ -87,15 +80,11 @@ const SwipeableEdgeDrawer = ({ isLoading, addressName, location }: Props) => {
           <TypoNotoSans text='완료' variant='button' textAlign='center' />
         </ProgressButton>
       </FlexColumn>
-    </StyledDrawer>
+    </SwipeableEdgeDrawer>
   );
 };
 
-export default SwipeableEdgeDrawer;
-
-const StyledDrawer = styled.div<{ isOpen: boolean; isCustom?: boolean }>`
-  /* height: ${({ isOpen, isCustom }) => (isCustom ? '' : isOpen ? 'var(--drawer-maximun-height)' : 'var(--drawer-default-height)')}; */
-`;
+export default TeamSettingDrawer;
 
 const StyledUl = styled.ul`
   list-style: none;
@@ -106,11 +95,7 @@ const DefaultListItem = styled.li<{ isCustom: boolean; type: string; noBorder?: 
   height: ${({ isCustom, type }) => (isCustom && type === 'custom' ? 0 : `var(--drawer-list-height)`)};
   border-bottom: ${({ isCustom, type, noBorder }) => ((isCustom && type === 'custom') || noBorder ? 0 : '1px solid #eee')};
 `;
-// const CustomListItem = styled.li<{ isCustom: boolean; type: string }>`
-//   opacity: ${({ isCustom, type }) => (isCustom && type === 'custom' ? 1 : 0)};
-//   height: ${({ isCustom, type }) => (isCustom && type === 'custom' ? `calc(var(--drawer-list-height) * 2)` : 0)};
-//   border-bottom: 0;
-// `;
+
 const EmptyListItem = styled.li<{ isCustom: boolean }>`
   height: ${({ isCustom }) => (isCustom ? 0 : `var(--drawer-list-button-gap)`)};
   border-bottom: 0;

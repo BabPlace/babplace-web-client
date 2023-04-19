@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@mui/material';
-import { ProgressButton, FlexColumn, TypoNotoSans } from '@/layouts';
-import { Input, Header, BaseUI } from '@/components';
+import { BaseUI, Input, ProgressButton, FlexColumn, TypoNotoSans } from '@/layouts';
+import { Header } from '@/components';
 import { useInput, useCreateUser } from '@/hooks';
 import styles from '@/styles/Gola.module.css';
 
