@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useQuery } from '@/hooks';
 import { Visible, TypoNotoSans, FlexRow, FlexColumn } from '@/layouts';
 import { CategoryIcon } from '@/icons';
@@ -14,18 +14,20 @@ type Props = {
 const SearchResultBox = ({ value, searchResult, reset }: Props) => {
   const { isSearch, isDefault } = useQuery();
 
-  const isValidDelim = (delim: string) => {
-    const regex = /^[a-zA-Z0-9가-힣\s]*$/;
-    return regex.test(delim);
-  };
   const splitValue = (source: string, delim: string) => {
+    const isValidDelim = (delim: string) => {
+      const regex = /^[a-zA-Z0-9가-힣\s]*$/;
+      return regex.test(delim);
+    };
     if (!isValidDelim(delim)) {
       return [source];
     }
     return source.split(new RegExp(`(${delim})`, 'gi'));
   };
 
-  if (isDefault) reset();
+  useEffect(() => {
+    if (isDefault) reset();
+  }, [isDefault]);
 
   return (
     <Visible visible={isSearch} className={styles.search_result}>

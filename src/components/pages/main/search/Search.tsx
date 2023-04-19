@@ -13,7 +13,7 @@ const Search = ({ location }: Props) => {
   return (
     <>
       <SearchBox value={value} handleChange={handleChange} />
-      {/* <SearchResultBox value={value} searchResult={searchResult} reset={reset} /> */}
+      <SearchResultBox value={value} searchResult={searchResult} reset={reset} />
     </>
   );
 };
