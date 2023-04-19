@@ -6,10 +6,9 @@ import type { SelectPlace } from '@/interfaces';
 
 type Props = {
   location: { lat: number; lng: number };
-  addSelects: (newSelect: SelectPlace) => void;
 };
 
-const Search = ({ location, addSelects }: Props) => {
+const Search = ({ location }: Props) => {
   const { value, reset, handleChange } = useInput('');
   const { searchResult } = useSearch(value, location.lat, location.lng);
   return (

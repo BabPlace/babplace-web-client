@@ -19,7 +19,7 @@ export default function Home() {
           onCenterChanged={onCenterChanged}
         />
         {!loading && isDefault && <BabMarker />}
-        {!loading && <Search location={location} addSelects={addSelects} />}
+        {!loading && <Search location={location} />}
         <SwipeableButton />
         <SwipeableEdgeDrawer isLoading={loading} addressName={addressName} location={location} />
       </BaseUI>
