@@ -1,13 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import useAlert from './useAlert';
 import { useInjectKakaoMapApi } from 'react-kakao-maps-sdk';
+import type { SetLocation } from '@/hooks/useMainMap';
 
-export default function useSearch(
-  value: string,
-  lat: number,
-  lng: number,
-  setLocation: ({ latitude, longitude }: { latitude?: number | undefined; longitude?: number | undefined }) => void
-) {
+export default function useSearch(value: string, lat: number, lng: number, setLocation: SetLocation) {
   const { open, handleOpen, handleClose } = useAlert();
   const { loading } = useInjectKakaoMapApi({ appkey: process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY!, libraries: ['services', 'clusterer'] });
   const [ps, setPs] = useState<kakao.maps.services.Places>();

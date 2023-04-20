@@ -5,14 +5,13 @@ import { Button, IconButton, styled } from '@mui/material';
 import SearchBox from './SearchBox';
 import SearchResultBox from './SearchResultBox';
 import { AlertSnackBar } from '@/components';
-import styles from '@/styles/SwipeableEdgeDrawer.module.css';
-
 import { CloseIcon, IosShareIcon } from '@/icons';
+import type { SetLocation } from '@/hooks/useMainMap';
 
 type Props = {
   location: { lat: number; lng: number };
   addSelects: (newSelect: kakao.maps.services.PlacesSearchResultItem) => void;
-  setLocation: ({ latitude, longitude }: { latitude?: number | undefined; longitude?: number | undefined }) => void;
+  setLocation: SetLocation;
 };
 
 const Search = ({ location, addSelects, setLocation }: Props) => {
@@ -46,8 +45,8 @@ const Search = ({ location, addSelects, setLocation }: Props) => {
     <>
       <SearchBox value={value} handleChange={handleChange} />
       <SearchResultBox value={value} searchResult={searchResults} handleClickResult={handleClickSearchResult} />
-      {/* <SwipeableEdgeDrawer isHidden={!isCustom || selectedSearchResult === null} height={drawerHeight}> */}
-      <SwipeableEdgeDrawer isHidden={false} height={drawerHeight}>
+      <SwipeableEdgeDrawer isHidden={!isCustom || selectedSearchResult === null} height={drawerHeight}>
+        {/* <SwipeableEdgeDrawer isHidden={false} height={drawerHeight}> */}
         <FlexColumn justifyContent='space-between' height='100%'>
           <FlexRow width='100%' justifyContent='space-between' alignItems='flex-start'>
             <TypoNotoSans text={selectedSearchResult?.place_name} variant='h5' />

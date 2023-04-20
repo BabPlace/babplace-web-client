@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useInjectKakaoMapApi } from 'react-kakao-maps-sdk';
 
+export type SetLocation = ({ latitude, longitude }: { latitude?: number | undefined; longitude?: number | undefined }) => void;
+
 const defaultLocation = {
-  // latitude: 37.566826,
-  // longitude: 126.9786567,
-  latitude: 37.5546788388674,
-  longitude: 126.970606917394,
+  latitude: 37.566826,
+  longitude: 126.9786567,
 };
 
 export default function useMainMap() {
@@ -19,7 +19,7 @@ export default function useMainMap() {
     libraries: ['services', 'clusterer'],
   });
 
-  const setLocation = ({ latitude, longitude }: { latitude?: number; longitude?: number }) => {
+  const setLocation: SetLocation = ({ latitude, longitude }) => {
     if (latitude) setLatitude(latitude);
     if (longitude) setLongitude(longitude);
   };

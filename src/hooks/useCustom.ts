@@ -8,5 +8,13 @@ export default function useCustom() {
     setSelects((prevSelects) => [...prevSelects, newSelect]);
   }
 
-  return { selects, addSelects };
+  function clearSelects() {
+    setSelects([]);
+  }
+
+  function deleteByIndex(index: number) {
+    setSelects((prevSelects) => prevSelects.filter((_, i) => i !== index));
+  }
+
+  return { selects, addSelects, clearSelects, deleteByIndex };
 }
