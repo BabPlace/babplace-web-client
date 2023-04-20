@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 
 export default function useQuery() {
   const router = useRouter();
@@ -23,8 +23,8 @@ export default function useQuery() {
   }, [router.query]);
 
   const isSearch = useMemo(() => {
-    const mode = router.query.mode as string;
-    if (mode === 'search') return true;
+    const search = router.query.search as string;
+    if (search === 'true') return true;
     return false;
   }, [router.query]);
 
@@ -46,5 +46,21 @@ export default function useQuery() {
     });
   }
 
-  return { isDefault, isCustom, isShow, isSearch, isSelects, setQuery };
+  const toggleMode = useCallback(() => {
+    if (isDefault) {
+      setQuery('mode', 'custom');
+    } else {
+      setQuery('mode', 'default');
+    }
+  }, [isDefault]);
+
+  const toggleSearch = useCallback(() => {
+    if (isSearch) {
+      setQuery('search');
+    } else {
+      setQuery('search', 'true');
+    }
+  }, [isSearch]);
+
+  return { isDefault, isCustom, isShow, isSearch, isSelects, setQuery, toggleMode, toggleSearch };
 }

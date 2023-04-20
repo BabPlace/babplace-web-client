@@ -13,10 +13,7 @@ type Props = {
 };
 
 const SearchBox = ({ value, handleChange }: Props) => {
-  const { isDefault, isCustom, isSearch, setQuery } = useQuery();
-  const handleIconClicked = useCallback(() => {
-    setQuery('mode', isCustom ? 'search' : 'custom');
-  }, [isCustom]);
+  const { toggleSearch, isSearch, setQuery } = useQuery();
 
   const SearchBoxIcon = useMemo(() => {
     return isSearch ? <MapIcon /> : <SearchIcon />;
@@ -24,14 +21,14 @@ const SearchBox = ({ value, handleChange }: Props) => {
 
   return (
     <Visible visible={true} className={styles.search_box}>
-      <IconButton onClick={handleIconClicked}>{SearchBoxIcon}</IconButton>
+      <IconButton onClick={toggleSearch}>{SearchBoxIcon}</IconButton>
       <Input
         value={value}
         placeholder='장소 주소 식당 검색'
         border={false}
         onChange={handleChange}
         onClick={() => {
-          setQuery('mode', 'search');
+          setQuery('search', 'true');
         }}
         textAlign='left'
         className={styles.search_box__input}

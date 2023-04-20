@@ -12,7 +12,7 @@ type Props = {
 };
 
 const SearchResultBox = ({ value, searchResult, reset }: Props) => {
-  const { isSearch, isDefault } = useQuery();
+  const { isSearch } = useQuery();
 
   const splitValue = (source: string, delim: string) => {
     const isValidDelim = (delim: string) => {
@@ -25,9 +25,9 @@ const SearchResultBox = ({ value, searchResult, reset }: Props) => {
     return source.split(new RegExp(`(${delim})`, 'gi'));
   };
 
-  useEffect(() => {
-    if (isDefault) reset();
-  }, [isDefault]);
+  // useEffect(() => {
+  //   if (!isSearch) reset();
+  // }, [isSearch]);
 
   return (
     <Visible visible={isSearch} className={styles.search_result}>
@@ -36,13 +36,13 @@ const SearchResultBox = ({ value, searchResult, reset }: Props) => {
           {searchResult.map((item) => (
             <li key={item.id} className={styles.search_result__li}>
               <FlexRow alignItems='center' gap='15px'>
-                <FlexColumn alignItems='center'>
+                <FlexColumn alignItems='center' width='30px'>
                   <CategoryIcon category={item.category_group_name} />
                   <TypoNotoSans
                     text={distanceFormat(parseInt(item.distance))}
                     variant='caption'
-                    fontSize='0.2rem'
                     color='rgba(var(--caption-foreground-rgba))'
+                    sx={{ transform: 'scale(0.7)' }}
                   />
                 </FlexColumn>
                 <FlexColumn>
@@ -51,11 +51,15 @@ const SearchResultBox = ({ value, searchResult, reset }: Props) => {
                       word.toLowerCase() === value.toLowerCase() ? (
                         <TypoNotoSans text={word} component='span' fontSize='0.9rem' color='blue' />
                       ) : (
-                        <TypoNotoSans text={word} component='span' fontSize='0.9rem' />
+                        <TypoNotoSans text={word} component='span' fontSize='0.9rem' paddingLeft='1px' />
                       )
                     )}
                   </div>
-                  <TypoNotoSans text={item.road_address_name} variant='caption' color='rgba(var(--secondary-foreground-rgba))' />
+                  <TypoNotoSans
+                    text={item.road_address_name.length > 0 ? item.road_address_name : item.address_name}
+                    variant='caption'
+                    color='rgba(var(--secondary-foreground-rgba))'
+                  />
                 </FlexColumn>
               </FlexRow>
             </li>

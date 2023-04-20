@@ -1,16 +1,19 @@
-import Head from 'next/head';
 import { useEffect, createContext } from 'react';
 import { ThemeProvider } from '@mui/material';
 import { useTheme } from '@/hooks';
+import createEmotionCache from '@/utils/createEmotionCache';
+import { CacheProvider } from '@emotion/react';
 import type { AppProps } from 'next/app';
 import '@/styles/globals.css';
+
+const clientSideEmotionCache = createEmotionCache();
 
 export const ColorModeContext = createContext<{ toggleColorMode: () => void; mode: 'light' | 'dark' }>({
   toggleColorMode: () => {},
   mode: 'light',
 });
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, emotionCache = clientSideEmotionCache, pageProps }: AppProps & { emotionCache: any }) {
   const { colorMode, theme } = useTheme();
 
   useEffect(() => {
@@ -25,15 +28,12 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <>
-      <Head>
-        <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
-      </Head>
+    <CacheProvider value={emotionCache}>
       <ColorModeContext.Provider value={colorMode}>
         <ThemeProvider theme={theme}>
           <Component {...pageProps} />
         </ThemeProvider>
       </ColorModeContext.Provider>
-    </>
+    </CacheProvider>
   );
 }

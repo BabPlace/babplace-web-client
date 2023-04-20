@@ -17,12 +17,12 @@ export default function Home() {
           style={{ ...mapStyle, height: !isDefault ? '100svh' : mapDefaultHeight }}
           onCenterChanged={onCenterChanged}
         />
-        <Search location={location} />
         <Visible visible={!loading && isDefault}>
           <BabMarker />
         </Visible>
         <SwipeableButton />
         <TeamSettingDrawer isLoading={loading} addressName={addressName} location={location} />
+        <Search location={location} />
       </BaseUI>
     </ErrorBoundary>
   );

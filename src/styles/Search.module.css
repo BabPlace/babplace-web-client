@@ -2,7 +2,7 @@
 .search_result {
   position: fixed;
   width: 100vw;
-  height: calc(var(--max-height) - var(--drawer-default-height) + var(--drawer-list-height) * 3 + var(--border-radius));
+  height: var(--max-height);
   max-width: var(--max-width);
   top: 0;
   z-index: 0;
