@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { Snackbar, IconButton } from '@mui/material';
+import { IconButton } from '@mui/material';
+import { AlertSnackBar } from '../snackbar';
 import { TypoNotoSans } from '@/layouts';
 import { useAlert, useCopy } from '@/hooks';
 import { HomeIcon, InviteIcon } from '@/icons';
@@ -11,7 +12,12 @@ interface Props {
 
 const Header = ({ showButtons = true }: Props) => {
   const { invite } = useCopy();
-  const { Alert, open, handleOpen, handleClose } = useAlert();
+  const { open, handleOpen, handleClose } = useAlert();
+
+  const handleClick = () => {
+    handleOpen();
+    invite();
+  };
 
   return (
     <div className={styles.header__container}>
@@ -24,15 +30,11 @@ const Header = ({ showButtons = true }: Props) => {
       )}
       <TypoNotoSans text='🍚 골라밥 🍚' variant='h6' textAlign='center' width='100%' fontSize='20px' />
       {showButtons && (
-        <IconButton>
+        <IconButton onClick={handleClick}>
           <InviteIcon />
         </IconButton>
       )}
-      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity='success' sx={{ width: '100%' }}>
-          초대 링크가 복사되었습니다!
-        </Alert>
-      </Snackbar>
+      <AlertSnackBar open={open} handleClose={handleClose} message='초대 링크가 복사되었습니다!' severity='info' />
     </div>
   );
 };

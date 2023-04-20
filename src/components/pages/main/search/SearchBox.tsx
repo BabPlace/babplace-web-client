@@ -8,7 +8,6 @@ import styles from '@/styles/Search.module.css';
 
 type Props = {
   value: string;
-
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -26,9 +25,9 @@ const SearchBox = ({ value, handleChange }: Props) => {
         value={value}
         placeholder='장소 주소 식당 검색'
         border={false}
-        onChange={handleChange}
-        onClick={() => {
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setQuery('search', 'true');
+          handleChange(event);
         }}
         textAlign='left'
         className={styles.search_box__input}

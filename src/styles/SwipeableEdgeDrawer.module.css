@@ -9,6 +9,8 @@
   color: rgba(var(--pribary-foreground-rgba));
   box-shadow: 0 0 10px 0 rgba(var(--primary-foreground-rgba), 0.2);
   transition: all 0.5s ease-in-out;
+  /* -webkit-backdrop-filter: blur(0px);
+  backdrop-filter: blur(0px); */
 }
 
 .puller {
@@ -59,7 +61,7 @@
 }
 
 .custon__buttons_add {
-  width: 50px;
+  width: 0px;
   height: 90%;
   border: none;
   border-radius: var(--border-radius);

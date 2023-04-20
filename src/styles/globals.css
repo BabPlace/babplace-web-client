@@ -14,16 +14,17 @@
   --animation-half-speed: 0.5s;
 
   /* chosen by color scheme */
-  --primary-background-rgb: 255, 255, 255;
-  --primary-foreground-rgba: 0, 0, 0;
-
   --highlight-background-rgba: 71, 184, 224, 0.6;
   --highlight-foreground-rgba: 71, 184, 224, 0.9;
+
+  --primary-background-rgb: 255, 255, 255;
+  --primary-foreground-rgba: 0, 0, 0;
 
   --secondary-background-rgb: 235, 235, 235;
   --secondary-foreground-rgba: 0, 0, 0, 0.6;
 
   --tertiary-background-rgb: 200, 200, 200;
+  --tertiary-foreground-rgb: 129, 129, 129;
 
   --caption-foreground-rgba: 0, 0, 0, 0.4;
   --error-foreground-rgba: 255, 95, 46, 0.8;
@@ -71,7 +72,7 @@
   --drawer-inner-padding-t: 1.25rem;
   --drawer-inner-padding-b: 2.5rem;
   --drawer-inner-padding-tb: calc(var(--drawer-inner-padding-t) + var(--drawer-inner-padding-b));
-  --drawer-inner-padding-lr: 2.5rem;
+  --drawer-inner-padding-lr: 1.25rem;
 
   --drawer-content-height: calc(
     var(--drawer-list-item-count) * var(--drawer-list-height) + var(--drawer-button-height) + var(--drawer-list-button-gap)
@@ -106,14 +107,16 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --primary-background-rgb: 16, 16, 16;
-    --primary-foreground-rgba: 245, 245, 245;
     --highlight-background-rgba: 71, 184, 224, 0.8;
 
-    --secondary-background-rgb: 34, 34, 34;
+    --primary-background-rgb: 22, 22, 24;
+    --primary-foreground-rgba: 245, 245, 245;
+
+    --secondary-background-rgb: 33, 33, 36;
     --secondary-foreground-rgba: 255, 255, 255, 0.7;
 
     --tertiary-background-rgb: 60, 60, 60;
+    --tertiary-foreground-rgb: 129, 129, 129;
 
     --caption-foreground-rgba: 255, 255, 255, 0.6;
 
@@ -128,14 +131,16 @@
 }
 
 [data-theme='dark'] {
-  --primary-background-rgb: 16, 16, 16;
-  --primary-foreground-rgba: 245, 245, 245;
   --highlight-background-rgba: 71, 184, 224, 0.8;
 
-  --secondary-background-rgb: 20, 20, 20;
+  --primary-background-rgb: 22, 22, 24;
+  --primary-foreground-rgba: 245, 245, 245;
+
+  --secondary-background-rgb: 33, 33, 36;
   --secondary-foreground-rgba: 255, 255, 255, 0.7;
 
-  --tertiary-background-rgb: 50, 50, 50;
+  --tertiary-background-rgb: 60, 60, 60;
+  --tertiary-foreground-rgb: 129, 129, 129;
 
   --caption-foreground-rgba: 255, 255, 255, 0.6;
 
@@ -149,16 +154,17 @@
 }
 
 [data-theme='light'] {
-  --primary-background-rgb: 255, 255, 255;
-  --primary-foreground-rgba: 0, 0, 0;
-
   --highlight-background-rgba: 71, 184, 224, 0.6;
   --highlight-foreground-rgba: 71, 184, 224, 0.9;
+
+  --primary-background-rgb: 255, 255, 255;
+  --primary-foreground-rgba: 0, 0, 0;
 
   --secondary-background-rgb: 245, 245, 245;
   --secondary-foreground-rgba: 0, 0, 0, 0.6;
 
   --tertiary-background-rgb: 200, 200, 200;
+  --tertiary-foreground-rgb: 129, 129, 129;
 
   --caption-foreground-rgba: 0, 0, 0, 0.4;
   --error-foreground-rgba: 255, 95, 46, 0.8;

@@ -36,6 +36,8 @@ export { default as LandscapeIcon } from '@mui/icons-material/LandscapeOutlined'
 export { default as Diversity3Icon } from '@mui/icons-material/Diversity3Outlined';
 export { default as LocalPharmacyIcon } from '@mui/icons-material/LocalPharmacyOutlined';
 
+export { default as IosShareIcon } from '@mui/icons-material/IosShareRounded';
+
 export { default as MenuIcon } from '@mui/icons-material/MenuRounded';
 export { default as FootPrintIcon } from './FootPrintIcon';
 export { default as BikeIcon } from './BikeIcon';

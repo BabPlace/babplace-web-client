@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { RatioBarChart } from '@teamapdan/weirdchart';
-import { Button, Snackbar } from '@mui/material';
-import { Header, ErrorBoundary, ResultCard, ResultDetail } from '@/components';
+import { Button } from '@mui/material';
+import { Header, ErrorBoundary, ResultCard, ResultDetail, AlertSnackBar } from '@/components';
 import { sliceByOffset, makeDataset } from '@/utils';
 import { BaseUI, TypoNotoSans } from '@/layouts';
 import { useAlert, useCopy } from '@/hooks';
@@ -16,7 +16,7 @@ type Props = {
 
 function Page({ result: satisfactions, teamInfo }: Props) {
   const { invite, share } = useCopy();
-  const { Alert, open, handleOpen, handleClose } = useAlert();
+  const { open, handleOpen, handleClose } = useAlert();
   const [top3, others] = sliceByOffset(satisfactions, 3);
 
   return (
@@ -71,11 +71,7 @@ function Page({ result: satisfactions, teamInfo }: Props) {
               </Button>
             </div>
           </div>
-          <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity='info' sx={{ width: '100%' }}>
-              결과 공유 링크가 복사되었습니다!
-            </Alert>
-          </Snackbar>
+          <AlertSnackBar open={open} handleClose={handleClose} message='결과 공유 링크가 복사되었습니다!' />
         </div>
       </BaseUI>
     </ErrorBoundary>

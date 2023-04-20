@@ -1,7 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
+import useAlert from './useAlert';
 import { useInjectKakaoMapApi } from 'react-kakao-maps-sdk';
 
 export default function useSearch(value: string, lat: number, lng: number) {
+  const { open, handleOpen, handleClose } = useAlert();
   const { loading } = useInjectKakaoMapApi({ appkey: process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY!, libraries: ['services', 'clusterer'] });
   const [ps, setPs] = useState<kakao.maps.services.Places>();
   const [searchResults, setSearchResults] = useState<kakao.maps.services.PlacesSearchResult>([]);
@@ -18,6 +20,22 @@ export default function useSearch(value: string, lat: number, lng: number) {
   const clearSelectedSearchResult = () => {
     setSelectedSearchResult(null);
   };
+
+  const share = useCallback(async () => {
+    if (!selectedSearchResult) {
+      return;
+    }
+    try {
+      await navigator.share({
+        title: selectedSearchResult.place_name,
+        text: selectedSearchResult.road_address_name,
+        url: selectedSearchResult.place_url,
+      });
+    } catch (error) {
+      handleOpen();
+      navigator.clipboard.writeText(selectedSearchResult.place_url);
+    }
+  }, [selectedSearchResult]);
 
   useEffect(() => {
     if (loading) return;
@@ -43,5 +61,5 @@ export default function useSearch(value: string, lat: number, lng: number) {
     );
   }, [value]);
 
-  return { searchResults, selectedSearchResult, handleClickSearchResult, clearSelectedSearchResult };
+  return { searchResults, selectedSearchResult, open, handleClose, share, handleClickSearchResult, clearSelectedSearchResult };
 }
