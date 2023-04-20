@@ -17,8 +17,8 @@ export default function Home() {
           style={{ ...mapStyle, height: !isDefault ? '100svh' : mapDefaultHeight }}
           onCenterChanged={onCenterChanged}
         />
-        <Visible visible={!loading && isDefault}>
-          <BabMarker />
+        <Visible visible={!loading}>
+          <BabMarker isCustom={!isDefault} />
         </Visible>
         <SwipeableButton />
         <TeamSettingDrawer isLoading={loading} addressName={addressName} location={location} />

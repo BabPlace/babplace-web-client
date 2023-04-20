@@ -1,8 +1,13 @@
 import React from 'react';
+import cn from 'classnames';
 import styles from '@/styles/BabMarker.module.css';
 
-const BabMarker = () => {
-  return <div className={styles.container} />;
+type Props = {
+  isCustom: boolean;
+};
+
+const BabMarker = ({ isCustom }: Props) => {
+  return <div className={cn(styles.container, isCustom && styles.custom)} />;
 };
 
 export default BabMarker;

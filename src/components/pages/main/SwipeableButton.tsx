@@ -22,6 +22,6 @@ const SwipeableButton = () => {
 export default React.memo(SwipeableButton);
 
 const StyledButton = styled.div<{ isCustom: boolean }>`
-  transform: ${({ isCustom }) => (isCustom ? 'translateY(calc(var(--drawer-list-height) * 3))' : '')};
+  transform: ${({ isCustom }) => (isCustom ? 'translateY(calc(var(--drawer-list-height) * 2))' : '')};
   transition: transform 0.5s ease-in-out;
 `;

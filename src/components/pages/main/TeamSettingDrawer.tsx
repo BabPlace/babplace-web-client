@@ -69,6 +69,12 @@ const TeamSettingDrawer = ({ isLoading, addressName, location }: Props) => {
               </TypoNotoSans>
             </div>
           </DefaultListItem>
+          <DefaultListItem className={styles.list_item} isCustom={isDefault} type='custom' noBorder={true}>
+            <TypoNotoSans text='선택 식당수' {...liTitleOptions} />
+            <div className={styles.list_item__content}>
+              <TypoNotoSans text='1' className={styles.list_item__content} textAlign='center' />
+            </div>
+          </DefaultListItem>
           <EmptyListItem className={styles.list_item} isCustom={false} />
         </StyledUl>
         <ProgressButton
@@ -110,5 +116,5 @@ const liTitleOptions = {
 const doneButtonStyle = {
   variant: 'contained' as const,
   fullWidth: true,
-  sx: { color: 'white' },
+  sx: { color: 'white', height: 'var(--drawer-button-height)' },
 };

@@ -34,7 +34,6 @@ export default function useSearch(value: string, lat: number, lng: number) {
       value,
       (data, status, _pagination) => {
         if (status === kakao.maps.services.Status.OK) {
-          console.log(data);
           setSearchResults(data);
         }
       },

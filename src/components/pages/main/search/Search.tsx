@@ -4,6 +4,7 @@ import { SwipeableEdgeDrawer } from '@/layouts';
 import { Button } from '@mui/material';
 import SearchBox from './SearchBox';
 import SearchResultBox from './SearchResultBox';
+import styles from '@/styles/SwipeableEdgeDrawer.module.css';
 
 type Props = {
   location: { lat: number; lng: number };
@@ -21,7 +22,12 @@ const Search = ({ location }: Props) => {
     <>
       <SearchBox value={value} handleChange={handleChange} />
       <SearchResultBox value={value} searchResult={searchResults} handleClickResult={handleClickSearchResult} />
-      <SwipeableEdgeDrawer isHidden={!isCustom || selectedSearchResult === null}>
+      <SwipeableEdgeDrawer
+        isHidden={!isCustom || selectedSearchResult === null}
+        height={
+          'calc(var(--drawer-list-height) * 2 + var(--drawer-list-button-gap) + var(--drawer-button-height) + var(--drawer-inner-padding-tb)) '
+        }
+      >
         <div>hi</div>
         <Button
           onClick={() => {
