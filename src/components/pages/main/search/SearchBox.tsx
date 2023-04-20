@@ -13,17 +13,17 @@ type Props = {
 };
 
 const SearchBox = ({ value, handleChange }: Props) => {
-  const { isDefault, isCustom, setQuery } = useQuery();
+  const { isDefault, isCustom, isSearch, setQuery } = useQuery();
   const handleIconClicked = useCallback(() => {
     setQuery('mode', isCustom ? 'search' : 'custom');
   }, [isCustom]);
 
   const SearchBoxIcon = useMemo(() => {
-    return isCustom ? <SearchIcon /> : <MapIcon />;
-  }, [isCustom]);
+    return isSearch ? <MapIcon /> : <SearchIcon />;
+  }, [isSearch]);
 
   return (
-    <Visible visible={!isDefault} className={styles.search_box}>
+    <Visible visible={true} className={styles.search_box}>
       <IconButton onClick={handleIconClicked}>{SearchBoxIcon}</IconButton>
       <Input
         value={value}
