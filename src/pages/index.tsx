@@ -1,6 +1,6 @@
 import { useMainMap, useQuery } from '@/hooks';
 import { LoadableMap, BabMarker, TeamSettingDrawer, SwipeableButton, Guide, ErrorBoundary, Search } from '@/components';
-import { BaseUI } from '@/layouts';
+import { BaseUI, Visible } from '@/layouts';
 
 export default function Home() {
   const { loading, location, addressName, onCenterChanged } = useMainMap();
@@ -17,8 +17,10 @@ export default function Home() {
           style={{ ...mapStyle, height: !isDefault ? '100svh' : mapDefaultHeight }}
           onCenterChanged={onCenterChanged}
         />
-        {!loading && isDefault && <BabMarker />}
-        {!loading && <Search location={location} />}
+        <Search location={location} />
+        <Visible visible={!loading && isDefault}>
+          <BabMarker />
+        </Visible>
         <SwipeableButton />
         <TeamSettingDrawer isLoading={loading} addressName={addressName} location={location} />
       </BaseUI>
