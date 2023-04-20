@@ -9,13 +9,14 @@ import styled from '@emotion/styled';
 type Props = {
   isLoading: boolean;
   addressName: string;
+  selectsLength: number;
   location: {
     lat: number;
     lng: number;
   };
 };
 
-const TeamSettingDrawer = ({ isLoading, addressName, location }: Props) => {
+const TeamSettingDrawer = ({ isLoading, addressName, selectsLength, location }: Props) => {
   const { value: name, isError: isNameError, handleChange: handleNameChange } = useInput('');
   const { value: count, isError: isCountError, handleChange: handleCountChange } = useInput(7);
   const { isDefault } = useQuery();
@@ -72,7 +73,7 @@ const TeamSettingDrawer = ({ isLoading, addressName, location }: Props) => {
           <DefaultListItem className={styles.list_item} isCustom={isDefault} type='custom' noBorder={true}>
             <TypoNotoSans text='선택 식당수' {...liTitleOptions} />
             <div className={styles.list_item__content}>
-              <TypoNotoSans text='1' className={styles.list_item__content} textAlign='center' />
+              <TypoNotoSans text={selectsLength} className={styles.list_item__content} textAlign='center' />
             </div>
           </DefaultListItem>
           <EmptyListItem className={styles.list_item} isCustom={false} />

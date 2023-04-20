@@ -3,7 +3,7 @@ import { Typography, TypographyTypeMap } from '@mui/material';
 
 type Props = {
   children?: React.ReactNode;
-  text?: string;
+  text?: string | number;
   color?: string;
   component?: React.ElementType;
   className?: string;
