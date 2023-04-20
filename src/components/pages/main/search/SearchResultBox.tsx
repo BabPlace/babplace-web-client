@@ -1,40 +1,32 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useQuery } from '@/hooks';
 import { Visible, TypoNotoSans, FlexRow, FlexColumn } from '@/layouts';
 import { CategoryIcon } from '@/icons';
-import { distanceFormat } from '@/utils';
+import { distanceFormat, splitByValue } from '@/utils';
 import styles from '@/styles/Search.module.css';
 
 type Props = {
   value: string;
   searchResult: kakao.maps.services.PlacesSearchResult;
-  reset: () => void;
+  handleClickResult: (selectedSearchResult: kakao.maps.services.PlacesSearchResultItem) => void;
 };
 
-const SearchResultBox = ({ value, searchResult, reset }: Props) => {
-  const { isSearch } = useQuery();
-
-  const splitValue = (source: string, delim: string) => {
-    const isValidDelim = (delim: string) => {
-      const regex = /^[a-zA-Z0-9가-힣\s]*$/;
-      return regex.test(delim);
-    };
-    if (!isValidDelim(delim)) {
-      return [source];
-    }
-    return source.split(new RegExp(`(${delim})`, 'gi'));
-  };
-
-  // useEffect(() => {
-  //   if (!isSearch) reset();
-  // }, [isSearch]);
+const SearchResultBox = ({ value, searchResult, handleClickResult }: Props) => {
+  const { isSearch, toggleSearch } = useQuery();
 
   return (
     <Visible visible={isSearch} className={styles.search_result}>
       <div>
         <ul className={styles.search_result__ul}>
           {searchResult.map((item) => (
-            <li key={item.id} className={styles.search_result__li}>
+            <li
+              key={`result-li-${item.id}`}
+              className={styles.search_result__li}
+              onClick={() => {
+                toggleSearch();
+                handleClickResult(item);
+              }}
+            >
               <FlexRow alignItems='center' gap='15px'>
                 <FlexColumn alignItems='center' width='30px'>
                   <CategoryIcon category={item.category_group_name} />
@@ -47,18 +39,21 @@ const SearchResultBox = ({ value, searchResult, reset }: Props) => {
                 </FlexColumn>
                 <FlexColumn>
                   <div>
-                    {splitValue(item.place_name, value).map((word) =>
-                      word.toLowerCase() === value.toLowerCase() ? (
-                        <TypoNotoSans text={word} component='span' fontSize='0.9rem' color='blue' />
-                      ) : (
-                        <TypoNotoSans text={word} component='span' fontSize='0.9rem' paddingLeft='1px' />
-                      )
-                    )}
+                    {splitByValue(item.place_name, value).map((word, index) => (
+                      <TypoNotoSans
+                        key={`result-place-${word}-${index}`}
+                        text={word}
+                        component='span'
+                        fontSize='0.9rem'
+                        color={word.toLowerCase() === value.toLowerCase() ? 'blue' : ''}
+                      />
+                    ))}
                   </div>
                   <TypoNotoSans
                     text={item.road_address_name.length > 0 ? item.road_address_name : item.address_name}
                     variant='caption'
                     color='rgba(var(--secondary-foreground-rgba))'
+                    paddingLeft='1px'
                   />
                 </FlexColumn>
               </FlexRow>

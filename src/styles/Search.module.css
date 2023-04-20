@@ -27,6 +27,7 @@
 
 .search_result__li {
   padding: 10px 0;
+  cursor: pointer;
 }
 .search_result__li::after {
   content: '';

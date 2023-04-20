@@ -1,10 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useInjectKakaoMapApi } from 'react-kakao-maps-sdk';
 
 export default function useSearch(value: string, lat: number, lng: number) {
   const { loading } = useInjectKakaoMapApi({ appkey: process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY!, libraries: ['services', 'clusterer'] });
-  const [searchResult, setSearchResult] = useState<kakao.maps.services.PlacesSearchResult>([]);
   const [ps, setPs] = useState<kakao.maps.services.Places>();
+  const [searchResults, setSearchResults] = useState<kakao.maps.services.PlacesSearchResult>([]);
+  const [selectedSearchResult, setSelectedSearchResult] = useState<kakao.maps.services.PlacesSearchResultItem | null>(null);
+
+  const handleClickSearchResult = useCallback(
+    (selectedSearchResult: kakao.maps.services.PlacesSearchResultItem) => {
+      if (!ps) return;
+      setSelectedSearchResult(selectedSearchResult);
+    },
+    [ps]
+  );
+
+  const clearSelectedSearchResult = () => {
+    setSelectedSearchResult(null);
+  };
 
   useEffect(() => {
     if (loading) return;
@@ -14,7 +27,7 @@ export default function useSearch(value: string, lat: number, lng: number) {
   useEffect(() => {
     if (!ps) return;
     if (value.length <= 1) {
-      setSearchResult([]);
+      setSearchResults([]);
       return;
     }
     ps.keywordSearch(
@@ -22,7 +35,7 @@ export default function useSearch(value: string, lat: number, lng: number) {
       (data, status, _pagination) => {
         if (status === kakao.maps.services.Status.OK) {
           console.log(data);
-          setSearchResult(data);
+          setSearchResults(data);
         }
       },
       {
@@ -31,5 +44,5 @@ export default function useSearch(value: string, lat: number, lng: number) {
     );
   }, [value]);
 
-  return { searchResult };
+  return { searchResults, selectedSearchResult, handleClickSearchResult, clearSelectedSearchResult };
 }

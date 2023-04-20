@@ -5,12 +5,13 @@ import styled from '@emotion/styled';
 
 type Props = {
   children: React.ReactNode;
+  isHidden?: boolean;
 };
 
-const SwipeableEdgeDrawer = ({ children }: Props) => {
+const SwipeableEdgeDrawer = ({ children, isHidden }: Props) => {
   const { drawerRef, open } = useDrawer();
   return (
-    <StyledDrawer className={styles.container} ref={drawerRef} isOpen={open}>
+    <StyledDrawer className={styles.container} ref={drawerRef} isOpen={open} isHidden={isHidden}>
       <div className={styles.puller} />
       {children}
     </StyledDrawer>
@@ -19,6 +20,9 @@ const SwipeableEdgeDrawer = ({ children }: Props) => {
 
 export default SwipeableEdgeDrawer;
 
-const StyledDrawer = styled.div<{ isOpen: boolean }>`
-  min-height: ${({ isOpen }) => (isOpen ? 'var(--drawer-maximun-height)' : '1px')};
+const StyledDrawer = styled.div<{ isOpen: boolean; isHidden?: boolean }>`
+  && {
+    min-height: ${({ isOpen }) => (isOpen ? 'var(--drawer-maximun-height)' : '1px')};
+    bottom: ${({ isHidden }) => (isHidden ? '-100%' : '0')};
+  }
 `;
