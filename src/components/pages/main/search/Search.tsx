@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useInput, useSearch, useQuery } from '@/hooks';
 import { FlexColumn, FlexRow, SwipeableEdgeDrawer, TypoNotoSans } from '@/layouts';
 import { Button, IconButton, styled } from '@mui/material';
@@ -11,21 +11,30 @@ import { CloseIcon, IosShareIcon } from '@/icons';
 
 type Props = {
   location: { lat: number; lng: number };
+  addSelects: (newSelect: kakao.maps.services.PlacesSearchResultItem) => void;
+  setLocation: ({ latitude, longitude }: { latitude?: number | undefined; longitude?: number | undefined }) => void;
 };
 
-const Search = ({ location }: Props) => {
+const Search = ({ location, addSelects, setLocation }: Props) => {
   const { isCustom } = useQuery();
   const { value, reset, handleChange } = useInput('');
   const { searchResults, selectedSearchResult, open, handleClose, share, handleClickSearchResult, clearSelectedSearchResult } = useSearch(
     value,
     location.lat,
-    location.lng
+    location.lng,
+    setLocation
   );
 
   const clear = () => {
     reset();
     clearSelectedSearchResult();
   };
+
+  const add = useCallback(() => {
+    clear();
+    if (!selectedSearchResult) return;
+    addSelects(selectedSearchResult);
+  }, [selectedSearchResult]);
 
   useEffect(() => {
     if (isCustom) {
@@ -37,21 +46,21 @@ const Search = ({ location }: Props) => {
     <>
       <SearchBox value={value} handleChange={handleChange} />
       <SearchResultBox value={value} searchResult={searchResults} handleClickResult={handleClickSearchResult} />
-      <SwipeableEdgeDrawer isHidden={!isCustom || selectedSearchResult === null} height={drawerHeight}>
-        {/* <SwipeableEdgeDrawer isHidden={false} height={drawerHeight}> */}
+      {/* <SwipeableEdgeDrawer isHidden={!isCustom || selectedSearchResult === null} height={drawerHeight}> */}
+      <SwipeableEdgeDrawer isHidden={false} height={drawerHeight}>
         <FlexColumn justifyContent='space-between' height='100%'>
-          <FlexRow width='100%' justifyContent='space-between' alignItems='top'>
-            <TypoNotoSans text='hi' />
-            <FlexRow gap='7px' alignItems='top'>
+          <FlexRow width='100%' justifyContent='space-between' alignItems='flex-start'>
+            <TypoNotoSans text={selectedSearchResult?.place_name} variant='h5' />
+            <FlexRow gap='7px' alignItems='flex-start'>
               <RoundedIconButton size='small' onClick={share}>
-                <IosShareIcon fontSize='small' sx={{ width: '17px', height: '17px' }} />
+                <IosShareIcon {...iconStyle} />
               </RoundedIconButton>
               <RoundedIconButton size='small' onClick={clear}>
-                <CloseIcon fontSize='small' sx={{ width: '17px', height: '17px' }} />
+                <CloseIcon {...iconStyle} />
               </RoundedIconButton>
             </FlexRow>
           </FlexRow>
-          <Button onClick={clear} {...doneButtonStyle}>
+          <Button onClick={add} {...doneButtonStyle}>
             <TypoNotoSans text='추가하기' variant='button' textAlign='center' color='primary' />
           </Button>
         </FlexColumn>
@@ -77,3 +86,7 @@ const RoundedIconButton = styled(IconButton)`
     color: rgb(var(--tertiary-foreground-rgb));
   }
 `;
+const iconStyle = {
+  fontSize: 'small' as const,
+  sx: { width: '17px', height: '17px' },
+};

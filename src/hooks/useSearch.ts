@@ -2,7 +2,12 @@ import { useState, useEffect, useCallback } from 'react';
 import useAlert from './useAlert';
 import { useInjectKakaoMapApi } from 'react-kakao-maps-sdk';
 
-export default function useSearch(value: string, lat: number, lng: number) {
+export default function useSearch(
+  value: string,
+  lat: number,
+  lng: number,
+  setLocation: ({ latitude, longitude }: { latitude?: number | undefined; longitude?: number | undefined }) => void
+) {
   const { open, handleOpen, handleClose } = useAlert();
   const { loading } = useInjectKakaoMapApi({ appkey: process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY!, libraries: ['services', 'clusterer'] });
   const [ps, setPs] = useState<kakao.maps.services.Places>();
@@ -13,6 +18,10 @@ export default function useSearch(value: string, lat: number, lng: number) {
     (selectedSearchResult: kakao.maps.services.PlacesSearchResultItem) => {
       if (!ps) return;
       setSelectedSearchResult(selectedSearchResult);
+      setLocation({
+        latitude: parseFloat(selectedSearchResult.y),
+        longitude: parseFloat(selectedSearchResult.x),
+      });
     },
     [ps]
   );

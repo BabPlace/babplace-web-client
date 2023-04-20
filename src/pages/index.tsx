@@ -1,10 +1,10 @@
-import { useMainMap, useQuery } from '@/hooks';
+import { useMainMap, useQuery, useCustom } from '@/hooks';
 import { LoadableMap, BabMarker, TeamSettingDrawer, SwipeableButton, Guide, ErrorBoundary, Search } from '@/components';
 import { BaseUI, Visible } from '@/layouts';
 
 export default function Home() {
-  const { loading, location, addressName, onCenterChanged } = useMainMap();
-  // const { selects, addSelects } = useCustom();
+  const { loading, location, addressName, setLocation, onCenterChanged } = useMainMap();
+  const { selects, addSelects } = useCustom();
   const { isDefault } = useQuery();
 
   return (
@@ -22,7 +22,7 @@ export default function Home() {
         </Visible>
         <SwipeableButton />
         <TeamSettingDrawer isLoading={loading} addressName={addressName} location={location} />
-        <Search location={location} />
+        <Search location={location} addSelects={addSelects} setLocation={setLocation} />
       </BaseUI>
     </ErrorBoundary>
   );

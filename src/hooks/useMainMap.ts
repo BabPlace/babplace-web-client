@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import { useInjectKakaoMapApi } from 'react-kakao-maps-sdk';
 
 const defaultLocation = {
-  latitude: 37.566826,
-  longitude: 126.9786567,
+  // latitude: 37.566826,
+  // longitude: 126.9786567,
+  latitude: 37.5546788388674,
+  longitude: 126.970606917394,
 };
 
 export default function useMainMap() {
@@ -21,7 +23,6 @@ export default function useMainMap() {
     if (latitude) setLatitude(latitude);
     if (longitude) setLongitude(longitude);
   };
-
   const onCenterChanged = (map: kakao.maps.Map) => {
     setLocation({
       latitude: map.getCenter().getLat(),
@@ -55,5 +56,11 @@ export default function useMainMap() {
     );
   }, []);
 
-  return { loading: loading ? loading : !isLoading, location: { lat: latitude, lng: longitude }, addressName, onCenterChanged };
+  return {
+    loading: loading ? loading : !isLoading,
+    location: { lat: latitude, lng: longitude },
+    addressName,
+    setLocation,
+    onCenterChanged,
+  };
 }
