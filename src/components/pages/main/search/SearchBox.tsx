@@ -12,14 +12,14 @@ type Props = {
 };
 
 const SearchBox = ({ value, handleChange }: Props) => {
-  const { toggleSearch, isSearch, setQuery } = useQuery();
+  const { toggleSearch, isSearch, drawer, setQuery } = useQuery();
 
   const SearchBoxIcon = useMemo(() => {
     return isSearch ? <IosBackIcon /> : <SearchIcon />;
   }, [isSearch]);
 
   return (
-    <Visible visible={true} className={styles.search_box}>
+    <Visible visible={!drawer} className={styles.search_box}>
       <IconButton onClick={toggleSearch}>{SearchBoxIcon}</IconButton>
       <Input
         value={value}

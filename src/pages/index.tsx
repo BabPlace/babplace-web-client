@@ -31,8 +31,8 @@ export default function Home() {
           <BabMarker isCustom={!isDefault} />
         </Visible>
         <SwipeableButton />
-        <Search location={location} addSelects={addSelects} setLocation={setLocation} />
         <TeamSettingDrawer isLoading={loading} addressName={addressName} location={location} selectsLength={selects.length} />
+        <Search location={location} addSelects={addSelects} setLocation={setLocation} />
       </BaseUI>
     </ErrorBoundary>
   );
