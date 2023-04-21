@@ -8,52 +8,36 @@ self.addEventListener('install', (event) => {
 });
 
 // 서비스 워커 캐싱
-self.addEventListener('fetch', function (event) {
+self.addEventListener('fetch', async (event) => {
   // 특정 도메인에서 요청한 리소스만 캐싱
   if (
     event.request.url.startsWith('http://dapi.kakao.com/v2/local/search/') ||
-    event.request.url.startsWith('https://dapi.kakao.com/v2/local/search/') ||
-    event.request.url.startsWith('https://fonts.gstatic.com/')
+    event.request.url.startsWith('https://dapi.kakao.com/v2/local/search/')
   ) {
-    event.respondWith(
-      caches
-        .open('cache-v1')
-        .then((cache) => {
-          return cache
-            .match(event.request)
-            .then((response) => {
-              if (response) {
-                console.log('cache hit!!');
-                return response;
-              } else {
-                return fetch(event.request)
-                  .then((response) => {
-                    // 캐시 메타데이터 설정
-                    var cacheHeaders = new Headers(response.headers);
-                    cacheHeaders.append('Cache-Control', 'max-age=3600');
-                    var cachedResponse = new Response(response.body, {
-                      status: response.status,
-                      statusText: response.statusText,
-                      headers: cacheHeaders,
-                    });
-                    cache.put(event.request, cachedResponse);
-                    return response;
-                  })
-                  .catch((error) => {
-                    console.log(error);
-                  });
-              }
-            })
-            .catch((error) => {
-              return new Response(error);
-            });
-        })
-        .catch((error) => {
-          return new Response(error);
-        })
-    );
-  } else {
-    console.log(event.request.url);
+    try {
+      const cache = await caches.open('cache-v1');
+      const response = await cache.match(event.request);
+      if (response) {
+        console.log('cache hit!!');
+        return response;
+      } else {
+        console.log('cache miss...');
+        const fetchResponse = await fetch(event.request);
+        // 캐시 메타데이터 설정
+        const cacheHeaders = new Headers(fetchResponse.headers);
+        cacheHeaders.append('Cache-Control', 'max-age=3600');
+        const cachedResponse = new Response(fetchResponse.body, {
+          status: fetchResponse.status,
+          statusText: fetchResponse.statusText,
+          headers: cacheHeaders,
+        });
+        await cache.put(event.request, cachedResponse);
+        return fetchResponse;
+      }
+    } catch (error) {
+      // if fetching fails, skip the request
+      // console.log(error);
+    }
   }
 });
 
