@@ -33,6 +33,11 @@ export default function useQuery() {
     return isShow === 'true';
   }, [router.query]);
 
+  const drawer = useMemo(() => {
+    const drawer = router.query.drawer as string;
+    return drawer === 'open';
+  }, [router.query]);
+
   function setQuery(key: string, value?: string) {
     const query = { ...router.query };
     if (value === undefined) {
@@ -62,5 +67,5 @@ export default function useQuery() {
     }
   }, [isSearch]);
 
-  return { isDefault, isCustom, isShow, isSearch, isSelects, setQuery, toggleMode, toggleSearch };
+  return { isDefault, isCustom, isShow, isSearch, isSelects, drawer, setQuery, toggleMode, toggleSearch };
 }

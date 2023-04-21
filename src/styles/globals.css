@@ -68,7 +68,7 @@
   --drawer-button-height: 2.5rem;
   --drawer-list-button-gap: 1.875rem;
 
-  --drawer-maximun-height: 90%;
+  --drawer-maximun-height: calc(var(--max-height) - max(env(safe-area-inset-top), 30px) - 10px);
 
   --drawer-inner-padding-t: 1.25rem;
   --drawer-inner-padding-b: 2.5rem;

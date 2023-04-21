@@ -1,6 +1,6 @@
 import React from 'react';
 import { TypoNotoSans, FlexRow, FlexColumn, SwipeableEdgeDrawer, ProgressButton } from '@/layouts';
-import { Button, IconButton, styled } from '@mui/material';
+import { IconButton, styled } from '@mui/material';
 import { IosShareIcon, CloseIcon } from '@/icons';
 import { addressSumary } from '@/utils';
 
@@ -11,10 +11,11 @@ type Props = {
   share: () => void;
   clear: () => void;
 };
+
 const SearchResultDrawer = ({ isHidden, selectedSearchResult, add, share, clear }: Props) => {
   return (
-    // <SwipeableEdgeDrawer isHidden={isHidden} height={drawerHeight}>
-    <SwipeableEdgeDrawer isHidden={false} height={drawerHeight}>
+    <SwipeableEdgeDrawer isHidden={isHidden} height={drawerHeight}>
+      {/* <SwipeableEdgeDrawer isHidden={false} height={drawerHeight}> */}
       <FlexColumn justifyContent='space-between' height='100%'>
         <FlexRow width='100%' justifyContent='space-between' alignItems='flex-start'>
           <FlexColumn>

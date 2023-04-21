@@ -26,8 +26,10 @@ const SearchBox = ({ value, handleChange }: Props) => {
         placeholder='장소 주소 식당 검색'
         border={false}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          setQuery('search', 'true');
           handleChange(event);
+        }}
+        onFocus={() => {
+          setQuery('search', 'true');
         }}
         textAlign='left'
         className={styles.search_box__input}

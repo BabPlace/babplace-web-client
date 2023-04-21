@@ -1,12 +1,22 @@
 import { useEffect, useRef, useState } from 'react';
+import useQuery from './useQuery';
 
 export default function useDrawer() {
+  const { setQuery } = useQuery();
   const drawerRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
 
   const handleDrawer = (bool: boolean) => {
     setOpen(bool);
   };
+
+  useEffect(() => {
+    if (open) {
+      setQuery('drawer', 'open');
+    } else {
+      setQuery('drawer');
+    }
+  }, [open]);
 
   useEffect(() => {
     function handleClickOutside({ target }: MouseEvent) {
@@ -28,7 +38,7 @@ export default function useDrawer() {
     function handleTouchMove(event: TouchEvent) {
       event.preventDefault();
       if (event.touches.length === 0) return;
-      if (touchDownPosition - event.touches[0].pageY > 20) {
+      if (touchDownPosition - event.touches[0].pageY > 10) {
         handleDrawer(true);
       }
       if (touchDownPosition - event.touches[0].pageY < -20) {

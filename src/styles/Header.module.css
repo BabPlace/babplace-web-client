@@ -9,6 +9,7 @@
   align-items: center;
   padding: env(safe-area-inset-top) 20px 0 20px;
   border-bottom: 1px solid #00000020;
+  border-top: 1px solid #00000020;
   z-index: 4000;
 
   background-color: rgb(var(--primary-background-rgb));
