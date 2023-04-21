@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useInjectKakaoMapApi } from 'react-kakao-maps-sdk';
-import throttle from 'lodash/throttle';
+import debounce from 'lodash/debounce';
 
 export type SetLocation = ({ latitude, longitude }: { latitude?: number | undefined; longitude?: number | undefined }) => void;
 
@@ -31,7 +31,7 @@ export default function useMainMap() {
       longitude: map.getCenter().getLng(),
     });
   };
-  const onCenterChangedThrottled = throttle(onCenterChanged, 850);
+  const onCenterChangedDebounced = debounce(onCenterChanged, 850);
 
   useEffect(() => {
     if (loading || !isLoading) return;
@@ -64,6 +64,6 @@ export default function useMainMap() {
     location: { lat: latitude, lng: longitude },
     addressName,
     setLocation,
-    onCenterChanged: onCenterChangedThrottled,
+    onCenterChanged: onCenterChangedDebounced,
   };
 }
