@@ -47,7 +47,7 @@ const mapStyle = {
   width: '100%',
   zIndex: 0,
   transformOrigin: 'bottom center',
-  transition: 'all 0.35s cubic-bezier(0, 0.3, 0.25, 1.07), height 0.5s ease-in-out',
+  transition: 'all 0.35s ease-out, height 0.5s ease-in-out',
 };
 const mapHideAnimation = {
   transform: 'scale(0.92,  0.92)',
