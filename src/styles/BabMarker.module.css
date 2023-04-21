@@ -7,7 +7,7 @@
   transform: translate(-50%, -10px);
   top: calc((var(--max-height) - var(--drawer-default-height) + var(--border-radius)) / 2);
   animation: fade-in 0.5s cubic-bezier(0.95, -0.01, 0.77, 0.08);
-  transition: bottom 0.5s ease-in-out;
+  transition: top 0.5s ease-in-out;
 }
 .custom {
   top: calc((var(--max-height) - var(--drawer-default-height) + var(--border-radius)) / 2 + var(--drawer-list-height) * 2);
