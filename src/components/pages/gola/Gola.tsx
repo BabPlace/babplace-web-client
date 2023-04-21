@@ -40,7 +40,8 @@ const Gola = ({ isValidUser, restaurants = [] }: Props) => {
                     }}
                   >
                     <div className={styles.card + ' card'}>
-                      <StaticMap marker={false} center={{ lat, lng }} style={mapStyle} level={4} />
+                      {/* TODO : <high> marker -> babmarker */}
+                      <StaticMap marker={{ position: { lat, lng } }} center={{ lat, lng }} style={mapStyle} level={4} />
                       <div className={styles.info}>
                         <FlexRow alignItems='center' justifyContent='space-between'>
                           <TypoNotoSans text={name} variant='h6' />
