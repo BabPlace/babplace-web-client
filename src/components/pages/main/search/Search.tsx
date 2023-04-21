@@ -43,7 +43,7 @@ const Search = ({ location, addSelects, setLocation }: Props) => {
         add={add}
         clear={clear}
         share={share}
-        selectedSearchResult={selectedSearchResult}
+        selectedSearchResult={defaultResult}
       />
       <AlertSnackBar open={open} handleClose={handleClose} message='클립보드에 복사되었습니다' severity='info' />
     </>
@@ -51,3 +51,18 @@ const Search = ({ location, addSelects, setLocation }: Props) => {
 };
 
 export default Search;
+
+const defaultResult: kakao.maps.services.PlacesSearchResultItem = {
+  id: '123',
+  place_name: '서울역',
+  x: '0',
+  y: '0',
+  address_name: '서울 서대문구 홍은동',
+  category_name: '여행 > 관광,명소 > 도보여행 > 둘레길 > 북한산둘레길',
+  phone: 'default',
+  category_group_code: '',
+  category_group_name: 'default',
+  distance: '5319',
+  place_url: 'http://place.map.kakao.com/12544587',
+  road_address_name: '',
+};

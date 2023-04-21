@@ -6,3 +6,4 @@ export { default as makeDataset } from './dataset';
 export { default as cn } from './cn';
 export { default as categoryFormat } from './categoryFormat';
 export { default as splitByValue } from './splitByValue';
+export { default as addressSumary } from './addressSumary';

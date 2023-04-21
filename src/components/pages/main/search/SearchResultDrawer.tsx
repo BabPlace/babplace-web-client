@@ -1,7 +1,8 @@
 import React from 'react';
-import { TypoNotoSans, FlexRow, FlexColumn, SwipeableEdgeDrawer } from '@/layouts';
+import { TypoNotoSans, FlexRow, FlexColumn, SwipeableEdgeDrawer, ProgressButton } from '@/layouts';
 import { Button, IconButton, styled } from '@mui/material';
 import { IosShareIcon, CloseIcon } from '@/icons';
+import { addressSumary } from '@/utils';
 
 type Props = {
   isHidden: boolean;
@@ -12,11 +13,18 @@ type Props = {
 };
 const SearchResultDrawer = ({ isHidden, selectedSearchResult, add, share, clear }: Props) => {
   return (
-    <SwipeableEdgeDrawer isHidden={isHidden} height={drawerHeight}>
-      {/* <SwipeableEdgeDrawer isHidden={false} height={drawerHeight}> */}
+    // <SwipeableEdgeDrawer isHidden={isHidden} height={drawerHeight}>
+    <SwipeableEdgeDrawer isHidden={false} height={drawerHeight}>
       <FlexColumn justifyContent='space-between' height='100%'>
         <FlexRow width='100%' justifyContent='space-between' alignItems='flex-start'>
-          <TypoNotoSans text={selectedSearchResult?.place_name} variant='h5' />
+          <FlexColumn>
+            <TypoNotoSans text={selectedSearchResult?.place_name} variant='h5' />
+            <TypoNotoSans
+              text={addressSumary(selectedSearchResult) + ' 근처'}
+              variant='body2'
+              color='rgba(var(--secondary-foreground-rgba))'
+            />
+          </FlexColumn>
           <FlexRow gap='7px' alignItems='flex-start'>
             <RoundedIconButton size='small' onClick={share}>
               <IosShareIcon {...iconStyle} />
@@ -26,9 +34,9 @@ const SearchResultDrawer = ({ isHidden, selectedSearchResult, add, share, clear 
             </RoundedIconButton>
           </FlexRow>
         </FlexRow>
-        <Button onClick={add} {...doneButtonStyle}>
+        <ProgressButton onClick={add} {...doneButtonStyle}>
           <TypoNotoSans text='추가하기' variant='button' textAlign='center' color='primary' />
-        </Button>
+        </ProgressButton>
       </FlexColumn>
     </SwipeableEdgeDrawer>
   );
