@@ -1,4 +1,5 @@
 import React from 'react';
+import RoundButton from './RoundButton';
 import { Button, ButtonTypeMap, CircularProgress } from '@mui/material';
 
 type Props = {
@@ -8,11 +9,11 @@ type Props = {
 } & ButtonTypeMap['props'] &
   React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-const ProgressButton = ({ children, style, isLoaded, ...props }: Props) => {
+const ProgressButton = ({ children, style, isLoaded = true, ...props }: Props) => {
   return (
-    <Button sx={{ ...props.sx, height: 'var(--button-default-height)', borderRadius: 'var(--border-radius)' }} {...props}>
+    <RoundButton sx={{ ...props.sx, height: 'var(--button-default-height)' }} {...props}>
       {isLoaded ? children : <CircularProgress size={24} sx={{ color: 'rgb(var(--primary-background-rgb))' }} />}
-    </Button>
+    </RoundButton>
   );
 };
 
