@@ -10,7 +10,7 @@ type Props = {
 
 const ProgressButton = ({ children, style, isLoaded, ...props }: Props) => {
   return (
-    <Button sx={{ ...props.sx, height: 'var(--button-default-height)' }} {...props}>
+    <Button sx={{ ...props.sx, height: 'var(--button-default-height)', borderRadius: 'var(--border-radius)' }} {...props}>
       {isLoaded ? children : <CircularProgress size={24} sx={{ color: 'rgb(var(--primary-background-rgb))' }} />}
     </Button>
   );
