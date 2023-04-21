@@ -23,16 +23,16 @@ export default function useDrawer() {
   useEffect(() => {
     let touchDownPosition = 0;
     function handleTouchStart(event: TouchEvent) {
-      event.stopPropagation();
+      event.preventDefault();
       touchDownPosition = event.touches[0].pageY;
     }
     function handleTouchMove(event: TouchEvent) {
-      event.stopPropagation();
+      event.preventDefault();
       if (event.touches.length === 0) return;
-      if (touchDownPosition - event.touches[0].pageY > 40) {
+      if (touchDownPosition - event.touches[0].pageY > 20) {
         handleDrawer(true);
       }
-      if (touchDownPosition - event.touches[0].pageY < -40) {
+      if (touchDownPosition - event.touches[0].pageY < -20) {
         handleDrawer(false);
       }
     }
