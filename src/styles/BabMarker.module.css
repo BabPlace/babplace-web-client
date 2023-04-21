@@ -5,12 +5,12 @@
   border-radius: 50%;
   left: 50%;
   transform: translate(-50%, -10px);
-  bottom: calc((100vh - var(--drawer-default-height) + var(--border-radius) + 7px));
+  top: calc((var(--max-height) - var(--drawer-default-height) + var(--border-radius)) / 2);
   animation: fade-in 0.5s cubic-bezier(0.95, -0.01, 0.77, 0.08);
   transition: bottom 0.5s ease-in-out;
 }
 .custom {
-  bottom: 50vh;
+  top: calc((var(--max-height) - var(--drawer-default-height) + var(--border-radius)) / 2 + var(--drawer-list-height) * 2);
 }
 .container::after {
   position: absolute;

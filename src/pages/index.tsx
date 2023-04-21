@@ -14,7 +14,7 @@ export default function Home() {
         <LoadableMap
           isLoading={loading}
           center={location}
-          style={{ ...mapStyle, height: !isDefault ? '100svh' : mapDefaultHeight }}
+          style={{ ...mapStyle, height: !isDefault ? mapCustomHeight : mapDefaultHeight }}
           onCenterChanged={onCenterChanged}
         />
         <Visible visible={!loading}>
@@ -30,7 +30,8 @@ export default function Home() {
 
 const title = '골라줘밥 🍚';
 const description = '친구들과 함께 오늘 메뉴를 골라골라 🍚';
-const mapDefaultHeight = 'calc(var(--max-height) - var(--drawer-default-height) + var(--border-radius) + 7px)';
+const mapDefaultHeight = 'calc(var(--max-height) - var(--drawer-default-height) + var(--border-radius))';
+const mapCustomHeight = 'calc(var(--max-height) - var(--drawer-default-height) + var(--drawer-list-height) * 2)';
 const mapStyle = {
   overflow: 'hidden',
   width: '100%',
