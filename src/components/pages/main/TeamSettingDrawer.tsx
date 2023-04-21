@@ -81,7 +81,9 @@ const TeamSettingDrawer = ({ isLoading, addressName, selectsLength, location }: 
         <ProgressButton
           isLoaded={isLoaded}
           onClick={onClick}
-          disabled={isLoading || name === '' || isCountError.state || isNameError.state || selectsLength === 0}
+          disabled={
+            isLoading || name === '' || (isDefault && isCountError.state) || isNameError.state || (!isDefault && selectsLength === 0)
+          }
           {...doneButtonStyle}
         >
           <TypoNotoSans text='완료' variant='button' textAlign='center' />
