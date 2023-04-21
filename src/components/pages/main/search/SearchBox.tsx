@@ -28,7 +28,7 @@ const SearchBox = ({ value, handleChange }: Props) => {
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           handleChange(event);
         }}
-        onFocus={() => {
+        onClick={() => {
           setQuery('search', 'true');
         }}
         textAlign='left'
