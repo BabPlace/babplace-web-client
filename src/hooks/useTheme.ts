@@ -47,6 +47,13 @@ export default function useTheme() {
   );
 
   useEffect(() => {
+    // @ts-ignore
+    if (window.navigator.standalone) {
+      document.documentElement.style.setProperty('--max-height', '100lvh');
+    }
+  }, []);
+
+  useEffect(() => {
     if (prefersDarkMode) setMode('dark');
     else setMode('light');
   }, [prefersDarkMode]);

@@ -1,7 +1,9 @@
 .container {
   overflow-y: scroll;
   padding: 15px 25px;
-  height: calc(var(--max-height) - var(--header-default-height));
+  position: fixed;
+  bottom: 0;
+  height: calc(var(--max-height) - calc(var(--header-default-height) + env(safe-area-inset-top)));
 }
 
 .losers {

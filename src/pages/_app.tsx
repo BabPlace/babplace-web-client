@@ -1,4 +1,5 @@
 import { useEffect, createContext } from 'react';
+import Head from 'next/head';
 import { ThemeProvider } from '@mui/material';
 import { useTheme } from '@/hooks';
 import createEmotionCache from '@/utils/createEmotionCache';
@@ -28,12 +29,18 @@ export default function App({ Component, emotionCache = clientSideEmotionCache, 
   }, []);
 
   return (
-    <CacheProvider value={emotionCache}>
-      <ColorModeContext.Provider value={colorMode}>
-        <ThemeProvider theme={theme}>
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </ColorModeContext.Provider>
-    </CacheProvider>
+    <>
+      <Head>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, viewport-fit=cover' />
+        <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
+      </Head>
+      <CacheProvider value={emotionCache}>
+        <ColorModeContext.Provider value={colorMode}>
+          <ThemeProvider theme={theme}>
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </ColorModeContext.Provider>
+      </CacheProvider>
+    </>
   );
 }

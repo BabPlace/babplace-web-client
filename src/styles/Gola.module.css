@@ -1,5 +1,6 @@
 .container {
-  padding: var(--gola-padding-t) var(--gola-padding-r) var(--gola-padding-b) var(--gola-padding-l);
+  padding: calc(var(--gola-padding-t) + env(safe-area-inset-top)) var(--gola-padding-r)
+    calc(var(--gola-padding-b) + env(safe-area-inset-bottom)) var(--gola-padding-l);
   height: 100%;
   display: flex;
   flex-direction: column;

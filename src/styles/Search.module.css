@@ -48,8 +48,11 @@
 
 /* Search Box */
 .search_box {
-  position: fixed;
-  top: 0;
+  position: absolute;
+  top: env(safe-area-inset-top);
+
+  bottom: 500px;
+  bottom: calc(100svh - var(--search-box-height));
   left: 0;
   right: 0;
   margin: var(--search-box-margin-tb) auto;

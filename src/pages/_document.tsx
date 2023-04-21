@@ -8,14 +8,14 @@ export default class MyDocument extends Document {
     return (
       <Html lang='en'>
         <Head>
-          <meta name='theme-color' content='#47b8e0'></meta>
+          <meta name='theme-color' content='var(--primary-background-hex)'></meta>
+          <meta name='msapplication-TileColor' content='rgb(var(--primary-background-rgb))'></meta>
           <link rel='manifest' href='/manifest.json' />
           {/* favicon */}
           <link href='/favicons/favicon-16x16.png' rel='icon' type='image/png' sizes='16x16' />
           <link href='/favicons/favicon-32x32.png' rel='icon' type='image/png' sizes='32x32' />
           {/* app icon */}
           <link rel='apple-touch-icon' href='/icons/icon-192x192.png'></link>
-          <meta name='msapplication-TileColor' content='#47b8e0'></meta>
           {/* splash screen */}
           <meta name='apple-mobile-web-app-capable' content='yes'></meta>
           <link

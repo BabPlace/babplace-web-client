@@ -2,7 +2,7 @@
   position: absolute;
   width: 100%;
 
-  bottom: calc(var(--drawer-default-height) - var(--header-default-height));
+  bottom: var(--drawer-default-height);
   padding: 5px 10px;
   overflow: auto;
   white-space: nowrap;
