@@ -23,7 +23,6 @@ export default function useDrawer() {
   useEffect(() => {
     let touchDownPosition = 0;
     function handleTouchStart(event: TouchEvent) {
-      event.preventDefault();
       touchDownPosition = event.touches[0].pageY;
     }
     function handleTouchMove(event: TouchEvent) {
