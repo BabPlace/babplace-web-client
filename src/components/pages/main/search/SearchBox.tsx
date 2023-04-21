@@ -1,8 +1,8 @@
 import React from 'react';
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useQuery } from '@/hooks';
 import { Visible, Input } from '@/layouts';
-import { SearchIcon, MapIcon } from '@/icons';
+import { SearchIcon, IosBackIcon } from '@/icons';
 import { IconButton } from '@mui/material';
 import styles from '@/styles/Search.module.css';
 
@@ -15,7 +15,7 @@ const SearchBox = ({ value, handleChange }: Props) => {
   const { toggleSearch, isSearch, setQuery } = useQuery();
 
   const SearchBoxIcon = useMemo(() => {
-    return isSearch ? <MapIcon /> : <SearchIcon />;
+    return isSearch ? <IosBackIcon /> : <SearchIcon />;
   }, [isSearch]);
 
   return (

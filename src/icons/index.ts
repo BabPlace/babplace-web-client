@@ -37,6 +37,7 @@ export { default as Diversity3Icon } from '@mui/icons-material/Diversity3Outline
 export { default as LocalPharmacyIcon } from '@mui/icons-material/LocalPharmacyOutlined';
 
 export { default as IosShareIcon } from '@mui/icons-material/IosShareRounded';
+export { default as IosBackIcon } from '@mui/icons-material/ArrowBackIosRounded';
 
 export { default as MenuIcon } from '@mui/icons-material/MenuRounded';
 export { default as FootPrintIcon } from './FootPrintIcon';
