@@ -18,10 +18,8 @@ self.addEventListener('fetch', async (event) => {
       const cache = await caches.open('cache-v1');
       const response = await cache.match(event.request);
       if (response) {
-        console.log('cache hit!!');
         return response;
       } else {
-        console.log('cache miss...');
         const fetchResponse = await fetch(event.request);
         // 캐시 메타데이터 설정
         const cacheHeaders = new Headers(fetchResponse.headers);
@@ -36,7 +34,6 @@ self.addEventListener('fetch', async (event) => {
       }
     } catch (error) {
       // if fetching fails, skip the request
-      // console.log(error);
     }
   }
 });
