@@ -1,6 +1,6 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
-import { Map, MapMarker, useInjectKakaoMapApi } from 'react-kakao-maps-sdk';
+import { StaticMap, useInjectKakaoMapApi } from 'react-kakao-maps-sdk';
 import { IconButton } from '@mui/material';
 import { Header, Guide } from '@/components';
 import { BaseUI, FlexRow, TypoNotoSans } from '@/layouts';
@@ -40,9 +40,7 @@ const Gola = ({ isValidUser, restaurants = [] }: Props) => {
                     }}
                   >
                     <div className={styles.card + ' card'}>
-                      <Map center={{ lat, lng }} style={mapStyle} level={5}>
-                        <MapMarker position={{ lat, lng }} />
-                      </Map>
+                      <StaticMap marker={false} center={{ lat, lng }} style={mapStyle} level={4} />
                       <div className={styles.info}>
                         <FlexRow alignItems='center' justifyContent='space-between'>
                           <TypoNotoSans text={name} variant='h6' />
