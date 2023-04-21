@@ -1,4 +1,4 @@
-import React, { ComponentProps } from 'react';
+import React, { useState, ComponentProps, useEffect } from 'react';
 import { Map } from 'react-kakao-maps-sdk';
 import Loading from './Loading';
 
@@ -8,7 +8,13 @@ type Props = ComponentProps<typeof Map> & {
 };
 
 const LoadableMap = ({ isLoading, ...props }: Props) => {
-  return isLoading ? <Loading {...props.style} /> : <Map {...props} />;
+  const [map, setMap] = useState<kakao.maps.Map>();
+
+  useEffect(() => {
+    if (map) map.relayout();
+  }, [map, props.style]);
+
+  return isLoading ? <Loading {...props.style} /> : <Map onCreate={setMap} {...props} />;
 };
 
 export default LoadableMap;
