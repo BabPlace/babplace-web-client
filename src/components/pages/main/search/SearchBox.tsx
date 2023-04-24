@@ -1,5 +1,4 @@
-import React from 'react';
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useQuery } from '@/hooks';
 import { Visible, Input } from '@/layouts';
 import { SearchIcon, IosBackIcon } from '@/icons';
@@ -12,7 +11,7 @@ type Props = {
 };
 
 const SearchBox = ({ value, handleChange }: Props) => {
-  const { toggleSearch, isSearch, drawer, setQuery } = useQuery();
+  const { isSearch, drawer, toggleSearch, setQuery } = useQuery();
 
   const SearchBoxIcon = useMemo(() => {
     return isSearch ? <IosBackIcon /> : <SearchIcon />;

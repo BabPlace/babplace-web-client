@@ -1,4 +1,4 @@
-// 서비스 워커 설치
+// 서비스 워커 설치 - 오프라인 설정
 // self.addEventListener('install', (event) => {
 //   event.waitUntil(
 //     caches.open('cache-v1').then((cache) => {
@@ -9,7 +9,6 @@
 
 // 서비스 워커 캐싱
 self.addEventListener('fetch', async (event) => {
-  // 특정 도메인에서 요청한 리소스만 캐싱
   if (
     event.request.url.startsWith('http://dapi.kakao.com/v2/local/search/') ||
     event.request.url.startsWith('https://dapi.kakao.com/v2/local/search/')
@@ -23,7 +22,6 @@ self.addEventListener('fetch', async (event) => {
         return response;
       } else {
         const fetchResponse = await fetch(event.request);
-        // 캐시 메타데이터 설정
         const cacheHeaders = new Headers(fetchResponse.headers);
         cacheHeaders.append('Cache-Control', 'max-age=3600');
         const cachedResponse = new Response(fetchResponse.body, {
