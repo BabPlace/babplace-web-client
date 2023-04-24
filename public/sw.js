@@ -1,11 +1,11 @@
 // 서비스 워커 설치
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open('cache-v1').then((cache) => {
-      return cache.addAll(['/']);
-    })
-  );
-});
+// self.addEventListener('install', (event) => {
+//   event.waitUntil(
+//     caches.open('cache-v1').then((cache) => {
+//       return cache.addAll(['/']);
+//     })
+//   );
+// });
 
 // 서비스 워커 캐싱
 self.addEventListener('fetch', async (event) => {
@@ -18,6 +18,8 @@ self.addEventListener('fetch', async (event) => {
       const cache = await caches.open('cache-v1');
       const response = await cache.match(event.request);
       if (response) {
+        console.log('cache hit!!');
+        console.log(response);
         return response;
       } else {
         const fetchResponse = await fetch(event.request);
