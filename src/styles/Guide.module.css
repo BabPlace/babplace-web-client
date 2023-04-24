@@ -15,7 +15,10 @@
   transform: translate(-50%, +50%);
 }
 
-.mySwiper {
-  height: 100%;
-  width: 100%;
+.delay {
+  transition: opacity 0.3s 0.3s ease-in-out, visibility 0.3s 0.3s ease-in-out, background, color 0.5s ease-in-out;
+}
+
+.nodelay {
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, background, color 0.5s ease-in-out;
 }

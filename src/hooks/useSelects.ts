@@ -1,8 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import type { SelectPlace } from '@/interfaces';
 
 export default function useSelect() {
   const [selects, setSelects] = useState<SelectPlace[]>([]);
+  const [isShow, setIsShow] = useState(false);
+
+  function show() {
+    setIsShow(true);
+  }
+
+  function hide() {
+    setIsShow(false);
+  }
 
   function addSelects(select: SelectPlace) {
     setSelects([...selects, select]);
@@ -20,5 +29,5 @@ export default function useSelect() {
     setSelects([]);
   }
 
-  return { selects, addSelects, removeSelects, removeSelectsByIndex, clearSelects };
+  return { isShow, selects, show, hide, addSelects, removeSelects, removeSelectsByIndex, clearSelects };
 }

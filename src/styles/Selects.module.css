@@ -1,16 +1,17 @@
-.container {
-  position: fixed;
-  max-width: var(--guide-max-width);
-  max-height: var(--guide-max-height);
+.items {
+  list-style: none;
+  padding: 30px 30px 0;
+  overflow-y: scroll;
+}
 
-  margin: auto;
-  padding: 30px 5px 15px 5px;
-  border-radius: var(--border-radius);
-
-  width: calc(100% - var(--guide-default-margin) * 2);
-  height: calc(100% - var(--guide-default-margin) * 2);
-
-  bottom: 50%;
-  left: 50%;
-  transform: translate(-50%, +50%);
+.item {
+  /* overflow-y: scroll; */
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(var(--secondary-foreground-rgba));
+}
+.item:last-child {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-bottom: none;
 }

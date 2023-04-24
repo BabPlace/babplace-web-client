@@ -1,9 +1,10 @@
 import React from 'react';
-import cn from 'classnames';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation, Pagination } from 'swiper';
-import { Button, Backdrop } from '@mui/material';
+import Modal from '../modal/Modal';
 import { FlexColumn, FlexRow, TypoNotoSans } from '@/layouts';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Button } from '@mui/material';
+import SwiperCore, { Navigation, Pagination } from 'swiper';
+import { useGuide } from '@/hooks';
 import {
   VeryDissatisfiedIcon,
   SatisfiedAltIcon,
@@ -14,38 +15,28 @@ import {
   RestaurantIcon,
   RouteIcon,
 } from '@/icons';
-import { useGuide } from '@/hooks';
-
 import styled from '@emotion/styled';
-import styles from '@/styles/Guide.module.css';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-type Props = {
-  page?: string;
-};
-
-const Guide = ({ page = 'main' }: Props) => {
-  const { isShow, hide, doNotShowAgain } = useGuide(page);
+const HowToUse = () => {
+  const { isShow, hide, doNotShowAgain } = useGuide('main');
   SwiperCore.use([Navigation, Pagination]);
   return (
-    <>
-      <Backdrop open={isShow} onClick={hide} sx={{ zIndex: 'var(--guide-show-z-index)' }} />
-      <Container isShow={isShow} className={cn(styles.container)}>
-        <FlexColumn justifyContent='space-between' alignItems='center' height='100%'>
-          <GuideHeader />
-          <GuideBody />
-          <GuideFooter doNotShowAgain={doNotShowAgain} />
-        </FlexColumn>
-      </Container>
-    </>
+    <Modal isShow={isShow} hide={hide}>
+      <FlexColumn justifyContent='space-between' alignItems='center' height='100%'>
+        <HowToUseHeader />
+        <HowToUseBody />
+        <HowToUseFooter doNotShowAgain={doNotShowAgain} />
+      </FlexColumn>
+    </Modal>
   );
 };
 
-export default Guide;
+export default HowToUse;
 
-const GuideHeader = () => {
+const HowToUseHeader = () => {
   return (
     <div>
       <TypoNotoSans text='🍚  골라밥 사용방법  🍚' variant='h6' textAlign='center' marginBottom='10px' />
@@ -60,10 +51,11 @@ const GuideHeader = () => {
   );
 };
 
-const GuideBody = () => {
+const HowToUseBody = () => {
   const bodyTypoStyle = { variant: 'body1' as const, noWrap: false };
+  const swiperStyle = { width: '100%', height: '100%' };
   return (
-    <Swiper navigation={true} pagination={{ clickable: true }} spaceBetween={50} className={styles.mySwiper}>
+    <Swiper navigation={true} pagination={{ clickable: true }} spaceBetween={50} style={swiperStyle}>
       <SwiperSlide>
         <SwiperSlideItem>
           <FlexRow alignItems='center' justifyContent='flex-start' gap='10px'>
@@ -116,21 +108,13 @@ const GuideBody = () => {
   );
 };
 
-const GuideFooter = ({ doNotShowAgain }: { doNotShowAgain: () => void }) => {
+const HowToUseFooter = ({ doNotShowAgain }: { doNotShowAgain: () => void }) => {
   return (
-    <Button onClick={doNotShowAgain} className={styles.donot_button}>
+    <Button onClick={doNotShowAgain}>
       <TypoNotoSans variant='caption' text='다시 보지 않기' color='rgb(var(--caption-foreground-rgba))' />
     </Button>
   );
 };
-
-const Container = styled.div<{ isShow: boolean }>`
-  opacity: ${({ isShow }) => (isShow ? 1 : 0)};
-  visibility: ${({ isShow }) => (isShow ? 'visible' : 'hidden')};
-  z-index: ${({ isShow }) => (isShow ? 'var(--guide-show-z-index)' : 'var(--guide-hide-z-index)')};
-  background: rgb(var(--primary-background-rgb));
-  transition: opacity 0.3s 0.3s ease-in-out, visibility 0.3s 0.3s ease-in-out, background, color, border-color 0.5s ease-in-out;
-`;
 
 const SwiperSlideItem = styled.div`
   padding: 30px 50px;

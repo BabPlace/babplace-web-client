@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { useInput, useSelectedButton, useCreateTeam, useQuery } from '@/hooks';
-import { Input, FlexColumn, ProgressButton, ButtonGroup, TypoNotoSans, SwipeableEdgeDrawer } from '@/layouts';
-import { BusIcon, BikeIcon, FootPrintIcon } from '@/icons';
+import { Input, FlexColumn, ProgressButton, ButtonGroup, TypoNotoSans, SwipeableEdgeDrawer, FlexRow } from '@/layouts';
+import { BusIcon, BikeIcon, FootPrintIcon, FormatListIcon } from '@/icons';
 import styles from '@/styles/SwipeableEdgeDrawer.module.css';
 import styled from '@emotion/styled';
 import { SelectsContext } from '@/components/context';
+import { IconButton } from '@mui/material';
 
 type Props = {
   isLoading: boolean;
@@ -16,7 +17,7 @@ type Props = {
 };
 
 const TeamSettingDrawer = ({ isLoading, addressName, location }: Props) => {
-  const { selects } = useContext(SelectsContext);
+  const { selects, show } = useContext(SelectsContext);
   const { value: name, isError: isNameError, handleChange: handleNameChange } = useInput('');
   const { value: count, isError: isCountError, handleChange: handleCountChange } = useInput(7);
   const { isDefault } = useQuery();
@@ -73,7 +74,12 @@ const TeamSettingDrawer = ({ isLoading, addressName, location }: Props) => {
           <DefaultListItem className={styles.list_item} isCustom={isDefault} type='custom' noBorder={true}>
             <TypoNotoSans text='선택 식당수' {...liTitleOptions} />
             <div className={styles.list_item__content}>
-              <TypoNotoSans text={selects.length} className={styles.list_item__content} textAlign='center' />
+              <FlexRow alignItems='center'>
+                <TypoNotoSans text={selects.length} className={styles.list_item__content} textAlign='center' />
+                <IconButton onClick={show} size='small'>
+                  <FormatListIcon />
+                </IconButton>
+              </FlexRow>
             </div>
           </DefaultListItem>
           <EmptyListItem className={styles.list_item} isCustom={false} />
@@ -82,7 +88,7 @@ const TeamSettingDrawer = ({ isLoading, addressName, location }: Props) => {
           isLoaded={isLoaded}
           onClick={onClick}
           disabled={
-            isLoading || name === '' || (isDefault && isCountError.state) || isNameError.state || (!isDefault && selectsLength === 0)
+            isLoading || name === '' || (isDefault && isCountError.state) || isNameError.state || (!isDefault && selects.length === 0)
           }
           {...doneButtonStyle}
         >

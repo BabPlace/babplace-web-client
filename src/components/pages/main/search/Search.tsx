@@ -5,7 +5,6 @@ import SearchResultBox from './SearchResultBox';
 import SearchResultDrawer from './SearchResultDrawer';
 import { AlertSnackBar } from '@/components';
 import type { SetLocation } from '@/hooks/useMainMap';
-import type { SelectPlace } from '@/interfaces';
 
 type Props = {
   location: { lat: number; lng: number };

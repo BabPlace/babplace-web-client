@@ -1,0 +1,50 @@
+.container {
+  position: fixed;
+  z-index: 3;
+
+  width: 300px;
+  height: 120px;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+
+  background: rgb(var(--primary-background-rgb));
+  border-radius: var(--border-radius);
+  /* box-shadow: var(--box-shadow-card); */
+}
+
+.fc {
+  height: 100%;
+}
+
+.title {
+  border-bottom: 1px solid rgb(var(--secondary-background-rgb));
+}
+.title,
+.buttons {
+  height: 50%;
+  width: 100%;
+}
+
+.button {
+  width: 50%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.button:first-child {
+  border-right: 1px solid rgb(var(--secondary-background-rgb));
+}
+
+/* .center {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  margin: auto;
+} */

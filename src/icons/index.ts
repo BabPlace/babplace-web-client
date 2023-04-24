@@ -47,6 +47,8 @@ export { default as SvgIcon } from './SvgIcon';
 export { default as ErrorIcon } from './ErrorIcon';
 
 export { default as CategoryIcon } from './CategoryIcon';
+export { default as RemoveIcon } from '@mui/icons-material/RemoveCircleRounded';
+export { default as FormatListIcon } from '@mui/icons-material/FormatListBulletedRounded';
 
 // import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 // import CloseRoundedIcon from '@mui/icons-material/CloseRounded';

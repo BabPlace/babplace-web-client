@@ -5,3 +5,5 @@ export * from './header';
 export * from './guide';
 export * from './snackbar';
 export * from './context';
+export * from './modal';
+export * from './alert';

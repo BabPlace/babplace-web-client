@@ -1,5 +1,15 @@
 import { useMainMap, useQuery } from '@/hooks';
-import { LoadableMap, BabMarker, TeamSettingDrawer, SwipeableButton, Guide, ErrorBoundary, Search, PWAGuide } from '@/components';
+import {
+  LoadableMap,
+  BabMarker,
+  TeamSettingDrawer,
+  SwipeableButton,
+  HowToUse,
+  ErrorBoundary,
+  Search,
+  PWAGuide,
+  Selects,
+} from '@/components';
 import { BaseUI, Visible } from '@/layouts';
 
 export default function Home() {
@@ -19,7 +29,7 @@ export default function Home() {
   return (
     <ErrorBoundary>
       <BaseUI title={title} description={description} bodyStyle={{ marginTop: '0px', backgroundColor: 'black' }}>
-        <Guide />
+        <HowToUse />
         {/* <PWAGuide /> */}
         <LoadableMap
           isLoading={loading}
@@ -33,7 +43,7 @@ export default function Home() {
         <SwipeableButton />
         <TeamSettingDrawer isLoading={loading} addressName={addressName} location={location} />
         <Search location={location} setLocation={setLocation} />
-        {/* <Selects /> */}
+        <Selects />
       </BaseUI>
     </ErrorBoundary>
   );
