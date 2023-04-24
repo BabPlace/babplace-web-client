@@ -1,10 +1,9 @@
-import { useMainMap, useQuery, useCustom } from '@/hooks';
-import { LoadableMap, BabMarker, TeamSettingDrawer, SwipeableButton, Guide, ErrorBoundary, Search } from '@/components';
+import { useMainMap, useQuery } from '@/hooks';
+import { LoadableMap, BabMarker, TeamSettingDrawer, SwipeableButton, Guide, ErrorBoundary, Search, PWAGuide } from '@/components';
 import { BaseUI, Visible } from '@/layouts';
 
 export default function Home() {
   const { loading, location, addressName, setLocation, onCenterChanged } = useMainMap();
-  const { selects, addSelects } = useCustom();
   const { isDefault, drawer } = useQuery();
 
   const getMapStyle = (drawer: boolean) => {
@@ -21,6 +20,7 @@ export default function Home() {
     <ErrorBoundary>
       <BaseUI title={title} description={description} bodyStyle={{ marginTop: '0px', backgroundColor: 'black' }}>
         <Guide />
+        {/* <PWAGuide /> */}
         <LoadableMap
           isLoading={loading}
           center={location}
@@ -31,8 +31,9 @@ export default function Home() {
           <BabMarker isCustom={!isDefault} />
         </Visible>
         <SwipeableButton />
-        <TeamSettingDrawer isLoading={loading} addressName={addressName} location={location} selectsLength={selects.length} />
-        <Search location={location} addSelects={addSelects} setLocation={setLocation} />
+        <TeamSettingDrawer isLoading={loading} addressName={addressName} location={location} />
+        <Search location={location} setLocation={setLocation} />
+        {/* <Selects /> */}
       </BaseUI>
     </ErrorBoundary>
   );

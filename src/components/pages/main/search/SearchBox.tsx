@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
+import cn from 'classnames';
 import { useQuery } from '@/hooks';
-import { Visible, Input } from '@/layouts';
+import { Input } from '@/layouts';
 import { SearchIcon, IosBackIcon } from '@/icons';
 import { IconButton } from '@mui/material';
 import styles from '@/styles/Search.module.css';
@@ -18,7 +19,7 @@ const SearchBox = ({ value, handleChange }: Props) => {
   }, [isSearch]);
 
   return (
-    <Visible visible={!drawer} className={styles.search_box}>
+    <div className={cn(styles.search_box, drawer ? styles.scale_down : '')}>
       <IconButton onClick={toggleSearch}>{SearchBoxIcon}</IconButton>
       <Input
         value={value}
@@ -31,7 +32,7 @@ const SearchBox = ({ value, handleChange }: Props) => {
         textAlign='left'
         className={styles.search_box__input}
       />
-    </Visible>
+    </div>
   );
 };
 

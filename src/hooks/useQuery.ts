@@ -6,7 +6,7 @@ export default function useQuery() {
 
   const isDefault = useMemo(() => {
     const mode = router.query.mode as string;
-    if (mode === 'custom' || mode === 'search' || mode === 'selects') return false;
+    if (mode === 'custom' || mode === 'search' || mode === 'selects' || mode === 'pwa') return false;
     return true;
   }, [router.query]);
 

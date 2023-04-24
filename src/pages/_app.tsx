@@ -1,32 +1,19 @@
-import { useEffect, createContext } from 'react';
+import React from 'react';
 import Head from 'next/head';
-import { ThemeProvider } from '@mui/material';
-import { useTheme } from '@/hooks';
-import createEmotionCache from '@/utils/createEmotionCache';
-import { CacheProvider } from '@emotion/react';
 import type { AppProps } from 'next/app';
+import { ThemeProvider } from '@mui/material';
+import { CacheProvider } from '@emotion/react';
+import createEmotionCache from '@/utils/createEmotionCache';
+import { ColorModeContext, SelectsContext } from '@/components';
+import { useTheme, useSelects, useServiceWorker } from '@/hooks';
 import '@/styles/globals.css';
 
 const clientSideEmotionCache = createEmotionCache();
 
-export const ColorModeContext = createContext<{ toggleColorMode: () => void; mode: 'light' | 'dark' }>({
-  toggleColorMode: () => {},
-  mode: 'light',
-});
-
 export default function App({ Component, emotionCache = clientSideEmotionCache, pageProps }: AppProps & { emotionCache: any }) {
   const { colorMode, theme } = useTheme();
-
-  useEffect(() => {
-    if ('serviceWorker' in navigator) {
-      const registInit = async () => {
-        const registration = await navigator.serviceWorker.register('/sw.js');
-
-        registration.waiting?.postMessage('SKIP_WAITING');
-      };
-      registInit();
-    }
-  }, []);
+  const selects = useSelects();
+  useServiceWorker();
 
   return (
     <>
@@ -36,9 +23,11 @@ export default function App({ Component, emotionCache = clientSideEmotionCache, 
       </Head>
       <CacheProvider value={emotionCache}>
         <ColorModeContext.Provider value={colorMode}>
-          <ThemeProvider theme={theme}>
-            <Component {...pageProps} />
-          </ThemeProvider>
+          <SelectsContext.Provider value={selects}>
+            <ThemeProvider theme={theme}>
+              <Component {...pageProps} />
+            </ThemeProvider>
+          </SelectsContext.Provider>
         </ColorModeContext.Provider>
       </CacheProvider>
     </>

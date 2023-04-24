@@ -1,12 +1,14 @@
-import { useCallback } from 'react';
+import { useCallback, useContext } from 'react';
 import useAlert from './useAlert';
+import type { SelectPlace } from '@/interfaces';
+import { SelectsContext } from '@/components/context';
 
 export default function useSearchResultDrawerButtons(
-  selectedSearchResult: kakao.maps.services.PlacesSearchResultItem | null,
+  selectedSearchResult: SelectPlace | null,
   reset: () => void,
-  clearSelectedSearchResult: () => void,
-  addSelects: (newSelect: kakao.maps.services.PlacesSearchResultItem) => void
+  clearSelectedSearchResult: () => void
 ) {
+  const { addSelects } = useContext(SelectsContext);
   const { open, handleOpen, handleClose } = useAlert();
   const clear = () => {
     reset();

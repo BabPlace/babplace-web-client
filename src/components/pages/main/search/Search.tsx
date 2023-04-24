@@ -5,23 +5,18 @@ import SearchResultBox from './SearchResultBox';
 import SearchResultDrawer from './SearchResultDrawer';
 import { AlertSnackBar } from '@/components';
 import type { SetLocation } from '@/hooks/useMainMap';
+import type { SelectPlace } from '@/interfaces';
 
 type Props = {
   location: { lat: number; lng: number };
-  addSelects: (newSelect: kakao.maps.services.PlacesSearchResultItem) => void;
   setLocation: SetLocation;
 };
 
-const Search = ({ location, addSelects, setLocation }: Props) => {
+const Search = ({ location, setLocation }: Props) => {
   const { value, reset, handleChange } = useInput('');
   const { searchResults } = useSearch(value, location);
   const { selectedSearchResult, handleClickSearchResult, clearSelectedSearchResult } = useSelectedSearchResult(setLocation);
-  const { open, clear, add, share, handleClose } = useSearchResultDrawerButtons(
-    selectedSearchResult,
-    reset,
-    clearSelectedSearchResult,
-    addSelects
-  );
+  const { open, clear, add, share, handleClose } = useSearchResultDrawerButtons(selectedSearchResult, reset, clearSelectedSearchResult);
 
   return (
     <>
