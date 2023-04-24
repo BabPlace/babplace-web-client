@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useInjectKakaoMapApi } from 'react-kakao-maps-sdk';
+import useQuery from './useQuery';
 import debounce from 'lodash/debounce';
 
 export type SetLocation = ({ latitude, longitude }: { latitude?: number | undefined; longitude?: number | undefined }) => void;
@@ -10,6 +11,7 @@ const defaultLocation = {
 };
 
 export default function useMainMap() {
+  const { isDefault } = useQuery();
   const [isLoading, setIsLoading] = useState(false);
   const [latitude, setLatitude] = useState(defaultLocation.latitude);
   const [longitude, setLongitude] = useState(defaultLocation.longitude);
@@ -34,7 +36,7 @@ export default function useMainMap() {
   const onCenterChangedDebounced = debounce(onCenterChanged, 850);
 
   useEffect(() => {
-    if (loading || !isLoading) return;
+    if (loading || !isLoading || !isDefault) return;
     const geocoder = new kakao.maps.services.Geocoder();
     const callback = (result: kakao.maps.services.RegionCode[], status: kakao.maps.services.Status) => {
       if (status === kakao.maps.services.Status.OK) {
