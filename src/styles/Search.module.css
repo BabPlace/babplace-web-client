@@ -17,7 +17,8 @@
 }
 
 .search_result__ul {
-  width: calc(100vw - var(--search-box-margin-lr) * 2);
+  width: var(--search-box-width);
+  max-width: calc(var(--max-width) - var(--search-box-margin-lr));
   left: 0;
   right: 0;
   margin: auto;
