@@ -34,6 +34,10 @@ const Search = ({ location, addSelects, setLocation }: Props) => {
     }
   }, [isCustom]);
 
+  useEffect(() => {
+    if (searchResults.length > 0) console.log(searchResults);
+  }, [searchResults]);
+
   return (
     <>
       <SearchBox value={value} handleChange={handleChange} />
