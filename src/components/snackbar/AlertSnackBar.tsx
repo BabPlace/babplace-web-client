@@ -11,7 +11,7 @@ type Props = {
 
 const AlertSnackBar = ({ open, message, handleClose, severity }: Props) => {
   return (
-    <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+    <Snackbar open={open} autoHideDuration={2000} onClose={handleClose} sx={{ marginBottom: 'env(safe-area-inset-bottom)' }}>
       <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
         {message}
       </Alert>
