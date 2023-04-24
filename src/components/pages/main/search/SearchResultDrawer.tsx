@@ -1,20 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TypoNotoSans, FlexRow, FlexColumn, SwipeableEdgeDrawer, ProgressButton } from '@/layouts';
 import { IconButton, styled } from '@mui/material';
 import { IosShareIcon, CloseIcon } from '@/icons';
 import { addressSumary } from '@/utils';
+import { useQuery } from '@/hooks';
 
 type Props = {
-  isHidden: boolean;
   selectedSearchResult: any;
   add: () => void;
   share: () => void;
   clear: () => void;
 };
 
-const SearchResultDrawer = ({ isHidden, selectedSearchResult, add, share, clear }: Props) => {
+const SearchResultDrawer = ({ selectedSearchResult, add, share, clear }: Props) => {
+  const { isCustom } = useQuery();
+
+  useEffect(() => {
+    if (isCustom) clear();
+  }, [isCustom]);
+
   return (
-    <SwipeableEdgeDrawer isHidden={isHidden} height={drawerHeight}>
+    <SwipeableEdgeDrawer isHidden={!isCustom || selectedSearchResult === null} height={drawerHeight}>
       {/* <SwipeableEdgeDrawer isHidden={false} height={drawerHeight}> */}
       <FlexColumn justifyContent='space-between' height='100%'>
         <FlexRow width='100%' justifyContent='space-between' alignItems='flex-start'>

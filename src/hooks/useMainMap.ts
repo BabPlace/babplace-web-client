@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useInjectKakaoMapApi } from 'react-kakao-maps-sdk';
 import useQuery from './useQuery';
 import debounce from 'lodash/debounce';
@@ -33,7 +33,7 @@ export default function useMainMap() {
       longitude: map.getCenter().getLng(),
     });
   };
-  const onCenterChangedDebounced = debounce(onCenterChanged, 850);
+  const onCenterChangedDebounced = useCallback(debounce(onCenterChanged, 750), []);
 
   useEffect(() => {
     if (loading || !isLoading || !isDefault) return;
