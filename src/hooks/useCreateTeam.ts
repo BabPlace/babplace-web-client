@@ -1,18 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useContext } from 'react';
 import { useRouter } from 'next/router';
 import { createTeam } from '@/controller';
 import { Errors, ErorrData } from '@/interfaces';
+import useQuery from './useQuery';
 import { AxiosError } from 'axios';
+import { SelectsContext } from '@/components';
 
-export default function useCreateTeam(name: string, limitRestaurant: number, lat: number, lng: number, radius: number) {
+export default function useCreateTeam(name: string, limitRestaurant: number, lat: number, lng: number, radius: number, limitUser: number) {
+  const { isDefault } = useQuery();
+  const { selects } = useContext(SelectsContext);
   const [isLoaded, setIsLoaded] = useState(true);
   const [errors, setErrors] = useState<Errors>();
   const router = useRouter();
 
-  async function onClick() {
+  const onClick = useCallback(async () => {
     setIsLoaded(false);
     try {
-      const { teamId } = await createTeam({ name, lat, lng, radius, limitRestaurant });
+      const { teamId } = await createTeam({ name, lat, lng, radius, limitRestaurant, limitUser }, !isDefault ? selects : undefined);
       router.push({
         pathname: `gola/${teamId}`,
       });
@@ -27,8 +31,7 @@ export default function useCreateTeam(name: string, limitRestaurant: number, lat
         setErrors({ name, message, status, data });
       }
     }
-    // setIsLoaded(true);
-  }
+  }, [isDefault, selects, name, lat, lng, radius, limitRestaurant]);
 
   useEffect(() => {
     if (errors) throw errors;

@@ -22,7 +22,7 @@ const TeamSettingDrawer = ({ isLoading, addressName, location }: Props) => {
   const { value: count, isError: isCountError, handleChange: handleCountChange } = useInput(7);
   const { isDefault } = useQuery();
   const { selectedButton, radius, guideMessage, onClickButton } = useSelectedButton();
-  const { isLoaded, onClick } = useCreateTeam(name, count, location.lat, location.lng, radius);
+  const { isLoaded, onClick } = useCreateTeam(name, count, location.lat, location.lng, radius, 10);
 
   return (
     <SwipeableEdgeDrawer>

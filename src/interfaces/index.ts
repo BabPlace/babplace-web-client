@@ -23,9 +23,9 @@ export type Restaurant = {
   longitude: number;
   category: string;
   distance: number;
+  restaurantPlaceUrl: string;
   teamcenterLat: number;
   teamcenterLoong: number;
-  restaurantPlaceUrl: string;
 };
 
 export type SatisfactionByRestaurant = {
@@ -91,6 +91,10 @@ export type TeamInfoResponse = {
   limitRestaurant: number;
   latitude: number;
   longitude: number;
+};
+
+export type TeamCustomRequest = TeamRequest & {
+  restaurantList: SelectPlace[];
 };
 
 // Restaurant

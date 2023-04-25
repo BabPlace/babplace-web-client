@@ -2,11 +2,11 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import { StaticMap, useInjectKakaoMapApi } from 'react-kakao-maps-sdk';
 import { IconButton } from '@mui/material';
-import { Header, Guide } from '@/components';
+import { Header } from '@/components';
 import { BaseUI, FlexRow, TypoNotoSans } from '@/layouts';
 import { useResult, useCard } from '@/hooks';
 import { categoryFormat, distanceFormat, directionToSatisfaction } from '@/utils';
-import { InfoIcon, ReplayIcon, ErrorIcon, SatisfiedAltIcon, VerySatisfiedIcon, VeryDissatisfiedIcon, SickIcon } from '@/icons';
+import { InfoIcon, ReplayIcon, SatisfiedAltIcon, VerySatisfiedIcon, VeryDissatisfiedIcon, SickIcon } from '@/icons';
 import type { Restaurant, API, Direction } from '@/interfaces';
 import styles from '@/styles/Gola.module.css';
 
@@ -23,7 +23,6 @@ const Gola = ({ isValidUser, restaurants = [] }: Props) => {
   return (
     <BaseUI title={title} description={description}>
       <Header showButtons />
-      <Guide page='gola' />
       <div className={styles.container}>
         <div className={styles.relative}>
           {restaurants.map(
