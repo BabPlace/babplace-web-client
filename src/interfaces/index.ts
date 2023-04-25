@@ -102,3 +102,31 @@ export type RestaurantParams = {
   userId: string;
 };
 export type RestaurantResponse = Restaurant[];
+
+declare module '@mui/material/styles' {
+  interface Palette {
+    neutral: Palette['primary'];
+    like: Palette['primary'];
+  }
+
+  // allow configuration using `createTheme`
+  interface PaletteOptions {
+    neutral?: PaletteOptions['primary'];
+    like?: PaletteOptions['primary'];
+  }
+}
+
+// Update the Button's color prop options
+declare module '@mui/material/Button' {
+  interface ButtonPropsColorOverrides {
+    neutral: true;
+    like: true;
+  }
+}
+
+// declare module '@mui/material/Typography' {
+//   interface TypographyPropsVariantOverrides {
+//     neutral: true;
+//     like: true;
+//   }
+// }

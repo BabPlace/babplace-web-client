@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useInjectKakaoMapApi } from 'react-kakao-maps-sdk';
-import { useDebouncedValue } from '@/hooks';
+import { useDebouncedValue, useQuery } from '@/hooks';
 
 export default function useSearch(value: string, location: { lat: number; lng: number }) {
   const { loading } = useInjectKakaoMapApi({ appkey: process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY!, libraries: ['services', 'clusterer'] });
   const [ps, setPs] = useState<kakao.maps.services.Places>();
   const [searchResults, setSearchResults] = useState<kakao.maps.services.PlacesSearchResult>([]);
   const debouncedValue = useDebouncedValue(value, 500);
+  const { setQuery } = useQuery();
 
   const keywordSearch = (debouncedValue: string) => {
     if (!ps) return;
@@ -29,7 +30,9 @@ export default function useSearch(value: string, location: { lat: number; lng: n
   };
 
   useEffect(() => {
+    if (debouncedValue.length === 0) return;
     keywordSearch(debouncedValue);
+    setQuery('search', 'true');
   }, [debouncedValue]);
 
   useEffect(() => {

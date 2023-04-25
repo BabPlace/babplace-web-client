@@ -13,6 +13,7 @@ const clientSideEmotionCache = createEmotionCache();
 export default function App({ Component, emotionCache = clientSideEmotionCache, pageProps }: AppProps & { emotionCache: any }) {
   const { colorMode, theme } = useTheme();
   const selects = useSelects();
+
   useServiceWorker();
 
   return (

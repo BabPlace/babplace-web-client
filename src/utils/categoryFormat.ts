@@ -1,5 +1,7 @@
-export default function categoryFormat(category: string) {
-  const categories = category.split('>');
+export function categorySplit(category: string | undefined) {
+  return category ? category.split(' > ') : [];
+}
 
-  return categories.slice(1).join('/');
+export function categoryFormat(category: string) {
+  return categorySplit(category).slice(1).join('/');
 }

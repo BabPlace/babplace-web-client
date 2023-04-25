@@ -17,11 +17,19 @@ export default function useTheme() {
   const theme = useMemo(
     () =>
       createTheme({
-        // palette: {
-        //   primary: {
-        //     main: '#47B8E0',
-        //   },
-        // },
+        palette: {
+          primary: {
+            main: '#1886db',
+          },
+          neutral: {
+            main: 'rgb(var(--tertiary-background-rgb))',
+            contrastText: '#fff',
+          },
+          like: {
+            main: '#ff6392',
+            contrastText: '#fff',
+          },
+        },
         components: {
           MuiButton: {
             styleOverrides: {

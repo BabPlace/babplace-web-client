@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import cn from 'classnames';
 import { useQuery } from '@/hooks';
 import { Input } from '@/layouts';
@@ -27,6 +27,8 @@ const SearchBox = ({ value, handleChange }: Props) => {
         border={false}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           handleChange(event);
+        }}
+        onFocus={() => {
           setQuery('search', 'true');
         }}
         textAlign='left'

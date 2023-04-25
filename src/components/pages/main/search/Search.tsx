@@ -12,7 +12,7 @@ type Props = {
 };
 
 const Search = ({ location, setLocation }: Props) => {
-  const { value, reset, handleChange } = useInput('');
+  const { value, reset, handleChange, setForceValue } = useInput('');
   const { searchResults } = useSearch(value, location);
   const { selectedSearchResult, handleClickSearchResult, clearSelectedSearchResult } = useSelectedSearchResult(setLocation);
   const { open, clear, add, share, handleClose } = useSearchResultDrawerButtons(selectedSearchResult, reset, clearSelectedSearchResult);
@@ -21,7 +21,7 @@ const Search = ({ location, setLocation }: Props) => {
     <>
       <SearchBox value={value} handleChange={handleChange} />
       <SearchResultBox value={value} searchResult={searchResults} handleClickResult={handleClickSearchResult} />
-      <SearchResultDrawer add={add} clear={clear} share={share} selectedSearchResult={selectedSearchResult} />
+      <SearchResultDrawer add={add} clear={clear} share={share} selectedSearchResult={selectedSearchResult} setForceValue={setForceValue} />
       <AlertSnackBar open={open} handleClose={handleClose} message='클립보드에 복사되었습니다' severity='info' />
     </>
   );

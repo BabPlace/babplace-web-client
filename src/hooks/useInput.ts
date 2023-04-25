@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 
 type InputValue = string | number;
 
-export default function useInput<T extends InputValue>(initialValue: T, max: number = 15) {
+export default function useInput<T>(initialValue: T, max: number = 15) {
   const [isError, setIsError] = useState({ state: false, message: '' });
   const [value, setValue] = useState<T>(initialValue);
 
@@ -48,5 +48,9 @@ export default function useInput<T extends InputValue>(initialValue: T, max: num
     setValue(initialValue);
   };
 
-  return { value, isError, handleChange, reset, resetIsError, valitate };
+  const setForceValue = (value: T) => {
+    setValue(value);
+  };
+
+  return { value, isError, handleChange, reset, resetIsError, setForceValue, valitate };
 }

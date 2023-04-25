@@ -7,10 +7,11 @@ type Props = {
   children: React.ReactNode;
   height?: string | number;
   isHidden?: boolean;
+  swipeUp?: boolean;
 };
 
-const SwipeableEdgeDrawer = ({ children, height, isHidden }: Props) => {
-  const { drawerRef, open } = useDrawer();
+const SwipeableEdgeDrawer = ({ children, height, isHidden, swipeUp = true }: Props) => {
+  const { drawerRef, open } = useDrawer(swipeUp);
   const { isDefault } = useQuery();
   return (
     <StyledDrawer className={styles.container} ref={drawerRef} isOpen={open} isHidden={isHidden} height={height} isDefault={isDefault}>

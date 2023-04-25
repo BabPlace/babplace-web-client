@@ -1,4 +1,6 @@
-export default function addressSumary(selectedSearchResult: kakao.maps.services.PlacesSearchResultItem) {
+import type { SelectPlace } from '@/interfaces';
+
+export default function addressSumary(selectedSearchResult: SelectPlace | null) {
   if (!selectedSearchResult) return '';
   if (selectedSearchResult.road_address_name !== '') {
     const sgRegex = /(\S+[시군구])/;
