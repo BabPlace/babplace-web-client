@@ -50,6 +50,8 @@ export { default as CategoryIcon } from './CategoryIcon';
 export { default as RemoveIcon } from '@mui/icons-material/RemoveCircleRounded';
 export { default as FormatListIcon } from '@mui/icons-material/FormatListBulletedRounded';
 export { default as HeartIcon } from '@mui/icons-material/FavoriteBorderRounded';
+export { default as HeartFilledIcon } from '@mui/icons-material/FavoriteRounded';
+
 // import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 // import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 // import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded';

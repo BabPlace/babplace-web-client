@@ -1,9 +1,18 @@
 import React, { useEffect } from 'react';
 import { TypoNotoSans, FlexRow, FlexColumn, SwipeableEdgeDrawer, ProgressButton } from '@/layouts';
 import { IconButton, Typography, styled } from '@mui/material';
-import { IosShareIcon, CloseIcon, HeartIcon, SatisfiedAltIcon, VerySatisfiedIcon, VeryDissatisfiedIcon, SickIcon } from '@/icons';
+import {
+  IosShareIcon,
+  CloseIcon,
+  HeartIcon,
+  SatisfiedAltIcon,
+  VerySatisfiedIcon,
+  VeryDissatisfiedIcon,
+  SickIcon,
+  HeartFilledIcon,
+} from '@/icons';
 import { addressSumary, categorySplit } from '@/utils';
-import { useQuery } from '@/hooks';
+import { useQuery, useLike } from '@/hooks';
 import type { SelectPlace } from '@/interfaces';
 
 type Props = {
@@ -31,21 +40,22 @@ const defaultSelectedSearchResult: SelectPlace = {
 
 const SearchResultDrawer = ({ selectedSearchResult, add, share, clear, setForceValue }: Props) => {
   const { isCustom } = useQuery();
-  selectedSearchResult = defaultSelectedSearchResult;
+  const { isLiked, addLike } = useLike(selectedSearchResult);
+
   useEffect(() => {
     if (isCustom) clear();
   }, [isCustom]);
 
   return (
-    // <SwipeableEdgeDrawer isHidden={!isCustom || selectedSearchResult === null} hei ght={drawerHeight} swipeUp={false}>
-    <SwipeableEdgeDrawer isHidden={false} height={drawerHeight} swipeUp={false}>
+    <SwipeableEdgeDrawer isHidden={!isCustom || selectedSearchResult === null} height={drawerHeight} swipeUp={false}>
+      {/* <SwipeableEdgeDrawer isHidden={false} height={drawerHeight} swipeUp={false}> */}
       <FlexColumn justifyContent='space-between' height='100%'>
         <FlexRow width='100%' justifyContent='space-between' alignItems='flex-start'>
           <FlexColumn width='80%' gap='3px'>
             <TypoNotoSans text={selectedSearchResult?.place_name} variant='h5' />
             <FlexRow gap='10px'>
               {categorySplit(selectedSearchResult?.category_name).map((category, index) => (
-                <div key={`SearchResultDrawer-Category-${index}`}>
+                <div key={`SearchResultDrawer-Category-${index}`} onClick={() => setForceValue(category)}>
                   <TypoNotoSans text={'#' + category} color='rgba(var(--secondary-foreground-rgba))' variant='body2' />
                 </div>
               ))}
@@ -66,7 +76,7 @@ const SearchResultDrawer = ({ selectedSearchResult, add, share, clear, setForceV
           </FlexRow>
         </FlexRow>
         <FlexColumn gap='10px'>
-          {selectedSearchResult?.category_group_name !== '음식점' ? (
+          {selectedSearchResult?.category_group_name === '음식점' ? (
             <FlexColumn gap='5px'>
               <FlexRow alignItems='flex-end'>
                 <FlexRow gap='10px' width='100%'>
@@ -86,11 +96,6 @@ const SearchResultDrawer = ({ selectedSearchResult, add, share, clear, setForceV
                     <SickIcon sx={{ color: 'rgba(var(--gola-verybad-rgb))' }} fontSize='small' />
                   </FlexRow>
                 </FlexRow>
-                <FlexRow style={{ minWidth: 'var(--button-default-height)' }} alignItems='flex-end' justifyContent='space-evenly'>
-                  <Typography fontSize='15px' color='like.main'>
-                    1
-                  </Typography>
-                </FlexRow>
               </FlexRow>
             </FlexColumn>
           ) : (
@@ -108,8 +113,13 @@ const SearchResultDrawer = ({ selectedSearchResult, add, share, clear, setForceV
             <ProgressButton onClick={add} color='primary' {...doneButtonStyle}>
               <TypoNotoSans text='추가하기' variant='button' textAlign='center' />
             </ProgressButton>
-            <ProgressButton onClick={add} color='like' variant='contained' sx={{ minWidth: 'var(--button-default-height)' }}>
-              <HeartIcon />
+            <ProgressButton
+              onClick={addLike}
+              color='like'
+              variant='contained'
+              sx={{ minWidth: 'var(--button-default-height)', padding: '0' }}
+            >
+              {isLiked ? <HeartFilledIcon /> : <HeartIcon />}
             </ProgressButton>
           </FlexRow>
         </FlexColumn>

@@ -19,3 +19,4 @@ export { default as useSelectedSearchResult } from './useSelectedSearchResult';
 export { default as useDebouncedValue } from './useDebouncedValue';
 export { default as useServiceWorker } from './useServiceWorker';
 export { default as useSelects } from './useSelects';
+export { default as useLike } from './useLike';

@@ -12,7 +12,7 @@ export default function useSearch(value: string, location: { lat: number; lng: n
   const keywordSearch = (debouncedValue: string) => {
     if (!ps) return;
     if (debouncedValue.length <= 1) {
-      setSearchResults([]);
+      resetResults();
       return;
     }
     ps.keywordSearch(
@@ -29,8 +29,15 @@ export default function useSearch(value: string, location: { lat: number; lng: n
     );
   };
 
+  const resetResults = () => {
+    setSearchResults([]);
+  };
+
   useEffect(() => {
-    if (debouncedValue.length === 0) return;
+    if (debouncedValue.length === 0) {
+      resetResults();
+      return;
+    }
     keywordSearch(debouncedValue);
     setQuery('search', 'true');
   }, [debouncedValue]);
