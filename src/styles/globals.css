@@ -4,6 +4,8 @@
   --max-width: 700px;
   --max-height: 100dvh;
 
+  --black-main: 0, 0, 0;
+
   --header-default-height: 60px;
   --button-default-height: 40px;
 
@@ -22,9 +24,9 @@
   --primary-foreground-rgba: 0, 0, 0;
 
   --secondary-background-rgb: 235, 235, 235;
-  --secondary-foreground-rgba: 0, 0, 0, 0.6;
+  --secondary-foreground-rgba: 100, 100, 100;
 
-  --tertiary-background-rgb: 200, 200, 200;
+  --tertiary-background-rgb: 233, 233, 233;
   --tertiary-foreground-rgb: 129, 129, 129;
 
   --caption-foreground-rgba: 0, 0, 0, 0.4;
@@ -33,6 +35,7 @@
   --box-shadow-1: 1px 1px 8px 2px rgba(var(--primary-foreground-rgba), 0.08);
   --box-shadow-card: 2px 2px 8px 1px rgba(var(--primary-foreground-rgba), 0.1);
   --box-shadow-button: 1px 1px 8px 0px rgba(var(--primary-foreground-rgba), 0.05);
+  --box-shadow-black: 1px 1px 8px 0px rgba(var(--black-main), 0.6);
 
   --card-default-height: calc((100vh - var(--header-default-height)) * 0.7);
 
@@ -165,9 +168,9 @@
   --primary-foreground-rgba: 0, 0, 0;
 
   --secondary-background-rgb: 245, 245, 245;
-  --secondary-foreground-rgba: 0, 0, 0, 0.6;
+  --secondary-foreground-rgba: 100, 100, 100;
 
-  --tertiary-background-rgb: 200, 200, 200;
+  --tertiary-background-rgb: 233, 233, 233;
   --tertiary-foreground-rgb: 129, 129, 129;
 
   --caption-foreground-rgba: 0, 0, 0, 0.4;

@@ -44,7 +44,7 @@ export default function useSwipeableButton() {
       case 'mode-custom':
         return <TypoNotoSans text={modeChangeText} variant='caption' fontSize='0.75rem' textAlign='center' />;
       case 'mode-pwa':
-        return <TypoNotoSans text='🍎 어플리케이션으로 보기' variant='caption' fontSize='0.75rem' textAlign='center' />;
+        return <TypoNotoSans text='🍎 앱으로 보기' variant='caption' fontSize='0.75rem' textAlign='center' />;
       case 'github':
         return <TypoNotoSans text='✨ 코드 기여하기' variant='caption' fontSize='0.75rem' textAlign='center' />;
     }
@@ -78,7 +78,7 @@ export default function useSwipeableButton() {
   }
 
   function openApp() {
-    setQuery('mode', 'pwa');
+    setQuery('pwa', 'true');
   }
 
   function showGithub() {

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { TypoNotoSans, FlexRow, FlexColumn, SwipeableEdgeDrawer, ProgressButton } from '@/layouts';
+import { TypoNotoSans, FlexRow, FlexColumn, SwipeableEdgeDrawer, ProgressButton, Visible } from '@/layouts';
 import { IconButton, Typography, styled } from '@mui/material';
 import {
   IosShareIcon,
@@ -53,16 +53,18 @@ const SearchResultDrawer = ({ selectedSearchResult, add, share, clear, setForceV
         <FlexRow width='100%' justifyContent='space-between' alignItems='flex-start'>
           <FlexColumn width='80%' gap='3px'>
             <TypoNotoSans text={selectedSearchResult?.place_name} variant='h5' />
-            <FlexRow gap='10px'>
-              {categorySplit(selectedSearchResult?.category_name).map((category, index) => (
-                <div key={`SearchResultDrawer-Category-${index}`} onClick={() => setForceValue(category)}>
-                  <TypoNotoSans text={'#' + category} color='rgba(var(--secondary-foreground-rgba))' variant='body2' />
-                </div>
-              ))}
-            </FlexRow>
+            <Visible visible={selectedSearchResult?.category_group_name === '음식점'}>
+              <FlexRow gap='10px'>
+                {categorySplit(selectedSearchResult?.category_name).map((category, index) => (
+                  <div key={`SearchResultDrawer-Category-${index}`} onClick={() => setForceValue(category)}>
+                    <TypoNotoSans text={'#' + category} color='rgba(var(--secondary-foreground-rgba))' variant='body2' />
+                  </div>
+                ))}
+              </FlexRow>
+            </Visible>
             <TypoNotoSans
               text={addressSumary(selectedSearchResult) + ' 근처'}
-              variant='body2'
+              variant='caption'
               color='rgba(var(--tertiary-foreground-rgb))'
             />
           </FlexColumn>

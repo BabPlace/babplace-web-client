@@ -65,11 +65,11 @@
 
   align-items: center;
   justify-content: flex-start;
-  border: 1px solid rgb(var(--tertiary-background-rgb));
+  /* border: 1px solid rgb(var(--tertiary-foreground-rgb)); */
   border-radius: var(--border-radius);
   z-index: 2;
   background: rgb(var(--secondary-background-rgb));
-
+  box-shadow: var(--box-shadow-black);
   transform-origin: bottom center;
   transition: all 0.35s ease-out;
 }
