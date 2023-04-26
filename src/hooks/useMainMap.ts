@@ -44,7 +44,7 @@ export default function useMainMap() {
       }
     };
     geocoder.coord2RegionCode(longitude, latitude, callback);
-  }, [loading, latitude, longitude]);
+  }, [loading, latitude, longitude, isDefault]);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -60,6 +60,7 @@ export default function useMainMap() {
       }
     );
   }, []);
+
   return {
     loading: loading ? loading : !isLoading,
     location: { lat: latitude, lng: longitude },

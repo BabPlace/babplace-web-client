@@ -1,6 +1,5 @@
 import React from 'react';
 import cn from 'classnames';
-import { FlexColumn } from '@/layouts';
 import { Backdrop } from '@mui/material';
 import styled from '@emotion/styled';
 import styles from '@/styles/Guide.module.css';

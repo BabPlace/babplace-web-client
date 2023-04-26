@@ -33,6 +33,7 @@ export default function Home() {
         {/* <PWAGuide /> */}
         <LoadableMap
           isLoading={loading}
+          level={5}
           center={location}
           style={{ ...getMapStyle(drawer), height: !isDefault ? mapCustomHeight : mapDefaultHeight }}
           onCenterChanged={onCenterChanged}

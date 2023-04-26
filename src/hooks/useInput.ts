@@ -7,6 +7,7 @@ export default function useInput<T>(initialValue: T, max: number = 15) {
   const [value, setValue] = useState<T>(initialValue);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value as T);
     if (typeof initialValue === 'number') {
       const num = Number(event.target.value);
       if (num < 0 || num > max) {
@@ -19,7 +20,6 @@ export default function useInput<T>(initialValue: T, max: number = 15) {
     } else {
       setIsError((prev) => ({ state: false, message: prev.message }));
     }
-    setValue(event.target.value as T);
   };
 
   const valitate = useMemo(() => {

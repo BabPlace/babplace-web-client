@@ -20,3 +20,4 @@ export { default as useDebouncedValue } from './useDebouncedValue';
 export { default as useServiceWorker } from './useServiceWorker';
 export { default as useSelects } from './useSelects';
 export { default as useLike } from './useLike';
+export { default as useConfirm } from './useConfirm';

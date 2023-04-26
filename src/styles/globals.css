@@ -4,6 +4,12 @@
   --max-width: 700px;
   --max-height: 100dvh;
 
+  --padding-container-t: calc(30px + env(safe-area-inset-top));
+  --padding-container-r: calc(0px + env(safe-area-inset-right));
+  --padding-container-b: calc(30px + env(safe-area-inset-bottom));
+  --padding-container-l: calc(0px + env(safe-area-inset-left));
+  --padding-container: var(--padding-container-t) var(--padding-container-r) var(--padding-container-b) var(--padding-container-l);
+
   --black-main: 0, 0, 0;
 
   --header-default-height: 60px;

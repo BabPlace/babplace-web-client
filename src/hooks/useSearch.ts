@@ -19,12 +19,11 @@ export default function useSearch(value: string, location: { lat: number; lng: n
       debouncedValue,
       (data, status, _pagination) => {
         if (status === kakao.maps.services.Status.OK) {
-          console.log('insearch : ', debouncedValue);
           setSearchResults(data);
         }
       },
       {
-        location: new kakao.maps.LatLng(location.lat, location.lat),
+        location: new kakao.maps.LatLng(location.lat, location.lng),
       }
     );
   };

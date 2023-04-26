@@ -58,7 +58,7 @@ const TeamSettingDrawer = ({ isLoading, addressName, location }: Props) => {
               onChange={handleCountChange}
             />
           </DefaultListItem>
-          <DefaultListItem className={styles.list_item} isCustom={!isDefault} type='custom' noBorder={true}>
+          <DefaultListItem className={styles.list_item} isCustom={!isDefault} type='custom' noBorder={true} style={{ overflow: 'visible' }}>
             <TypoNotoSans text='제한 반경' {...liTitleOptions} />
             <div className={styles.list_item__content}>
               <ButtonGroup selectedButton={selectedButton} onClickButton={onClickButton}>

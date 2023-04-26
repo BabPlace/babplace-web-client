@@ -14,7 +14,7 @@ const LoadableMap = ({ isLoading, ...props }: Props) => {
     if (map) map.relayout();
   }, [map, props.style]);
 
-  return isLoading ? <Loading {...props.style} /> : <Map onCreate={setMap} {...props} />;
+  return isLoading ? <Loading {...props.style} /> : <Map onCreate={setMap} isPanto={true} {...props} />;
 };
 
 export default LoadableMap;

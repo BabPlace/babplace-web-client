@@ -46,7 +46,6 @@ export default function useLike(place: SelectPlace | null) {
     if (!place) return;
     const likedPlaces: SelectPlace[] = getLikes();
     setIsLiked(likedPlaces.some((likedPlace) => likedPlace.id === place.id));
-    console.log(likedPlaces.some((likedPlace) => likedPlace.id === place.id));
   }, [place]);
 
   return { isLiked, addLike, getLikes, deleteLike, clearLike };

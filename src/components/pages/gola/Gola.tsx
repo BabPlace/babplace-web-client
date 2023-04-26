@@ -5,7 +5,7 @@ import { IconButton } from '@mui/material';
 import { Header } from '@/components';
 import { BaseUI, FlexRow, TypoNotoSans } from '@/layouts';
 import { useResult, useCard } from '@/hooks';
-import { categoryFormat, distanceFormat, directionToSatisfaction } from '@/utils';
+import { categoryFormat, distanceFormat, directionToSatisfaction, addressSumary } from '@/utils';
 import { InfoIcon, ReplayIcon, SatisfiedAltIcon, VerySatisfiedIcon, VeryDissatisfiedIcon, SickIcon } from '@/icons';
 import type { Restaurant, API, Direction } from '@/interfaces';
 import styles from '@/styles/Gola.module.css';
@@ -57,7 +57,7 @@ const Gola = ({ isValidUser, restaurants = [] }: Props) => {
                           </IconButton>
                         </FlexRow>
                         <TypoNotoSans text={categoryFormat(category)} />
-                        <TypoNotoSans text={distanceFormat(distance)} variant='caption' />
+                        <TypoNotoSans variant='caption'>{distance === -1 ? address : distanceFormat(distance)}</TypoNotoSans>
                       </div>
                     </div>
                   </ForwardRefNoSSRTinderCard>

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { SelectsContext, Modal, Confirm } from '@/components';
+import { SelectsContext, FullScreenModal, Confirm } from '@/components';
 import { FlexRow, FlexColumn, TypoNotoSans } from '@/layouts';
 import { addressSumary } from '@/utils';
 import type { SelectPlace } from '@/interfaces';
@@ -7,18 +7,21 @@ import { IconButton } from '@mui/material';
 import { RemoveIcon } from '@/icons';
 import styled from '@emotion/styled';
 import styles from '@/styles/Selects.module.css';
-import useConfirm from '@/hooks/useConfirm';
+import { useConfirm, useInput } from '@/hooks';
+import SearchBox from '../search/SearchBox';
 
 const Selects = () => {
+  const { value, handleChange } = useInput('');
   const { isShow, selects, hide, removeSelects } = useContext(SelectsContext);
 
   return (
-    <Modal isShow={isShow} hide={hide} animationDelay={false}>
-      <FlexColumn height='100%'>
+    <FullScreenModal isShow={isShow} onClick={hide}>
+      <SearchBox value={value} handleChange={handleChange} />
+      <FlexColumn height='100%' className={styles.inner}>
         <SelectsHeader />
         <SelectsBody selects={selects} removeSelects={removeSelects} />
       </FlexColumn>
-    </Modal>
+    </FullScreenModal>
   );
 };
 
