@@ -3,20 +3,30 @@ import { useQuery } from '@/hooks';
 import { Visible, TypoNotoSans, FlexRow, FlexColumn } from '@/layouts';
 import { CategoryIcon } from '@/icons';
 import { distanceFormat, splitByValue } from '@/utils';
+import SearchBox from './SearchBox';
 import styles from '@/styles/Search.module.css';
 
 type Props = {
   value: string;
   searchResult: kakao.maps.services.PlacesSearchResult;
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleClickResult: (selectedSearchResult: kakao.maps.services.PlacesSearchResultItem) => void;
 };
 
-const SearchResultBox = ({ value, searchResult, handleClickResult }: Props) => {
+const SearchResultBox = ({ value, searchResult, handleChange, handleClickResult }: Props) => {
   const { isSearch, toggleSearch } = useQuery();
 
   return (
     <Visible visible={isSearch} className={styles.search_result}>
-      <div>
+      <SearchBox
+        value={value}
+        handleChange={handleChange}
+        isShadow={false}
+        focus={isSearch}
+        placeholder='장소 주소 식당 검색'
+        handleClose={toggleSearch}
+      />
+      <div className={styles.search_result__content}>
         <ul className={styles.search_result__ul}>
           {searchResult.map((item) => (
             <li

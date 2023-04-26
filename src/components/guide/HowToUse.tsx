@@ -2,8 +2,8 @@ import React from 'react';
 import Modal from '../modal/Modal';
 import { FlexColumn, FlexRow, TypoNotoSans } from '@/layouts';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Button } from '@mui/material';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
+import { Button } from '@mui/material';
 import { useGuide } from '@/hooks';
 import {
   VeryDissatisfiedIcon,

@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { TypoNotoSans } from '@/layouts';
 
 type Props = {
+  focus?: boolean;
   className?: string;
   border?: boolean;
   error?: boolean;
@@ -13,6 +14,7 @@ type Props = {
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 const Input = ({
+  focus,
   className,
   border = true,
   error = false,
@@ -28,10 +30,10 @@ const Input = ({
   }
 
   useEffect(() => {
-    if (inputRef.current) {
+    if (focus && inputRef.current) {
       inputRef.current.focus();
     }
-  }, []);
+  }, [focus]);
 
   return (
     <Container border={border} error={error} errorSize={errorSize} className={className} textAlign={textAlign}>

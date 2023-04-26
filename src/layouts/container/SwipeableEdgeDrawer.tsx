@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDrawer, useQuery } from '@/hooks';
+import Visible from './Visible';
 import styles from '@/styles/SwipeableEdgeDrawer.module.css';
 import styled from '@emotion/styled';
 
@@ -8,14 +9,15 @@ type Props = {
   height?: string | number;
   isHidden?: boolean;
   swipeUp?: boolean;
+  showPuller?: boolean;
 };
 
-const SwipeableEdgeDrawer = ({ children, height, isHidden, swipeUp = true }: Props) => {
+const SwipeableEdgeDrawer = ({ children, height, isHidden, swipeUp = true, showPuller = true }: Props) => {
   const { drawerRef, open } = useDrawer(swipeUp);
   const { isDefault } = useQuery();
   return (
     <StyledDrawer className={styles.container} ref={drawerRef} isOpen={open} isHidden={isHidden} height={height} isDefault={isDefault}>
-      <div className={styles.puller} />
+      <Visible visible={showPuller} className={styles.puller} />
       {children}
     </StyledDrawer>
   );

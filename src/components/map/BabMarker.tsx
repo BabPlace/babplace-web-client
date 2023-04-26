@@ -10,4 +10,4 @@ const BabMarker = ({ isCustom }: Props) => {
   return <div className={cn(styles.container, isCustom && styles.custom)} />;
 };
 
-export default BabMarker;
+export default React.memo(BabMarker);

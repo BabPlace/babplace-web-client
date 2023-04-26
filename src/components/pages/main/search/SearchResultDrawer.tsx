@@ -41,21 +41,26 @@ const defaultSelectedSearchResult: SelectPlace = {
 const SearchResultDrawer = ({ selectedSearchResult, add, share, clear, setForceValue }: Props) => {
   const { isCustom } = useQuery();
   const { isLiked, addLike } = useLike(selectedSearchResult);
+  const { place_name, category_group_name, category_name } = selectedSearchResult || defaultSelectedSearchResult;
+
+  const isRestaurant = (category_group_name: string) => {
+    return category_group_name === '음식점' || category_group_name === '카페';
+  };
 
   useEffect(() => {
     if (isCustom) clear();
   }, [isCustom]);
 
   return (
-    <SwipeableEdgeDrawer isHidden={!isCustom || selectedSearchResult === null} height={drawerHeight} swipeUp={false}>
+    <SwipeableEdgeDrawer isHidden={!isCustom || selectedSearchResult === null} height={drawerHeight} swipeUp={false} showPuller={false}>
       {/* <SwipeableEdgeDrawer isHidden={false} height={drawerHeight} swipeUp={false}> */}
       <FlexColumn justifyContent='space-between' height='100%'>
         <FlexRow width='100%' justifyContent='space-between' alignItems='flex-start'>
           <FlexColumn width='80%' gap='3px'>
-            <TypoNotoSans text={selectedSearchResult?.place_name} variant='h5' />
-            <Visible visible={selectedSearchResult?.category_group_name === '음식점'}>
+            <TypoNotoSans text={place_name} variant='h5' />
+            <Visible visible={isRestaurant(category_group_name)}>
               <FlexRow gap='10px'>
-                {categorySplit(selectedSearchResult?.category_name).map((category, index) => (
+                {categorySplit(category_name).map((category, index) => (
                   <div key={`SearchResultDrawer-Category-${index}`} onClick={() => setForceValue(category)}>
                     <TypoNotoSans text={'#' + category} color='rgba(var(--secondary-foreground-rgba))' variant='body2' />
                   </div>
@@ -78,7 +83,7 @@ const SearchResultDrawer = ({ selectedSearchResult, add, share, clear, setForceV
           </FlexRow>
         </FlexRow>
         <FlexColumn gap='10px'>
-          {selectedSearchResult?.category_group_name === '음식점' ? (
+          {isRestaurant(category_group_name) ? (
             <FlexColumn gap='5px'>
               <FlexRow alignItems='flex-end'>
                 <FlexRow gap='10px' width='100%'>
@@ -130,7 +135,7 @@ const SearchResultDrawer = ({ selectedSearchResult, add, share, clear, setForceV
   );
 };
 
-export default SearchResultDrawer;
+export default React.memo(SearchResultDrawer);
 
 const drawerHeight =
   'calc(var(--drawer-list-height) * 2 + var(--drawer-list-button-gap) + var(--drawer-button-height) + var(--drawer-inner-padding-tb))';

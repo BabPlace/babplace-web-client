@@ -62,6 +62,6 @@ const mapStyle = {
   transition: 'all 0.35s ease-out, height 0.5s ease-in-out',
 };
 const mapHideAnimation = {
-  transform: 'scale(0.92,  0.92)',
+  transform: 'scale(0.95,  0.95)',
   borderRadius: 'var(--border-radius)',
 };
