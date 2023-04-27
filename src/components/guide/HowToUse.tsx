@@ -23,7 +23,7 @@ import 'swiper/css/pagination';
 const HowToUse = () => {
   const { isShow, hide, doNotShowAgain } = useGuide('main');
   SwiperCore.use([Navigation, Pagination]);
-  if (!isShow) return <></>;
+
   return (
     <Modal isShow={isShow} hide={hide}>
       <FlexColumn justifyContent='space-between' alignItems='center' height='100%'>
