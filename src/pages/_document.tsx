@@ -9,6 +9,8 @@ export default class MyDocument extends Document {
       <Html lang='en'>
         <Head>
           <link rel='manifest' href='/manifest.json' />
+          <meta name='theme-color' media='(prefers-color-scheme: light)' content='#f3f5f6' />
+          <meta name='theme-color' media='(prefers-color-scheme: dark)' content='#212124' />
           {/* favicon */}
           <link href='/favicons/favicon-16x16.png' rel='icon' type='image/png' sizes='16x16' />
           <link href='/favicons/favicon-32x32.png' rel='icon' type='image/png' sizes='32x32' />
