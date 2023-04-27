@@ -8,8 +8,6 @@ export default class MyDocument extends Document {
     return (
       <Html lang='en'>
         <Head>
-          <meta name='theme-color' content='var(--primary-background-hex)'></meta>
-          <meta name='msapplication-TileColor' content='rgb(var(--primary-background-rgb))'></meta>
           <link rel='manifest' href='/manifest.json' />
           {/* favicon */}
           <link href='/favicons/favicon-16x16.png' rel='icon' type='image/png' sizes='16x16' />
@@ -18,6 +16,7 @@ export default class MyDocument extends Document {
           <link rel='apple-touch-icon' href='/icons/icon-192x192.png'></link>
           {/* splash screen */}
           <meta name='apple-mobile-web-app-capable' content='yes'></meta>
+          <meta name='apple-mobile-web-app-title' content='골라밥'></meta>
           <link
             rel='apple-touch-startup-image'
             media='screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)'
