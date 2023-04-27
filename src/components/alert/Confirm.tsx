@@ -12,7 +12,7 @@ type Props = {
 const Confirm = ({ isShow, message, handleClose, handleConfirm }: Props) => {
   return (
     <>
-      <Backdrop open={isShow} onClick={handleClose} sx={{ borderRadius: '12px' }} />
+      <Backdrop open={isShow} onClick={handleClose} sx={{ zIndex: 1 }} />
       <Visible visible={isShow} className={styles.container}>
         <div className={styles.fc}>
           <FlexColumn alignItems='center' justifyContent='center' className={styles.title}>

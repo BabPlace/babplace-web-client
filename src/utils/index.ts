@@ -6,5 +6,5 @@ export { default as makeDataset } from './dataset';
 export { default as splitByValue } from './splitByValue';
 export { default as addressSumary } from './addressSumary';
 export { default as snakeToCamel } from './snakeToCamel';
-
+export { default as filterPlace } from './filterPlace';
 export { categoryFormat, categorySplit } from './categoryFormat';

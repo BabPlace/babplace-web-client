@@ -1,0 +1,19 @@
+.items {
+  list-style: none;
+  overflow-y: scroll;
+}
+
+.item {
+  /* overflow-y: scroll; */
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  /* border-bottom: 1px solid rgba(var(--secondary-foreground-rgba)); */
+}
+.item:first-child {
+  margin-top: 10px;
+}
+.item:last-child {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-bottom: none;
+}

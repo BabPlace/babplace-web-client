@@ -1,8 +1,9 @@
-import { useMemo, useCallback, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import type { SelectPlace } from '@/interfaces';
 
 export default function useLike(place: SelectPlace | null) {
   const [isLiked, setIsLiked] = useState(false);
+  const [likeItems, setLikeItems] = useState<SelectPlace[]>([]);
 
   const deleteLike = () => {
     if (!place) return;
@@ -48,5 +49,9 @@ export default function useLike(place: SelectPlace | null) {
     setIsLiked(likedPlaces.some((likedPlace) => likedPlace.id === place.id));
   }, [place]);
 
-  return { isLiked, addLike, getLikes, deleteLike, clearLike };
+  useEffect(() => {
+    setLikeItems(getLikes());
+  }, []);
+
+  return { likeItems, isLiked, addLike, getLikes, deleteLike, clearLike };
 }

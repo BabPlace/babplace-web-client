@@ -1,0 +1,18 @@
+.tabs_title {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: var(--tabs-default-height);
+}
+
+.tabs_title__item {
+  /* textAlign='center' width='100%' */
+  text-align: center;
+  width: 100%;
+  transition: color 0.6s ease-out;
+  z-index: 1;
+}
+
+.tabs_content {
+  padding: var(--tabs-default-height) 30px 0;
+}

@@ -24,12 +24,19 @@ const Search = ({ location, setLocation }: Props) => {
         value={value}
         handleChange={handleChange}
         placeholder='장소 주소 식당 검색'
+        reset={reset}
         disabled={true}
         onClick={() => {
           setQuery('search', 'true');
         }}
       />
-      <SearchResultBox value={value} handleChange={handleChange} searchResult={searchResults} handleClickResult={handleClickSearchResult} />
+      <SearchResultBox
+        value={value}
+        reset={reset}
+        handleChange={handleChange}
+        searchResult={searchResults}
+        handleClickResult={handleClickSearchResult}
+      />
       <SearchResultDrawer add={add} clear={clear} share={share} selectedSearchResult={selectedSearchResult} setForceValue={setForceValue} />
       <AlertSnackBar open={open} handleClose={handleClose} message='클립보드에 복사되었습니다' severity='info' />
     </>

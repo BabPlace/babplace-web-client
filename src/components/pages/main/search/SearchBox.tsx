@@ -1,8 +1,8 @@
 import React from 'react';
 import cn from 'classnames';
 import { useQuery } from '@/hooks';
-import { Input } from '@/layouts';
-import { SearchIcon, IosBackIcon } from '@/icons';
+import { Input, Visible } from '@/layouts';
+import { SearchIcon, IosBackIcon, CloseIcon } from '@/icons';
 import { IconButton } from '@mui/material';
 import styles from '@/styles/Search.module.css';
 
@@ -10,6 +10,7 @@ type Props = React.HTMLAttributes<HTMLDivElement> & {
   value: string;
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
+  reset: () => void;
   isShadow?: boolean;
   focus?: boolean;
 } & (
@@ -23,7 +24,7 @@ type Props = React.HTMLAttributes<HTMLDivElement> & {
       }
   );
 
-const SearchBox = ({ value, handleChange, placeholder, isShadow = true, disabled = false, handleClose, focus, ...props }: Props) => {
+const SearchBox = ({ value, handleChange, placeholder, reset, isShadow = true, disabled = false, handleClose, focus, ...props }: Props) => {
   const { drawer } = useQuery();
 
   return (
@@ -41,6 +42,11 @@ const SearchBox = ({ value, handleChange, placeholder, isShadow = true, disabled
         textAlign='left'
         className={styles.search_box__input}
       />
+      <Visible visible={value.length !== 0}>
+        <IconButton size='small' onClick={reset}>
+          <CloseIcon />
+        </IconButton>
+      </Visible>
     </div>
   );
 };

@@ -113,6 +113,8 @@
 
   --select-box-margin-r: 15px;
   --select-box-margin-b: 15px;
+
+  --tabs-default-height: 48px;
 }
 
 @media (prefers-color-scheme: dark) {

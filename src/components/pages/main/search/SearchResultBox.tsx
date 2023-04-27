@@ -9,11 +9,12 @@ import styles from '@/styles/Search.module.css';
 type Props = {
   value: string;
   searchResult: kakao.maps.services.PlacesSearchResult;
+  reset: () => void;
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleClickResult: (selectedSearchResult: kakao.maps.services.PlacesSearchResultItem) => void;
 };
 
-const SearchResultBox = ({ value, searchResult, handleChange, handleClickResult }: Props) => {
+const SearchResultBox = ({ value, searchResult, reset, handleChange, handleClickResult }: Props) => {
   const { isSearch, toggleSearch } = useQuery();
 
   return (
@@ -25,6 +26,7 @@ const SearchResultBox = ({ value, searchResult, handleChange, handleClickResult 
         focus={isSearch}
         placeholder='장소 주소 식당 검색'
         handleClose={toggleSearch}
+        reset={reset}
       />
       <div className={styles.search_result__content}>
         <ul className={styles.search_result__ul}>
