@@ -18,6 +18,7 @@ const PWAGuide = () => {
         <FlexColumn alignItems='center' justifyContent='space-between' height='100%'>
           <FlexColumn alignItems='center' gap='40px' justifyContent='center' className={styles.intro} height='100%'>
             <img src='/icons/icon-512x512.png' className={styles.app_logo} />
+            <TypoNotoSans variant='h4'>Try Install PWA</TypoNotoSans>
             <TypoNotoSans {...guideTypoStyle} fontSize='0.9rem'>
               화면 아래에 있는 공유하기 버튼을 누른 후, '홈 화면에 추가' 혹은 'Add to home screen'을 찾아서 눌러주세요.
             </TypoNotoSans>
