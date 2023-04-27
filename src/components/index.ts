@@ -1,5 +1,6 @@
 export * from './error';
 export * from './map';
+export * from './loading';
 export * from './pages';
 export * from './header';
 export * from './guide';

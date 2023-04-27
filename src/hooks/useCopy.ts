@@ -17,5 +17,10 @@ export default function useCopy() {
     callback && callback();
   }
 
-  return { invite, share };
+  function toGola() {
+    const teamId = router.query.teamId as string;
+    router.push(`/gola/${teamId}`);
+  }
+
+  return { invite, share, toGola };
 }

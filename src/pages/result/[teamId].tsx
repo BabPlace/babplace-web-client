@@ -3,7 +3,7 @@ import { RatioBarChart } from '@teamapdan/weirdchart';
 import { Button } from '@mui/material';
 import { Header, ErrorBoundary, ResultCard, ResultDetail, AlertSnackBar } from '@/components';
 import { sliceByOffset, makeDataset } from '@/utils';
-import { BaseUI, TypoNotoSans } from '@/layouts';
+import { BaseUI, TypoNotoSans, Visible } from '@/layouts';
 import { useAlert, useCopy } from '@/hooks';
 import { getResult, getTeamInfo } from '@/controller';
 import type { ResultResponse, TeamInfoResponse } from '@/interfaces';
@@ -15,7 +15,7 @@ type Props = {
 };
 
 function Page({ result: satisfactions, teamInfo }: Props) {
-  const { invite, share } = useCopy();
+  const { toGola, share } = useCopy();
   const { open, handleOpen, handleClose } = useAlert();
   const [top3, others] = sliceByOffset(satisfactions, 3);
 
@@ -35,27 +35,29 @@ function Page({ result: satisfactions, teamInfo }: Props) {
                 <ResultDetail satisfaction={satisfaction} />
               </ResultCard>
             ))}
-            <ResultCard title='🥲 패배자들'>
-              <div className={styles.losers}>
-                {others.map((satisfaction, index) => {
-                  return (
-                    <div key={`others-${satisfaction.restaurantName}-${index}`} className={styles.loser}>
-                      <TypoNotoSans text={satisfaction.restaurantName} variant='caption' className={styles.loser__title} />
-                      <div className={styles.loser__bar}>
-                        <RatioBarChart
-                          dataset={makeDataset(satisfaction)}
-                          option={{
-                            startAnimation: 'fromEqual',
-                            barHeight: 25,
-                            offsetY: 5,
-                          }}
-                        />
+            <Visible visible={others.length !== 0}>
+              <ResultCard title='🥲 패배자들'>
+                <div className={styles.losers}>
+                  {others.map((satisfaction, index) => {
+                    return (
+                      <div key={`others-${satisfaction.restaurantName}-${index}`} className={styles.loser}>
+                        <TypoNotoSans text={satisfaction.restaurantName} variant='caption' className={styles.loser__title} />
+                        <div className={styles.loser__bar}>
+                          <RatioBarChart
+                            dataset={makeDataset(satisfaction)}
+                            option={{
+                              startAnimation: 'fromEqual',
+                              barHeight: 25,
+                              offsetY: 5,
+                            }}
+                          />
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </ResultCard>
+                    );
+                  })}
+                </div>
+              </ResultCard>
+            </Visible>
             <div className={styles.button_box}>
               <Button
                 variant='contained'
@@ -66,8 +68,8 @@ function Page({ result: satisfactions, teamInfo }: Props) {
               >
                 <TypoNotoSans text='결과 공유하기' variant='button' textAlign='center' color='white' />
               </Button>
-              <Button variant='text' onClick={() => invite()}>
-                <TypoNotoSans text='친구 초대하기' {...inviteButtonTypoStyle} />
+              <Button variant='text' onClick={toGola}>
+                <TypoNotoSans text='팀에 참여하기' {...inviteButtonTypoStyle} />
               </Button>
             </div>
           </div>

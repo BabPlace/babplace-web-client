@@ -1,6 +1,6 @@
 import React, { useState, ComponentProps, useEffect } from 'react';
 import { Map } from 'react-kakao-maps-sdk';
-import Loading from './Loading';
+import Loading from '../loading/Loading';
 
 type Props = ComponentProps<typeof Map> & {
   style: React.CSSProperties;
