@@ -26,11 +26,13 @@ const HowToUse = () => {
 
   return (
     <Modal isShow={isShow} hide={hide}>
-      <FlexColumn justifyContent='space-between' alignItems='center' height='100%'>
-        <HowToUseHeader />
-        <HowToUseBody />
-        <HowToUseFooter doNotShowAgain={doNotShowAgain} />
-      </FlexColumn>
+      {isShow && (
+        <FlexColumn justifyContent='space-between' alignItems='center' height='100%'>
+          <HowToUseHeader />
+          <HowToUseBody />
+          <HowToUseFooter doNotShowAgain={doNotShowAgain} />
+        </FlexColumn>
+      )}
     </Modal>
   );
 };

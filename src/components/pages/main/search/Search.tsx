@@ -24,6 +24,7 @@ const Search = ({ location, setLocation }: Props) => {
         value={value}
         handleChange={handleChange}
         placeholder='장소 주소 식당 검색'
+        focus={false}
         reset={reset}
         disabled={true}
         onClick={() => {
