@@ -25,7 +25,6 @@ const Selects = () => {
 
   return (
     <FullScreenModal isShow={isShow}>
-      <SearchBox value={value} handleChange={handleChange} placeholder='장소 검색' reset={reset} isShadow={false} handleClose={hide} />
       <div className={styles.container}>
         <div className={styles.content}>
           <Tabs
@@ -43,6 +42,7 @@ const Selects = () => {
         }}
         handleClose={handleClose}
       />
+      <SearchBox value={value} handleChange={handleChange} placeholder='장소 검색' reset={reset} isShadow={false} handleClose={hide} />
     </FullScreenModal>
   );
 };
