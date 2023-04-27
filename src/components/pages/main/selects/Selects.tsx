@@ -50,7 +50,7 @@ const Selects = () => {
 export default Selects;
 
 const SelectsItems = ({ value, open, set }: { value: string; open: () => void; set: (select: SelectPlace) => void }) => {
-  const { selects } = useContext(SelectsContext);
+  const { selects, hide } = useContext(SelectsContext);
 
   return (
     <SelectsBox
@@ -60,12 +60,13 @@ const SelectsItems = ({ value, open, set }: { value: string; open: () => void; s
         open();
         set(select);
       }}
+      emptyAction={hide}
     />
   );
 };
 
 const LikeItems = ({ value }: { value: string }) => {
-  const { addSelects } = useContext(SelectsContext);
+  const { addSelects, hide } = useContext(SelectsContext);
   const { likeItems } = useLike(null);
 
   return (
@@ -75,6 +76,7 @@ const LikeItems = ({ value }: { value: string }) => {
       action={(select) => {
         addSelects(select);
       }}
+      emptyAction={hide}
     />
   );
 };

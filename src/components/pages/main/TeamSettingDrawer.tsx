@@ -76,7 +76,7 @@ const TeamSettingDrawer = ({ isLoading, addressName, location }: Props) => {
             <div className={styles.list_item__content}>
               <FlexRow alignItems='center'>
                 <TypoNotoSans text={selects.length} className={styles.list_item__content} textAlign='center' />
-                <IconButton onClick={show} size='small'>
+                <IconButton onClick={show} size='small' sx={{ position: 'absolute', right: '0' }}>
                   <FormatListIcon />
                 </IconButton>
               </FlexRow>

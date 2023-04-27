@@ -1,0 +1,47 @@
+.container {
+  position: fixed;
+  width: 100%;
+  height: var(--max-height);
+
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 3;
+
+  background: rgb(var(--secondary-background-rgb));
+  /* background-image: url('/splashscreens/iPhone_11_Pro_Max__iPhone_XS_Max_portrait.png');
+  background-position: center;
+  background-size: cover; */
+}
+.intro {
+  padding: 0 30px;
+  word-break: keep-all;
+}
+.guide {
+}
+
+.app_logo {
+  width: 90px;
+  height: 90px;
+  border-radius: var(--border-radius);
+  box-shadow: 0px 7px 29px 0px rgba(var(--primary-foreground-rgba), 0.4);
+  box-shadow: 0px 4px 25px 0px rgba(var(--primary-foreground-rgba), 0.4);
+}
+
+.share_icon {
+  transform: translateY(5px);
+}
+
+.south_icon {
+  animation: wave 1s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes wave {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-30px);
+  }
+}
