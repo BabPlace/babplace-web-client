@@ -30,7 +30,7 @@ export default function Home() {
     <ErrorBoundary>
       <BaseUI title={title} description={description} bodyStyle={{ marginTop: '0px', backgroundColor: 'black' }}>
         <HowToUse />
-        {/* <PWAGuide /> */}
+        <PWAGuide />
         <LoadableMap
           isLoading={loading}
           level={5}
