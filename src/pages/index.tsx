@@ -29,8 +29,6 @@ export default function Home() {
   return (
     <ErrorBoundary>
       <BaseUI title={title} description={description} bodyStyle={{ marginTop: '0px', backgroundColor: 'black' }}>
-        <HowToUse />
-        <PWAGuide />
         <LoadableMap
           isLoading={loading}
           level={5}
@@ -45,6 +43,8 @@ export default function Home() {
         <TeamSettingDrawer isLoading={loading} addressName={addressName} location={location} />
         <Search location={location} setLocation={setLocation} />
         <Selects />
+        <HowToUse />
+        <PWAGuide />
       </BaseUI>
     </ErrorBoundary>
   );

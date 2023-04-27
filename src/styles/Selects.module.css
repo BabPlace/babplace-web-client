@@ -3,6 +3,9 @@
   height: var(--max-height);
   padding: var(--padding-container);
   z-index: 1;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
 .content {

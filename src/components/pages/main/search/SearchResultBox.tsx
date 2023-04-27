@@ -17,6 +17,7 @@ type Props = {
 const SearchResultBox = ({ value, searchResult, reset, handleChange, handleClickResult }: Props) => {
   const { isSearch, toggleSearch } = useQuery();
 
+  if (!isSearch) return <></>;
   return (
     <Visible visible={isSearch} className={styles.search_result}>
       <SearchBox

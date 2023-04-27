@@ -23,6 +23,7 @@ const Selects = () => {
     setSelect(select);
   }
 
+  if (!isShow) return <div></div>;
   return (
     <FullScreenModal isShow={isShow}>
       <div className={styles.container}>

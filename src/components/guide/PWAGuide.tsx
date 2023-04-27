@@ -7,39 +7,38 @@ import styles from '@/styles/PWAGuide.module.css';
 
 const PWAGuide = () => {
   const { isPWA, setQuery } = useQuery();
+  if (!isPWA) return <></>;
   return (
-    <Visible visible={isPWA}>
-      <div
-        className={styles.container}
-        onClick={() => {
-          setQuery('pwa');
-        }}
-      >
-        <FlexColumn alignItems='center' justifyContent='space-between' height='100%'>
-          <FlexColumn alignItems='center' gap='40px' justifyContent='center' className={styles.intro} height='100%'>
-            <img src='/icons/icon-512x512.png' className={styles.app_logo} />
-            <TypoNotoSans variant='h4'>Try Install PWA</TypoNotoSans>
-            <TypoNotoSans {...guideTypoStyle} fontSize='0.9rem'>
-              화면 아래에 있는 공유하기 버튼을 누른 후, '홈 화면에 추가' 혹은 'Add to home screen'을 찾아서 눌러주세요.
-            </TypoNotoSans>
-            <TypoNotoSans color='rgb(var(--tertiary-foreground-rgb))' {...guideTypoStyle} fontSize='0.8rem'>
-              브라우저 버전에 따라 정상적으로 설치되지 않을 수 있습니다. 최신 버전의 브라우저를 권장합니다.
-            </TypoNotoSans>
-          </FlexColumn>
-          <FlexColumn alignItems='center' justifyContent='space-between' gap='60px' className={styles.guide}>
-            <FlexColumn alignItems='center' justifyContent='space-between' gap='20px'>
-              <TypoNotoSans variant='body2' fontWeight={600} letterSpacing={1.5}>
-                아래의 <IosShareIcon color='primary' className={styles.share_icon} /> 버튼을 누른 후
-              </TypoNotoSans>
-              <TypoNotoSans variant='body2' fontWeight={600} letterSpacing={1.5}>
-                '홈 화면에 추가' 선택
-              </TypoNotoSans>
-            </FlexColumn>
-            <SouthIcon className={styles.south_icon} />
-          </FlexColumn>
+    <div
+      className={styles.container}
+      onClick={() => {
+        setQuery('pwa');
+      }}
+    >
+      <FlexColumn alignItems='center' justifyContent='space-between' height='100%'>
+        <FlexColumn alignItems='center' gap='40px' justifyContent='center' className={styles.intro} height='100%'>
+          <img src='/icons/icon-512x512.png' className={styles.app_logo} />
+          <TypoNotoSans variant='h4'>Try Install PWA</TypoNotoSans>
+          <TypoNotoSans {...guideTypoStyle} fontSize='0.9rem'>
+            화면 아래에 있는 공유하기 버튼을 누른 후, '홈 화면에 추가' 혹은 'Add to home screen'을 찾아서 눌러주세요.
+          </TypoNotoSans>
+          <TypoNotoSans color='rgb(var(--tertiary-foreground-rgb))' {...guideTypoStyle} fontSize='0.8rem'>
+            브라우저 버전에 따라 정상적으로 설치되지 않을 수 있습니다. 최신 버전의 브라우저를 권장합니다.
+          </TypoNotoSans>
         </FlexColumn>
-      </div>
-    </Visible>
+        <FlexColumn alignItems='center' justifyContent='space-between' gap='60px' className={styles.guide}>
+          <FlexColumn alignItems='center' justifyContent='space-between' gap='20px'>
+            <TypoNotoSans variant='body2' fontWeight={600} letterSpacing={1.5}>
+              아래의 <IosShareIcon color='primary' className={styles.share_icon} /> 버튼을 누른 후
+            </TypoNotoSans>
+            <TypoNotoSans variant='body2' fontWeight={600} letterSpacing={1.5}>
+              '홈 화면에 추가' 선택
+            </TypoNotoSans>
+          </FlexColumn>
+          <SouthIcon className={styles.south_icon} />
+        </FlexColumn>
+      </FlexColumn>
+    </div>
   );
 };
 

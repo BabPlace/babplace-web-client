@@ -1,47 +1,42 @@
 import { useRouter } from 'next/router';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 
 export default function useQuery() {
   const router = useRouter();
+  const [isDefault, setIsDefault] = useState(true);
+  const [isSelects, setIsSelects] = useState(false);
+  const [isCustom, setIsCustom] = useState(false);
+  const [isSearch, setIsSearch] = useState(false);
+  const [isShow, setIsShow] = useState(false);
+  const [drawer, setDrawer] = useState(false);
+  const [isPWA, setIsPWA] = useState(false);
 
-  const isDefault = useMemo(() => {
+  useEffect(() => {
     const mode = router.query.mode as string;
-    if (mode === 'custom' || mode === 'search' || mode === 'selects' || mode === 'pwa') return false;
-    return true;
-  }, [router.query]);
+    setIsDefault(!(mode === 'custom' || mode === 'search' || mode === 'selects' || mode === 'pwa'));
+    setIsSelects(mode === 'selects');
+    setIsCustom(mode === 'custom' || mode === 'selects');
+  }, [router.query.mode]);
 
-  const isSelects = useMemo(() => {
-    const mode = router.query.mode as string;
-    if (mode === 'selects') return true;
-    return false;
-  }, [router.query]);
-
-  const isCustom = useMemo(() => {
-    const mode = router.query.mode as string;
-    if (mode === 'custom' || mode === 'selects') return true;
-    return false;
-  }, [router.query]);
-
-  const isSearch = useMemo(() => {
+  useEffect(() => {
     const search = router.query.search as string;
-    if (search === 'true') return true;
-    return false;
-  }, [router.query]);
+    setIsSearch(search === 'true');
+  }, [router.query.search]);
 
-  const isShow = useMemo(() => {
+  useEffect(() => {
     const isShow = router.query.isShow as string;
-    return isShow === 'true';
-  }, [router.query]);
+    setIsShow(isShow === 'true');
+  }, [router.query.isShow]);
 
-  const drawer = useMemo(() => {
+  useEffect(() => {
     const drawer = router.query.drawer as string;
-    return drawer === 'open';
-  }, [router.query]);
+    setDrawer(drawer === 'open');
+  }, [router.query.drawer]);
 
-  const isPWA = useMemo(() => {
+  useEffect(() => {
     const pwa = router.query.pwa as string;
-    return pwa === 'true';
-  }, [router.query]);
+    setIsPWA(pwa === 'true');
+  }, [router.query.pwa]);
 
   function setQuery(key: string, value?: string) {
     const query = { ...router.query };
