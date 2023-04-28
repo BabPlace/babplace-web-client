@@ -3,6 +3,10 @@
   padding: 15px 25px;
   position: fixed;
   bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  max-width: var(--max-width);
   height: calc(var(--max-height) - calc(var(--header-default-height) + env(safe-area-inset-top)));
 }
 
