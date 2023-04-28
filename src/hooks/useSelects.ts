@@ -14,6 +14,7 @@ export default function useSelect() {
   }
 
   function addSelects(select: SelectPlace) {
+    if (selects.some((_select) => _select.id === select.id)) return;
     setSelects([...selects, select]);
   }
 
