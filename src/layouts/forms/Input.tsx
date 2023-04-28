@@ -37,7 +37,7 @@ const Input = ({
 
   return (
     <Container border={border} error={error} errorSize={errorSize} className={className} textAlign={textAlign}>
-      <input ref={inputRef} onKeyDown={onKeyDown} {...props} className='input' />
+      <input ref={inputRef} onKeyDown={onKeyDown} {...props} className='input' autoFocus />
       <TypoNotoSans
         className={'error-text ' + (error ? 'show' : 'hide')}
         textAlign='center'

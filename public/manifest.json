@@ -4,9 +4,9 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "\uace8\ub77c\ubc25",
-  "short_name": "\uace8\ub77c\ubc25",
-  "description": "\uc624\ub298 \ubb50 \uba39\uc744\uc9c0 \uace0\ubbfc\ub420 \ub54c? \uace8\ub77c\ubc25!",
+  "name": "밥풀레이스",
+  "short_name": "밥풀레이스",
+  "description": "친구들과 함께 오늘의 밥풀레이스를 뽑아보세요 🍚",
   "icons": [
     {
       "src": "/icons/icon-48x48.png",
