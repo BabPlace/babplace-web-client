@@ -82,7 +82,7 @@ export default function useSwipeableButton() {
   }
 
   function showGithub() {
-    window.open('https://github.com/Gola-bab/web');
+    window.open('https://github.com/BabPlace/babplace-web-client');
   }
 
   useEffect(() => {

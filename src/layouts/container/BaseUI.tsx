@@ -10,7 +10,7 @@ type Props = {
   bodyStyle?: React.CSSProperties;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-const BaseUI = ({ children, bodyStyle, title = '골라밥 🍚', description = 'This is default description', ...props }: Props) => {
+const BaseUI = ({ children, bodyStyle, title = '밥풀레이스 🍚', description = 'This is default description', ...props }: Props) => {
   return (
     <div className={styles.main} {...props}>
       <Head>

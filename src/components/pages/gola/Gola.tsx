@@ -111,6 +111,6 @@ const NoSSRTinderCard = dynamic(() => import('./TinderCardWrapper'), {
 });
 const ForwardRefNoSSRTinderCard = React.forwardRef<API, any>((props, ref) => <NoSSRTinderCard innerRef={ref} {...props} />);
 
-const title = '식당 만족도 조사 | 골라밥 🍚';
+const title = '식당 만족도 조사 | 밥풀레이스 🍚';
 const description = '원하는 식당, 원하지 않는 식당을 표현하세요!';
 const mapStyle = { width: '99.5%', height: '99.5%', borderRadius: 'var(--border-radius)' };

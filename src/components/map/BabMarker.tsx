@@ -7,7 +7,7 @@ type Props = {
 };
 
 const BabMarker = ({ isCustom }: Props) => {
-  return <div className={cn(styles.container, isCustom && styles.custom)} />;
+  return <img src='icons/icon-tr-512x512.png' className={cn(styles.container, isCustom && styles.custom)} />;
 };
 
 export default React.memo(BabMarker);

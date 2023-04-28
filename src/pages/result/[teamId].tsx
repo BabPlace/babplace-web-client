@@ -101,7 +101,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
 export default Page;
 
-const title = '결과 페이지 | 골라밥 🍚';
+const title = '결과 페이지 | 밥풀레이스 🍚';
 const description = '생성한 팀 혹은 초대받은 팀의 식당 만족도 조사결과 페이지입니다.';
 const inviteButtonTypoStyle = {
   variant: 'button' as const,

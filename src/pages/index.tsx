@@ -50,8 +50,8 @@ export default function Home() {
   );
 }
 
-const title = '골라줘밥 🍚';
-const description = '친구들과 함께 오늘 메뉴를 골라골라 🍚';
+const title = '밥풀레이스 🍚';
+const description = '친구들과 함께 오늘의 밥풀레이스를 뽑아보세요 🍚';
 const mapDefaultHeight = 'calc(var(--max-height) - var(--drawer-default-height) + var(--border-radius))';
 const mapCustomHeight = 'calc(var(--max-height) - var(--drawer-default-height) + var(--border-radius) + var(--drawer-list-height) * 2)';
 const mapStyle = {

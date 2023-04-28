@@ -28,7 +28,7 @@ const Header = ({ showButtons = true }: Props) => {
           </IconButton>
         </Link>
       )}
-      <TypoNotoSans text='🍚 골라밥 🍚' variant='h6' textAlign='center' width='100%' fontSize='20px' />
+      <TypoNotoSans text='🍚 밥풀레이스 🍚' variant='h6' textAlign='center' width='100%' fontSize='20px' />
       {showButtons && (
         <IconButton onClick={handleClick}>
           <InviteIcon />

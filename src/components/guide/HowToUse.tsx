@@ -42,9 +42,9 @@ export default HowToUse;
 const HowToUseHeader = () => {
   return (
     <div>
-      <TypoNotoSans text='🍚  골라밥 사용방법  🍚' variant='h6' textAlign='center' marginBottom='10px' />
+      <TypoNotoSans text='🍚  밥풀레이스 사용방법  🍚' variant='h6' textAlign='center' marginBottom='10px' />
       <TypoNotoSans
-        text='골라밥은 선택한 지역의 식당을 추천해줘요! 친구들과 함께 오늘의 식당을 골라봐요!'
+        text='밥풀레이스는 선택한 지역의 식당을 추천해줘요! 친구들과 함께 오늘의 밥집을 뽑아봐요!'
         noWrap={false}
         variant='body2'
         textAlign='center'
