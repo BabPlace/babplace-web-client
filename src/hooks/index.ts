@@ -21,3 +21,4 @@ export { default as useServiceWorker } from './useServiceWorker';
 export { default as useSelects } from './useSelects';
 export { default as useLike } from './useLike';
 export { default as useConfirm } from './useConfirm';
+export { default as useRecentResult } from './useRecentResult';

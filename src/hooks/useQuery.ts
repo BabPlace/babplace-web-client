@@ -7,7 +7,7 @@ export default function useQuery() {
   const [isSelects, setIsSelects] = useState(false);
   const [isCustom, setIsCustom] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
-  const [isShow, setIsShow] = useState(false);
+  const [isShow, setIsShow] = useState('undefined');
   const [drawer, setDrawer] = useState(false);
   const [isPWA, setIsPWA] = useState(false);
 
@@ -25,7 +25,7 @@ export default function useQuery() {
 
   useEffect(() => {
     const isShow = router.query.isShow as string;
-    setIsShow(isShow === 'true');
+    setIsShow(isShow);
   }, [router.query.isShow]);
 
   useEffect(() => {

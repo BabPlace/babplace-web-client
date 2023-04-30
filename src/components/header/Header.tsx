@@ -2,7 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import { IconButton } from '@mui/material';
 import { AlertSnackBar } from '../snackbar';
-import { TypoNotoSans } from '@/layouts';
+import { LogoTr } from '../logo';
+import { FlexRow, TypoNotoSans } from '@/layouts';
 import { useAlert, useCopy } from '@/hooks';
 import { HomeIcon, InviteIcon } from '@/icons';
 import styles from '@/styles/Header.module.css';
@@ -28,7 +29,13 @@ const Header = ({ showButtons = true }: Props) => {
           </IconButton>
         </Link>
       )}
-      <TypoNotoSans text='🍚 밥풀레이스 🍚' variant='h6' textAlign='center' width='100%' fontSize='20px' />
+
+      <FlexRow height='100%' alignItems='center'>
+        <LogoTr height='40px' />
+        <TypoNotoSans variant='h6' textAlign='center' width='100%' fontSize='20px'>
+          밥풀레이스
+        </TypoNotoSans>
+      </FlexRow>
       {showButtons && (
         <IconButton onClick={handleClick}>
           <InviteIcon />

@@ -1,10 +1,11 @@
+import { useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import { RatioBarChart } from '@teamapdan/weirdchart';
 import { Button } from '@mui/material';
 import { Header, ErrorBoundary, ResultCard, ResultDetail, AlertSnackBar } from '@/components';
 import { sliceByOffset, makeDataset } from '@/utils';
 import { BaseUI, TypoNotoSans, Visible } from '@/layouts';
-import { useAlert, useCopy } from '@/hooks';
+import { useAlert, useCopy, useRecentResult } from '@/hooks';
 import { getResult, getTeamInfo } from '@/controller';
 import type { ResultResponse, TeamInfoResponse } from '@/interfaces';
 import styles from '@/styles/Result.module.css';
@@ -17,7 +18,12 @@ type Props = {
 function Page({ result: satisfactions, teamInfo }: Props) {
   const { toGola, share } = useCopy();
   const { open, handleOpen, handleClose } = useAlert();
+  const { addRecentResult } = useRecentResult();
   const [top3, others] = sliceByOffset(satisfactions, 3);
+
+  useEffect(() => {
+    addRecentResult();
+  }, []);
 
   return (
     <ErrorBoundary>

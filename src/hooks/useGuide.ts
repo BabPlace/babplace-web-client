@@ -30,5 +30,5 @@ export default function useGuide(page: string) {
     setIsLoaded(true);
   }, []);
 
-  return { isShow: isLoaded ? isShow : isLoaded, show, hide, doNotShowAgain };
+  return { isShow: isLoaded ? isShow === 'true' : isLoaded, show, hide, doNotShowAgain };
 }
