@@ -3,14 +3,11 @@ import { SelectsContext, FullScreenModal, Confirm } from '@/components';
 import { useConfirm, useInput, useLike } from '@/hooks';
 import { RemoveIcon, AddIcon } from '@/icons';
 import { filterPlace } from '@/utils';
-
 import Tabs from './Tabs';
 import SelectsBox from './SelectsBox';
 import SearchBox from '../search/SearchBox';
 
 import type { SelectPlace } from '@/interfaces';
-
-import styled from '@emotion/styled';
 import styles from '@/styles/Selects.module.css';
 
 const Selects = () => {
