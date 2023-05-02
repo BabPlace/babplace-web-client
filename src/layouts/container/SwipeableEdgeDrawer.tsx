@@ -18,7 +18,7 @@ const SwipeableEdgeDrawer = ({ children, height, isHidden, swipeUp = true, showP
   const { isDefault } = useQuery();
   return (
     <StyledDrawer
-      className={cn(styles.container, isHidden ? 'hidden' : '')}
+      className={cn(styles.container, isHidden ? styles.hidden : '')}
       ref={drawerRef}
       isOpen={open}
       isHidden={isHidden}
