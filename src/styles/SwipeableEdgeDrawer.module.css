@@ -9,8 +9,10 @@
   color: rgba(var(--pribary-foreground-rgba));
   box-shadow: 0 0 10px 0 rgba(var(--primary-foreground-rgba), 0.2);
   transition: bottom 0.5s ease-out, height 0.5s ease-in-out, min-height 0.35s ease-out;
-  /* -webkit-backdrop-filter: blur(0px);
-  backdrop-filter: blur(0px); */
+}
+
+.hidden {
+  bottom: -100%;
 }
 
 .puller {
