@@ -2,7 +2,7 @@ import React from 'react';
 import { FlexRow, FlexColumn, TypoNotoSans } from '@/layouts';
 import type { SelectPlace } from '@/interfaces';
 import styles from '@/styles/SelectsBox.module.css';
-import { AddIcon, CategoryIcon } from '@/icons';
+import { CategoryIcon } from '@/icons';
 import { IconButton, Button } from '@mui/material';
 
 type SelectsBodyProps = {
