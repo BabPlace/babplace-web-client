@@ -5,7 +5,6 @@
   height: var(--max-height);
   max-width: var(--max-width);
   top: 0;
-  z-index: 1;
   background: rgb(var(--secondary-background-rgb));
   padding-top: calc(var(--search-box-margin-tb) * 2 + var(--search-box-height) + env(safe-area-inset-top));
 }

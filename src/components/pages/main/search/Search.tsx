@@ -5,7 +5,6 @@ import SearchResultBox from './SearchResultBox';
 import SearchResultDrawer from './SearchResultDrawer';
 import { AlertSnackBar } from '@/components';
 import type { SetLocation } from '@/hooks/useMainMap';
-import { Visible } from '@/layouts';
 
 type Props = {
   location: { lat: number; lng: number };
@@ -13,7 +12,7 @@ type Props = {
 };
 
 const Search = ({ location, setLocation }: Props) => {
-  const { isSearch, setQuery } = useQuery();
+  const { isSearch, toggleSearch, setQuery } = useQuery();
   const { value, reset, handleChange, setForceValue } = useInput('');
   const { searchResults } = useSearch(value, location);
   const { selectedSearchResult, handleClickSearchResult, clearSelectedSearchResult } = useSelectedSearchResult(setLocation);
@@ -21,26 +20,19 @@ const Search = ({ location, setLocation }: Props) => {
 
   return (
     <>
-      <Visible visible={!isSearch}>
-        <SearchBox
-          value={value}
-          handleChange={handleChange}
-          placeholder='장소 주소 식당 검색'
-          focus={false}
-          reset={reset}
-          disabled={true}
-          onClick={() => {
-            setQuery('search', 'true');
-          }}
-        />
-      </Visible>
-      <SearchResultBox
+      <SearchBox
         value={value}
-        reset={reset}
         handleChange={handleChange}
-        searchResult={searchResults}
-        handleClickResult={handleClickSearchResult}
+        isShadow={false}
+        placeholder='장소 주소 식당 검색'
+        handleClose={toggleSearch}
+        reset={reset}
+        isSearch={isSearch}
+        onClick={() => {
+          setQuery('search', 'true');
+        }}
       />
+      <SearchResultBox value={value} searchResult={searchResults} handleClickResult={handleClickSearchResult} />
       <SearchResultDrawer add={add} clear={clear} share={share} selectedSearchResult={selectedSearchResult} setForceValue={setForceValue} />
       <AlertSnackBar open={open} handleClose={handleClose} message='클립보드에 복사되었습니다' severity='info' />
     </>

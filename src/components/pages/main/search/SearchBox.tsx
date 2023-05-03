@@ -11,34 +11,31 @@ type Props = React.HTMLAttributes<HTMLDivElement> & {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
   reset: () => void;
+  handleClose: () => void;
+  isSearch?: boolean;
   isShadow?: boolean;
-  focus?: boolean;
-} & (
-    | {
-        disabled: true;
-        handleClose?: never;
-      }
-    | {
-        disabled?: false;
-        handleClose: () => void;
-      }
-  );
+};
 
-const SearchBox = ({ value, handleChange, placeholder, reset, isShadow = true, disabled = false, handleClose, focus, ...props }: Props) => {
+const SearchBox = ({ value, handleChange, placeholder, reset, isShadow = true, handleClose, isSearch = true, ...props }: Props) => {
   const { drawer } = useQuery();
 
   return (
     <div className={cn(styles.search_box, drawer ? styles.scale_down : '', isShadow ? styles.shadow : styles.no_shadow)} {...props}>
-      <IconButton onClick={handleClose}>{disabled ? <SearchIcon /> : <IosBackIcon />}</IconButton>
+      <IconButton
+        onClick={(e) => {
+          e.stopPropagation();
+          handleClose && handleClose();
+        }}
+      >
+        {isSearch ? <IosBackIcon /> : <SearchIcon />}
+      </IconButton>
       <Input
-        focus={focus}
         value={value}
         placeholder={placeholder}
         border={false}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           handleChange(event);
         }}
-        disabled={disabled}
         textAlign='left'
         className={styles.search_box__input}
       />
