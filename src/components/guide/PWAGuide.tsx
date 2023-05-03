@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@/hooks';
-import { Visible, FlexColumn, TypoNotoSans } from '@/layouts';
+import { FlexColumn, TypoNotoSans, Visible } from '@/layouts';
 import { IosShareIcon, SouthIcon } from '@/icons';
 
 import styles from '@/styles/PWAGuide.module.css';
@@ -8,9 +8,10 @@ import { Typography } from '@mui/material';
 
 const PWAGuide = () => {
   const { isPWA, setQuery } = useQuery();
-  if (!isPWA) return <></>;
+
   return (
-    <div
+    <Visible
+      visible={isPWA}
       className={styles.container}
       onClick={() => {
         setQuery('pwa');
@@ -41,7 +42,7 @@ const PWAGuide = () => {
           <SouthIcon className={styles.south_icon} />
         </FlexColumn>
       </FlexColumn>
-    </div>
+    </Visible>
   );
 };
 

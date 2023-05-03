@@ -5,6 +5,7 @@ import SearchResultBox from './SearchResultBox';
 import SearchResultDrawer from './SearchResultDrawer';
 import { AlertSnackBar } from '@/components';
 import type { SetLocation } from '@/hooks/useMainMap';
+import { Visible } from '@/layouts';
 
 type Props = {
   location: { lat: number; lng: number };
@@ -12,7 +13,7 @@ type Props = {
 };
 
 const Search = ({ location, setLocation }: Props) => {
-  const { setQuery } = useQuery();
+  const { isSearch, setQuery } = useQuery();
   const { value, reset, handleChange, setForceValue } = useInput('');
   const { searchResults } = useSearch(value, location);
   const { selectedSearchResult, handleClickSearchResult, clearSelectedSearchResult } = useSelectedSearchResult(setLocation);
@@ -20,17 +21,19 @@ const Search = ({ location, setLocation }: Props) => {
 
   return (
     <>
-      <SearchBox
-        value={value}
-        handleChange={handleChange}
-        placeholder='장소 주소 식당 검색'
-        focus={false}
-        reset={reset}
-        disabled={true}
-        onClick={() => {
-          setQuery('search', 'true');
-        }}
-      />
+      <Visible visible={!isSearch}>
+        <SearchBox
+          value={value}
+          handleChange={handleChange}
+          placeholder='장소 주소 식당 검색'
+          focus={false}
+          reset={reset}
+          disabled={true}
+          onClick={() => {
+            setQuery('search', 'true');
+          }}
+        />
+      </Visible>
       <SearchResultBox
         value={value}
         reset={reset}
