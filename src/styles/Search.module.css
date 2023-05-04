@@ -81,7 +81,7 @@
 }
 
 .scale_down {
-  transform: scale(0.92, 0.92) translateY(calc(var(--max-height) * 0.05));
+  transform: scale(0.95, 0.95) translateY(calc(var(--max-height) * 0.03));
 }
 
 .search_box__input {
