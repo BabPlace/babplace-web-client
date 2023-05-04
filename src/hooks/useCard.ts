@@ -4,7 +4,6 @@ import type { API, Direction, Restaurant } from '@/interfaces';
 export default function useCard(restaurants: Restaurant[] = []) {
   const restaurantLength = restaurants.length;
   const [frontIndex, setFrontIndex] = useState(restaurantLength - 1);
-  // const [currentDirection, setCurrentDirection] = useState<Direction>();
 
   const canGoBack = frontIndex < restaurantLength - 1;
   const canSwipe = frontIndex >= 0;
@@ -29,7 +28,7 @@ export default function useCard(restaurants: Restaurant[] = []) {
   };
 
   const swipe = async (direction: Direction) => {
-    if (canSwipe && frontIndex < restaurantLength && cardRefs[frontIndex].current) {
+    if (frontIndex >= 0 && canSwipe && frontIndex < restaurantLength && cardRefs[frontIndex].current) {
       await cardRefs[frontIndex].current?.swipe(direction);
     }
   };
@@ -46,10 +45,6 @@ export default function useCard(restaurants: Restaurant[] = []) {
     await cardRefs[frontIndex].current?.restoreCard();
   };
 
-  // const _setCurrentDirection = (direction: Direction) => {
-  //   setCurrentDirection(direction);
-  // };
-
   useEffect(() => {
     if (restaurantLength === 0) {
       throw new Error('No restaurants found');
@@ -59,7 +54,6 @@ export default function useCard(restaurants: Restaurant[] = []) {
   return {
     cardRefs,
     frontIndex,
-
     canRender,
     afterSwipe,
     swipe,
