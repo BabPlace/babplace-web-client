@@ -47,7 +47,6 @@ const Gola = ({ isValidUser, restaurants = [] }: Props) => {
                         className='swipe'
                         onCardLeftScreen={afterSwipe}
                         onSwipe={(direction: Direction) => {
-                          console.log('id : ', id, ' / ', direction);
                           addResult({ restaurantId: id, satisfaction: directionToSatisfaction(direction) });
                         }}
                       >
