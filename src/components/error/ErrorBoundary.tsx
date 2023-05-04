@@ -33,7 +33,7 @@ class ErrorBoundary extends Component<Props, State> {
 
   public render() {
     if (this.state.hasError && this.state.error) {
-      const message = this.state.error.message ?? 'undefined error';
+      const message = this.state.error.data.message ?? 'undefined error';
       const status = this.state.error.status ?? 'none';
       return (
         <BaseUI onClick={this.reset}>
