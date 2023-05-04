@@ -31,7 +31,7 @@ const Header = ({ showButtons = true }: Props) => {
       )}
 
       <FlexRow height='100%' alignItems='center'>
-        <LogoTr height='40px' />
+        <LogoTr height='32px' />
         <TypoNotoSans variant='h6' textAlign='center' width='100%' fontSize='20px'>
           밥풀레이스
         </TypoNotoSans>
