@@ -1,9 +1,9 @@
 import React from 'react';
+import { useMainMap, useQuery } from '@/hooks';
 import { BaseUI, Visible } from '@/layouts';
 import { LoadableMap, BabMarker, HowToUse, Search, PWAGuide, Selects } from '@/components';
 import SwipeableButton from './SwipeableButton';
 import TeamSettingDrawer from './TeamSettingDrawer';
-import { useMainMap, useQuery } from '@/hooks';
 
 const Home = () => {
   const { loading, addressName, onCenterChanged } = useMainMap();

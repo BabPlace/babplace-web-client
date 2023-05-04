@@ -1,14 +1,14 @@
 import React, { useCallback } from 'react';
 import dynamic from 'next/dynamic';
+import { throttle } from 'lodash';
 import { StaticMap, useInjectKakaoMapApi } from 'react-kakao-maps-sdk';
+import { useResult, useCard } from '@/hooks';
 import { IconButton } from '@mui/material';
 import { Header, Loading, LogoTr } from '@/components';
 import { BaseUI, FlexRow, TypoNotoSans, Visible } from '@/layouts';
-import { useResult, useCard } from '@/hooks';
-import { categoryFormat, distanceFormat, directionToSatisfaction, addressSumary } from '@/utils';
+import { categoryFormat, distanceFormat, directionToSatisfaction } from '@/utils';
 import { InfoIcon, ReplayIcon, SatisfiedAltIcon, VerySatisfiedIcon, VeryDissatisfiedIcon, SickIcon } from '@/icons';
 import type { Restaurant, API, Direction } from '@/interfaces';
-import { throttle } from 'lodash';
 import styles from '@/styles/Gola.module.css';
 
 type Props = {

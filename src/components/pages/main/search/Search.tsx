@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useInput, useQuery, useSearch, useSearchResultDrawerButtons, useSelectedSearchResult } from '@/hooks';
+import { AlertSnackBar } from '@/components';
 import SearchBox from './SearchBox';
 import SearchResultBox from './SearchResultBox';
 import SearchResultDrawer from './SearchResultDrawer';
-import { AlertSnackBar } from '@/components';
 
 const Search = () => {
   const { isSearch, toggleSearch } = useQuery();

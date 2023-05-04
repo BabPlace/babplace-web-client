@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button } from '@mui/material';
-import { BaseUI, Input, ProgressButton, FlexColumn, TypoNotoSans } from '@/layouts';
-import { Header } from '@/components';
 import { useInput, useCreateUser } from '@/hooks';
+import { Button } from '@mui/material';
+import { Header } from '@/components';
+import { BaseUI, Input, ProgressButton, FlexColumn, TypoNotoSans } from '@/layouts';
 import styles from '@/styles/Gola.module.css';
 
 const SetUser = () => {
