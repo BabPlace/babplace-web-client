@@ -6,6 +6,11 @@ export type { ErorrData } from './error';
 
 type ExtractGenericFromRefObject<TRefObject> = TRefObject extends RefObject<infer U> ? U : never;
 
+export type Location = {
+  latitude: number;
+  longitude: number;
+};
+
 export type TinderCardProps = Parameters<typeof TinderCard>[0];
 export type API = ExtractGenericFromRefObject<TinderCardProps['ref']>;
 

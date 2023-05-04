@@ -4,25 +4,21 @@ import { Input, FlexColumn, ProgressButton, ButtonGroup, TypoNotoSans, Swipeable
 import { BusIcon, BikeIcon, FootPrintIcon, FormatListIcon } from '@/icons';
 import styles from '@/styles/SwipeableEdgeDrawer.module.css';
 import styled from '@emotion/styled';
-import { SelectsContext } from '@/components/context';
+import { SelectsContext } from '@/context';
 import { IconButton } from '@mui/material';
 
 type Props = {
   isLoading: boolean;
   addressName: string;
-  location: {
-    lat: number;
-    lng: number;
-  };
 };
 
-const TeamSettingDrawer = ({ isLoading, addressName, location }: Props) => {
+const TeamSettingDrawer = ({ isLoading, addressName }: Props) => {
   const { selects, show } = useContext(SelectsContext);
   const { value: name, isError: isNameError, handleChange: handleNameChange } = useInput('');
   const { value: count, isError: isCountError, handleChange: handleCountChange } = useInput(7);
   const { isDefault } = useQuery();
   const { selectedButton, radius, guideMessage, onClickButton } = useSelectedButton();
-  const { isLoaded, onClick } = useCreateTeam(name, count, location.lat, location.lng, radius, 10);
+  const { isLoaded, onClick } = useCreateTeam(name, count, radius, 10);
 
   return (
     <SwipeableEdgeDrawer>

@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useInjectKakaoMapApi } from 'react-kakao-maps-sdk';
 import { useDebouncedValue, useQuery } from '@/hooks';
+import { LocationContext } from '@/context';
 
-export default function useSearch(value: string, location: { lat: number; lng: number }) {
+export default function useSearch(value: string) {
+  const { location } = useContext(LocationContext);
   const { loading } = useInjectKakaoMapApi({ appkey: process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY!, libraries: ['services', 'clusterer'] });
   const [ps, setPs] = useState<kakao.maps.services.Places>();
   const [searchResults, setSearchResults] = useState<kakao.maps.services.PlacesSearchResult>([]);
@@ -23,7 +25,7 @@ export default function useSearch(value: string, location: { lat: number; lng: n
         }
       },
       {
-        location: new kakao.maps.LatLng(location.lat, location.lng),
+        location: new kakao.maps.LatLng(location.latitude, location.longitude),
       }
     );
   };

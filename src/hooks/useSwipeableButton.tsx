@@ -1,10 +1,9 @@
 import { useEffect, useState, useMemo, useContext } from 'react';
 import { TypoNotoSans } from '@/layouts';
-import { ColorModeContext } from '@/components';
+import { ColorModeContext } from '@/context';
 import { useRouter } from 'next/router';
 import useQuery from './useQuery';
 import useRecentResult from './useRecentResult';
-import { Errors } from '@/interfaces';
 
 type ButtonType = 'guide' | 'theme' | 'mode-pwa' | 'mode-custom' | 'github' | 'result';
 type Button = {

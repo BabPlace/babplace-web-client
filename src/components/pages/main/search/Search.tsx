@@ -1,22 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useInput, useQuery, useSearch, useSearchResultDrawerButtons, useSelectedSearchResult } from '@/hooks';
 import SearchBox from './SearchBox';
 import SearchResultBox from './SearchResultBox';
 import SearchResultDrawer from './SearchResultDrawer';
 import { AlertSnackBar } from '@/components';
-import type { SetLocation } from '@/hooks/useMainMap';
 
-type Props = {
-  location: { lat: number; lng: number };
-  setLocation: SetLocation;
-  toCurrentPosition: () => void;
-};
-
-const Search = ({ location, setLocation, toCurrentPosition }: Props) => {
-  const { isSearch, toggleSearch, setQuery } = useQuery();
+const Search = () => {
+  const { isSearch, toggleSearch } = useQuery();
   const { value, reset, handleChange, setForceValue } = useInput('');
-  const { searchResults } = useSearch(value, location);
-  const { selectedSearchResult, handleClickSearchResult, clearSelectedSearchResult } = useSelectedSearchResult(setLocation);
+  const { searchResults } = useSearch(value);
+  const { selectedSearchResult, handleClickSearchResult, clearSelectedSearchResult } = useSelectedSearchResult();
   const { open, clear, add, share, handleClose } = useSearchResultDrawerButtons(selectedSearchResult, reset, clearSelectedSearchResult);
 
   return (
@@ -28,7 +21,6 @@ const Search = ({ location, setLocation, toCurrentPosition }: Props) => {
         handleClose={toggleSearch}
         reset={reset}
         isSearch={isSearch}
-        toCurrentPosition={toCurrentPosition}
       />
       <SearchResultBox value={value} searchResult={searchResults} handleClickResult={handleClickSearchResult} />
       <SearchResultDrawer add={add} clear={clear} share={share} selectedSearchResult={selectedSearchResult} setForceValue={setForceValue} />

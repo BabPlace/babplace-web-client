@@ -4,11 +4,12 @@ import { createTeam } from '@/controller';
 import { Errors, ErorrData } from '@/interfaces';
 import useQuery from './useQuery';
 import { AxiosError } from 'axios';
-import { SelectsContext } from '@/components';
+import { SelectsContext, LocationContext } from '@/context';
 
-export default function useCreateTeam(name: string, limitRestaurant: number, lat: number, lng: number, radius: number, limitUser: number) {
-  const { isDefault } = useQuery();
+export default function useCreateTeam(name: string, limitRestaurant: number, radius: number, limitUser: number) {
+  const { location } = useContext(LocationContext);
   const { selects } = useContext(SelectsContext);
+  const { isDefault } = useQuery();
   const [isLoaded, setIsLoaded] = useState(true);
   const [errors, setErrors] = useState<Errors>();
   const router = useRouter();
@@ -16,7 +17,10 @@ export default function useCreateTeam(name: string, limitRestaurant: number, lat
   const onClick = useCallback(async () => {
     setIsLoaded(false);
     try {
-      const { teamId } = await createTeam({ name, lat, lng, radius, limitRestaurant, limitUser }, !isDefault ? selects : undefined);
+      const { teamId } = await createTeam(
+        { name, lat: location.latitude, lng: location.longitude, radius, limitRestaurant, limitUser },
+        !isDefault ? selects : undefined
+      );
       router.push({
         pathname: `gola/${teamId}`,
       });
@@ -31,7 +35,7 @@ export default function useCreateTeam(name: string, limitRestaurant: number, lat
         setErrors({ name, message, status, data });
       }
     }
-  }, [isDefault, selects, name, lat, lng, radius, limitRestaurant]);
+  }, [isDefault, selects, name, location, radius, limitRestaurant]);
 
   useEffect(() => {
     if (errors) throw errors;

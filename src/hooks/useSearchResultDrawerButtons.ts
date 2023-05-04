@@ -1,7 +1,7 @@
 import { useCallback, useContext } from 'react';
 import useAlert from './useAlert';
 import type { SelectPlace } from '@/interfaces';
-import { SelectsContext } from '@/components/context';
+import { SelectsContext } from '@/context';
 
 export default function useSearchResultDrawerButtons(
   selectedSearchResult: SelectPlace | null,

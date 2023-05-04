@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
-import { SelectsContext, FullScreenModal, Confirm } from '@/components';
+import { FullScreenModal, Confirm } from '@/components';
 import { useConfirm, useInput, useLike } from '@/hooks';
 import { RemoveIcon, AddIcon } from '@/icons';
 import { filterPlace } from '@/utils';
+import { SelectsContext } from '@/context';
 import Tabs from './Tabs';
 import SelectsBox from './SelectsBox';
 import SearchBox from '../search/SearchBox';
-
 import type { SelectPlace } from '@/interfaces';
 import styles from '@/styles/Selects.module.css';
 

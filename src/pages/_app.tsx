@@ -4,11 +4,11 @@ import type { AppProps } from 'next/app';
 import { ThemeProvider } from '@mui/material';
 import { CacheProvider } from '@emotion/react';
 import createEmotionCache from '@/utils/createEmotionCache';
-import { ColorModeContext, SelectsContext } from '@/components';
+import { ColorModeContext, SelectsContext } from '@/context';
 import { useTheme, useSelects, useServiceWorker } from '@/hooks';
 import '@/styles/globals.css';
-import Script from 'next/script'
-import * as gtag from '../lib/gtag'
+import Script from 'next/script';
+import * as gtag from '../lib/gtag';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -25,13 +25,10 @@ export default function App({ Component, emotionCache = clientSideEmotionCache, 
         <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
       </Head>
       {/* Global Site Tag (gtag.js) - Google Analytics */}
+      <Script strategy='afterInteractive' src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`} />
       <Script
-        strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
-      />
-      <Script
-        id="gtag-init"
-        strategy="afterInteractive"
+        id='gtag-init'
+        strategy='afterInteractive'
         dangerouslySetInnerHTML={{
           __html: `
             window.dataLayer = window.dataLayer || [];

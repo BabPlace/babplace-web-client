@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import type { SetLocation } from '@/hooks/useMainMap';
+import { useState, useContext } from 'react';
 import type { SelectPlace } from '@/interfaces';
+import { LocationContext } from '@/context';
 
-export default function useSelectedSearchResult(setLocation: SetLocation) {
+export default function useSelectedSearchResult() {
+  const { setLocation } = useContext(LocationContext);
   const [selectedSearchResult, setSelectedSearchResult] = useState<SelectPlace | null>(null);
 
   const handleClickSearchResult = (selectedSearchResult: SelectPlace) => {

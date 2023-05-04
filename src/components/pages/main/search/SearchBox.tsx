@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import cn from 'classnames';
 import { useQuery } from '@/hooks';
 import { Input, Visible } from '@/layouts';
 import { SearchIcon, IosBackIcon, CloseIcon, NearMeIcon } from '@/icons';
 import { IconButton } from '@mui/material';
+import { LocationContext } from '@/context';
 import styles from '@/styles/Search.module.css';
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
@@ -12,11 +13,11 @@ type Props = React.HTMLAttributes<HTMLDivElement> & {
   placeholder: string;
   reset: () => void;
   handleClose: () => void;
-  toCurrentPosition?: () => void;
   isSearch?: boolean;
 };
 
-const SearchBox = ({ value, handleChange, placeholder, reset, handleClose, toCurrentPosition, isSearch = true, ...props }: Props) => {
+const SearchBox = ({ value, handleChange, placeholder, reset, handleClose, isSearch = true, ...props }: Props) => {
+  const { toCurrentPosition } = useContext(LocationContext);
   const { drawer } = useQuery();
 
   return (
@@ -44,7 +45,7 @@ const SearchBox = ({ value, handleChange, placeholder, reset, handleClose, toCur
           className={styles.search_box__nearme_icon_button}
           onClick={() => {
             reset();
-            toCurrentPosition && toCurrentPosition();
+            toCurrentPosition();
           }}
         >
           <NearMeIcon />
