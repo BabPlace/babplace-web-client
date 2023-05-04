@@ -2,7 +2,7 @@ import React from 'react';
 import cn from 'classnames';
 import { useQuery } from '@/hooks';
 import { Input, Visible } from '@/layouts';
-import { SearchIcon, IosBackIcon, CloseIcon } from '@/icons';
+import { SearchIcon, IosBackIcon, CloseIcon, NearMeIcon } from '@/icons';
 import { IconButton } from '@mui/material';
 import styles from '@/styles/Search.module.css';
 
@@ -12,23 +12,15 @@ type Props = React.HTMLAttributes<HTMLDivElement> & {
   placeholder: string;
   reset: () => void;
   handleClose: () => void;
+  toCurrentPosition?: () => void;
   isSearch?: boolean;
-  isShadow?: boolean;
 };
 
-const SearchBox = ({ value, handleChange, placeholder, reset, isShadow = true, handleClose, isSearch = true, ...props }: Props) => {
+const SearchBox = ({ value, handleChange, placeholder, reset, handleClose, toCurrentPosition, isSearch = true, ...props }: Props) => {
   const { drawer } = useQuery();
 
   return (
-    <div className={cn(styles.search_box, drawer ? styles.scale_down : '', isShadow ? styles.shadow : styles.no_shadow)} {...props}>
-      <IconButton
-        onClick={(e) => {
-          e.stopPropagation();
-          handleClose && handleClose();
-        }}
-      >
-        {isSearch ? <IosBackIcon /> : <SearchIcon />}
-      </IconButton>
+    <div className={cn(styles.search_box, drawer ? styles.scale_down : '')} {...props}>
       <Input
         value={value}
         placeholder={placeholder}
@@ -37,10 +29,29 @@ const SearchBox = ({ value, handleChange, placeholder, reset, isShadow = true, h
           handleChange(event);
         }}
         textAlign='left'
-        className={styles.search_box__input}
+        className={cn(styles.search_box__input, isSearch ? styles.no_shadow : styles.shadow)}
       />
-      <Visible visible={value.length !== 0}>
-        <IconButton size='small' onClick={reset}>
+      <IconButton
+        className={styles.search_box__left_icon}
+        onClick={(e) => {
+          handleClose && handleClose();
+        }}
+      >
+        {isSearch ? <IosBackIcon /> : <SearchIcon />}
+      </IconButton>
+      <Visible visible={!isSearch} className={styles.search_box__nearme_icon}>
+        <IconButton
+          className={styles.search_box__nearme_icon_button}
+          onClick={() => {
+            reset();
+            toCurrentPosition && toCurrentPosition();
+          }}
+        >
+          <NearMeIcon />
+        </IconButton>
+      </Visible>
+      <Visible visible={isSearch && value.length !== 0} className={styles.search_box__right_icon}>
+        <IconButton onClick={reset}>
           <CloseIcon />
         </IconButton>
       </Visible>

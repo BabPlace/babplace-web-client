@@ -35,6 +35,22 @@ export default function useMainMap() {
   };
   const onCenterChangedDebounced = useCallback(debounce(onCenterChanged, 750), []);
 
+  const toCurrentPosition = () => {
+    if (navigator && navigator.geolocation)
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLocation({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
+          setIsLoading(true);
+        },
+        (error) => {
+          setIsLoading(true);
+        }
+      );
+  };
+
   useEffect(() => {
     if (loading || !isLoading || !isDefault) return;
     const geocoder = new kakao.maps.services.Geocoder();
@@ -47,18 +63,7 @@ export default function useMainMap() {
   }, [loading, latitude, longitude, isDefault]);
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setLocation({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
-        setIsLoading(true);
-      },
-      (error) => {
-        setIsLoading(true);
-      }
-    );
+    toCurrentPosition();
   }, []);
 
   return {
@@ -66,6 +71,7 @@ export default function useMainMap() {
     location: { lat: latitude, lng: longitude },
     addressName,
     setLocation,
+    toCurrentPosition,
     onCenterChanged: onCenterChangedDebounced,
   };
 }

@@ -13,7 +13,7 @@ import {
 import { BaseUI, Visible } from '@/layouts';
 
 export default function Home() {
-  const { loading, location, addressName, setLocation, onCenterChanged } = useMainMap();
+  const { loading, location, addressName, setLocation, toCurrentPosition, onCenterChanged } = useMainMap();
   const { isDefault, drawer } = useQuery();
 
   const getMapStyle = (drawer: boolean) => {
@@ -41,7 +41,7 @@ export default function Home() {
         </Visible>
         <SwipeableButton />
         <TeamSettingDrawer isLoading={loading} addressName={addressName} location={location} />
-        <Search location={location} setLocation={setLocation} />
+        <Search location={location} setLocation={setLocation} toCurrentPosition={toCurrentPosition} />
         <Selects />
         <HowToUse />
         <PWAGuide />

@@ -9,9 +9,10 @@ import type { SetLocation } from '@/hooks/useMainMap';
 type Props = {
   location: { lat: number; lng: number };
   setLocation: SetLocation;
+  toCurrentPosition: () => void;
 };
 
-const Search = ({ location, setLocation }: Props) => {
+const Search = ({ location, setLocation, toCurrentPosition }: Props) => {
   const { isSearch, toggleSearch, setQuery } = useQuery();
   const { value, reset, handleChange, setForceValue } = useInput('');
   const { searchResults } = useSearch(value, location);
@@ -23,14 +24,11 @@ const Search = ({ location, setLocation }: Props) => {
       <SearchBox
         value={value}
         handleChange={handleChange}
-        isShadow={false}
         placeholder='장소 주소 식당 검색'
         handleClose={toggleSearch}
         reset={reset}
         isSearch={isSearch}
-        onClick={() => {
-          setQuery('search', 'true');
-        }}
+        toCurrentPosition={toCurrentPosition}
       />
       <SearchResultBox value={value} searchResult={searchResults} handleClickResult={handleClickSearchResult} />
       <SearchResultDrawer add={add} clear={clear} share={share} selectedSearchResult={selectedSearchResult} setForceValue={setForceValue} />

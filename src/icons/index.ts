@@ -54,6 +54,7 @@ export { default as HeartIcon } from '@mui/icons-material/FavoriteBorderRounded'
 export { default as HeartFilledIcon } from '@mui/icons-material/FavoriteRounded';
 
 export { default as SouthIcon } from '@mui/icons-material/SouthRounded';
+export { default as NearMeIcon } from '@mui/icons-material/NearMeRounded';
 
 // import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 // import CloseRoundedIcon from '@mui/icons-material/CloseRounded';

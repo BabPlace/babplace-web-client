@@ -40,7 +40,7 @@ const Selects = () => {
         }}
         handleClose={handleClose}
       />
-      <SearchBox value={value} handleChange={handleChange} placeholder='장소 검색' reset={reset} isShadow={false} handleClose={hide} />
+      <SearchBox value={value} handleChange={handleChange} placeholder='장소 검색' reset={reset} isSearch={true} handleClose={hide} />
     </FullScreenModal>
   );
 };
