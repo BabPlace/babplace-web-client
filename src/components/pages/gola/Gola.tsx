@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import { StaticMap, useInjectKakaoMapApi } from 'react-kakao-maps-sdk';
 import { IconButton } from '@mui/material';
@@ -8,7 +8,7 @@ import { useResult, useCard } from '@/hooks';
 import { categoryFormat, distanceFormat, directionToSatisfaction, addressSumary } from '@/utils';
 import { InfoIcon, ReplayIcon, SatisfiedAltIcon, VerySatisfiedIcon, VeryDissatisfiedIcon, SickIcon } from '@/icons';
 import type { Restaurant, API, Direction } from '@/interfaces';
-import styled from '@emotion/styled';
+import { throttle } from 'lodash';
 import styles from '@/styles/Gola.module.css';
 
 type Props = {
@@ -20,6 +20,13 @@ const Gola = ({ isValidUser, restaurants = [] }: Props) => {
   const { loading } = useInjectKakaoMapApi({ appkey: process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY!, libraries: ['services', 'clusterer'] });
   const { cardRefs, frontIndex, canRender, afterSwipe, swipeUp, swipeLeft, swipeRight, swipeDown, goBack } = useCard(restaurants);
   const { addResult, isLoading } = useResult(restaurants, isValidUser, frontIndex);
+
+  const throttledAction = useCallback(
+    throttle((callbackFn) => {
+      callbackFn();
+    }, 800),
+    [frontIndex]
+  );
 
   return (
     <BaseUI title={title} description={description}>
@@ -40,17 +47,12 @@ const Gola = ({ isValidUser, restaurants = [] }: Props) => {
                         className='swipe'
                         onCardLeftScreen={afterSwipe}
                         onSwipe={(direction: Direction) => {
+                          console.log('id : ', id, ' / ', direction);
                           addResult({ restaurantId: id, satisfaction: directionToSatisfaction(direction) });
                         }}
-                        // onSwipeRequirementFulfilled={(direction: Direction) => {
-                        //   console.log(direction);
-                        //   setCurrentDirection(direction);
-                        // }}
                       >
                         <div
                           className={styles.card + ' card'}
-                          // grade={0}
-                          // satisfaction={directionToSatisfaction(currentDirection || '').toLowerCase()}
                           onMouseDown={(e) => {
                             console.log(e);
                           }}
@@ -80,23 +82,23 @@ const Gola = ({ isValidUser, restaurants = [] }: Props) => {
                   )
               )}
             </div>
-            <div className={styles.card_action_buttons}>
-              <IconButton onClick={goBack} className={styles.undo}>
+            <Visible visible={frontIndex >= 0} className={styles.card_action_buttons}>
+              <IconButton onClick={() => throttledAction(goBack)} className={styles.undo}>
                 <ReplayIcon />
               </IconButton>
-              <IconButton onClick={swipeDown} className={styles.verybad}>
+              <IconButton onClick={() => throttledAction(swipeDown)} className={styles.verybad}>
                 <SickIcon />
               </IconButton>
-              <IconButton onClick={swipeLeft} className={styles.bad}>
+              <IconButton onClick={() => throttledAction(swipeLeft)} className={styles.bad}>
                 <VeryDissatisfiedIcon />
               </IconButton>
-              <IconButton onClick={swipeRight} className={styles.good}>
+              <IconButton onClick={() => throttledAction(swipeRight)} className={styles.good}>
                 <SatisfiedAltIcon />
               </IconButton>
-              <IconButton onClick={swipeUp} className={styles.verygood}>
+              <IconButton onClick={() => throttledAction(swipeUp)} className={styles.verygood}>
                 <VerySatisfiedIcon />
               </IconButton>
-            </div>
+            </Visible>
           </>
         )}
       </div>
