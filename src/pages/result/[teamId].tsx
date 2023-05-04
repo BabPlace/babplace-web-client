@@ -16,6 +16,7 @@ type Props = {
 };
 
 function Page({ result: satisfactions, teamInfo }: Props) {
+  const today = new Date();
   const { toGola, share } = useCopy();
   const { open, handleOpen, handleClose } = useAlert();
   const { addRecentResult } = useRecentResult();
@@ -31,7 +32,12 @@ function Page({ result: satisfactions, teamInfo }: Props) {
         <Header showButtons={true} />
         <div className={styles.container}>
           <TypoNotoSans text={teamInfo.name} variant='h6' textAlign='center' />
-          <TypoNotoSans text='오늘의 식당은?' variant='caption' textAlign='center' marginBottom='20px' />
+          <TypoNotoSans
+            text={`${today.getMonth() + 1}월 ${today.getDate()}일! 오늘의 식당은?`}
+            variant='caption'
+            textAlign='center'
+            marginBottom='20px'
+          />
           <div className={styles.flex}>
             {top3.map((satisfaction, index) => (
               <ResultCard key={`top3-${satisfaction.restaurantName}-${index}`} title={satisfaction.restaurantName} index={index}>
