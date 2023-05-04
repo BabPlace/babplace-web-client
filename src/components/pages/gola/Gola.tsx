@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import { StaticMap, useInjectKakaoMapApi } from 'react-kakao-maps-sdk';
 import { IconButton } from '@mui/material';
-import { Header, Loading } from '@/components';
+import { Header, Loading, LogoTr } from '@/components';
 import { BaseUI, FlexRow, TypoNotoSans, Visible } from '@/layouts';
 import { useResult, useCard } from '@/hooks';
 import { categoryFormat, distanceFormat, directionToSatisfaction, addressSumary } from '@/utils';
@@ -56,7 +56,8 @@ const Gola = ({ isValidUser, restaurants = [] }: Props) => {
                             console.log(e);
                           }}
                         >
-                          <StaticMap marker={{ position: { lat, lng } }} center={{ lat, lng }} style={mapStyle} level={4} />
+                          <StaticMap marker={false} center={{ lat, lng }} style={mapStyle} level={4} />
+                          <LogoTr className={styles.marker} width='60px' height='60px' />
                           <div className={styles.info}>
                             <FlexRow alignItems='center' justifyContent='space-between'>
                               <TypoNotoSans text={name} variant='h6' />
