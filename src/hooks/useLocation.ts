@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useRef, useEffect, useState, useCallback } from 'react';
 import type { Location } from '@/interfaces';
 
 const defaultLocation = {
@@ -7,7 +7,7 @@ const defaultLocation = {
 };
 
 export default function useLocation() {
-  const [startLocation, setStartLocation] = useState<Location>(defaultLocation);
+  const startLocation = useRef<Location>(defaultLocation);
   const [location, setLocation] = useState<Location>(defaultLocation);
   const [isFetch, setIsFetch] = useState(false);
 
@@ -15,10 +15,10 @@ export default function useLocation() {
     if (navigator && navigator.geolocation)
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          setStartLocation({
+          startLocation.current = {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
-          });
+          };
           setLocation({
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
@@ -33,8 +33,8 @@ export default function useLocation() {
   };
 
   const toCurrentPosition = useCallback(() => {
-    setLocation(startLocation);
-  }, [startLocation]);
+    _setLocation(startLocation.current);
+  }, [startLocation.current]);
 
   useEffect(() => {
     getCurrentPosition();
