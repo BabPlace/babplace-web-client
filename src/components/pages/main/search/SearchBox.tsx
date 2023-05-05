@@ -9,14 +9,15 @@ import styles from '@/styles/Search.module.css';
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   value: string;
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
   reset: () => void;
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleClose: () => void;
   isSearch?: boolean;
+  handleClick?: () => void;
 };
 
-const SearchBox = ({ value, handleChange, placeholder, reset, handleClose, isSearch = true, ...props }: Props) => {
+const SearchBox = ({ value, placeholder, reset, handleChange, handleClose, isSearch = true, handleClick, ...props }: Props) => {
   const { toCurrentPosition } = useContext(LocationContext);
   const { drawer } = useQuery();
 
@@ -29,6 +30,7 @@ const SearchBox = ({ value, handleChange, placeholder, reset, handleClose, isSea
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           handleChange(event);
         }}
+        onClick={handleClick}
         textAlign='left'
         className={cn(styles.search_box__input, isSearch ? styles.no_shadow : styles.shadow)}
       />

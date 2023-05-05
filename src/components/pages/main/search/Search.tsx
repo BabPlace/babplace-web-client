@@ -6,7 +6,7 @@ import SearchResultBox from './SearchResultBox';
 import SearchResultDrawer from './SearchResultDrawer';
 
 const Search = () => {
-  const { isSearch, toggleSearch } = useQuery();
+  const { isSearch, toggleSearch, setQuery } = useQuery();
   const { value, reset, handleChange, setForceValue } = useInput('');
   const { searchResults } = useSearch(value);
   const { selectedSearchResult, handleClickSearchResult, clearSelectedSearchResult } = useSelectedSearchResult();
@@ -21,6 +21,9 @@ const Search = () => {
         handleClose={toggleSearch}
         reset={reset}
         isSearch={isSearch}
+        handleClick={() => {
+          setQuery('search', 'true');
+        }}
       />
       <SearchResultBox value={value} searchResult={searchResults} handleClickResult={handleClickSearchResult} />
       <SearchResultDrawer add={add} clear={clear} share={share} selectedSearchResult={selectedSearchResult} setForceValue={setForceValue} />
