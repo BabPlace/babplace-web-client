@@ -32,13 +32,17 @@ export default function useLocation() {
       );
   };
 
-  const toCurrentPosition = useCallback(() => {
+  const toCurrentPosition = () => {
     _setLocation(startLocation.current);
-  }, [startLocation.current]);
+  };
 
   useEffect(() => {
     getCurrentPosition();
   }, []);
+
+  useEffect(() => {
+    console.log(location);
+  }, [location]);
 
   const _setLocation = (location: Location) => {
     setLocation(location);

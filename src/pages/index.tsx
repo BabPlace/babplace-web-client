@@ -6,10 +6,10 @@ export default function Page() {
   const _location = useLocation();
 
   return (
-    <ErrorBoundary>
-      <LocationContext.Provider value={_location}>
+    <LocationContext.Provider value={_location}>
+      <ErrorBoundary>
         <Home />
-      </LocationContext.Provider>
-    </ErrorBoundary>
+      </ErrorBoundary>
+    </LocationContext.Provider>
   );
 }
