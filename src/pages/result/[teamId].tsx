@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import { RatioBarChart } from '@teamapdan/weirdchart';
 import { Button } from '@mui/material';
-import { Header, ErrorBoundary, ResultCard, ResultDetail, AlertSnackBar } from '@/components';
+import { Header, ErrorBoundary, ResultCard, ResultDetail, AlertSnackBar, NotificationPermissionDrawer } from '@/components';
 import { sliceByOffset, makeDataset } from '@/utils';
 import { BaseUI, TypoNotoSans, Visible } from '@/layouts';
 import { useAlert, useCopy, useRecentResult } from '@/hooks';
@@ -87,6 +87,7 @@ function Page({ result: satisfactions, teamInfo }: Props) {
           </div>
           <AlertSnackBar open={open} handleClose={handleClose} message='결과 공유 링크가 복사되었습니다!' />
         </div>
+        <NotificationPermissionDrawer />
       </BaseUI>
     </ErrorBoundary>
   );

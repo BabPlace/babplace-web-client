@@ -52,8 +52,7 @@ const SearchResultDrawer = ({ selectedSearchResult, add, share, clear, setForceV
   }, [isCustom]);
 
   return (
-    <SwipeableEdgeDrawer isHidden={!isCustom || selectedSearchResult === null} height={drawerHeight} swipeUp={false} showPuller={false}>
-      {/* <SwipeableEdgeDrawer isHidden={false} height={drawerHeight} swipeUp={false}> */}
+    <SwipeableEdgeDrawer hidden={!isCustom || selectedSearchResult === null} height={drawerHeight} swipeable={false}>
       <FlexColumn justifyContent='space-between' height='100%'>
         <FlexRow width='100%' justifyContent='space-between' alignItems='flex-start'>
           <FlexColumn width='80%' gap='3px'>

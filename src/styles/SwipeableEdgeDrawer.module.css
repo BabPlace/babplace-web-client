@@ -3,16 +3,25 @@
   padding: var(--drawer-inner-padding-t) var(--drawer-inner-padding-lr) var(--drawer-inner-padding-b);
   width: 100%;
   max-width: var(--max-width);
-  bottom: 0;
   border-radius: var(--border-radius) var(--border-radius) 0 0;
   background-color: rgb(var(--primary-background-rgb));
   color: rgba(var(--pribary-foreground-rgba));
   box-shadow: 0 0 10px 0 rgba(var(--primary-foreground-rgba), 0.2);
-  transition: bottom 0.5s ease-out, height 0.5s ease-in-out, min-height 0.35s ease-out;
+  transition: bottom 0.5s ease-in-out, height 0.5s ease-in-out, min-height 0.35s ease-in-out;
+}
+.no_hidden {
+  bottom: 0;
 }
 
 .hidden {
   bottom: -100%;
+}
+
+.swipeable {
+}
+
+.no_swipeable {
+  min-height: 0 !important;
 }
 
 .puller {

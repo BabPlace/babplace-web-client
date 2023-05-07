@@ -14,6 +14,7 @@ const Search = () => {
 
   return (
     <>
+      <SearchResultDrawer add={add} clear={clear} share={share} selectedSearchResult={selectedSearchResult} setForceValue={setForceValue} />
       <SearchBox
         value={value}
         handleChange={handleChange}
@@ -26,7 +27,6 @@ const Search = () => {
         }}
       />
       <SearchResultBox value={value} searchResult={searchResults} handleClickResult={handleClickSearchResult} />
-      <SearchResultDrawer add={add} clear={clear} share={share} selectedSearchResult={selectedSearchResult} setForceValue={setForceValue} />
       <AlertSnackBar open={open} handleClose={handleClose} message='클립보드에 복사되었습니다' severity='info' />
     </>
   );
