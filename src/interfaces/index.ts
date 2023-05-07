@@ -108,6 +108,17 @@ export type RestaurantParams = {
 };
 export type RestaurantResponse = Restaurant[];
 
+// Web Push
+
+export type SubscribeRequest = {
+  teamId: string;
+  pushEndPoint: string;
+};
+
+export type SubscribeCheckResponse = {
+  subscribe: boolean;
+};
+
 declare module '@mui/material/styles' {
   interface Palette {
     neutral: Palette['primary'];
@@ -128,10 +139,3 @@ declare module '@mui/material/Button' {
     like: true;
   }
 }
-
-// declare module '@mui/material/Typography' {
-//   interface TypographyPropsVariantOverrides {
-//     neutral: true;
-//     like: true;
-//   }
-// }

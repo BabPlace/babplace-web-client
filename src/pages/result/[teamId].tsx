@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import { RatioBarChart } from '@teamapdan/weirdchart';
 import { Button } from '@mui/material';
-import { Header, ErrorBoundary, ResultCard, ResultDetail, AlertSnackBar } from '@/components';
+import { Header, ErrorBoundary, ResultCard, ResultDetail, AlertSnackBar, NotificationPermissionDrawer } from '@/components';
 import { sliceByOffset, makeDataset } from '@/utils';
-import { BaseUI, ProgressButton, SwipeableEdgeDrawer, TypoNotoSans, Visible } from '@/layouts';
-import { useAlert, useCopy, useRecentResult, useWebPush } from '@/hooks';
+import { BaseUI, TypoNotoSans, Visible } from '@/layouts';
+import { useAlert, useCopy, useRecentResult } from '@/hooks';
 import { getResult, getTeamInfo } from '@/controller';
 import type { ResultResponse, TeamInfoResponse } from '@/interfaces';
 import styles from '@/styles/Result.module.css';
@@ -17,16 +17,10 @@ type Props = {
 
 function Page({ result: satisfactions, teamInfo }: Props) {
   const today = new Date();
-  const { subscribeButtonHandler } = useWebPush();
   const { toGola, share } = useCopy();
   const { open, handleOpen, handleClose } = useAlert();
   const { addRecentResult } = useRecentResult();
   const [top3, others] = sliceByOffset(satisfactions, 3);
-
-  const [isShowNotificationPermissionAlert, setIsShowNotificationPermissionAlert] = useState(false);
-  const toTrue = () => {
-    setIsShowNotificationPermissionAlert(true);
-  };
 
   useEffect(() => {
     addRecentResult();
@@ -76,7 +70,6 @@ function Page({ result: satisfactions, teamInfo }: Props) {
                 </div>
               </ResultCard>
             </Visible>
-
             <div className={styles.button_box}>
               <Button
                 variant='contained'
@@ -94,17 +87,7 @@ function Page({ result: satisfactions, teamInfo }: Props) {
           </div>
           <AlertSnackBar open={open} handleClose={handleClose} message='결과 공유 링크가 복사되었습니다!' />
         </div>
-        <SwipeableEdgeDrawer isHidden={isShowNotificationPermissionAlert} height='50px' swipeUp={false} showPuller={false}>
-          <TypoNotoSans text='이 팀에 대한 결과 알림을 받을까용?' />
-          <ProgressButton
-            isLoaded={true}
-            onClick={() => {
-              subscribeButtonHandler(toTrue);
-            }}
-          >
-            확인
-          </ProgressButton>
-        </SwipeableEdgeDrawer>
+        <NotificationPermissionDrawer />
       </BaseUI>
     </ErrorBoundary>
   );

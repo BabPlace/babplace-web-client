@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, MutableRefObject } from 'react';
 import type { Location } from '@/interfaces';
 
 const defaultLocation = {
@@ -9,11 +9,13 @@ const defaultLocation = {
 export type LocationContextType = {
   isFetch: boolean;
   location: Location;
+  startLocation: MutableRefObject<Location> | undefined;
   setLocation: (location: Location) => void;
   toCurrentPosition: () => void;
 };
 export const LocationContext = createContext<LocationContextType>({
   isFetch: false,
+  startLocation: undefined,
   location: defaultLocation,
   setLocation: () => {},
   toCurrentPosition: () => {},

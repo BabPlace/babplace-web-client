@@ -8,24 +8,22 @@ import styled from '@emotion/styled';
 type Props = {
   children: React.ReactNode;
   height?: string | number;
-  isHidden?: boolean;
-  swipeUp?: boolean;
-  showPuller?: boolean;
+  hidden?: boolean;
+  swipeable?: boolean;
 };
 
-const SwipeableEdgeDrawer = ({ children, height, isHidden, swipeUp = true, showPuller = true }: Props) => {
-  const { drawerRef, open } = useDrawer(swipeUp);
+const SwipeableEdgeDrawer = ({ children, height, hidden, swipeable = true }: Props) => {
+  const { drawerRef, open } = useDrawer(swipeable);
   const { isDefault } = useQuery();
   return (
     <StyledDrawer
-      className={cn(styles.container, isHidden ? styles.hidden : '')}
+      className={cn(styles.container, styles[hidden ? 'hidden' : 'no_hidden'], styles[swipeable ? 'swipeable' : 'no_swipeable'])}
       ref={drawerRef}
-      isOpen={open}
-      isHidden={isHidden}
       height={height}
+      isOpen={open}
       isDefault={isDefault}
     >
-      <Visible visible={showPuller} className={styles.puller} />
+      <Visible visible={swipeable} className={styles.puller} />
       {children}
     </StyledDrawer>
   );
@@ -33,7 +31,7 @@ const SwipeableEdgeDrawer = ({ children, height, isHidden, swipeUp = true, showP
 
 export default SwipeableEdgeDrawer;
 
-const StyledDrawer = styled.div<{ isOpen: boolean; isHidden?: boolean; height?: string | number; isDefault: boolean }>`
+const StyledDrawer = styled.div<{ isOpen: boolean; height?: string | number; isDefault: boolean }>`
   && {
     min-height: ${({ isOpen, isDefault }) =>
       isOpen

@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { addSubscribe, createSubscribe, checkSubscribe } from '@/controller';
 
 export default function useWebPush() {
-  const [isRegistered, setIsRegistered] = useState(false);
+  const router = useRouter();
+  const [notificationPermission, setNotificationPermission] = useState<typeof Notification.permission>();
+  const [isRegistered, setIsRegistered] = useState(true);
 
-  // isAllowed
   function urlB64ToUint8Array(base64String: string) {
     const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
     const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
@@ -15,59 +18,82 @@ export default function useWebPush() {
     return outputArray;
   }
 
-  async function subscribeButtonHandler(callback?: () => void) {
-    const result = await Notification.requestPermission();
-    if (result === 'denied') {
-      console.error('The user explicitly denied the permission request.');
-      return;
-    }
-    if (result === 'granted') {
-      console.info('The user accepted the permission request.');
-    }
+  function getTeamId() {
+    const teamId = router.query.teamId as string;
+    return teamId;
+  }
+
+  async function getRegistration() {
     const registration = await navigator.serviceWorker.getRegistration();
+    const subscribed = await registration?.pushManager.getSubscription();
+    return { registration, subscribed };
+  }
+
+  async function askNotificationPermission() {
+    const result = await Notification.requestPermission();
+    setNotificationPermission(result);
+  }
+
+  async function addSubscription(registration: ServiceWorkerRegistration) {
     const VAPID_PUBLIC_KEY = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
-    if (!registration || !VAPID_PUBLIC_KEY) {
-      return;
-    }
-    const subscribed = await registration.pushManager.getSubscription();
-    if (subscribed) {
-      subscribed.endpoint;
-      console.info('User is already subscribed.');
-      return;
-    }
+    if (!VAPID_PUBLIC_KEY) return;
     const subscription = await registration.pushManager.subscribe({
       userVisibleOnly: true,
       applicationServerKey: urlB64ToUint8Array(VAPID_PUBLIC_KEY),
     });
 
-    fetch('http://localhost:49644/add-subscription', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(subscription),
-    });
-
-    callback && callback();
-  }
-
-  async function unsubscribeButtonHandler() {
-    const registration = await navigator.serviceWorker.getRegistration();
-    if (!registration) return;
-    const subscription = await registration.pushManager.getSubscription();
-    if (!subscription) return;
-    fetch('/remove-subscription', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ endpoint: subscription.endpoint }),
-    });
-    const unsubscribed = await subscription.unsubscribe();
-    if (unsubscribed) {
-      console.info('Successfully unsubscribed from push notifications.');
+    const result = await addSubscribe(subscription);
+    if (result === 'OK') {
+      addSubscriptionToWAS(subscription.endpoint);
     }
   }
 
-  return { isRegistered, subscribeButtonHandler, unsubscribeButtonHandler };
+  async function addSubscriptionToWAS(pushEndPoint: string) {
+    const teamId = getTeamId();
+    const result = await createSubscribe({ teamId, pushEndPoint });
+    console.log(result);
+  }
+
+  async function subscribeButtonHandler(callback?: () => void) {
+    if (notificationPermission === 'default') askNotificationPermission();
+    const { registration } = await getRegistration();
+    if (!isRegistered && registration) {
+      await addSubscription(registration);
+    }
+    callback && callback();
+  }
+
+  // async function unsubscribeButtonHandler() {
+  //   const registration = await navigator.serviceWorker.getRegistration();
+  //   if (!registration) return;
+  //   const subscription = await registration.pushManager.getSubscription();
+  //   if (!subscription) return;
+  //   fetch('/remove-subscription', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({ endpoint: subscription.endpoint }),
+  //   });
+  //   const unsubscribed = await subscription.unsubscribe();
+  //   if (unsubscribed) {
+  //     console.info('Successfully unsubscribed from push notifications.');
+  //   }
+  // }
+
+  async function check() {
+    const teamId = getTeamId();
+    const { subscribed } = await getRegistration();
+    if (!subscribed) return;
+    const pushEndPoint = subscribed.endpoint;
+    const result = await checkSubscribe({ teamId, pushEndPoint });
+    setIsRegistered(result.subscribe);
+  }
+
+  useEffect(() => {
+    check();
+    setNotificationPermission(Notification.permission);
+  }, []);
+
+  return { isRegistered, notificationPermission, subscribeButtonHandler };
 }

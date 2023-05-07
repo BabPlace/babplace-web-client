@@ -16,10 +16,14 @@ const LoadableMap = ({ isLoading, ...props }: Props) => {
     if (map) map.relayout();
   }, [map, props.style]);
 
+  useEffect(() => {
+    if (map) map.panTo(new kakao.maps.LatLng(location.latitude, location.longitude));
+  }, [map, location]);
+
   return isLoading ? (
     <Loading {...props.style} />
   ) : (
-    <Map onCreate={setMap} isPanto={true} center={{ lat: location.latitude, lng: location.longitude }} {...props} />
+    <Map onCreate={setMap} isPanto={true} center={{ lat: 37.566826, lng: 126.9786567 }} {...props} />
   );
 };
 

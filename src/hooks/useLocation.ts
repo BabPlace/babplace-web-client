@@ -40,13 +40,9 @@ export default function useLocation() {
     getCurrentPosition();
   }, []);
 
-  useEffect(() => {
-    console.log(location);
-  }, [location]);
-
   const _setLocation = (location: Location) => {
     setLocation(location);
   };
 
-  return { isFetch, location, setLocation: _setLocation, toCurrentPosition };
+  return { isFetch, location, startLocation, setLocation: _setLocation, toCurrentPosition };
 }

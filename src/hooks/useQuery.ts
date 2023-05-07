@@ -45,6 +45,12 @@ export default function useQuery() {
     } else {
       query[key] = value;
     }
+    const dynamicPathKeys = Object.keys(router.query).filter((key) => {
+      return router.pathname.includes('[' + key + ']');
+    });
+    dynamicPathKeys.forEach((key) => {
+      delete query[key];
+    });
     router.push({
       pathname: router.asPath.split('?')[0],
       query,

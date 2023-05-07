@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import useQuery from './useQuery';
 
-export default function useDrawer(swipeUp: boolean) {
+export default function useDrawer(swipeable: boolean) {
   const { setQuery } = useQuery();
   const drawerRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
 
   const handleDrawer = (bool: boolean) => {
-    if (swipeUp) setOpen(bool);
+    if (swipeable) setOpen(bool);
   };
 
   useEffect(() => {
