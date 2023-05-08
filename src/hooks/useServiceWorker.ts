@@ -8,6 +8,7 @@ export default function useServiceWorker() {
 
         registration.waiting?.postMessage('SKIP_WAITING');
       };
+      console.log('sw_with_push_manager.js init');
       registInit();
     } else if ('serviceWorker' in navigator) {
       const registInit = async () => {
@@ -15,6 +16,7 @@ export default function useServiceWorker() {
 
         registration.waiting?.postMessage('SKIP_WAITING');
       };
+      console.log('sw.js init');
       registInit();
     }
   }, []);

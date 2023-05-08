@@ -28,14 +28,18 @@ export default function useWebPush() {
       const registration = await navigator.serviceWorker.getRegistration();
       const subscribed = await registration?.pushManager.getSubscription();
       return { registration, subscribed };
-    } catch {
+    } catch (e) {
       return { registration: undefined, subscribed: undefined };
     }
   }
 
   async function askNotificationPermission() {
-    const result = await Notification.requestPermission();
-    setNotificationPermission(result);
+    try {
+      const result = await Notification.requestPermission();
+      setNotificationPermission(result);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   async function addSubscription(registration: ServiceWorkerRegistration) {
@@ -48,6 +52,7 @@ export default function useWebPush() {
 
     const result = await addSubscribe(subscription);
     if (result === 'OK') {
+      console.log('web-push server OK');
       addSubscriptionToWAS(subscription.endpoint);
     }
   }
@@ -55,7 +60,7 @@ export default function useWebPush() {
   async function addSubscriptionToWAS(pushEndPoint: string) {
     const teamId = getTeamId();
     const result = await createSubscribe({ teamId, pushEndPoint });
-    console.log(result);
+    console.log('was OK, ', result);
   }
 
   async function subscribeButtonHandler(callback?: () => void) {
@@ -88,15 +93,19 @@ export default function useWebPush() {
   async function check() {
     const teamId = getTeamId();
     const { subscribed } = await getRegistration();
-    if (!subscribed) return;
+    if (!subscribed) {
+      setIsRegistered(false);
+      return;
+    }
     const pushEndPoint = subscribed.endpoint;
     const result = await checkSubscribe({ teamId, pushEndPoint });
+    console.log(result);
     setIsRegistered(result.subscribe);
   }
 
   useEffect(() => {
     check();
-    setNotificationPermission(Notification.permission);
+    setNotificationPermission('default');
   }, []);
 
   return { isRegistered, notificationPermission, subscribeButtonHandler };

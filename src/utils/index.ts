@@ -7,4 +7,5 @@ export { default as splitByValue } from './splitByValue';
 export { default as addressSumary } from './addressSumary';
 export { default as snakeToCamel } from './snakeToCamel';
 export { default as filterPlace } from './filterPlace';
+export { default as isPwaBrowser } from './isPwaBrowser';
 export { categoryFormat, categorySplit } from './categoryFormat';
