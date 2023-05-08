@@ -24,9 +24,13 @@ export default function useWebPush() {
   }
 
   async function getRegistration() {
-    const registration = await navigator.serviceWorker.getRegistration();
-    const subscribed = await registration?.pushManager.getSubscription();
-    return { registration, subscribed };
+    try {
+      const registration = await navigator.serviceWorker.getRegistration();
+      const subscribed = await registration?.pushManager.getSubscription();
+      return { registration, subscribed };
+    } catch {
+      return { registration: undefined, subscribed: undefined };
+    }
   }
 
   async function askNotificationPermission() {
