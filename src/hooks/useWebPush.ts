@@ -29,7 +29,7 @@ export default function useWebPush() {
       const registration = await navigator.serviceWorker.getRegistration();
       console.log(registration);
       const subscribed = await registration?.pushManager.getSubscription();
-      console.log(registration?.pushManager);
+      console.log(subscribed);
       return { registration, subscribed };
     } catch (e) {
       return { registration: undefined, subscribed: undefined };
@@ -47,15 +47,18 @@ export default function useWebPush() {
 
   async function addSubscription(registration: ServiceWorkerRegistration) {
     const VAPID_PUBLIC_KEY = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
-    if (!VAPID_PUBLIC_KEY) return;
+    if (!VAPID_PUBLIC_KEY) {
+      console.log('no KEY');
+      return;
+    }
     const subscription = await registration.pushManager.subscribe({
       userVisibleOnly: true,
       applicationServerKey: urlB64ToUint8Array(VAPID_PUBLIC_KEY),
     });
-
+    console.log('ready to add subscribe : ', subscription);
     const result = await addSubscribe(subscription);
+    console.log('web-push server result : ', result);
     if (result === 'OK') {
-      console.log('web-push server OK');
       addSubscriptionToWAS(subscription.endpoint);
     }
   }
