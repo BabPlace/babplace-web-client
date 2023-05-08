@@ -7,7 +7,7 @@ import { SwipeableEdgeDrawer, TypoNotoSans, ProgressButton, FlexRow, FlexColumn,
 import { PWAGuide } from '@/components/guide';
 
 const NotificationPermissionDrawer = () => {
-  const { isRegistered, notificationPermission, subscribeButtonHandler } = useWebPush();
+  const { isRegistered, isSubscribed, notificationPermission, subscribeButtonHandler } = useWebPush();
   const { setQuery } = useQuery();
   const [isChecked, setIsChecked] = useState(false);
   const [isIosSafariNoPWA, setIsIosSafariNoPWA] = useState(false);
@@ -30,6 +30,7 @@ const NotificationPermissionDrawer = () => {
   }, []);
 
   useEffect(() => {
+    console.log('state');
     if (isRegistered) {
       console.log('registered');
       setIsShow(false);
@@ -87,7 +88,7 @@ const NotificationPermissionDrawer = () => {
               text='아직 모든 팀원이 투표에 참여하지 않았어요. 투표가 종료되었을때 저희가 알림을 보내드릴 수 있어요!'
             />
           </FlexColumn>
-          <Visible visible={notificationPermission === 'default'}>
+          <Visible visible={!isSubscribed && notificationPermission === 'default'}>
             <FlexRow alignItems='center' gap='5px' onClick={handleChecked}>
               <Checkbox
                 color='error'

@@ -6,6 +6,7 @@ export default function useWebPush() {
   const router = useRouter();
   const [notificationPermission, setNotificationPermission] = useState<typeof Notification.permission>();
   const [isRegistered, setIsRegistered] = useState(true);
+  const [isSubscribed, setIsSubscribed] = useState(true);
 
   function urlB64ToUint8Array(base64String: string) {
     const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
@@ -94,9 +95,12 @@ export default function useWebPush() {
     const teamId = getTeamId();
     const { subscribed } = await getRegistration();
     if (!subscribed) {
+      console.log('subscribed : ', subscribed);
+      setIsSubscribed(false);
       setIsRegistered(false);
       return;
     }
+    setIsSubscribed(true);
     const pushEndPoint = subscribed.endpoint;
     const result = await checkSubscribe({ teamId, pushEndPoint });
     console.log(result);
@@ -108,5 +112,5 @@ export default function useWebPush() {
     setNotificationPermission('default');
   }, []);
 
-  return { isRegistered, notificationPermission, subscribeButtonHandler };
+  return { isRegistered, isSubscribed, notificationPermission, subscribeButtonHandler };
 }
