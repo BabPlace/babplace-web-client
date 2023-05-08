@@ -27,7 +27,9 @@ export default function useWebPush() {
   async function getRegistration() {
     try {
       const registration = await navigator.serviceWorker.getRegistration();
+      console.log(registration);
       const subscribed = await registration?.pushManager.getSubscription();
+      console.log(registration?.pushManager);
       return { registration, subscribed };
     } catch (e) {
       return { registration: undefined, subscribed: undefined };
