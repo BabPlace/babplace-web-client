@@ -30,9 +30,7 @@ const NotificationPermissionDrawer = () => {
   }, []);
 
   useEffect(() => {
-    console.log('state');
     if (isRegistered) {
-      console.log('registered');
       setIsShow(false);
       return;
     }
