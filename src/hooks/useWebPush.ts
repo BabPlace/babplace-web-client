@@ -55,24 +55,24 @@ export default function useWebPush() {
       userVisibleOnly: true,
       applicationServerKey: urlB64ToUint8Array(VAPID_PUBLIC_KEY),
     });
-    console.log('ready to add subscribe : ', subscription);
-    const result = await addSubscribe(subscription);
-    console.log('web-push server result : ', result);
-    if (result === 'OK') {
-      addSubscriptionToWAS(subscription.endpoint);
+    if (!isRegistered) {
+      console.log('ready to add subscribe : ', subscription);
+      const result = await addSubscribe(subscription);
+      console.log('web-push server result : ', result);
     }
+    addSubscriptionToWAS(subscription.endpoint);
   }
 
   async function addSubscriptionToWAS(pushEndPoint: string) {
     const teamId = getTeamId();
     const result = await createSubscribe({ teamId, pushEndPoint });
-    console.log('was OK, ', result);
+    console.log('was result : ', result);
   }
 
   async function subscribeButtonHandler(callback?: () => void) {
     if (notificationPermission === 'default') askNotificationPermission();
     const { registration } = await getRegistration();
-    if (!isRegistered && registration) {
+    if (registration) {
       await addSubscription(registration);
     }
     callback && callback();
