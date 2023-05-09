@@ -82,6 +82,7 @@
 
 .search_box__input {
   height: 100%;
+  max-width: 580px;
   background: rgb(var(--secondary-background-rgb));
   border-radius: var(--border-radius);
   padding-left: 40px;
