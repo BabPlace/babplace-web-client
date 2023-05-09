@@ -56,6 +56,7 @@ const Container = styled.div<{ border: boolean; error: boolean; errorSize: 'smal
     width: 100%;
     height: 100%;
     border: none;
+    border-radius: 0;
     border-bottom: ${(props) =>
       props.border
         ? props.error

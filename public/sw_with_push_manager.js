@@ -36,10 +36,8 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('push', (event) => {
   let data = event.data.json();
-  const image = 'https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1566557331/noticon/d5hqar2idkoefh6fjtpu.png';
   const options = {
     body: data.teamId,
-    icon: image,
   };
   self.registration.showNotification(data.teamName, options);
 });
@@ -47,5 +45,5 @@ self.addEventListener('push', (event) => {
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
   console.log(event.notification.data.json());
-  event.waitUntil(self.clients.openWindow('https://web.dev'));
+  event.waitUntil(self.clients.openWindow());
 });
