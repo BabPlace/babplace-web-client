@@ -25,7 +25,7 @@ const Home = () => {
     <BaseUI title={title} description={description} bodyStyle={{ marginTop: '0px', backgroundColor: 'black' }}>
       <Visible visible={!loading}>
         <FlexRow alignItems='center' className={styles.current_position} gap='5px'>
-          <MyLocationIcon sx={{ width: '0.9rem' }} />
+          <MyLocationIcon sx={{ width: '0.9rem' }} color='error' />
           <TypoNotoSans text={addressName} color='#333333' variant='body2' />
         </FlexRow>
       </Visible>

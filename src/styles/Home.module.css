@@ -1,6 +1,5 @@
 .current_position {
   position: absolute;
-  color: #333333;
 
   top: calc(var(--search-box-height) + var(--search-box-margin-tb) + 7px);
   left: calc(min(var(--search-box-margin-lr), 35px));
