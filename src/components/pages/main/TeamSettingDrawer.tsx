@@ -48,7 +48,7 @@ const TeamSettingDrawer = ({ isLoading }: Props) => {
               <FlexRow style={{ margin: '0 calc((100% - var(--drawer-list-height) * 0.75 * 3) / 4)' }}>
                 <IconButton
                   onClick={() => {
-                    setUserCountForceValue(userCount - 1);
+                    setUserCountForceValue(parseInt(userCount.toString()) - 1);
                   }}
                 >
                   <RemoveRoundedIcon />
@@ -67,7 +67,7 @@ const TeamSettingDrawer = ({ isLoading }: Props) => {
                 />
                 <IconButton
                   onClick={() => {
-                    setUserCountForceValue(parseInt(count.toString()) + 1);
+                    setUserCountForceValue(parseInt(userCount.toString()) + 1);
                   }}
                 >
                   <AddRoundedIcon />
@@ -100,7 +100,7 @@ const TeamSettingDrawer = ({ isLoading }: Props) => {
                 />
                 <IconButton
                   onClick={() => {
-                    setCountForceValue(count + 1);
+                    setCountForceValue(parseInt(count.toString()) + 1);
                   }}
                 >
                   <AddRoundedIcon />
