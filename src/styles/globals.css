@@ -111,7 +111,7 @@
   --search-box-height: 45px;
   --search-box-width: 90vw;
   --search-box-margin-tb: 10px;
-  --search-box-margin-lr: calc((100vw - var(--search-box-width)) / 2);
+  --search-box-margin-lr: 5vw;
 
   --select-box-margin-r: 15px;
   --select-box-margin-b: 15px;

@@ -48,15 +48,14 @@
 
 /* Search Box */
 .search_box {
-  position: fixed;
+  position: absolute;
   display: flex;
   gap: 5px;
   top: env(safe-area-inset-top);
   left: 0;
   right: 0;
   margin: var(--search-box-margin-tb) auto;
-  width: var(--search-box-width);
-  max-width: calc(var(--max-width) - var(--search-box-margin-lr));
+  width: 90%;
   height: var(--search-box-height);
 
   transform-origin: bottom center;

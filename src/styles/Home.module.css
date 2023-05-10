@@ -1,11 +1,12 @@
 .current_position {
-  position: fixed;
+  position: absolute;
   color: #333333;
 
   top: calc(var(--search-box-height) + var(--search-box-margin-tb) + 7px);
-  left: calc(var(--search-box-margin-lr));
+  left: calc(min(var(--search-box-margin-lr), 35px));
 
   border-radius: 100px;
   background: #9d9d9d66;
   padding: 2px 7px;
+  z-index: 1;
 }
