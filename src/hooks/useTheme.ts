@@ -1,5 +1,6 @@
 import { useMemo, useState, useEffect } from 'react';
 import { createTheme, useMediaQuery } from '@mui/material';
+import { isPwaBrowser } from '@/utils';
 
 export default function useTheme() {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -55,8 +56,7 @@ export default function useTheme() {
   );
 
   useEffect(() => {
-    // @ts-ignore
-    if (window.navigator.standalone) {
+    if (isPwaBrowser()) {
       document.documentElement.style.setProperty('--max-height', '100lvh');
     }
   }, []);

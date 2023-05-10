@@ -2,6 +2,7 @@ import { useEffect, useState, useMemo, useContext } from 'react';
 import { TypoNotoSans } from '@/layouts';
 import { ColorModeContext } from '@/context';
 import { useRouter } from 'next/router';
+import { isPwaBrowser } from '@/utils';
 import useQuery from './useQuery';
 import useRecentResult from './useRecentResult';
 
@@ -111,7 +112,7 @@ export default function useSwipeableButton() {
       _buttons.splice(1, 0, resultButtons);
     }
     // @ts-ignore
-    if (!window.navigator.standalone) {
+    if (!isPwaBrowser()) {
       _buttons.splice(1, 0, pwaButtons);
     }
     setButtons([..._buttons]);
