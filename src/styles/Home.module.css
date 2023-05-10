@@ -1,15 +1,11 @@
-.main {
-  height: var(--max-height);
-  overflow: hidden;
-  width: 100%;
-  background-color: rgb(var(--primary-background-rgb));
-  color: rgba(var(--primary-foreground-rgba));
-}
+.current_position {
+  position: fixed;
+  color: #333333;
 
-.body {
-  width: 100%;
-  max-width: var(--max-width);
-  margin: auto;
-  margin-top: var(--header-default-height);
-  height: calc(var(--max-height) - var(--header-default-height));
+  top: calc(var(--search-box-height) + var(--search-box-margin-tb) + 7px);
+  left: calc(var(--search-box-margin-lr));
+
+  border-radius: 100px;
+  background: #9d9d9d66;
+  padding: 2px 7px;
 }

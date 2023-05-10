@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import Head from 'next/head';
 
-import styles from '@/styles/Home.module.css';
+import styles from '@/styles/BaseUI.module.css';
 
 type Props = {
   children?: ReactNode;

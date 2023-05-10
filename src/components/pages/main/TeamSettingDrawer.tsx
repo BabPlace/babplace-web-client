@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useInput, useSelectedButton, useCreateTeam, useQuery } from '@/hooks';
 import { Input, FlexColumn, ProgressButton, ButtonGroup, TypoNotoSans, SwipeableEdgeDrawer, FlexRow } from '@/layouts';
-import { BusIcon, BikeIcon, FootPrintIcon, FormatListIcon } from '@/icons';
+import { BusIcon, BikeIcon, FootPrintIcon, FormatListIcon, AddRoundedIcon, RemoveRoundedIcon } from '@/icons';
 import { SelectsContext } from '@/context';
 import { IconButton } from '@mui/material';
 import styles from '@/styles/SwipeableEdgeDrawer.module.css';
@@ -9,16 +9,21 @@ import styled from '@emotion/styled';
 
 type Props = {
   isLoading: boolean;
-  addressName: string;
 };
 
-const TeamSettingDrawer = ({ isLoading, addressName }: Props) => {
+const TeamSettingDrawer = ({ isLoading }: Props) => {
   const { selects, show } = useContext(SelectsContext);
   const { value: name, isError: isNameError, handleChange: handleNameChange } = useInput('');
-  const { value: count, isError: isCountError, handleChange: handleCountChange } = useInput(7);
+  const { value: count, isError: isCountError, handleChange: handleCountChange, setForceValue: setCountForceValue } = useInput(7);
+  const {
+    value: userCount,
+    isError: isUserCountError,
+    handleChange: handleUserCountChange,
+    setForceValue: setUserCountForceValue,
+  } = useInput(5);
   const { isDefault } = useQuery();
   const { selectedButton, radius, guideMessage, onClickButton } = useSelectedButton();
-  const { isLoaded, onClick } = useCreateTeam(name, count, radius, 10);
+  const { isLoaded, onClick } = useCreateTeam(name, count, radius, userCount);
 
   return (
     <SwipeableEdgeDrawer>
@@ -38,21 +43,66 @@ const TeamSettingDrawer = ({ isLoading, addressName }: Props) => {
             />
           </DefaultListItem>
           <DefaultListItem className={styles.list_item} isCustom={!isDefault} type='custom'>
-            <TypoNotoSans text='기준 위치' {...liTitleOptions} />
-            <TypoNotoSans text={addressName} className={styles.list_item__content} fontSize='0.8rem' textAlign='center' />
+            <TypoNotoSans text='참여 인원' {...liTitleOptions} />
+            <div className={styles.list_item__content}>
+              <FlexRow style={{ margin: '0 calc((100% - var(--drawer-list-height) * 0.75 * 3) / 4)' }}>
+                <IconButton
+                  onClick={() => {
+                    setUserCountForceValue(userCount - 1);
+                  }}
+                >
+                  <RemoveRoundedIcon />
+                </IconButton>
+                <Input
+                  width='50px'
+                  value={userCount}
+                  type='number'
+                  error={isUserCountError.state}
+                  errorText={isUserCountError.message}
+                  errorSize='small'
+                  border={false}
+                  onChange={handleUserCountChange}
+                />
+                <IconButton
+                  onClick={() => {
+                    setUserCountForceValue(userCount + 1);
+                  }}
+                >
+                  <AddRoundedIcon />
+                </IconButton>
+              </FlexRow>
+            </div>
           </DefaultListItem>
           <DefaultListItem className={styles.list_item} isCustom={!isDefault} type='custom'>
             <TypoNotoSans text='음식점 개수' {...liTitleOptions} />
-            <Input
-              value={count}
-              className={styles.list_item__content}
-              type='number'
-              error={isCountError.state}
-              errorText={isCountError.message}
-              errorSize='small'
-              border={false}
-              onChange={handleCountChange}
-            />
+            <div className={styles.list_item__content}>
+              <FlexRow style={{ margin: '0 calc((100% - var(--drawer-list-height) * 0.75 * 3) / 4)' }}>
+                <IconButton
+                  onClick={() => {
+                    setCountForceValue(count - 1);
+                  }}
+                >
+                  <RemoveRoundedIcon />
+                </IconButton>
+                <Input
+                  width='50px'
+                  value={count}
+                  type='number'
+                  error={isCountError.state}
+                  errorText={isCountError.message}
+                  errorSize='small'
+                  border={false}
+                  onChange={handleCountChange}
+                />
+                <IconButton
+                  onClick={() => {
+                    setCountForceValue(count + 1);
+                  }}
+                >
+                  <AddRoundedIcon />
+                </IconButton>
+              </FlexRow>
+            </div>
           </DefaultListItem>
           <DefaultListItem className={styles.list_item} isCustom={!isDefault} type='custom' noBorder={true} style={{ overflow: 'visible' }}>
             <TypoNotoSans text='제한 반경' {...liTitleOptions} />

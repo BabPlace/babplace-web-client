@@ -1,0 +1,15 @@
+.main {
+  height: var(--max-height);
+  overflow: hidden;
+  width: 100%;
+  background-color: rgb(var(--primary-background-rgb));
+  color: rgba(var(--primary-foreground-rgba));
+}
+
+.body {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: auto;
+  margin-top: var(--header-default-height);
+  height: calc(var(--max-height) - var(--header-default-height));
+}

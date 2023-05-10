@@ -1,9 +1,11 @@
 import React from 'react';
 import { useMainMap, useQuery } from '@/hooks';
-import { BaseUI, Visible } from '@/layouts';
+import { BaseUI, FlexRow, TypoNotoSans, Visible } from '@/layouts';
 import { LoadableMap, BabMarker, HowToUse, Search, PWAGuide, Selects } from '@/components';
+import { MyLocationIcon } from '@/icons';
 import SwipeableButton from './SwipeableButton';
 import TeamSettingDrawer from './TeamSettingDrawer';
+import styles from '@/styles/Home.module.css';
 
 const Home = () => {
   const { loading, addressName, onCenterChanged } = useMainMap();
@@ -28,10 +30,14 @@ const Home = () => {
         onCenterChanged={onCenterChanged}
       />
       <Visible visible={!loading}>
+        <FlexRow alignItems='center' className={styles.current_position} gap='5px'>
+          <MyLocationIcon sx={{ width: '0.9rem' }} />
+          <TypoNotoSans text={addressName} color='#333333' variant='body2' />
+        </FlexRow>
         <BabMarker isCustom={!isDefault} />
       </Visible>
       <SwipeableButton />
-      <TeamSettingDrawer isLoading={loading} addressName={addressName} />
+      <TeamSettingDrawer isLoading={loading} />
       <Search />
       <Selects />
       <HowToUse />
