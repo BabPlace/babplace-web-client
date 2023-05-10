@@ -57,6 +57,8 @@ const TeamSettingDrawer = ({ isLoading }: Props) => {
                   width='50px'
                   value={userCount}
                   type='number'
+                  inputMode='numeric'
+                  pattern='[0-9]*'
                   error={isUserCountError.state}
                   errorText={isUserCountError.message}
                   errorSize='small'
@@ -65,7 +67,7 @@ const TeamSettingDrawer = ({ isLoading }: Props) => {
                 />
                 <IconButton
                   onClick={() => {
-                    setUserCountForceValue(userCount + 1);
+                    setUserCountForceValue(parseInt(count.toString()) + 1);
                   }}
                 >
                   <AddRoundedIcon />
@@ -79,7 +81,7 @@ const TeamSettingDrawer = ({ isLoading }: Props) => {
               <FlexRow style={{ margin: '0 calc((100% - var(--drawer-list-height) * 0.75 * 3) / 4)' }}>
                 <IconButton
                   onClick={() => {
-                    setCountForceValue(count - 1);
+                    setCountForceValue(parseInt(count.toString()) - 1);
                   }}
                 >
                   <RemoveRoundedIcon />
@@ -88,6 +90,8 @@ const TeamSettingDrawer = ({ isLoading }: Props) => {
                   width='50px'
                   value={count}
                   type='number'
+                  inputMode='numeric'
+                  pattern='[0-9]*'
                   error={isCountError.state}
                   errorText={isCountError.message}
                   errorSize='small'
