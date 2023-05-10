@@ -10,10 +10,11 @@ type Props = {
   value: string;
   searchResult: kakao.maps.services.PlacesSearchResult;
   handleClickResult: (selectedSearchResult: kakao.maps.services.PlacesSearchResultItem) => void;
+  setForceValue: (value: string) => void;
 };
 
-const SearchResultBox = ({ value, searchResult, handleClickResult }: Props) => {
-  const { isSearch, toggleSearch } = useQuery();
+const SearchResultBox = ({ value, searchResult, handleClickResult, setForceValue }: Props) => {
+  const { isSearch, setQuery } = useQuery();
 
   return (
     <Visible visible={isSearch} className={styles.search_result}>
@@ -24,7 +25,8 @@ const SearchResultBox = ({ value, searchResult, handleClickResult }: Props) => {
               key={`result-li-${item.id}`}
               className={styles.search_result__li}
               onClick={() => {
-                toggleSearch();
+                setQuery('search');
+                setForceValue(item.place_name);
                 handleClickResult(item);
               }}
             >

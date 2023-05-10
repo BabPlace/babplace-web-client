@@ -19,14 +19,21 @@ const Search = () => {
         value={value}
         handleChange={handleChange}
         placeholder='장소 주소 식당 검색'
-        handleClose={toggleSearch}
+        handleClose={() => {
+          setQuery('search');
+        }}
         reset={reset}
         isSearch={isSearch}
         handleClick={() => {
           setQuery('search', 'true');
         }}
       />
-      <SearchResultBox value={value} searchResult={searchResults} handleClickResult={handleClickSearchResult} />
+      <SearchResultBox
+        value={value}
+        searchResult={searchResults}
+        handleClickResult={handleClickSearchResult}
+        setForceValue={setForceValue}
+      />
       <AlertSnackBar open={open} handleClose={handleClose} message='클립보드에 복사되었습니다' severity='info' />
     </>
   );

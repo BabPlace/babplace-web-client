@@ -39,7 +39,7 @@ const defaultSelectedSearchResult: SelectPlace = {
 };
 
 const SearchResultDrawer = ({ selectedSearchResult, add, share, clear, setForceValue }: Props) => {
-  const { isCustom } = useQuery();
+  const { isCustom, setQuery } = useQuery();
   const { isLiked, addLike } = useLike(selectedSearchResult);
   const { place_name, category_group_name, category_name } = selectedSearchResult || defaultSelectedSearchResult;
 
@@ -60,7 +60,13 @@ const SearchResultDrawer = ({ selectedSearchResult, add, share, clear, setForceV
             <Visible visible={isRestaurant(category_group_name)}>
               <FlexRow gap='10px'>
                 {categorySplit(category_name).map((category, index) => (
-                  <div key={`SearchResultDrawer-Category-${index}`} onClick={() => setForceValue(category)}>
+                  <div
+                    key={`SearchResultDrawer-Category-${index}`}
+                    onClick={() => {
+                      setQuery('search', 'true');
+                      setForceValue(category);
+                    }}
+                  >
                     <TypoNotoSans text={'#' + category} color='rgba(var(--secondary-foreground-rgba))' variant='body2' />
                   </div>
                 ))}
@@ -107,6 +113,7 @@ const SearchResultDrawer = ({ selectedSearchResult, add, share, clear, setForceV
           ) : (
             <ProgressButton
               onClick={() => {
+                setQuery('search', 'true');
                 setForceValue(addressSumary(selectedSearchResult) + ' 맛집');
               }}
               color='neutral'
