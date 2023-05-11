@@ -26,7 +26,7 @@ const Home = () => {
       <Visible visible={!loading}>
         <FlexRow alignItems='center' className={styles.current_position} gap='5px'>
           <MyLocationIcon sx={{ width: '0.9rem' }} color='error' />
-          <TypoNotoSans text={addressName} color='#333333' variant='body2' />
+          <TypoNotoSans text={addressName} color='#333333' variant='caption' />
         </FlexRow>
       </Visible>
       <LoadableMap
