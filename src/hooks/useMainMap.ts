@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useContext } from 'react';
 import { useInjectKakaoMapApi } from 'react-kakao-maps-sdk';
 import useQuery from './useQuery';
-import debounce from 'lodash/debounce';
+import { debounce } from 'lodash-es';
 import { LocationContext } from '@/context';
 
 export default function useMainMap() {

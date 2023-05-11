@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import dynamic from 'next/dynamic';
-import { throttle } from 'lodash';
+import { throttle } from 'lodash-es';
 import { StaticMap, useInjectKakaoMapApi } from 'react-kakao-maps-sdk';
 import { useResult, useCard } from '@/hooks';
 import { IconButton } from '@mui/material';
