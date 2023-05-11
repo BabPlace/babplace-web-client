@@ -1,7 +1,7 @@
 .current_position {
   position: absolute;
 
-  top: calc(var(--search-box-height) + var(--search-box-margin-tb) + 7px);
+  top: calc(var(--search-box-height) + var(--search-box-margin-tb) + 7px + env(safe-area-inset-top));
   left: calc(min(var(--search-box-margin-lr), 35px));
 
   border-radius: 100px;
