@@ -1,4 +1,4 @@
-import React from 'react';
+import Reactㄴ from 'react';
 import { useMainMap, useQuery } from '@/hooks';
 import { BaseUI, FlexRow, TypoNotoSans, Visible } from '@/layouts';
 import { LoadableMap, BabMarker, HowToUse, Search, PWAGuide, Selects } from '@/components';

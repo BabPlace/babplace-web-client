@@ -1,0 +1,13 @@
+.container {
+  padding: 10px;
+}
+
+.restaurants {
+  overflow-x: scroll;
+}
+
+.restaurant {
+  padding: 5px 10px;
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(var(--secondary-foreground-rgba));
+}

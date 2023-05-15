@@ -24,3 +24,4 @@ export { default as useConfirm } from './useConfirm';
 export { default as useRecentResult } from './useRecentResult';
 export { default as useLocation } from './useLocation';
 export { default as useWebPush } from './useWebPush';
+export { default as useRecommends } from './useRecommends';

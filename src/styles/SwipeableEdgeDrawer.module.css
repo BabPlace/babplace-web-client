@@ -7,7 +7,7 @@
   background-color: rgb(var(--primary-background-rgb));
   color: rgba(var(--pribary-foreground-rgba));
   box-shadow: 0 0 10px 0 rgba(var(--primary-foreground-rgba), 0.2);
-  transition: bottom 0.5s ease-in-out, height 0.5s ease-in-out, min-height 0.35s ease-in-out;
+  transition: bottom 0.5s ease-in-out, height 0.5s ease-in-out, min-height 0.35s ease-in-out, z-index 0.5s ease-in-out;
 }
 .no_hidden {
   bottom: 0;
@@ -39,6 +39,8 @@
   position: relative;
   margin: auto;
   max-width: var(--drawer-max-width);
+  overflow: scroll;
+  max-height: calc(var(--drawer-maximun-height) - var(--drawer-inner-padding-b) - var(--drawer-inner-padding-t));
 }
 
 .list_item {

@@ -14,7 +14,7 @@ export default function useCreateTeam(name: string, limitRestaurant: number, rad
   const [errors, setErrors] = useState<Errors>();
   const router = useRouter();
 
-  const onClick = useCallback(async () => {
+  const _createTeam = useCallback(async () => {
     setIsLoaded(false);
     try {
       const { teamId } = await createTeam(
@@ -41,5 +41,5 @@ export default function useCreateTeam(name: string, limitRestaurant: number, rad
     if (errors) throw errors;
   }, [errors]);
 
-  return { isLoaded, errors, onClick };
+  return { isLoaded, errors, createTeam: _createTeam };
 }

@@ -119,6 +119,19 @@ export type SubscribeCheckResponse = {
   subscribe: boolean;
 };
 
+type SnakeToCamelCase<S extends string> = S extends `${infer T}_${infer U}` ? `${T}${Capitalize<SnakeToCamelCase<U>>}` : S;
+
+type CamelCaseSelectPlace = { [K in keyof SelectPlace as SnakeToCamelCase<K>]: SelectPlace[K] };
+
+export type Recommend = {
+  title: string;
+  restaurants: CamelCaseSelectPlace[];
+};
+
+export type RecommendResponse = {
+  recommends: Recommend[];
+};
+
 declare module '@mui/material/styles' {
   interface Palette {
     neutral: Palette['primary'];

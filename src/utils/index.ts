@@ -8,4 +8,5 @@ export { default as addressSumary } from './addressSumary';
 export { default as snakeToCamel } from './snakeToCamel';
 export { default as filterPlace } from './filterPlace';
 export { default as isPwaBrowser } from './isPwaBrowser';
+export { default as getRandomFoodEmoji } from './getRandomFoodEmoji';
 export { categoryFormat, categorySplit } from './categoryFormat';

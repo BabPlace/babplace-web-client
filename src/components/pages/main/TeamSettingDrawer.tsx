@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { useInput, useSelectedButton, useCreateTeam, useQuery } from '@/hooks';
-import { Input, FlexColumn, ProgressButton, ButtonGroup, TypoNotoSans, SwipeableEdgeDrawer, FlexRow } from '@/layouts';
+import { Input, FlexColumn, ProgressButton, ButtonGroup, TypoNotoSans, SwipeableEdgeDrawer, FlexRow, Visible } from '@/layouts';
 import { BusIcon, BikeIcon, FootPrintIcon, FormatListIcon, AddRoundedIcon, RemoveRoundedIcon } from '@/icons';
 import { SelectsContext } from '@/context';
 import { IconButton } from '@mui/material';
+import Recommends from './Recommends';
 import styles from '@/styles/SwipeableEdgeDrawer.module.css';
 import styled from '@emotion/styled';
 
@@ -21,9 +22,9 @@ const TeamSettingDrawer = ({ isLoading }: Props) => {
     handleChange: handleUserCountChange,
     setForceValue: setUserCountForceValue,
   } = useInput(5);
-  const { isDefault } = useQuery();
+  const { isDefault, drawer } = useQuery();
   const { selectedButton, radius, guideMessage, onClickButton } = useSelectedButton();
-  const { isLoaded, onClick } = useCreateTeam(name, count, radius, userCount);
+  const { isLoaded, createTeam } = useCreateTeam(name, count, radius, userCount);
 
   return (
     <SwipeableEdgeDrawer>
@@ -136,7 +137,7 @@ const TeamSettingDrawer = ({ isLoading }: Props) => {
         </StyledUl>
         <ProgressButton
           isLoaded={isLoaded}
-          onClick={onClick}
+          onClick={createTeam}
           disabled={
             isLoading || name === '' || (isDefault && isCountError.state) || isNameError.state || (!isDefault && selects.length === 0)
           }
@@ -144,6 +145,9 @@ const TeamSettingDrawer = ({ isLoading }: Props) => {
         >
           <TypoNotoSans text='완료' variant='button' textAlign='center' />
         </ProgressButton>
+        <Visible visible={drawer}>
+          <Recommends />
+        </Visible>
       </FlexColumn>
     </SwipeableEdgeDrawer>
   );
