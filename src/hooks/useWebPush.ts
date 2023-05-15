@@ -4,7 +4,7 @@ import { addSubscribe, createSubscribe, checkSubscribe } from '@/controller';
 
 export default function useWebPush() {
   const router = useRouter();
-  const [notificationPermission, setNotificationPermission] = useState<typeof Notification.permission>();
+  const [notificationPermission, setNotificationPermission] = useState<typeof Notification.permission>('default');
   const [isRegistered, setIsRegistered] = useState(true);
   const [isSubscribed, setIsSubscribed] = useState(true);
 
@@ -39,6 +39,7 @@ export default function useWebPush() {
   async function askNotificationPermission() {
     try {
       const result = await Notification.requestPermission();
+      console.log('result : ', result);
       setNotificationPermission(result);
     } catch (e) {
       console.log(e);
@@ -114,7 +115,6 @@ export default function useWebPush() {
 
   useEffect(() => {
     check();
-    setNotificationPermission('default');
   }, []);
 
   return { isRegistered, isSubscribed, notificationPermission, subscribeButtonHandler };

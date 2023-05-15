@@ -30,6 +30,7 @@ const NotificationPermissionDrawer = () => {
   }, []);
 
   useEffect(() => {
+    console.log(isChecked, notificationPermission);
     if (isRegistered) {
       setIsShow(false);
       return;
@@ -108,7 +109,7 @@ const NotificationPermissionDrawer = () => {
               isLoaded={true}
               fullWidth
               variant='contained'
-              disabled={notificationPermission !== 'granted' && !isChecked}
+              disabled={!isSubscribed && !isChecked}
               onClick={() => {
                 subscribeButtonHandler(hide);
               }}
