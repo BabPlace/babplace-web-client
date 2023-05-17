@@ -1,16 +1,22 @@
 import React from 'react';
-import { CircularProgress, IconButton } from '@mui/material';
-import { FlexColumn, FlexRow, TypoNotoSans } from '@/layouts';
-import { useRecommends } from '@/hooks';
+import { CircularProgress } from '@mui/material';
+import { FlexColumn, FlexRow, TypoNotoSans, Visible } from '@/layouts';
+import { useRecommends, useQuery } from '@/hooks';
 import { getRandomFoodEmoji } from '@/utils';
-import { AddRoundedIcon } from '@/icons';
 import styles from '@/styles/Recommends.module.css';
 
 const Recommends = () => {
+  const { drawer } = useQuery();
   const { recommends, isLoaded } = useRecommends();
 
   return (
-    <div className={styles.container}>
+    <Visible
+      visible={drawer}
+      className={styles.container}
+      onTouchStart={(e) => {
+        e.stopPropagation();
+      }}
+    >
       <TypoNotoSans variant='body2' textAlign='center' marginY='30px' color='rgb(var(--tertiary-foreground-rgb))' noWrap={false}>
         밥풀레이스에서 엄선한 식당을 살펴보세요!
       </TypoNotoSans>
@@ -21,9 +27,9 @@ const Recommends = () => {
           <FlexColumn gap='23px'>
             {recommends.map(({ title, restaurants }, index) => {
               return (
-                <FlexColumn key={`recommend-title-${index}`} gap='2px' className={styles.recommend}>
+                <FlexColumn key={`recommend-title-${index}`} gap='5px' className={styles.recommend}>
                   <FlexRow justifyContent='space-between'>
-                    <TypoNotoSans variant='h6'>{title}</TypoNotoSans>
+                    <TypoNotoSans fontSize='1.1rem'>{title}</TypoNotoSans>
                     {/* <IconButton sx={{ padding: '0' }} onClick={() => {}}>
                       <AddRoundedIcon />
                     </IconButton> */}
@@ -32,7 +38,7 @@ const Recommends = () => {
                     {restaurants.map((restaurant) => {
                       return (
                         <div key={`recommend-restaurant-${restaurant.id}`} className={styles.restaurant}>
-                          <TypoNotoSans noWrap={true} overflow='visible' textOverflow=''>
+                          <TypoNotoSans noWrap={true} overflow='visible' textOverflow='' fontSize='0.8rem'>
                             {getRandomFoodEmoji() + restaurant.placeName}
                           </TypoNotoSans>
                         </div>
@@ -47,7 +53,7 @@ const Recommends = () => {
       ) : (
         <CircularProgress />
       )}
-    </div>
+    </Visible>
   );
 };
 

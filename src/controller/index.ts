@@ -3,7 +3,7 @@ import { createResult, getResult } from './result';
 import { getRestaurant } from './restaurant';
 import { createUser } from './user';
 import { addSubscribe, createSubscribe, checkSubscribe } from './webpush';
-import { getRecommends } from './recommand';
+import { getRecommends } from './recommend';
 
 export {
   createTeam,

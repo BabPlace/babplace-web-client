@@ -145,9 +145,7 @@ const TeamSettingDrawer = ({ isLoading }: Props) => {
         >
           <TypoNotoSans text='완료' variant='button' textAlign='center' />
         </ProgressButton>
-        <Visible visible={drawer}>
-          <Recommends />
-        </Visible>
+        <Recommends />
       </FlexColumn>
     </SwipeableEdgeDrawer>
   );

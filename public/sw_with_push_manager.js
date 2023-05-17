@@ -36,10 +36,11 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('push', (event) => {
   let data = event.data.json();
-  const options = {
-    body: data.teamId,
-  };
-  self.registration.showNotification(data.teamName, options);
+  const title = data.teamName + '의 모든 팀원이 투표에 참여했어요! 결과를 확인하세요!';
+  // const options = {
+  //   body: data.teamId,
+  // };
+  self.registration.showNotification(title);
 });
 
 self.addEventListener('notificationclick', (event) => {
