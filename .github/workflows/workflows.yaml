@@ -1,10 +1,11 @@
 name: Publish Docker Hub
+
 on:
     push:
         branches: [main]
 jobs:
   docker:
-    name: Deploy Docker Image
+      name: Deploy Docker Image
       runs-on: ubuntu-latest
       env:
           REPO: ${{ secrets.DOCKER_REPO }}
