@@ -28,6 +28,6 @@ jobs:
                 password: ${{ secrets.DOCKER_PASSWORD }}
           - name: Publish Docker Image
             run: |
-                docker push $REPO
-                docker image tag $REPO $REPO:${{ github.sha }}
                 docker push $REPO:${{ github.sha }}
+                docker image tag $REPO:${{ github.sha }} $REPO
+                docker push $REPO
