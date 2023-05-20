@@ -43,8 +43,23 @@ self.addEventListener('push', (event) => {
   self.registration.showNotification(title);
 });
 
-self.addEventListener('notificationclick', (event) => {
+self.addEventListener('notificationclick', async (event) => {
   event.notification.close();
-  console.log(event.notification.data.json());
-  event.waitUntil(self.clients.openWindow());
+
+  const data = await event.notification.data.json();
+
+  event.notification.close();
+
+  event.waitUntil(
+    clients
+      .matchAll({
+        type: 'window',
+      })
+      .then((clientList) => {
+        for (const client of clientList) {
+          if (client.url === '/' && 'focus' in client) return client.focus();
+        }
+        if (clients.openWindow) return clients.openWindow(`/result/${data.teamId}`);
+      })
+  );
 });
