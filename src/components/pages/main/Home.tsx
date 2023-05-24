@@ -23,18 +23,18 @@ const Home = () => {
 
   return (
     <BaseUI title={title} description={description} bodyStyle={{ marginTop: '0px', backgroundColor: 'black' }}>
-      <Visible visible={!loading}>
-        <FlexRow alignItems='center' className={styles.current_position} gap='5px'>
-          <MyLocationIcon sx={{ width: '0.9rem' }} color='error' />
-          <TypoNotoSans text={addressName} color='#333333' variant='caption' />
-        </FlexRow>
-      </Visible>
       <LoadableMap
         isLoading={loading}
         level={5}
         style={{ ...getMapStyle(drawer), height: !isDefault ? mapCustomHeight : mapDefaultHeight }}
         onCenterChanged={onCenterChanged}
       />
+      <Visible visible={!loading}>
+        <FlexRow alignItems='center' className={styles.current_position} gap='5px'>
+          <MyLocationIcon sx={{ width: '0.9rem' }} color='error' />
+          <TypoNotoSans text={addressName} color='#333333' variant='caption' />
+        </FlexRow>
+      </Visible>
       <Visible visible={!loading}>
         <BabMarker isCustom={!isDefault} />
       </Visible>
