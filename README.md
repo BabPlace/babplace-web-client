@@ -17,7 +17,27 @@
 
 <br><br><br>
 
+# Useage
+
+1. 식당을 찾을 위치, 팀 이름 등 원하는 옵션으로 설정
+2. 함께 점심을 먹을 팀원들에게 링크 전송
+3. 투표 결과 확인!
+
+<p float="left">
+<img src="./assets/main.png" width="45%"/>
+<img src="./assets/result.png" width="45%"/>
+</p>
+
+<br><br><br>
+
 # Code
+
+### 연관 프로젝트
+
+- [babplace-backend](https://github.com/BabPlace/babplace-backend)
+- [babplace-webpush-server](https://github.com/BabPlace/babplace-webpush-server)
+
+<br>
 
 ### 디렉토리 구조
 
